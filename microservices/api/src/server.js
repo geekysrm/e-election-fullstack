@@ -15,8 +15,12 @@ var server = require('http').Server(app);
 var config = require('./config');
 
 app.get('/',function(req,res){
-  res.send("Hello")
-})
+  res.sendFile(path.join(__dirname,'index.html'));
+});
+
+app.get('/indexjs', function(req, res) {
+  res.sendFile(path.join(__dirname,'index.js'));
+});
 
 app.post('/data',function(req,res){
 
@@ -29,11 +33,11 @@ app.post('/data',function(req,res){
     {
       if(request.status === 200)
       {
-        res.status(200).send(req.responseText);
+        res.status(200).send(request.responseText);
       }
       else if(request.status === 500)
       {
-        res.status(500).send(req.responseText);
+        res.status(500).send(request.responseText);
       }
     }
   };
@@ -49,6 +53,6 @@ app.post('get-credentials',function(req,res){
 
 });
 */
-app.listen(8080, function () {
+app.listen(8000, function () {
   console.log('Example app listening on port 8080!');
 });
