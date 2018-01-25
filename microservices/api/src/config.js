@@ -1,6 +1,6 @@
 let projectConfig = {
     url: {
-        data: 'http://data.hasura/v1/query',
+        data: 'http://data.artfully11.hasura-app.io/v1/query',
     }
 }
 
