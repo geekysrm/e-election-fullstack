@@ -17,9 +17,11 @@ class Home extends Component {
                     config: { headers: { 'Content-Type': 'application/json' } }
                 })
                     .then(function (response) {
+                      console.log(response.data.hasura_id);
                       saveId(response.data.hasura_id);
                     })
                     .catch(function (response) {
+                      console.log(response.data.hasura_id);
                       console.log("post req failed");
                     });
 
