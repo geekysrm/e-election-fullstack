@@ -51,8 +51,7 @@ class Home extends Component {
 
         request.open('POST','https://api.artfully11.hasura-app.io/data',true);
         request.setRequestHeader('Content-Type','application/json');
-        request.setRequestHeader('Authorization',authToken);
-        request.send(null);
+        request.send(JSON.stringify({'auth':authToken}));
     }
 
     render() {
