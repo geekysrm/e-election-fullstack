@@ -47,6 +47,7 @@ class Auth extends React.Component {
         //this.showAlert("Login Successful! \n Your auth credentials are: " + JSON.stringify(authResponse, null, 2));
 
         var auth = "Bearer "+authResponse.auth_token;
+/*
         var request = new XMLHttpRequest();
 
         request.onreadystatechange = function(){
@@ -58,7 +59,7 @@ class Auth extends React.Component {
               this.showAlert("Login Successful!");
               window.location.assign("/home");
             }
-            else
+            else if(request.status === 401)
             {
               this.showAlert("Login Unsuccessful!");
             }
@@ -69,7 +70,24 @@ class Auth extends React.Component {
         request.setRequestHeader('Content-Type','application/json');
         request.setRequestHeader('Authorization',auth);
         request.send(null);
+*/
 
+        axios({
+        method:'get',
+        url:'https://auth.artfully11.hasura-app.io/v1/user/info',
+        headers: {
+        'Authorization': auth,
+        'Content-Type': 'application/json'
+        }
+        })
+        .then(function(response) {
+          saveId(request.responseText.data.hasura_id);
+          this.showAlert("Login Successful!");
+          window.location.assign("/home");
+        });
+        .catch(function(response){
+          this.showAlert("Login Unsuccessful!");
+        });
       } else {
         this.showAlert(JSON.stringify(authResponse));
       }
