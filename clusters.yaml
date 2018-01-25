@@ -1,0 +1,7 @@
+- alias: hasura
+  config:
+    configmap: controller-conf
+    namespace: artfully11-hasura
+  data: null
+  kubeContext: artfully11
+  name: artfully11
