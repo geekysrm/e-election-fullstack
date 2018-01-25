@@ -19,6 +19,6 @@ app.use(bodyParser.urlencoded({
 
 app.use('/', hasuraExamplesRouter);
 
-app.listen(8080, function () {
+app.listen(8000, function () {
   console.log('Example app listening on port 8080!');
 });
