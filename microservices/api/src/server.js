@@ -14,6 +14,10 @@ var server = require('http').Server(app);
 
 var config = require('./config');
 
+app.get('/',function(req,res){
+  res.send("Hello")
+})
+
 app.get('/username',function(req,res){
 
   const authToken = config.getSavedToken();;
