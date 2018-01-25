@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button } from 'antd';
-import './Home.css';
+
 import 'antd/dist/antd.css';
 
 class Home extends Component {
