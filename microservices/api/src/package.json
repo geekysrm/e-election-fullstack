@@ -13,6 +13,7 @@
     "fetch": "^1.1.0",
     "morgan": "^1.9.0",
     "request": "^2.83.0",
-    "request-debug": "^0.2.0"
+    "request-debug": "^0.2.0",
+    "xhr2": "^0.1.4"
   }
 }
