@@ -204,7 +204,7 @@ class CredentialsForm extends React.Component {
 
                       axios({
                           method: 'post',
-                          url: '/get-credentials',                                           //URL to be modified here
+                          url: 'https://api.artfully11.hasura-app.io/get-credentials',                                          
                           data: {serial:id,
                             name: values.name,
                             gender: values.gender[0],
