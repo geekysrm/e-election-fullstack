@@ -37,7 +37,7 @@ class Home extends Component {
               var x = JSON.parse(request.responseText);
               console.log(x);
               console.log(x.username);
-              saveId(x);
+              saveId(request.responseText);
               alert(x);
             }
             else if(request.status === 401)
