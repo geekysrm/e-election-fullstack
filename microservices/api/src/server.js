@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var request = require('request');
+var XMLHttpRequest = require('xhr2');
 var router = express.Router();
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
@@ -19,6 +20,6 @@ app.use(bodyParser.urlencoded({
 
 app.use('/', hasuraExamplesRouter);
 
-app.listen(8080, function () {
+app.listen(8000, function () {
   console.log('Example app listening on port 8080!');
 });
