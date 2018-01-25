@@ -9,35 +9,32 @@ router.route("/").get(function (req, res) {
 
 router.route("/get_articles").get(function (req, res) {
   //Fetch all rows from table - articles
-  var selectOptions = {
-    url: config.projectConfig.url.data,
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-Hasura-User-Id': 0,
-      'X-Hasura-Role': 'anonymous'
-    },
-    body: JSON.stringify({
-      'type': 'select',
-      'args': {
-        'table': 'article',
-        'columns': [
-          '*'
-        ]
-      }
+  var requestOptions = {
+        "method": "POST",
+        "headers": {
+            "Content-Type": "application/json"
+        }
+    };
+    var body = {
+        "type": "select",
+        "args": {
+            "table": "article",
+            "columns": [
+                "content",
+                "id",
+                "author_id",
+                "title"
+            ]
+        }
+    };
+    requestOptions["body"] = JSON.stringify(body);
+    return fetch(projectConfig.url.data, requestOptions)
+    .then(function(response) {
+      return response.json();
     })
-  }
-  request(selectOptions, function(error, response, body) {
-    if (error) {
-        console.log('Error from select request: ');
-        console.log(error)
-        res.status(500).json({
-          'error': error,
-          'message': 'Select request failed'
-        });
-    }
-    res.json(JSON.parse(body))
-  })
-})
+    .catch(function(error) {
+      console.log('Request Failed:' + error);
+    });
+});
 
 module.exports = router;
