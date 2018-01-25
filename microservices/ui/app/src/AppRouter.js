@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Home from './Home';
 import { Data } from './Data';
 import { Auth } from './Auth';
 import { Filestore } from './Filestore';
