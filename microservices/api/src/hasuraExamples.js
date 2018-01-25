@@ -11,7 +11,6 @@ router.route("/").get(function (req, res) {
 
 router.route("/get_articles").get(function (req, res) {
   //Fetch all rows from table - articles
-  /*
   var selectOptions = {
     url: config.projectConfig.url.data,
     method: 'POST',
@@ -41,38 +40,6 @@ router.route("/get_articles").get(function (req, res) {
     }
     res.json(JSON.parse(body))
   });
-*/
-
-  var body = {
-    "type": "select",
-    "args": {
-        "table": "article",
-        "columns": [
-            "*"
-        ]
-    }
-  };
-
-  var request = new XMLHttpRequest();
-
-    request.onreadystatechange = function(){
-      if(request.readyState === XMLHttpRequest.DONE)
-      {
-        if(request.status === 200)
-        {
-          res.status(200).json(JSON.parse(body));
-        }
-        else if(request.status === 500)
-        {
-          res.status(500).send('Sorry, Server Error !');
-        }
-      }
-    };
-
-    request.open('POST','https://data.artfully11.hasura-app.io/v1/query',true);
-    request.setRequestHeader('Content-Type','application/json');
-    request.send(JSON.stringify(body));
-
 });
 
 module.exports = router;

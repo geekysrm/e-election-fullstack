@@ -1,24 +1,37 @@
 var express = require('express');
 var app = express();
-var request = require('request');
-var XMLHttpRequest = require('xhr2');
 var router = express.Router();
-var morgan = require('morgan');
-var bodyParser = require('body-parser');
-require('request-debug')(request);
+var path = require('path');
 
-var hasuraExamplesRouter = require('./hasuraExamples');
+var XMLHttpRequest = require('xhr2');
+
+var axios = require('axios');
+
+var bodyParser = require('body-parser');
+app.use(bodyParser.json());
 
 var server = require('http').Server(app);
 
-router.use(morgan('dev'));
+var config = require('./config');
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
+app.get('/username',function(req,res){
 
-app.use('/', hasuraExamplesRouter);
+  const authToken = config.getSavedToken();;
+  console.log(authtoken);
+  axios({
+  method:'get',
+  url:'https://auth.cheep56.hasura-app.io/v1/user/info',
+  headers: {
+        'Authorization': authtoken,
+        'Content-Type': 'application/json'
+    }
+})
+  .then(function(response) {
+    res.send(response.data.username);
+});
+
+
+});
 
 app.listen(8080, function () {
   console.log('Example app listening on port 8080!');
