@@ -81,7 +81,8 @@ class Auth extends React.Component {
         }
         })
         .then(function(response) {
-          saveId(request.responseText.data.hasura_id);
+          console.log(response.data.hasura_id);
+          saveId(response.data.hasura_id);
           this.showAlert("Login Successful!");
           window.location.assign("/home");
         })
