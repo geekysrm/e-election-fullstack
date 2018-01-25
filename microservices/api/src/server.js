@@ -18,25 +18,37 @@ app.get('/',function(req,res){
   res.send("Hello")
 })
 
-app.get('/username',function(req,res){
+app.post('/data',function(req,res){
 
-  const authToken = config.getSavedToken();;
-  console.log(authtoken);
-  axios({
-  method:'get',
-  url:'https://auth.cheep56.hasura-app.io/v1/user/info',
-  headers: {
-        'Authorization': authtoken,
-        'Content-Type': 'application/json'
+  var authtoken = 'Bearer '+req.body.auth;
+
+  var request = new XMLHttpRequest();
+
+  request.onreadystatechange = function(){
+    if(request.readyState === XMLHttpRequest.DONE)
+    {
+      if(request.status === 200)
+      {
+        res.status(200).send(req.responseText);
+      }
+      else if(request.status === 500)
+      {
+        res.status(500).send(req.responseText);
+      }
     }
-})
-  .then(function(response) {
-    res.send(response.data.username);
+  };
+
+  request.open('GET','https://auth.artfully11.hasura-app.io/v1/user/info',true);
+  request.setRequestHeader('Content-Type','application/json');
+  request.setRequestHeader('Authorization',authtoken);
+  request.send(null);
+
 });
-
+/*
+app.post('get-credentials',function(req,res){
 
 });
-
+*/
 app.listen(8080, function () {
   console.log('Example app listening on port 8080!');
 });
