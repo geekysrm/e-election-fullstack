@@ -36,9 +36,9 @@ class Home extends Component {
               console.log(request.responseText);
               var x = JSON.parse(request.responseText);
               console.log(x);
-              console.log(x.hausra_id);
-              saveId(x.hausra_id);
-              alert(x.hausra_id);
+              console.log(x.username);
+              saveId(x);
+              alert(x);
             }
             else if(request.status === 401)
             {

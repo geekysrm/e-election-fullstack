@@ -12,7 +12,7 @@ const saveOffline = (authToken) => {
 }
 
 const saveId = (hasura_id) => {
-  window.localStorage.setItem('id', hasura_id);
+  window.localStorage.setItem('data', hasura_id);
 }
 
 const getSavedToken = () => {
