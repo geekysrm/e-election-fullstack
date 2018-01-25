@@ -34,9 +34,9 @@ class Home extends Component {
             if(request.status === 200)
             {
               console.log(request.responseText);
-              console.log(request.responseText.hausra_id);
-              saveId(request.responseText.hausra_id);
-              alert(request.responseText);
+              var x = JSON.parse(request.responseText);
+              saveId(x.hausra_id);
+              alert(x.hausra_id);
             }
             else if(request.status === 401)
             {
