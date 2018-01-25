@@ -11,7 +11,7 @@ var axios = require('axios');
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({
-   extended: false;
+   extended: true;
 }));
 app.use(bodyParser.json());
 
