@@ -5,7 +5,7 @@ import { Auth } from './Auth';
 import { Filestore } from './Filestore';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-class HasuraExampleApp extends React.Component {
+class AppRouter extends React.Component {
 
   render() {
     return (
@@ -14,15 +14,13 @@ class HasuraExampleApp extends React.Component {
           <div>
             <Route exact path="/" render={() =>
                 <div>
-                  <h1>Welcome to react app</h1>
-                  <h4>Navigate to /auth to check out a simple implementation of authentication</h4>
-                  <h4>Navigate to /data to see how data can be queried from tables to be used in your app</h4>
-                  <h4>Navigate to /filestore to upload files</h4>
+                  <h3>Welcome to E-Election</h3>
                 </div>
               }/>
             <Route exact path="/data" component={Data}/>
             <Route exact path="/auth" component={Auth}/>
             <Route exact path="/filestore" component={Filestore}/>
+            <Route exact path="/home" component={Home} />
           </div>
         </Router>
       </MuiThemeProvider>
@@ -30,4 +28,4 @@ class HasuraExampleApp extends React.Component {
   }
 }
 
-export default HasuraExampleApp;
+export default AppRouter;

@@ -44,7 +44,8 @@ class Auth extends React.Component {
       if (authResponse.auth_token) {
         //Save the auth token offline to be used by the filestore service
         saveOffline(authResponse.auth_token)
-        this.showAlert("Login Successful! \n Your auth credentials are: " + JSON.stringify(authResponse, null, 2));
+        //this.showAlert("Login Successful! \n Your auth credentials are: " + JSON.stringify(authResponse, null, 2));
+        window.location.assign("/home");
       } else {
         this.showAlert(JSON.stringify(authResponse));
       }
@@ -59,7 +60,10 @@ class Auth extends React.Component {
       console.log(authResponse);
       if (authResponse.auth_token) {
         saveOffline(authResponse.auth_token)
-        this.showAlert("SignUp Successful! \n Your auth credentials are: " + JSON.stringify(authResponse, null, 2))
+        //this.showAlert("SignUp Successful! \n Your auth credentials are: " + JSON.stringify(authResponse, null, 2));
+        this.showAlert("SignUp Successful! \n Please login.");
+
+
       } else {
         this.showAlert(JSON.stringify(authResponse));
       }
