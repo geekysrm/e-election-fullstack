@@ -84,7 +84,7 @@ class Auth extends React.Component {
           saveId(request.responseText.data.hasura_id);
           this.showAlert("Login Successful!");
           window.location.assign("/home");
-        });
+        })
         .catch(function(response){
           this.showAlert("Login Unsuccessful!");
         });
