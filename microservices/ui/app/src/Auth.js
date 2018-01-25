@@ -8,7 +8,7 @@ import Divider from 'material-ui/Divider';
 import Subheader from 'material-ui/Subheader';
 import LinearProgress from 'material-ui/LinearProgress';
 import {Card, CardText} from 'material-ui/Card';
-import { saveOffline, getSavedToken , saveId } from './config';
+import { saveOffline, getSavedToken } from './config';
 import { authenticateUser } from './api';
 
 
@@ -47,49 +47,7 @@ class Auth extends React.Component {
         saveOffline(authResponse.auth_token);
         //this.showAlert("Login Successful! \n Your auth credentials are: " + JSON.stringify(authResponse, null, 2));
 
-        var auth = "Bearer "+authResponse.auth_token;
-/*
-        var request = new XMLHttpRequest();
-
-        request.onreadystatechange = function(){
-          if(request.readyState === XMLHttpRequest.DONE)
-          {
-            if(request.status === 200)
-            {
-              saveId(request.responseText.data.hasura_id);
-              this.showAlert("Login Successful!");
-              window.location.assign("/home");
-            }
-            else if(request.status === 401)
-            {
-              this.showAlert("Login Unsuccessful!");
-            }
-          }
-        };
-
-        request.open('GET','https://auth.artfully11.hasura-app.io/v1/user/info',true);
-        request.setRequestHeader('Content-Type','application/json');
-        request.setRequestHeader('Authorization',auth);
-        request.send(null);
-*/
-
-        axios({
-        method:'get',
-        url:'https://auth.artfully11.hasura-app.io/v1/user/info',
-        headers: {
-        'Authorization': auth,
-        'Content-Type': 'application/json'
-        }
-        })
-        .then(function(response) {
-          console.log(response.data.hasura_id);
-          saveId(response.data.hasura_id);
-          this.showAlert("Login Successful!");
-          window.location.assign("/home");
-        })
-        .catch(function(response){
-          this.showAlert("Login Unsuccessful!");
-        });
+        window.location.assign("/home");
       } else {
         this.showAlert(JSON.stringify(authResponse));
       }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from 'antd';
 import axios from 'axios';
-import { getSavedToken } from './config';
+import { getSavedToken , saveId } from './config';
 import 'antd/dist/antd.css';
 const authToken = getSavedToken();
 class Home extends Component {
@@ -17,16 +17,10 @@ class Home extends Component {
                     config: { headers: { 'Content-Type': 'application/json' } }
                 })
                     .then(function (response) {
-                        console.log('Successful post request');
-                        console.log(response);
-                        //TODO: Display credentials got from response in a copiable span
-
+                      saveId(response.data.hasura_id);
                     })
                     .catch(function (response) {
-                        console.log('Unsuccessful post request');
-                        console.log(response);
-                        alert('Sorry, Server Error!');
-
+                      console.log("post req failed");
                     });
 
 

@@ -17,8 +17,8 @@
     "uuid": "^3.1.0"
   },
   "scripts": {
-    "start": "cross-env REACT_APP_CLUSTER_NAME=actively72 react-scripts start",
-    "build": "cross-env REACT_APP_CLUSTER_NAME=actively72 react-scripts build",
+    "start": "cross-env REACT_APP_CLUSTER_NAME=artfully11 react-scripts start",
+    "build": "cross-env REACT_APP_CLUSTER_NAME=artfully11 react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
