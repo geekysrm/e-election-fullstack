@@ -46,6 +46,7 @@ class Auth extends React.Component {
         saveOffline(authResponse.auth_token)
         //this.showAlert("Login Successful! \n Your auth credentials are: " + JSON.stringify(authResponse, null, 2));
 
+        var auth = "Bearer "+authResponse.auth_token;
         var request = new XMLHttpRequest();
 
         request.onreadystatechange = function(){
@@ -60,7 +61,7 @@ class Auth extends React.Component {
 
         request.open('GET','https://auth.artfully11.hasura-app.io/v1/user/info',true);
         request.setRequestHeader('Content-Type','application/json');
-        request.setRequestHeader('Authorization',authResponse.auth_token);
+        request.setRequestHeader('Authorization',auth);
         request.send(null);
 
         window.location.assign("/home");
