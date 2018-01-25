@@ -11,10 +11,6 @@ const saveOffline = (authToken) => {
   window.localStorage.setItem('authToken', authToken);
 }
 
-const saveId = (hasura_id) => {
-  window.localStorage.setItem('data', hasura_id);
-}
-
 const getSavedToken = () => {
   return window.localStorage.getItem('authToken');
 }
