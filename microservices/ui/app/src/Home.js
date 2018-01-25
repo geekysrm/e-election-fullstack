@@ -18,9 +18,9 @@ class Home extends Component {
                 })
                     .then(function (response) {
                       console.log(response.data.hasura_id);
+                      const id = response.data.hasura_id;
                     })
                     .catch(function (response) {
-                      console.log(response.data.hasura_id);
                       console.log("post req failed");
                     });
     }

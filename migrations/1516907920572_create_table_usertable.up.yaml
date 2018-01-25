@@ -1,0 +1,10 @@
+- args:
+    sql: CREATE TABLE "usertable"("hasura_id" integer NOT NULL, "name" text NOT NULL,
+      "gender" text NOT NULL, "dob" date NOT NULL, "state" text NOT NULL, "voter_id"
+      text NOT NULL, "email" text NOT NULL, "phone" bigint NOT NULL, "nomination"
+      boolean NOT NULL DEFAULT false, "credentials" text NOT NULL, PRIMARY KEY ("hasura_id")
+      )
+  type: run_sql
+- args:
+    name: usertable
+  type: add_existing_table_or_view

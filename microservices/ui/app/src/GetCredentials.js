@@ -189,24 +189,48 @@ class CredentialsForm extends React.Component {
                 var dateGot = dateMoment.format("YYYY-MM-DD");
                 var age = nowDate.diff(dateGot, 'years');
                 console.log(age);
+
                 axios({
                     method: 'post',
-                    url: '/get-credentials',                                           //URL to be modified here
-                    data: { name: values.name, gender: values.gender[0], date: dateGot, state: values.states[0], voterId: values.voterId, email:values.email, phone:Number(values.phone) },
+                    url: 'https://api.artfully11.hasura-app.io/data',                                           //URL to be modified here
+                    data: { auth: authToken },
                     config: { headers: { 'Content-Type': 'application/json' } }
                 })
                     .then(function (response) {
-                        console.log('Successful post request');
-                        console.log(response);
-                        //TODO: Display credentials got from response in a copiable span 
+                      console.log(response.data.hasura_id);
+                      const id = response.data.hasura_id;
 
+                      axios({
+                          method: 'post',
+                          url: '/get-credentials',                                           //URL to be modified here
+                          data: {serial:id,
+                            name: values.name,
+                            gender: values.gender[0],
+                            date: dateGot, state: values.states[0],
+                            voterId: values.voterId,
+                            email:values.email,
+                            phone:Number(values.phone)
+                          },
+                          config: { headers: { 'Content-Type': 'application/json' } }
+                      })
+                          .then(function (response) {
+                              console.log('Successful post request');
+                              console.log(response);
+                              //TODO: Display credentials got from response in a copiable span
+                              alert(response);
+                          })
+                          .catch(function (response) {
+                              console.log('Unsuccessful post request');
+                              console.log(response);
+                              alert('Sorry, Server Error!');
+
+                          });
                     })
                     .catch(function (response) {
-                        console.log('Unsuccessful post request');
-                        console.log(response);
-                        alert('Sorry, Server Error!');
-
+                      console.log("post req failed");
                     });
+
+
             }
         });
     }
@@ -232,7 +256,7 @@ class CredentialsForm extends React.Component {
 
 
     render() {
-       
+
         const { getFieldDecorator } = this.props.form;
         const { autoCompleteResult } = this.state;
 
@@ -258,7 +282,7 @@ class CredentialsForm extends React.Component {
                 },
             },
         };
-        
+
         const config = {
             rules: [{ type: 'object', required: true, message: 'Please select date!' }],
         };
@@ -297,7 +321,7 @@ class CredentialsForm extends React.Component {
                         <Cascader options={gender} key={gender} />
                         )}
                 </FormItem>
-               
+
 
                     <FormItem
                         {...formItemLayout}
@@ -357,7 +381,7 @@ class CredentialsForm extends React.Component {
                         <Input />
                         )}
                 </FormItem>
-                
+
                 <FormItem
                     {...formItemLayout}
                     label="Phone Number"
@@ -371,7 +395,7 @@ class CredentialsForm extends React.Component {
                 <FormItem {...tailFormItemLayout}>
                     <Button type="primary" htmlType="submit">Get Credentials</Button>
                 </FormItem>
-              
+
                 {/*
                     TO DO: Add agree to agreement
 
@@ -383,7 +407,7 @@ class CredentialsForm extends React.Component {
                         <Checkbox>I have read the <a href="">agreement</a></Checkbox>
                         )}
                 </FormItem>
-                
+
                     */}
 
                 {
@@ -396,7 +420,7 @@ class CredentialsForm extends React.Component {
                     */
                 }
             </Form>
-               
+
             </div>
         );
     }
