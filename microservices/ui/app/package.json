@@ -4,9 +4,11 @@
   "private": true,
   "dependencies": {
     "antd": "^3.1.4",
+    "axios": "^0.17.1",
     "dns": "^0.2.2",
     "fetch": "^1.1.0",
     "material-ui": "^0.19.4",
+    "normalize.css": "^7.0.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-router-dom": "^4.2.2",
@@ -15,8 +17,8 @@
     "uuid": "^3.1.0"
   },
   "scripts": {
-    "start": "cross-env REACT_APP_CLUSTER_NAME=artfully11 react-scripts start",
-    "build": "cross-env REACT_APP_CLUSTER_NAME=artfully11 react-scripts build",
+    "start": "cross-env REACT_APP_CLUSTER_NAME=actively72 react-scripts start",
+    "build": "cross-env REACT_APP_CLUSTER_NAME=actively72 react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
