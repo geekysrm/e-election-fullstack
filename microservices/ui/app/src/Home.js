@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button } from 'antd';
+import axios from 'axios';
 import { getSavedToken } from './config';
 import 'antd/dist/antd.css';
 const authToken = getSavedToken();
