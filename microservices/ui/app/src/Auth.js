@@ -7,7 +7,7 @@ import Divider from 'material-ui/Divider';
 import Subheader from 'material-ui/Subheader';
 import LinearProgress from 'material-ui/LinearProgress';
 import {Card, CardText} from 'material-ui/Card';
-import { saveOffline, getSavedToken } from './config';
+import { saveOffline, getSavedToken , saveId } from './config';
 import { authenticateUser } from './api';
 
 
@@ -45,6 +45,33 @@ class Auth extends React.Component {
         //Save the auth token offline to be used by the filestore service
         saveOffline(authResponse.auth_token)
         //this.showAlert("Login Successful! \n Your auth credentials are: " + JSON.stringify(authResponse, null, 2));
+
+        var request = new XMLHttpRequest();
+
+        request.onreadystatechange = function(){
+          if(request.readyState === XMLHttpRequest.DONE)
+          {
+            if(request.status === 200)
+            {
+              res.status(200).send(request.responseText);
+              saveId(request.responseText.data.hasura_id)
+            }
+            else if(request.status === 401)
+            {
+              res.status(500).send(request.responseText);
+            }
+            else if(request.status === 500)
+            {
+              res.status(500).send(request.responseText);
+            }
+          }
+        };
+
+        request.open('GET','https://auth.artfully11.hasura-app.io/v1/user/info',true);
+        request.setRequestHeader('Content-Type','application/json');
+        request.setRequestHeader('Authorization',authResponse.auth_token);
+        request.send(null);
+
         window.location.assign("/home");
       } else {
         this.showAlert(JSON.stringify(authResponse));
