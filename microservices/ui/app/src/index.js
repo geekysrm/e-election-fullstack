@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import HasuraExampleApp from './AppRouter';
+import AppRouter from './AppRouter';
 
 //Replace HasuraExampleApp with your own component
 ReactDOM.render(
