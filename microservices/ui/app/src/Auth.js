@@ -53,16 +53,7 @@ class Auth extends React.Component {
           {
             if(request.status === 200)
             {
-              res.status(200).send(request.responseText);
               saveId(request.responseText.data.hasura_id)
-            }
-            else if(request.status === 401)
-            {
-              res.status(500).send(request.responseText);
-            }
-            else if(request.status === 500)
-            {
-              res.status(500).send(request.responseText);
             }
           }
         };
