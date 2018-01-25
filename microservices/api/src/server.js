@@ -35,6 +35,10 @@ app.post('/data',function(req,res){
       {
         res.status(200).send(request.responseText);
       }
+      else if(request.status === 401)
+      {
+        res.status(500).send(request.responseText);
+      }
       else if(request.status === 500)
       {
         res.status(500).send(request.responseText);
