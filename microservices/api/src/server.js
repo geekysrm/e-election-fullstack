@@ -10,9 +10,6 @@ var XMLHttpRequest = require('xhr2');
 var axios = require('axios');
 
 var bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({
-   extended: true;
-}));
 app.use(bodyParser.json());
 
 var server = require('http').Server(app);
