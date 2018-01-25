@@ -12,7 +12,7 @@ var axios = require('axios');
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-   extended: true;
+   extended: true
 }));
 
 var server = require('http').Server(app);
