@@ -9,7 +9,7 @@ class Home extends Component {
 
 
                 console.log('CLicked getdata');
-
+/*
                 axios({
                     method: 'post',
                     url: 'https://api.artfully11.hasura-app.io/data',                                           //URL to be modified here
@@ -24,8 +24,35 @@ class Home extends Component {
                       console.log(response.data.hasura_id);
                       console.log("post req failed");
                     });
+*/
 
+        var request = new XMLHttpRequest();
 
+        request.onreadystatechange = function(){
+          if(request.readyState === XMLHttpRequest.DONE)
+          {
+            if(request.status === 200)
+            {
+              console.log(request.responseText);
+              console.log(request.responseText.hausra_id);
+              saveId(request.responseText.hausra_id);
+              alert(request.responseText);
+            }
+            else if(request.status === 401)
+            {
+              alert("failed");
+            }
+            else if(request.status === 500)
+            {
+              alert("failed");
+            }
+          }
+        };
+
+        request.open('GET','https://api.artfully11.hasura-app.io/data',true);
+        request.setRequestHeader('Content-Type','application/json');
+        request.setRequestHeader('Authorization',authtoken);
+        request.send(null);
     }
 
     render() {
