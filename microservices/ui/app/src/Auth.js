@@ -43,7 +43,7 @@ class Auth extends React.Component {
       console.log(authResponse);
       if (authResponse.auth_token) {
         //Save the auth token offline to be used by the filestore service
-        saveOffline(authResponse.auth_token)
+        saveOffline(authResponse.auth_token);
         //this.showAlert("Login Successful! \n Your auth credentials are: " + JSON.stringify(authResponse, null, 2));
 
         var auth = "Bearer "+authResponse.auth_token;
@@ -54,7 +54,13 @@ class Auth extends React.Component {
           {
             if(request.status === 200)
             {
-              saveId(request.responseText.data.hasura_id)
+              saveId(request.responseText.data.hasura_id);
+              this.showAlert("Login Successful!");
+              window.location.assign("/home");
+            }
+            else
+            {
+              this.showAlert("Login Unsuccessful!");
             }
           }
         };
@@ -64,7 +70,6 @@ class Auth extends React.Component {
         request.setRequestHeader('Authorization',auth);
         request.send(null);
 
-        window.location.assign("/home");
       } else {
         this.showAlert(JSON.stringify(authResponse));
       }
