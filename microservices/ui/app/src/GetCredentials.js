@@ -3,6 +3,8 @@ import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Butto
 import moment from 'moment';
 import axios from 'axios';
 
+import { getSavedToken } from './config';
+
 const FormItem = Form.Item;
 const Option = Select.Option;
 const AutoCompleteOption = AutoComplete.Option;
@@ -173,7 +175,7 @@ const gender = [{
 }];
 
 
-
+const authToken = getSavedToken();
 class CredentialsForm extends React.Component {
     state = {
         confirmDirty: false,
