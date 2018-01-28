@@ -180,8 +180,13 @@ class CredentialsForm extends React.Component {
     state = {
         confirmDirty: false,
         autoCompleteResult: [],
-        credentialsThere: ''
+        credentialsThere: '',
+        loading: false
     };
+    enterLoading = () => {
+        this.setState({ loading: true });
+    }
+
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
@@ -221,6 +226,9 @@ class CredentialsForm extends React.Component {
                               console.log(response.data);
                             //TODO: Display credentials got from response in a copiable span
                               that1.setState({ credentialsThere: response.data });
+                              that1.setState({ loading: false });
+
+
                             
                           })
                           .catch(function (response) {
@@ -409,7 +417,10 @@ class CredentialsForm extends React.Component {
                         )}
                 </FormItem>
                 <FormItem {...tailFormItemLayout}>
-                    <Button type="primary" htmlType="submit">Get Credentials</Button>
+                    {/*  <Button type="primary" htmlType="submit">Get Credentials</Button> */}
+                        <Button type="primary" loading={this.state.loading} onClick={this.enterLoading}>
+                            Get Voting Credentials
+                        </Button>
                 </FormItem>
 
                 {/*
