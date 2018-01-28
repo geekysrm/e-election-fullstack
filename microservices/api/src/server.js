@@ -65,7 +65,7 @@ app.post('/getcredentials',function(req,res){
   var g = req.body.gender;
   var dt = req.body.date;
   var State = req.body.state;
-  var voter_id = req.body.vaterId;
+  var voter_id = req.body.voterId;
   var mail = req.body.email;
   var number = req.body.phone;
 
