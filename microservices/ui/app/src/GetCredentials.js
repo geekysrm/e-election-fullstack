@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete, DatePicker } from 'antd';
+import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete, DatePicker, Alert } from 'antd';
 import moment from 'moment';
 import axios from 'axios';
 
@@ -180,6 +180,7 @@ class CredentialsForm extends React.Component {
     state = {
         confirmDirty: false,
         autoCompleteResult: [],
+        credentialsThere: false
     };
     handleSubmit = (e) => {
         e.preventDefault();
@@ -218,8 +219,9 @@ class CredentialsForm extends React.Component {
                           .then(function (response) {
                               console.log('Successful post request');
                               console.log(response.data);
-                              //TODO: Display credentials got from response in a copiable span
-                              
+                            //TODO: Display credentials got from response in a copiable span
+                              this.setState({ credentialsThere: true });
+                            
                           })
                           .catch(function (response) {
                               console.log('Unsuccessful post request');
@@ -261,6 +263,7 @@ class CredentialsForm extends React.Component {
 
         const { getFieldDecorator } = this.props.form;
         const { autoCompleteResult } = this.state;
+        let credentialsThere = this.state.credentialsThere;
 
         const formItemLayout = {
             labelCol: {
@@ -421,8 +424,16 @@ class CredentialsForm extends React.Component {
                     Display get credentials
                     */
                 }
+               
             </Form>
-
+                if(credentialsThere){
+                <Alert
+                    message="Successfully generated Voting Credentials!"
+                    description="Your voting credentials are"
+                    type="success"
+                    showIcon
+                />
+                }
             </div>
         );
     }
