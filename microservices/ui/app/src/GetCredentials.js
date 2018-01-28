@@ -226,7 +226,7 @@ class CredentialsForm extends React.Component {
                               console.log(response.data);
                             //TODO: Display credentials got from response in a copiable span
                               that1.setState({ credentialsThere: response.data });
-                             // that1.setState({ loading: false });
+                              that1.setState({ loading: false });
 
 
                             
@@ -418,7 +418,7 @@ class CredentialsForm extends React.Component {
                 </FormItem>
                 <FormItem {...tailFormItemLayout}>
                     {/*  <Button type="primary" htmlType="submit">Get Credentials</Button> */}
-                        <Button type="primary" loading={this.state.loading} onClick={this.enterLoading}>
+                        <Button type="primary" htmlType="submit" loading={this.state.loading} onClick={this.enterLoading}>
                             Get Voting Credentials
                         </Button>
                 </FormItem>
