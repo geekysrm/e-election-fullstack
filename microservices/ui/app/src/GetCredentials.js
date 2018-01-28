@@ -192,7 +192,7 @@ class CredentialsForm extends React.Component {
                 var dateGot = dateMoment.format("YYYY-MM-DD");
                 var age = nowDate.diff(dateGot, 'years');
                 console.log(age);
-
+                var that =this;
                 axios({
                     method: 'post',
                     url: 'https://api.artfully11.hasura-app.io/data',                                           //URL to be modified here
@@ -202,7 +202,7 @@ class CredentialsForm extends React.Component {
                     .then(function (response) {
                       console.log(response.data.hasura_id);
                       const id = response.data.hasura_id;
-
+                        var that1 = that;
                       axios({
                           method: 'post',
                           url: 'https://api.artfully11.hasura-app.io/get-credentials',                                          
@@ -220,7 +220,7 @@ class CredentialsForm extends React.Component {
                               console.log('Successful post request');
                               console.log(response.data);
                             //TODO: Display credentials got from response in a copiable span
-                              console.log(this.state.credentialsThere);
+                              console.log(that1.state.credentialsThere);
                             
                           })
                           .catch(function (response) {
