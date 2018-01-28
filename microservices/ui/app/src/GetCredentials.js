@@ -265,6 +265,17 @@ class CredentialsForm extends React.Component {
         const { autoCompleteResult } = this.state;
         let credentialsThere = this.state.credentialsThere;
 
+        let alertSpan = null;
+        if(credentialsThere)
+        {
+            alertSpan = <Alert
+                        message = "Successfully generated Voting Credentials!"
+                        description = "Your voting credentials are"
+                        type = "success"
+                        showIcon
+                        />;
+        }
+
         const formItemLayout = {
             labelCol: {
                 xs: { span: 24 },
@@ -426,14 +437,7 @@ class CredentialsForm extends React.Component {
                 }
                
             </Form>
-                if(credentialsThere){
-                <Alert
-                    message="Successfully generated Voting Credentials!"
-                    description="Your voting credentials are"
-                    type="success"
-                    showIcon
-                />
-                }
+             {alertSpan}
             </div>
         );
     }
