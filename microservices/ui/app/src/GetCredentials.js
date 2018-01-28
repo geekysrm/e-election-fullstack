@@ -217,9 +217,9 @@ class CredentialsForm extends React.Component {
                       })
                           .then(function (response) {
                               console.log('Successful post request');
-                              console.log(response);
+                              console.log(response.data);
                               //TODO: Display credentials got from response in a copiable span
-                              alert(response);
+                              
                           })
                           .catch(function (response) {
                               console.log('Unsuccessful post request');
