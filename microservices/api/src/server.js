@@ -12,7 +12,7 @@ var axios = require('axios');
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-   extended: true
+   extended: false
 }));
 
 var server = require('http').Server(app);
@@ -58,7 +58,7 @@ app.post('/data',function(req,res){
 
 });
 
-app.post('get-credentials',function(req,res){
+app.post('/getcredentials',function(req,res){
 
   var id = req.body.serial;
   var nm = req.body.name;
@@ -114,10 +114,10 @@ app.post('get-credentials',function(req,res){
   request.open('POST','https://data.artfully11.hasura-app.io/v1/query',true);
   request.setRequestHeader('Content-Type','application/json');
   request.setRequestHeader('Authorization','Bearer 9729a88294a0859b8bf736156b6b9f7d381d596c44d8a73f');
-  request.send(JSON.stringify(data));
+  request.send(JSON.stringify(body));
 
 });
 
-app.listen(8080, function () {
+app.listen(8000, function () {
   console.log('Example app listening on port 8080!');
 });
