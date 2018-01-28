@@ -23,6 +23,7 @@ class AppRouter extends React.Component {
             <Route exact path="/auth" component={Auth}/>
             <Route exact path="/filestore" component={Filestore}/>
             <Route exact path="/home" component={Home} />
+           {/* <Route exact path="/logout" component={Logout} /> */}
             <Route exact path="/get-credentials" component={GetCredentials} />
           </div>
         </Router>
