@@ -58,7 +58,7 @@ app.post('/data',function(req,res){
 
 });
 
-app.post('/getcredentials',function(req,res){
+app.post('/get-credentials',function(req,res){
 
   var id = req.body.serial;
   var nm = req.body.name;
