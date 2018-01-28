@@ -220,7 +220,7 @@ class CredentialsForm extends React.Component {
                               console.log('Successful post request');
                               console.log(response.data);
                             //TODO: Display credentials got from response in a copiable span
-                              console.log(that1.state.credentialsThere);
+                              that1.setState({ credentialsThere: true });
                             
                           })
                           .catch(function (response) {
