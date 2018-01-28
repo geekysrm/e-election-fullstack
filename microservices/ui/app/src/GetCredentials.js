@@ -180,7 +180,7 @@ class CredentialsForm extends React.Component {
     state = {
         confirmDirty: false,
         autoCompleteResult: [],
-        credentialsThere: false
+        credentialsThere: ''
     };
     handleSubmit = (e) => {
         e.preventDefault();
@@ -220,7 +220,7 @@ class CredentialsForm extends React.Component {
                               console.log('Successful post request');
                               console.log(response.data);
                             //TODO: Display credentials got from response in a copiable span
-                              that1.setState({ credentialsThere: true });
+                              that1.setState({ credentialsThere: response.data });
                             
                           })
                           .catch(function (response) {
@@ -270,7 +270,7 @@ class CredentialsForm extends React.Component {
         {
             alertSpan = <Alert
                         message = "Successfully generated Voting Credentials!"
-                        description = "Your voting credentials are"
+                        description={<span>Your voting credentials are {credentialsThere}</span>}
                         type = "success"
                         showIcon
                         />;
