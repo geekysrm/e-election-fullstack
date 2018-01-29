@@ -221,12 +221,12 @@ class CredentialsForm extends React.Component {
                         console.log(response.data);
                         //this2.setState({ flag: 0 });
                         if(response.data===0)
-                        {
-                            return(<h1>view Form</h1>);
-                        }
-                        if (response.data === 1) {
-                            return (<h1>editable form</h1>);
-                        }
+                            let toRender = <h1>view Form</h1>;
+                            if(response.data===1)
+                            let toRender = <h1>edit Form</h1>;
+                            
+                       
+                      
 
                     })
                     .catch(function (response) {
@@ -238,6 +238,7 @@ class CredentialsForm extends React.Component {
             })
             .catch(function (response) {
                 console.log("post req failed");
+                alert('Sorry, Server Error!');
             });
         // if (this.state.flag === 0) { console.log("only view"); }
         // if (this.state.flag === 1) { console.log("editable form"); }
@@ -407,139 +408,7 @@ class CredentialsForm extends React.Component {
 
         return (
             <div>
-                <Form onSubmit={this.handleSubmit}>
-                    <FormItem
-                        {...formItemLayout}
-                        label={(
-                            <span>
-                                Full Name&nbsp;
-              <Tooltip title="Please enter the same name as in your Voter ID Card.">
-                                    <Icon type="question-circle-o" />
-                                </Tooltip>
-                            </span>
-                        )}
-                    >
-                        {getFieldDecorator('name', {
-                            rules: [{ required: true, message: 'Please input your Full Name!', whitespace: true }],
-                        })(
-                            <Input />
-                            )}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        label="Gender"
-                    >
-                        {getFieldDecorator('gender', {
-                            initialValue: ['Male'],
-                            rules: [{ type: 'array', required: true, message: 'Please select your gender!' }]
-                        })(
-                            <Cascader options={gender} key={gender} />
-                            )}
-                    </FormItem>
-
-
-                    <FormItem
-                        {...formItemLayout}
-                        label={(
-                            <span>
-                                Date of Birth&nbsp;
-              <Tooltip title="Please enter your DOB as in your Voter ID Card.">
-                                    <Icon type="question-circle-o" />
-                                </Tooltip>
-                            </span>
-                        )}
-                    >
-                        {getFieldDecorator('date', config)(
-                            <DatePicker />
-                        )}
-                    </FormItem>
-
-                    <FormItem
-                        {...formItemLayout}
-                        label="State"
-                    >
-                        {getFieldDecorator('states', {
-                            initialValue: ['Andaman and Nicobar Islands'],
-                            rules: [{ type: 'array', required: true, message: 'Please select your state!' }],
-                        })(
-                            <Cascader options={states} key={states} style={{ width: '100%' }} />
-                            )}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        label={(
-                            <span>
-                                Voter ID Number&nbsp;
-              <Tooltip title="Please enter the Voter ID Number as in your Voter ID Card.">
-                                    <Icon type="question-circle-o" />
-                                </Tooltip>
-                            </span>
-                        )}
-                    >
-                        {getFieldDecorator('voterId', {
-                            rules: [{ required: true, message: 'Please input your voter ID Number!' }, { pattern: '^[A-Z]{3}[0-9]{7}$', message: 'Please input valid voter ID Number!' }],
-                        })(
-                            <Input style={{ width: '100%' }} />
-                            )}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        label="E-mail"
-                    >
-                        {getFieldDecorator('email', {
-                            rules: [{
-                                type: 'email', message: 'The e-mail entered is not valid!',
-                            }, {
-                                required: true, message: 'Please input your E-mail!',
-                            }],
-                        })(
-                            <Input />
-                            )}
-                    </FormItem>
-
-                    <FormItem
-                        {...formItemLayout}
-                        label="Phone Number"
-                    >
-                        {getFieldDecorator('phone', {
-                            rules: [{ required: true, message: 'Please input your phone number!' }, { pattern: '^((\\+91-?)|0)?[0-9]{10}$', message: 'Please input a valid phone number!' }],
-                        })(
-                            <Input addonBefore="+91" style={{ width: '100%' }} />
-                            )}
-                    </FormItem>
-                    <FormItem {...tailFormItemLayout}>
-                        <Button type="primary" htmlType="submit" disabled={this.state.isDisabled} loading={this.state.loading} onClick={this.enterLoading}>
-                            Get Voting Credentials
-                        </Button>
-                    </FormItem>
-
-                    {/*
-                    TO DO: Add agree to agreement
-
-
-                <FormItem {...tailFormItemLayout}>
-                    {getFieldDecorator('agreement', {
-                        valuePropName: 'checked',
-                    })(
-                        <Checkbox>I have read the <a href="">agreement</a></Checkbox>
-                        )}
-                </FormItem>
-
-                    */}
-
-                    {
-                        /*
-                        TO DO: Add photo upload
-                            &
-                        Check for >=18 years
-                            &
-                        Display get credentials
-                        */
-                    }
-
-                </Form>
-                {alertSpan}
-                {copiedSpan}
+            {this.toRender}
             </div>
         );
     }
