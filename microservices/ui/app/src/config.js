@@ -11,6 +11,10 @@ const saveOffline = (authToken) => {
   window.localStorage.setItem('authToken', authToken);
 }
 
+const deleteToken = (authToken) => {
+  window.localStorage.removeItem(authToken);
+}
+
 const getSavedToken = () => {
   return window.localStorage.getItem('authToken');
 }
@@ -18,5 +22,6 @@ const getSavedToken = () => {
 module.exports = {
   projectConfig,
   saveOffline,
-  getSavedToken
+  getSavedToken,
+  deleteToken
 };
