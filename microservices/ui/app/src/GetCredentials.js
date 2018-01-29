@@ -2,6 +2,8 @@ import React from 'react';
 import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete, DatePicker, Alert } from 'antd';
 import moment from 'moment';
 import axios from 'axios';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+
 
 import { getSavedToken } from './config';
 
@@ -281,6 +283,7 @@ class CredentialsForm extends React.Component {
         let copied = this.state.copied;
 
         let alertSpan = null;
+        let copied = null;
         if(credentialsThere)
         {
             alertSpan = <Alert
