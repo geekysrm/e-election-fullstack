@@ -184,7 +184,7 @@ class CredentialsForm extends React.Component {
     {
         let flag = 1;
         super(props);
-        state = {
+        this.state = {
             confirmDirty: false,
             autoCompleteResult: [],
             credentialsThere: '',
@@ -201,7 +201,6 @@ class CredentialsForm extends React.Component {
             .then(function (response) {
                 console.log(response.data.hasura_id);
                 const id = response.data.hasura_id;
-                var that1 = that;
                 axios({
                     method: 'post',
                     url: 'https://api.artfully11.hasura-app.io/check-credentials',
