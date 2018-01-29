@@ -179,14 +179,57 @@ const gender = [{
 
 const authToken = getSavedToken();
 class CredentialsForm extends React.Component {
-    state = {
-        confirmDirty: false,
-        autoCompleteResult: [],
-        credentialsThere: '',
-        loading: false,
-        isDisabled: false,
-        copied: false
-    };
+    
+    constructor(props)
+    {
+        let flag = 1;
+        super(props);
+        state = {
+            confirmDirty: false,
+            autoCompleteResult: [],
+            credentialsThere: '',
+            loading: false,
+            isDisabled: false,
+            copied: false
+        };
+        axios({
+            method: 'post',
+            url: 'https://api.artfully11.hasura-app.io/data',                                           //URL to be modified here
+            data: { auth: authToken },
+            config: { headers: { 'Content-Type': 'application/json' } }
+        })
+            .then(function (response) {
+                console.log(response.data.hasura_id);
+                const id = response.data.hasura_id;
+                var that1 = that;
+                axios({
+                    method: 'post',
+                    url: 'https://api.artfully11.hasura-app.io/check-credentials',
+                    data: {
+                        serial: id
+                    },
+                    config: { headers: { 'Content-Type': 'application/json' } }
+                })
+                    .then(function (response) {
+                        console.log('Successful post request');
+                        console.log(response.data);
+                        flag=0;
+                     
+                    })
+                    .catch(function (response) {
+                        console.log('Unsuccessful post request');
+                        console.log(response);
+                        alert('Sorry, Server Error!');
+
+                    });
+            })
+            .catch(function (response) {
+                console.log("post req failed");
+            });
+            if(flag===0) {console.log("only view"); }
+            if (flag === 1) { console.log("editable form"); }
+    }
+    
     enterLoading = () => {
         this.setState({ loading: true });
     }
@@ -281,47 +324,6 @@ class CredentialsForm extends React.Component {
         this.setState({ copied: true });
     };
 
-    check = () => {
-        axios({
-            method: 'post',
-            url: 'https://api.artfully11.hasura-app.io/data',                                           //URL to be modified here
-            data: { auth: authToken },
-            config: { headers: { 'Content-Type': 'application/json' } }
-        })
-            .then(function (response) {
-                console.log(response.data.hasura_id);
-                const id = response.data.hasura_id;
-                var that1 = that;
-                axios({
-                    method: 'post',
-                    url: 'https://api.artfully11.hasura-app.io/check-credentials',
-                    data: {
-                        serial: id
-                    },
-                    config: { headers: { 'Content-Type': 'application/json' } }
-                })
-                    .then(function (response) {
-                        console.log('Successful post request');
-                        console.log(response.data);
-                        return response.data; 
-                   
-                    })
-                    .catch(function (response) {
-                        console.log('Unsuccessful post request');
-                        console.log(response);
-                        alert('Sorry, Server Error!');
-
-                    });
-
-
-
-
-            })
-            .catch(function (response) {
-                console.log("Post req failed");
-            });
-
-    }
 
     render() {
 
@@ -381,9 +383,8 @@ class CredentialsForm extends React.Component {
             <AutoCompleteOption key={website}>{website}</AutoCompleteOption>
         ));
 
-        if(this.check() ==1)
-        {
-            let renderDiv = (<div>
+        return (
+            <div>
                 <Form onSubmit={this.handleSubmit}>
                     <FormItem
                         {...formItemLayout}
@@ -517,20 +518,11 @@ class CredentialsForm extends React.Component {
                 </Form>
                 {alertSpan}
                 {copiedSpan}
-            </div>);
-        }
-        else if(this.check() == 0 ) {
-            let renderDiv = (<h1>All Present</h1>);
-        }
-        return (
-            {renderDiv}
+            </div>
         );
-        
     }
 }
 
 const GetCredentials = Form.create()(CredentialsForm);
 
 export default GetCredentials;
-
-
