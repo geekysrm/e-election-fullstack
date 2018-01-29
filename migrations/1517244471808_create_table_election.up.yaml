@@ -1,0 +1,9 @@
+- args:
+    sql: CREATE TABLE "election"("election_id" integer NOT NULL, "state" text NOT
+      NULL, "post" text NOT NULL, "nomination_start_time" timestamptz NOT NULL, "nomination_end_time"
+      timestamptz NOT NULL, "election_start_time" timestamptz NOT NULL, "election_end_time"
+      timestamptz NOT NULL, PRIMARY KEY ("election_id") )
+  type: run_sql
+- args:
+    name: election
+  type: add_existing_table_or_view
