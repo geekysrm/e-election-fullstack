@@ -181,7 +181,8 @@ class CredentialsForm extends React.Component {
         confirmDirty: false,
         autoCompleteResult: [],
         credentialsThere: '',
-        loading: false
+        loading: false,
+        isDisabled:false
     };
     enterLoading = () => {
         this.setState({ loading: true });
@@ -227,6 +228,7 @@ class CredentialsForm extends React.Component {
                             //TODO: Display credentials got from response in a copiable span
                               that1.setState({ credentialsThere: response.data });
                               that1.setState({ loading: false });
+                              that1.setState({ isDisabled: true });
                           })
                             .catch(function (response) {
                                 console.log('Unsuccessful post request');
@@ -417,7 +419,7 @@ class CredentialsForm extends React.Component {
                         )}
                 </FormItem>
                 <FormItem {...tailFormItemLayout}>
-                        <Button type="primary" htmlType="submit" loading={this.state.loading} onClick={this.enterLoading}>
+                        <Button type="primary" htmlType="submit" disabled={isDisabled} loading={this.state.loading} onClick={this.enterLoading}>
                             Get Voting Credentials
                         </Button>
                 </FormItem>
