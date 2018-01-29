@@ -238,6 +238,7 @@ class CredentialsForm extends React.Component {
                                 console.log('Unsuccessful post request');
                                 console.log(response);
                                 alert('Sorry, Server Error!');
+                                
                                 });
                             
                               
@@ -250,6 +251,7 @@ class CredentialsForm extends React.Component {
                 }
                 else {
                     alert('Please enter correct DOB.\nYou have to be above 18 years to vote!');
+                    that.setState({ loading: false });
                 }
 
             }
