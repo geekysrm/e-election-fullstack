@@ -182,7 +182,8 @@ class CredentialsForm extends React.Component {
         autoCompleteResult: [],
         credentialsThere: '',
         loading: false,
-        isDisabled:false
+        isDisabled:false,
+        copied: false
     };
     enterLoading = () => {
         this.setState({ loading: true });
@@ -267,6 +268,9 @@ class CredentialsForm extends React.Component {
         }
         callback();
     }
+    onCopy = () => {
+        this.setState({ copied: true });
+    };
 
 
     render() {
@@ -274,16 +278,28 @@ class CredentialsForm extends React.Component {
         const { getFieldDecorator } = this.props.form;
         const { autoCompleteResult } = this.state;
         let credentialsThere = this.state.credentialsThere;
+        let copied = this.state.copied;
 
         let alertSpan = null;
         if(credentialsThere)
         {
             alertSpan = <Alert
                         message = "Successfully generated Voting Credentials!"
-                description={<span>Your voting credentials are <strong>{credentialsThere}</strong>.</span>}
+                        description={
+                            
+                            <CopyToClipboard onCopy={this.onCopy} text={this.state.credentialsThere}>
+                            <span>Your voting credentials are <strong>{credentialsThere}</strong>.</span>
+                            </CopyToClipboard>
+                           
+                            }
                         type = "success"
                         showIcon
                         />;
+            
+        }
+        if(copied)
+        {
+            copiedSpan = <Alert message={"Copied!"} type="info" />
         }
 
         const formItemLayout = {
@@ -450,6 +466,7 @@ class CredentialsForm extends React.Component {
                
             </Form>
              {alertSpan}
+                {copiedSpan}
             </div>
         );
     }
