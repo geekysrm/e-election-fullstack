@@ -186,7 +186,7 @@ class CredentialsForm extends React.Component {
     enterLoading = () => {
         this.setState({ loading: true });
     }
-
+    
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
@@ -230,12 +230,12 @@ class CredentialsForm extends React.Component {
 
 
                             
-                          })
-                          .catch(function (response) {
                               console.log('Unsuccessful post request');
                               console.log(response);
                               alert('Sorry, Server Error!');
 
+                          })
+                          .catch(function (response) {
                           });
                     })
                     .catch(function (response) {
@@ -278,7 +278,7 @@ class CredentialsForm extends React.Component {
         {
             alertSpan = <Alert
                         message = "Successfully generated Voting Credentials!"
-                        description={<span>Your voting credentials are {credentialsThere}</span>}
+                description={<span>Your voting credentials are {credentialsThere}.</span>}
                         type = "success"
                         showIcon
                         />;
@@ -417,7 +417,6 @@ class CredentialsForm extends React.Component {
                         )}
                 </FormItem>
                 <FormItem {...tailFormItemLayout}>
-                    {/*  <Button type="primary" htmlType="submit">Get Credentials</Button> */}
                         <Button type="primary" htmlType="submit" loading={this.state.loading} onClick={this.enterLoading}>
                             Get Voting Credentials
                         </Button>
