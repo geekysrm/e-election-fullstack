@@ -227,16 +227,16 @@ class CredentialsForm extends React.Component {
                             //TODO: Display credentials got from response in a copiable span
                               that1.setState({ credentialsThere: response.data });
                               that1.setState({ loading: false });
-
-
-                            
-                              console.log('Unsuccessful post request');
-                              console.log(response);
-                              alert('Sorry, Server Error!');
-
                           })
-                          .catch(function (response) {
-                          });
+                            .catch(function (response) {
+                                console.log('Unsuccessful post request');
+                                console.log(response);
+                                alert('Sorry, Server Error!');
+                                });
+                            
+                              
+                         
+                         
                     })
                     .catch(function (response) {
                       console.log("post req failed");
