@@ -4,7 +4,7 @@ import Home from './Home';
 import { Data } from './Data';
 import { Auth } from './Auth';
 import { Filestore } from './Filestore';
-import { Logout } from './Logout';
+//import { Logout } from './Logout';
 
 import GetCredentials from './GetCredentials';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
