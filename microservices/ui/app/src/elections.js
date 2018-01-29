@@ -14,7 +14,7 @@ class elections extends Component
         config: { headers: { 'Content-Type': 'application/json' } }
     })
         .then(function (response) {
-          var card = ``;
+          {/*var card = ``;
           for(var i=0;i<response.data.length;i++)
           {
 
@@ -28,7 +28,15 @@ class elections extends Component
               </Card>`
 
           }
-          return card;
+          return card;*/}
+          return (<Card title={response.data[0].id} extra={<a href="#">More</a>} style={{ width: 300 }}>
+            <p>{response.data[0].post}</p>
+            <p>{response.data[0].state}</p>
+            <p>{response.data[0].nomination_start_time}</p>
+            <p>{response.data[0].nomination_end_time}</p>
+            <p>{response.data[0].election_start_time}</p>
+            <p>{response.data[0].election_end_time}</p>
+          </Card>)
           console.log(response);
         })
         .catch(function (response) {
@@ -44,7 +52,7 @@ class elections extends Component
   render() {
       return (
           <div className="elections">
-            ${this.loadCards()}
+            {this.loadCards()}
           </div>
       );
   }
