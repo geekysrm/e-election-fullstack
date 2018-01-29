@@ -381,7 +381,7 @@ class CredentialsForm extends React.Component {
             <AutoCompleteOption key={website}>{website}</AutoCompleteOption>
         ));
 
-        if(this.check==1)
+        if(this.check() ==1)
         {
             let renderDiv = (<div>
                 <Form onSubmit={this.handleSubmit}>
@@ -519,7 +519,7 @@ class CredentialsForm extends React.Component {
                 {copiedSpan}
             </div>);
         }
-        else if(this.check == 0 ) {
+        else if(this.check() == 0 ) {
             let renderDiv = (<h1>All Present</h1>);
         }
         return (
