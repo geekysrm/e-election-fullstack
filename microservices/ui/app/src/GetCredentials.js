@@ -291,7 +291,7 @@ class CredentialsForm extends React.Component {
                         description={
                             
                             <CopyToClipboard onCopy={this.onCopy} text={this.state.credentialsThere}>
-                            <span>Your voting credentials are <strong>{credentialsThere}</strong>.</span>
+                            <span style={{cursor:'pointer'}}>Your voting credentials are <strong>{credentialsThere}</strong>.</span>
                             </CopyToClipboard>
                            
                             }
