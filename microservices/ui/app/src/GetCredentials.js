@@ -202,6 +202,7 @@ class CredentialsForm extends React.Component {
                 var age = nowDate.diff(dateGot, 'years');
                 console.log(age);
                 var that =this;
+                if(age>=18){
                 axios({
                     method: 'post',
                     url: 'https://api.artfully11.hasura-app.io/data',                                           //URL to be modified here
@@ -246,7 +247,10 @@ class CredentialsForm extends React.Component {
                     .catch(function (response) {
                       console.log("post req failed");
                     });
-
+                }
+                else {
+                    alert('Please enter correct DOB.\nYou have to be above 18 years to vote!');
+                }
 
             }
         });
