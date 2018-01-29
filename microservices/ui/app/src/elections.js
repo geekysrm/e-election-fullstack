@@ -4,6 +4,7 @@ import { Card } from 'antd';
 import { getSavedToken } from './config';
 const authToken = getSavedToken();
 
+const card = {};
 class elections extends Component
 {
   loadCards = () =>{
@@ -13,6 +14,19 @@ class elections extends Component
         config: { headers: { 'Content-Type': 'application/json' } }
     })
         .then(function (response) {
+          for(var i=0;i<response.data.length;i++)
+          {
+            card = {
+              <Card title=response.data[i].id extra={<a href="#">More</a>} style={{ width: 300 }}>
+                <p>{response.data[i].post}</p>
+                <p>{response.data[i].state}</p>
+                <p>{response.data[i].nomination_start_time}</p>
+                <p>{response.data[i].nomination_end_time}</p>
+                <p>{response.data[i].election_start_time}</p>
+                <p>{response.data[i].election_end_time}</p>
+              </Card>
+            }
+          }
           console.log(response);
         })
         .catch(function (response) {
