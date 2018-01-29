@@ -283,7 +283,7 @@ class CredentialsForm extends React.Component {
         let copied = this.state.copied;
 
         let alertSpan = null;
-        let copied = null;
+        let copiedSpan = null;
         if(credentialsThere)
         {
             alertSpan = <Alert
