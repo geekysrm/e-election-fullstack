@@ -182,7 +182,7 @@ class CredentialsForm extends React.Component {
     
     constructor(props)
     {
-        let flag = 1;
+      
         super(props);
         this.state = {
             confirmDirty: false,
@@ -190,8 +190,13 @@ class CredentialsForm extends React.Component {
             credentialsThere: '',
             loading: false,
             isDisabled: false,
-            copied: false
+            copied: false,
+            flag:1
         };
+        
+    }
+    
+    handleOnLoad = () => {
         axios({
             method: 'post',
             url: 'https://api.artfully11.hasura-app.io/data',                                           //URL to be modified here
@@ -212,8 +217,8 @@ class CredentialsForm extends React.Component {
                     .then(function (response) {
                         console.log('Successful post request');
                         console.log(response.data);
-                        flag=0;
-                     
+                        this.setState({ flag: 0 });
+
                     })
                     .catch(function (response) {
                         console.log('Unsuccessful post request');
@@ -225,10 +230,19 @@ class CredentialsForm extends React.Component {
             .catch(function (response) {
                 console.log("post req failed");
             });
-            if(flag===0) {console.log("only view"); }
-            if (flag === 1) { console.log("editable form"); }
+        if (flag === 0) { console.log("only view"); }
+        if (flag === 1) { console.log("editable form"); }
     }
-    
+
+    componentDidMount()
+    {
+        window.addEventListener('load', this.handleOnLoad);
+    }
+    componentDidUpdate()
+    {
+        window.addEventListener('load', this.handleOnLoad);
+
+    }
     enterLoading = () => {
         this.setState({ loading: true });
     }
