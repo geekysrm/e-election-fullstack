@@ -11,8 +11,8 @@ const saveOffline = (authToken) => {
   window.localStorage.setItem('authToken', authToken);
 }
 
-const deleteToken = (authToken) => {
-  window.localStorage.removeItem(authToken);
+const deleteToken = () => {
+  window.localStorage.removeItem('authToken');
 }
 
 const getSavedToken = () => {

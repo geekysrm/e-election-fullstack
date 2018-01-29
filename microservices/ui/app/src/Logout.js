@@ -14,7 +14,7 @@ class Logout extends React.Component {
         const authToken = getSavedToken();
         if(authToken)
         {
-            deleteToken(authToken);
+            deleteToken();
         }
         else {
             alert('Please login at /auth first');
