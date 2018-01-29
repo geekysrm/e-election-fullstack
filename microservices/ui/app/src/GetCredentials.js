@@ -302,7 +302,7 @@ class CredentialsForm extends React.Component {
         }
         if(copied)
         {
-            copiedSpan = <Alert message={"Copied!"} type="info" />
+            copiedSpan = <Alert message={"Copied to clipboard!"} type="info" />
         }
 
         const formItemLayout = {
