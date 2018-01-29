@@ -419,7 +419,7 @@ class CredentialsForm extends React.Component {
                         )}
                 </FormItem>
                 <FormItem {...tailFormItemLayout}>
-                        <Button type="primary" htmlType="submit" disabled={isDisabled} loading={this.state.loading} onClick={this.enterLoading}>
+                        <Button type="primary" htmlType="submit" disabled={this.state.isDisabled} loading={this.state.loading} onClick={this.enterLoading}>
                             Get Voting Credentials
                         </Button>
                 </FormItem>
