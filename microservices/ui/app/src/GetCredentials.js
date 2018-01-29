@@ -2,6 +2,8 @@ import React from 'react';
 import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete, DatePicker, Alert } from 'antd';
 import moment from 'moment';
 import axios from 'axios';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+
 
 import { getSavedToken } from './config';
 
@@ -181,7 +183,9 @@ class CredentialsForm extends React.Component {
         confirmDirty: false,
         autoCompleteResult: [],
         credentialsThere: '',
-        loading: false
+        loading: false,
+        isDisabled:false,
+        copied: false
     };
     enterLoading = () => {
         this.setState({ loading: true });
@@ -198,6 +202,7 @@ class CredentialsForm extends React.Component {
                 var age = nowDate.diff(dateGot, 'years');
                 console.log(age);
                 var that =this;
+                if(age>=18){
                 axios({
                     method: 'post',
                     url: 'https://api.artfully11.hasura-app.io/data',                                           //URL to be modified here
@@ -227,21 +232,27 @@ class CredentialsForm extends React.Component {
                             //TODO: Display credentials got from response in a copiable span
                               that1.setState({ credentialsThere: response.data });
                               that1.setState({ loading: false });
-
-
-                            
-                              console.log('Unsuccessful post request');
-                              console.log(response);
-                              alert('Sorry, Server Error!');
-
+                              that1.setState({ isDisabled: true });
                           })
-                          .catch(function (response) {
-                          });
+                            .catch(function (response) {
+                                console.log('Unsuccessful post request');
+                                console.log(response);
+                                alert('Sorry, Server Error!');
+                                
+                                });
+                            
+                              
+                         
+                         
                     })
                     .catch(function (response) {
                       console.log("post req failed");
                     });
-
+                }
+                else {
+                    alert('Please enter correct DOB.\nYou have to be above 18 years to vote!');
+                    that.setState({ loading: false });
+                }
 
             }
         });
@@ -265,6 +276,9 @@ class CredentialsForm extends React.Component {
         }
         callback();
     }
+    onCopy = () => {
+        this.setState({ copied: true });
+    };
 
 
     render() {
@@ -272,16 +286,29 @@ class CredentialsForm extends React.Component {
         const { getFieldDecorator } = this.props.form;
         const { autoCompleteResult } = this.state;
         let credentialsThere = this.state.credentialsThere;
+        let copied = this.state.copied;
 
         let alertSpan = null;
+        let copiedSpan = null;
         if(credentialsThere)
         {
             alertSpan = <Alert
                         message = "Successfully generated Voting Credentials!"
-                description={<span>Your voting credentials are {credentialsThere}.</span>}
+                        description={
+                            
+                            <CopyToClipboard onCopy={this.onCopy} text={this.state.credentialsThere}>
+                            <span style={{cursor:'pointer'}}>Your voting credentials are <strong>{credentialsThere}</strong>.</span>
+                            </CopyToClipboard>
+                           
+                            }
                         type = "success"
                         showIcon
                         />;
+            
+        }
+        if(copied)
+        {
+            copiedSpan = <Alert message={"Copied to clipboard!"} type="info" />
         }
 
         const formItemLayout = {
@@ -417,7 +444,7 @@ class CredentialsForm extends React.Component {
                         )}
                 </FormItem>
                 <FormItem {...tailFormItemLayout}>
-                        <Button type="primary" htmlType="submit" loading={this.state.loading} onClick={this.enterLoading}>
+                        <Button type="primary" htmlType="submit" disabled={this.state.isDisabled} loading={this.state.loading} onClick={this.enterLoading}>
                             Get Voting Credentials
                         </Button>
                 </FormItem>
@@ -448,6 +475,7 @@ class CredentialsForm extends React.Component {
                
             </Form>
              {alertSpan}
+                {copiedSpan}
             </div>
         );
     }
