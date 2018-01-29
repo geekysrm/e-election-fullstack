@@ -230,8 +230,8 @@ class CredentialsForm extends React.Component {
             .catch(function (response) {
                 console.log("post req failed");
             });
-        if (flag === 0) { console.log("only view"); }
-        if (flag === 1) { console.log("editable form"); }
+        if (this.state.flag === 0) { console.log("only view"); }
+        if (this.state.flag === 1) { console.log("editable form"); }
     }
 
     componentDidMount()
