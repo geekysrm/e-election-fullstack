@@ -4,9 +4,9 @@ import { Card } from 'antd';
 import { getSavedToken } from './config';
 const authToken = getSavedToken();
 
-const card = {};
 class elections extends Component
 {
+
   loadCards = () =>{
     axios({
         method: 'post',
@@ -14,19 +14,21 @@ class elections extends Component
         config: { headers: { 'Content-Type': 'application/json' } }
     })
         .then(function (response) {
+          var card = ``;
           for(var i=0;i<response.data.length;i++)
           {
-            card = {
-              <Card title=response.data[i].id extra={<a href="#">More</a>} style={{ width: 300 }}>
+
+              card = card +`<Card title=response.data[i].id extra={<a href="#">More</a>} style={{ width: 300 }}>
                 <p>{response.data[i].post}</p>
                 <p>{response.data[i].state}</p>
                 <p>{response.data[i].nomination_start_time}</p>
                 <p>{response.data[i].nomination_end_time}</p>
                 <p>{response.data[i].election_start_time}</p>
                 <p>{response.data[i].election_end_time}</p>
-              </Card>
-            }
+              </Card>`
+
           }
+          return card;
           console.log(response);
         })
         .catch(function (response) {
@@ -42,11 +44,7 @@ class elections extends Component
   render() {
       return (
           <div className="elections">
-          <Card title="Card title" extra={<a href="#">More</a>} style={{ width: 300 }}>
-            <p>Card content</p>
-            <p>Card content</p>
-            <p>Card content</p>
-          </Card>
+            ${this.loadCards()}
           </div>
       );
   }
