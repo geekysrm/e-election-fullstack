@@ -1,14 +1,28 @@
 import React, { Component } from 'react';
 import { Button } from 'antd';
 import axios from 'axios';
-import { getSavedToken } from './config';
+import { getSavedToken, deleteToken } from './config';
 import 'antd/dist/antd.css';
 const authToken = getSavedToken();
 class Home extends Component {
+    
+    onLogout = () => {
+
+
+        console.log('CLicked logout');
+        const authToken = getSavedToken();
+        if (authToken) {
+            deleteToken();
+        }
+        else {
+            alert('Please login at /auth first');
+        }
+
+    }
     getData = () => {
 
 
-                console.log('CLicked getdata');
+                console.log('Clicked getdata');
 
                 axios({
                     method: 'post',
@@ -32,6 +46,7 @@ class Home extends Component {
                 <div>
                     <Button type="primary" href="/get-credentials">Get Credentials</Button>
                     <Button type="primary" onClick={this.getData}>Data</Button>
+                    <Button type="primary" onClick={this.onLogout}>Logout</Button>
                 </div>
             </div>
         );
