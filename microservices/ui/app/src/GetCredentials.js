@@ -197,6 +197,7 @@ class CredentialsForm extends React.Component {
     }
     
     handleOnLoad = () => {
+        var this1 = this;
         axios({
             method: 'post',
             url: 'https://api.artfully11.hasura-app.io/data',                                           //URL to be modified here
@@ -206,6 +207,7 @@ class CredentialsForm extends React.Component {
             .then(function (response) {
                 console.log(response.data.hasura_id);
                 const id = response.data.hasura_id;
+                var this2 = this1;
                 axios({
                     method: 'post',
                     url: 'https://api.artfully11.hasura-app.io/check-credentials',
@@ -217,7 +219,7 @@ class CredentialsForm extends React.Component {
                     .then(function (response) {
                         console.log('Successful post request');
                         console.log(response.data);
-                        this.setState({ flag: 0 });
+                        this2.setState({ flag: 0 });
 
                     })
                     .catch(function (response) {
