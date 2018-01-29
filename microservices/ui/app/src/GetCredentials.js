@@ -198,6 +198,7 @@ class CredentialsForm extends React.Component {
     
     handleOnLoad = () => {
         var this1 = this;
+        let toRender=null;
         axios({
             method: 'post',
             url: 'https://api.artfully11.hasura-app.io/data',                                           //URL to be modified here
@@ -220,10 +221,10 @@ class CredentialsForm extends React.Component {
                         console.log('Successful post request');
                         console.log(response.data);
                         //this2.setState({ flag: 0 });
-                        if(response.data===0)
-                            let toRender = <h1>view Form</h1>;
+                             if(response.data===0)
+                            toRender = <h1>view Form</h1>;
                             if(response.data===1)
-                            let toRender = <h1>edit Form</h1>;
+                            toRender = <h1>edit Form</h1>;
                             
                        
                       
