@@ -199,7 +199,7 @@ app.post('/get-credentials',function(req,res){
 
 });
 
-app.get('/get-elections',function(req,res){
+app.post('/get-elections',function(req,res){
 
     var body = {
       "type": "select",
