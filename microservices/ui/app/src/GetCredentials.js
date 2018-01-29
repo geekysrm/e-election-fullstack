@@ -179,7 +179,6 @@ const gender = [{
 
 const authToken = getSavedToken();
 class CredentialsForm extends React.Component {
-    
     constructor(props)
     {
       
@@ -191,14 +190,14 @@ class CredentialsForm extends React.Component {
             loading: false,
             isDisabled: false,
             copied: false,
-           // flag:1
+            flag:-1
         };
         
     }
     
     handleOnLoad = () => {
         var this1 = this;
-        let toRender=null;
+        
         axios({
             method: 'post',
             url: 'https://api.artfully11.hasura-app.io/data',                                           //URL to be modified here
@@ -222,9 +221,9 @@ class CredentialsForm extends React.Component {
                         console.log(response.data);
                         //this2.setState({ flag: 0 });
                              if(response.data===0)
-                            toRender = <h1>view Form</h1>;
+                            this2.setState({ flag: 0 });;
                             if(response.data===1)
-                            toRender = <h1>edit Form</h1>;
+                            this2.setState({ flag: 1 });
                             
                        
                       
@@ -409,7 +408,9 @@ class CredentialsForm extends React.Component {
 
         return (
             <div>
-            {this.toRender}
+            {(this.state.flag===0) && <h1>view form</h1>}
+            {(this.state.flag === 1) && <h1>edit form</h1>}
+
             </div>
         );
     }
