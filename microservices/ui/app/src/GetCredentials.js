@@ -278,7 +278,7 @@ class CredentialsForm extends React.Component {
         {
             alertSpan = <Alert
                         message = "Successfully generated Voting Credentials!"
-                description={<span>Your voting credentials are {credentialsThere}.</span>}
+                description={<span>Your voting credentials are <strong>{credentialsThere}</strong>.</span>}
                         type = "success"
                         showIcon
                         />;
