@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Button } from 'antd';
 import axios from 'axios';
+import Election from './elections.js';
 import { getSavedToken, deleteToken } from './config';
 import 'antd/dist/antd.css';
 const authToken = getSavedToken();
 class Home extends Component {
-    
+
     onLogout = () => {
 
 
@@ -19,7 +20,7 @@ class Home extends Component {
         }
 
     }
-    
+
     getData = () => {
 
 
@@ -49,6 +50,7 @@ class Home extends Component {
                     <Button type="primary" onClick={this.getData}>Data</Button>
                     <Button type="primary" onClick={this.onLogout}>Logout</Button>
                 </div>
+                <Election />
             </div>
         );
     }
