@@ -191,7 +191,7 @@ class CredentialsForm extends React.Component {
             loading: false,
             isDisabled: false,
             copied: false,
-            flag:1
+           // flag:1
         };
         
     }
@@ -219,7 +219,14 @@ class CredentialsForm extends React.Component {
                     .then(function (response) {
                         console.log('Successful post request');
                         console.log(response.data);
-                        this2.setState({ flag: 0 });
+                        //this2.setState({ flag: 0 });
+                        if(response.data===0)
+                        {
+                            return(<h1>view Form</h1>);
+                        }
+                        if (response.data === 1) {
+                            return (<h1>editable form</h1>);
+                        }
 
                     })
                     .catch(function (response) {
@@ -232,8 +239,8 @@ class CredentialsForm extends React.Component {
             .catch(function (response) {
                 console.log("post req failed");
             });
-        if (this.state.flag === 0) { console.log("only view"); }
-        if (this.state.flag === 1) { console.log("editable form"); }
+        // if (this.state.flag === 0) { console.log("only view"); }
+        // if (this.state.flag === 1) { console.log("editable form"); }
     }
 
     componentDidMount()
