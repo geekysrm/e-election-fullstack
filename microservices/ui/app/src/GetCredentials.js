@@ -179,18 +179,60 @@ const gender = [{
 
 const authToken = getSavedToken();
 class CredentialsForm extends React.Component {
-    state = {
-        confirmDirty: false,
-        autoCompleteResult: [],
-        credentialsThere: '',
-        loading: false,
-        isDisabled:false,
-        copied: false
-    };
+    
+    constructor(props)
+    {
+        let flag = 1;
+        super(props);
+        this.state = {
+            confirmDirty: false,
+            autoCompleteResult: [],
+            credentialsThere: '',
+            loading: false,
+            isDisabled: false,
+            copied: false
+        };
+        axios({
+            method: 'post',
+            url: 'https://api.artfully11.hasura-app.io/data',                                           //URL to be modified here
+            data: { auth: authToken },
+            config: { headers: { 'Content-Type': 'application/json' } }
+        })
+            .then(function (response) {
+                console.log(response.data.hasura_id);
+                const id = response.data.hasura_id;
+                axios({
+                    method: 'post',
+                    url: 'https://api.artfully11.hasura-app.io/check-credentials',
+                    data: {
+                        serial: id
+                    },
+                    config: { headers: { 'Content-Type': 'application/json' } }
+                })
+                    .then(function (response) {
+                        console.log('Successful post request');
+                        console.log(response.data);
+                        flag=0;
+                     
+                    })
+                    .catch(function (response) {
+                        console.log('Unsuccessful post request');
+                        console.log(response);
+                        alert('Sorry, Server Error!');
+
+                    });
+            })
+            .catch(function (response) {
+                console.log("post req failed");
+            });
+            if(flag===0) {console.log("only view"); }
+            if (flag === 1) { console.log("editable form"); }
+    }
+    
     enterLoading = () => {
         this.setState({ loading: true });
     }
-    
+
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
@@ -201,53 +243,54 @@ class CredentialsForm extends React.Component {
                 var dateGot = dateMoment.format("YYYY-MM-DD");
                 var age = nowDate.diff(dateGot, 'years');
                 console.log(age);
-                var that =this;
-                if(age>=18){
-                axios({
-                    method: 'post',
-                    url: 'https://api.artfully11.hasura-app.io/data',                                           //URL to be modified here
-                    data: { auth: authToken },
-                    config: { headers: { 'Content-Type': 'application/json' } }
-                })
-                    .then(function (response) {
-                      console.log(response.data.hasura_id);
-                      const id = response.data.hasura_id;
-                        var that1 = that;
-                      axios({
-                          method: 'post',
-                          url: 'https://api.artfully11.hasura-app.io/get-credentials',                                          
-                          data: {serial:id,
-                            name: values.name,
-                            gender: values.gender[0],
-                            date: dateGot, state: values.states[0],
-                            voterId: values.voterId,
-                            email:values.email,
-                            phone:Number(values.phone)
-                          },
-                          config: { headers: { 'Content-Type': 'application/json' } }
-                      })
-                          .then(function (response) {
-                              console.log('Successful post request');
-                              console.log(response.data);
-                            //TODO: Display credentials got from response in a copiable span
-                              that1.setState({ credentialsThere: response.data });
-                              that1.setState({ loading: false });
-                              that1.setState({ isDisabled: true });
-                          })
-                            .catch(function (response) {
-                                console.log('Unsuccessful post request');
-                                console.log(response);
-                                alert('Sorry, Server Error!');
-                                
-                                });
-                            
-                              
-                         
-                         
+                var that = this;
+                if (age >= 18) {
+                    axios({
+                        method: 'post',
+                        url: 'https://api.artfully11.hasura-app.io/data',                                           //URL to be modified here
+                        data: { auth: authToken },
+                        config: { headers: { 'Content-Type': 'application/json' } }
                     })
-                    .catch(function (response) {
-                      console.log("post req failed");
-                    });
+                        .then(function (response) {
+                            console.log(response.data.hasura_id);
+                            const id = response.data.hasura_id;
+                            var that1 = that;
+                            axios({
+                                method: 'post',
+                                url: 'https://api.artfully11.hasura-app.io/get-credentials',
+                                data: {
+                                    serial: id,
+                                    name: values.name,
+                                    gender: values.gender[0],
+                                    date: dateGot, state: values.states[0],
+                                    voterId: values.voterId,
+                                    email: values.email,
+                                    phone: Number(values.phone)
+                                },
+                                config: { headers: { 'Content-Type': 'application/json' } }
+                            })
+                                .then(function (response) {
+                                    console.log('Successful post request');
+                                    console.log(response.data);
+                                    //TODO: Display credentials got from response in a copiable span
+                                    that1.setState({ credentialsThere: response.data });
+                                    that1.setState({ loading: false });
+                                    that1.setState({ isDisabled: true });
+                                })
+                                .catch(function (response) {
+                                    console.log('Unsuccessful post request');
+                                    console.log(response);
+                                    alert('Sorry, Server Error!');
+
+                                });
+
+
+
+
+                        })
+                        .catch(function (response) {
+                            console.log("post req failed");
+                        });
                 }
                 else {
                     alert('Please enter correct DOB.\nYou have to be above 18 years to vote!');
@@ -290,24 +333,22 @@ class CredentialsForm extends React.Component {
 
         let alertSpan = null;
         let copiedSpan = null;
-        if(credentialsThere)
-        {
+        if (credentialsThere) {
             alertSpan = <Alert
-                        message = "Successfully generated Voting Credentials!"
-                        description={
-                            
-                            <CopyToClipboard onCopy={this.onCopy} text={this.state.credentialsThere}>
-                            <span style={{cursor:'pointer'}}>Your voting credentials are <strong>{credentialsThere}</strong>.</span>
-                            </CopyToClipboard>
-                           
-                            }
-                        type = "success"
-                        showIcon
-                        />;
-            
+                message="Successfully generated Voting Credentials!"
+                description={
+
+                    <CopyToClipboard onCopy={this.onCopy} text={this.state.credentialsThere}>
+                        <span style={{ cursor: 'pointer' }}>Your voting credentials are <strong>{credentialsThere}</strong>.</span>
+                    </CopyToClipboard>
+
+                }
+                type="success"
+                showIcon
+            />;
+
         }
-        if(copied)
-        {
+        if (copied) {
             copiedSpan = <Alert message={"Copied to clipboard!"} type="info" />
         }
 
@@ -343,35 +384,35 @@ class CredentialsForm extends React.Component {
 
         return (
             <div>
-               <Form onSubmit={this.handleSubmit}>
-                <FormItem
-                    {...formItemLayout}
-                    label={(
-                        <span>
-                            Full Name&nbsp;
+                <Form onSubmit={this.handleSubmit}>
+                    <FormItem
+                        {...formItemLayout}
+                        label={(
+                            <span>
+                                Full Name&nbsp;
               <Tooltip title="Please enter the same name as in your Voter ID Card.">
-                                <Icon type="question-circle-o" />
-                            </Tooltip>
-                        </span>
-                    )}
-                >
-                    {getFieldDecorator('name', {
-                        rules: [{ required: true, message: 'Please input your Full Name!', whitespace: true }],
-                    })(
-                        <Input />
+                                    <Icon type="question-circle-o" />
+                                </Tooltip>
+                            </span>
                         )}
-                </FormItem>
-                <FormItem
-                    {...formItemLayout}
-                    label="Gender"
-                >
-                    {getFieldDecorator('gender', {
-                        initialValue: ['Male'],
-                        rules: [{ type: 'array', required: true, message: 'Please select your gender!' }]
-                    })(
-                        <Cascader options={gender} key={gender} />
-                        )}
-                </FormItem>
+                    >
+                        {getFieldDecorator('name', {
+                            rules: [{ required: true, message: 'Please input your Full Name!', whitespace: true }],
+                        })(
+                            <Input />
+                            )}
+                    </FormItem>
+                    <FormItem
+                        {...formItemLayout}
+                        label="Gender"
+                    >
+                        {getFieldDecorator('gender', {
+                            initialValue: ['Male'],
+                            rules: [{ type: 'array', required: true, message: 'Please select your gender!' }]
+                        })(
+                            <Cascader options={gender} key={gender} />
+                            )}
+                    </FormItem>
 
 
                     <FormItem
@@ -390,66 +431,66 @@ class CredentialsForm extends React.Component {
                         )}
                     </FormItem>
 
-                <FormItem
-                    {...formItemLayout}
-                    label="State"
-                >
-                    {getFieldDecorator('states', {
-                        initialValue: ['Andaman and Nicobar Islands'],
-                        rules: [{ type: 'array', required: true, message: 'Please select your state!' }],
-                    })(
-                        <Cascader options={states} key={states} style={{ width: '100%' }} />
-                        )}
-                </FormItem>
-                <FormItem
-                    {...formItemLayout}
-                    label = {(
-                        <span>
-                            Voter ID Number&nbsp;
+                    <FormItem
+                        {...formItemLayout}
+                        label="State"
+                    >
+                        {getFieldDecorator('states', {
+                            initialValue: ['Andaman and Nicobar Islands'],
+                            rules: [{ type: 'array', required: true, message: 'Please select your state!' }],
+                        })(
+                            <Cascader options={states} key={states} style={{ width: '100%' }} />
+                            )}
+                    </FormItem>
+                    <FormItem
+                        {...formItemLayout}
+                        label={(
+                            <span>
+                                Voter ID Number&nbsp;
               <Tooltip title="Please enter the Voter ID Number as in your Voter ID Card.">
-                                <Icon type="question-circle-o" />
-                            </Tooltip>
-                        </span>
-                    )}
-                >
-                    {getFieldDecorator('voterId', {
-                        rules: [{ required: true, message: 'Please input your voter ID Number!' }, { pattern: '^[A-Z]{3}[0-9]{7}$', message: 'Please input valid voter ID Number!' }],
-                    })(
-                        <Input style={{ width: '100%' }} />
+                                    <Icon type="question-circle-o" />
+                                </Tooltip>
+                            </span>
                         )}
-                </FormItem>
-                <FormItem
-                    {...formItemLayout}
-                    label="E-mail"
-                >
-                    {getFieldDecorator('email', {
-                        rules: [{
-                            type: 'email', message: 'The e-mail entered is not valid!',
-                        }, {
-                            required: true, message: 'Please input your E-mail!',
-                        }],
-                    })(
-                        <Input />
-                        )}
-                </FormItem>
+                    >
+                        {getFieldDecorator('voterId', {
+                            rules: [{ required: true, message: 'Please input your voter ID Number!' }, { pattern: '^[A-Z]{3}[0-9]{7}$', message: 'Please input valid voter ID Number!' }],
+                        })(
+                            <Input style={{ width: '100%' }} />
+                            )}
+                    </FormItem>
+                    <FormItem
+                        {...formItemLayout}
+                        label="E-mail"
+                    >
+                        {getFieldDecorator('email', {
+                            rules: [{
+                                type: 'email', message: 'The e-mail entered is not valid!',
+                            }, {
+                                required: true, message: 'Please input your E-mail!',
+                            }],
+                        })(
+                            <Input />
+                            )}
+                    </FormItem>
 
-                <FormItem
-                    {...formItemLayout}
-                    label="Phone Number"
-                >
-                    {getFieldDecorator('phone', {
-                        rules: [{ required: true, message: 'Please input your phone number!' }, { pattern: '^((\\+91-?)|0)?[0-9]{10}$', message: 'Please input a valid phone number!' }],
-                    })(
-                        <Input addonBefore="+91" style={{ width: '100%' }} />
-                        )}
-                </FormItem>
-                <FormItem {...tailFormItemLayout}>
+                    <FormItem
+                        {...formItemLayout}
+                        label="Phone Number"
+                    >
+                        {getFieldDecorator('phone', {
+                            rules: [{ required: true, message: 'Please input your phone number!' }, { pattern: '^((\\+91-?)|0)?[0-9]{10}$', message: 'Please input a valid phone number!' }],
+                        })(
+                            <Input addonBefore="+91" style={{ width: '100%' }} />
+                            )}
+                    </FormItem>
+                    <FormItem {...tailFormItemLayout}>
                         <Button type="primary" htmlType="submit" disabled={this.state.isDisabled} loading={this.state.loading} onClick={this.enterLoading}>
                             Get Voting Credentials
                         </Button>
-                </FormItem>
+                    </FormItem>
 
-                {/*
+                    {/*
                     TO DO: Add agree to agreement
 
 
@@ -463,18 +504,18 @@ class CredentialsForm extends React.Component {
 
                     */}
 
-                {
-                    /*
-                    TO DO: Add photo upload
-                        &
-                    Check for >=18 years
-                        &
-                    Display get credentials
-                    */
-                }
-               
-            </Form>
-             {alertSpan}
+                    {
+                        /*
+                        TO DO: Add photo upload
+                            &
+                        Check for >=18 years
+                            &
+                        Display get credentials
+                        */
+                    }
+
+                </Form>
+                {alertSpan}
                 {copiedSpan}
             </div>
         );
