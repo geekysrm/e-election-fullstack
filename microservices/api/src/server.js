@@ -238,6 +238,52 @@ app.post('/get-elections',function(req,res){
 
 });
 
+app.post('/view-credentials',function(req,res){
+
+  var id = req.body.serial;
+
+    var body = {
+    "type": "select",
+    "args": {
+        "table": "usertable",
+        "columns": [
+            "*"
+        ],
+        "where": {
+            "hasura_id": {
+                "$eq": "2"
+            }
+        }
+    }
+  };
+
+  var request = new XMLHttpRequest();
+
+  request.onreadystatechange = function(){
+    if(request.readyState === XMLHttpRequest.DONE)
+    {
+      if(request.status === 200)
+      {
+        res.status(200).send(request.responseText);
+      }
+      else if(request.status === 400)
+      {
+        res.status(400).send(request.responseText);
+      }
+      else if(request.status === 500)
+      {
+        res.status(500).send(request.responseText);
+      }
+    }
+  };
+
+  request.open('POST','https://data.artfully11.hasura-app.io/v1/query',true);
+  request.setRequestHeader('Content-Type','application/json');
+  request.setRequestHeader('Authorization','Bearer 9729a88294a0859b8bf736156b6b9f7d381d596c44d8a73f');
+  request.send(JSON.stringify(body));
+
+});
+
 app.listen(8080, function () {
   console.log('Example app listening on port 8080!');
 });

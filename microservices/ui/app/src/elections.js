@@ -46,7 +46,6 @@ class elections extends Component
   constructor()
   {
     super();
-    this.loadCards();
   }
 
   render() {
