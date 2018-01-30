@@ -1,0 +1,6 @@
+- args:
+    sql: CREATE TABLE "x"("x" serial NOT NULL, PRIMARY KEY ("x") )
+  type: run_sql
+- args:
+    name: x
+  type: add_existing_table_or_view

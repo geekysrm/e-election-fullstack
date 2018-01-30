@@ -129,7 +129,7 @@ class Auth extends React.Component {
           style={styleObj}
           zDepth={1}>
           {this.state.showLoadingIndicator ? <LinearProgress mode="indeterminate" /> : null}
-
+          <br /><br />
           <TextField
             onChange={this.handleUsernameChange}
             floatingLabelText="Username"

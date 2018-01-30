@@ -1,0 +1,3 @@
+- args:
+    sql: ALTER TABLE "nomination" ADD COLUMN "nomination_id1" serial NOT NULL
+  type: run_sql
