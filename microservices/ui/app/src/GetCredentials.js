@@ -239,7 +239,7 @@ class CredentialsForm extends React.Component {
                                 this3.setState({ details: arr });
                                 console.log(this3.state.details);
                                 
-                               
+                               //TODO: Give loading screen when data is being loaded for viewing credentials
                               
 
 
@@ -586,6 +586,13 @@ class CredentialsForm extends React.Component {
                         <br />
                         <br />
                         <Input value={this.state.details[1]} style={{ color: 'black' }} disabled={true} />
+                        <br />
+                        <br />
+                        <CopyToClipboard onCopy1={this.onCopy1} text={this.state.details[3]}>
+                            <Input value={this.state.details[3]} style={{ color: 'black', cursor:'pointer' }} disabled={true} />
+                        </CopyToClipboard>
+                        {copiedSpan}
+                        
                         <br />
                         <br />
                     </div>
