@@ -1,0 +1,4 @@
+- args:
+    sql: ALTER TABLE "votes" ADD FOREIGN KEY ("election_id") REFERENCES "election"
+      ("election_id")
+  type: run_sql
