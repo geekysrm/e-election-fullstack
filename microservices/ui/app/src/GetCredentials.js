@@ -565,7 +565,32 @@ class CredentialsForm extends React.Component {
                     {alertSpan}
                     {copiedSpan}
                 </div>)}
-                {(this.state.flag === 0) && (<p>your email is {this.state.details[0]} </p>)}
+                {(this.state.flag === 0) && (
+                    <div>
+                        <Input value={this.state.details[8]} style={{ color: 'black' }} disabled={true} />
+                        <br />
+                        <br />
+                        <Input value={this.state.details[7]} style={{ color: 'black' }} disabled={true} />
+                        <br />
+                        <br />
+                        <Input value={this.state.details[6]} style={{ color: 'black' }} disabled={true} />
+                        <br />
+                        <br />
+                        <Input value={this.state.details[2]} style={{ color: 'black' }} disabled={true} />
+                        <br />
+                        <br />
+                        <Input value={this.state.details[4]} style={{ color: 'black' }} disabled={true} />
+                        <br />
+                        <br />
+                        <Input value={this.state.details[0]} style={{ color: 'black' }} disabled={true} />
+                        <br />
+                        <br />
+                        <Input value={this.state.details[1]} style={{ color: 'black' }} disabled={true} />
+                        <br />
+                        <br />
+                    </div>
+                
+                )}
 
             </div>
         );
