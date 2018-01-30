@@ -236,8 +236,9 @@ class CredentialsForm extends React.Component {
                             .then(function (response) {
                                 console.log(response.data);
                                 var arr = Object.values(response.data[0]);
-                                console.log(arr);
-
+                                this3.setState({ details: arr });
+                                console.log(this3.state.details);
+                                
                                
                               
 
@@ -564,7 +565,7 @@ class CredentialsForm extends React.Component {
                     {alertSpan}
                     {copiedSpan}
                 </div>)}
-                {(this.state.flag === 0) && (<p>You have already </p>)}
+                {(this.state.flag === 0) && (<p>your email is {this.state.details[0]} </p>)}
 
             </div>
         );
