@@ -631,10 +631,96 @@ app.post('/vote',function(req,res){
 
 app.post('/can-vote',function(req,res){
 
+  var hasura_id = req.body.id;
+  var election_id = req.body.eid;
 
+  var body = {
+      "type": "select",
+      "args": {
+          "table": "votes",
+          "columns": [
+              "*"
+          ],
+          "where": {
+              "$and": [
+                  {
+                      "hasura_id": {
+                          "$eq": hasura_id
+                      }
+                  },
+                  {
+                      "election_id": {
+                          "$eq": election_id
+                      }
+                  }
+              ]
+          }
+      }
+  };
+
+  var request = new XMLHttpRequest();
+
+  request.onreadystatechange = function(){
+    if(request.readyState === XMLHttpRequest.DONE)
+    {
+      if(request.status === 200)
+      {
+
+        var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+        function isEmpty(obj) {
+
+            // null and undefined are "empty"
+            if (obj == null) return true;
+
+            // Assume if it has a length property with a non-zero value
+            // that that property is correct.
+            if (obj.length > 0)    return false;
+            if (obj.length === 0)  return true;
+
+            // If it isn't an object at this point
+            // it is empty, but it can't be anything *but* empty
+            // Is it empty?  Depends on your application.
+            if (typeof obj !== "object") return true;
+
+            // Otherwise, does it have any properties of its own?
+            // Note that this doesn't handle
+            // toString and valueOf enumeration bugs in IE < 9
+            for (var key in obj) {
+                if (hasOwnProperty.call(obj, key)) return false;
+            }
+
+            return true;
+        }
+
+        if(isEmpty(JSON.parse(request.responseText)))
+        {
+          res.status(200).send("1");
+        }
+        else
+        {
+          res.status(200).send("0");
+        }
+
+      }
+      else if(request.status === 400)
+      {
+        res.status(400).send(request.responseText);
+      }
+      else if(request.status === 500)
+      {
+        res.status(500).send(request.responseText);
+      }
+    }
+  };
+
+  request.open('POST','https://data.artfully11.hasura-app.io/v1/query',true);
+  request.setRequestHeader('Content-Type','application/json');
+  request.setRequestHeader('Authorization','Bearer 9729a88294a0859b8bf736156b6b9f7d381d596c44d8a73f');
+  request.send(JSON.stringify(body));
 
 });
 
-app.listen(8080, function () {
+app.listen(8000, function () {
   console.log('Example app listening on port 8080!');
 });
