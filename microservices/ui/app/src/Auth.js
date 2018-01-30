@@ -130,9 +130,6 @@ class Auth extends React.Component {
           zDepth={1}>
           {this.state.showLoadingIndicator ? <LinearProgress mode="indeterminate" /> : null}
 
-          <Subheader>Authentication</Subheader>
-          <Divider/>
-
           <TextField
             onChange={this.handleUsernameChange}
             floatingLabelText="Username"
@@ -174,12 +171,6 @@ class Auth extends React.Component {
           onRequestClose={this.closeAlert}>
           {this.state.alertMessage}
         </Dialog>
-        <Card>
-          <CardText>
-            This is a basic implementation of authentication using the auth apis provided by Hasura. While hasura provides various types of authentication like username/password, email/password, mobile/otp, google, facebook etc. This examples utilizes the username/password authentication.
-            To view the code for this component, check out services/ui/app/src/hasuraExamples/Auth.js
-          </CardText>
-        </Card>
       </div>
     )
   }
