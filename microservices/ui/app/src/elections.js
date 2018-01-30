@@ -19,6 +19,7 @@ class elections extends Component
             console.log(response);
             console.log(response.data);
             console.log(response.data[0]);
+            console.log(response.data[0].state);
             for(var i=0;i<response.data.length;i++)
             {
                 console.log("hello");
