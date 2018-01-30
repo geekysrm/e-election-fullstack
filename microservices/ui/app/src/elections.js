@@ -18,9 +18,7 @@ class elections extends Component
             console.log('Successful post request');
             console.log(response);
             console.log(response.data);
-            var x = JSON.parse(response.data);
-            console.log(x);
-            console.log(x[0].state);
+            console.log(response.data[0]);
             for(var i=0;i<response.data.length;i++)
             {
                 console.log("hello");
