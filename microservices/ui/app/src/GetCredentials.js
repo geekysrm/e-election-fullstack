@@ -235,8 +235,8 @@ class CredentialsForm extends React.Component {
                         })
                             .then(function (response) {
                                 console.log(response.data);
-                                var result = Object.values(response.data).map(value => value);
-                                console.log(result);
+                                var arr = Object.values(response.data[0]);
+                                console.log(arr);
 
                                
                               
