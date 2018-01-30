@@ -318,7 +318,45 @@ app.post('/nominate',function(req,res){
       {
         if(request.status === 200)
         {
-          res.status(200).send(request.responseText);
+          var body1 = {
+            "type": "update",
+            "args": {
+                "table": "usertable",
+                "where": {
+                    "hasura_id": {
+                        "$eq": hasura_id
+                    }
+                },
+                "$set": {
+                    "nomination": "true"
+                }
+            }
+          };
+
+          var request1 = new XMLHttpRequest();
+
+          request1.onreadystatechange = function(){
+            if(request1.readyState === XMLHttpRequest.DONE)
+            {
+              if(request1.status === 200)
+              {
+                res.status(200).send(request1.responseText);
+              }
+              else if(request1.status === 400)
+              {
+                res.status(400).send(request1.responseText);
+              }
+              else if(request1.status === 500)
+              {
+                res.status(500).send(request1.responseText);
+              }
+            }
+          }
+
+          request1.open('POST','https://data.artfully11.hasura-app.io/v1/query',true);
+          request1.setRequestHeader('Content-Type','application/json');
+          request1.setRequestHeader('Authorization','Bearer 9729a88294a0859b8bf736156b6b9f7d381d596c44d8a73f');
+          request1.send(JSON.stringify(body1));
         }
         else if(request.status === 400)
         {
@@ -363,7 +401,45 @@ app.post('/nominate',function(req,res){
       {
         if(request.status === 200)
         {
-          res.status(200).send(request.responseText);
+          var body1 = {
+            "type": "update",
+            "args": {
+                "table": "usertable",
+                "where": {
+                    "hasura_id": {
+                        "$eq": hasura_id
+                    }
+                },
+                "$set": {
+                    "nomination": "true"
+                }
+            }
+          };
+
+          var request1 = new XMLHttpRequest();
+
+          request1.onreadystatechange = function(){
+            if(request1.readyState === XMLHttpRequest.DONE)
+            {
+              if(request1.status === 200)
+              {
+                res.status(200).send(request1.responseText);
+              }
+              else if(request1.status === 400)
+              {
+                res.status(400).send(request1.responseText);
+              }
+              else if(request1.status === 500)
+              {
+                res.status(500).send(request1.responseText);
+              }
+            }
+          }
+
+          request1.open('POST','https://data.artfully11.hasura-app.io/v1/query',true);
+          request1.setRequestHeader('Content-Type','application/json');
+          request1.setRequestHeader('Authorization','Bearer 9729a88294a0859b8bf736156b6b9f7d381d596c44d8a73f');
+          request1.send(JSON.stringify(body1));
         }
         else if(request.status === 400)
         {
@@ -480,7 +556,44 @@ app.post('/vote',function(req,res){
           {
             if(request1.status === 200)
             {
-              res.status(200).send(request1.responseText);
+              var body2 = {
+                  "type": "insert",
+                  "args": {
+                      "table": "votes",
+                      "objects": [
+                          {
+                              "hasura_id": hasura_id,
+                              "election_id": election_id
+                          }
+                      ]
+                  }
+              };
+
+              var request2 = new XMLHttpRequest();
+
+              request2.onreadystatechange = function(){
+                if(request2.readyState === XMLHttpRequest.DONE)
+                {
+                  if(request2.status === 200)
+                  {
+                    res.status(200).send(request2.responseText);
+                  }
+                  else if(request2.status === 400)
+                  {
+                    res.status(400).send(request2.responseText);
+                  }
+                  else if(request2.status === 500)
+                  {
+                    res.status(500).send(request2.responseText);
+                  }
+                }
+              }
+
+              request2.open('POST','https://data.artfully11.hasura-app.io/v1/query',true);
+              request2.setRequestHeader('Content-Type','application/json');
+              request2.setRequestHeader('Authorization','Bearer 9729a88294a0859b8bf736156b6b9f7d381d596c44d8a73f');
+              request2.send(JSON.stringify(body2));
+
             }
             else if(request1.status === 400)
             {
@@ -513,6 +626,12 @@ app.post('/vote',function(req,res){
   request.setRequestHeader('Content-Type','application/json');
   request.setRequestHeader('Authorization','Bearer 9729a88294a0859b8bf736156b6b9f7d381d596c44d8a73f');
   request.send(JSON.stringify(body));
+
+});
+
+app.post('/can-vote',function(req,res){
+
+
 
 });
 
