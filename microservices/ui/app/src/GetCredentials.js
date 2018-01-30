@@ -190,7 +190,6 @@ class CredentialsForm extends React.Component {
             loading: false,
             isDisabled: false,
             copied: false,
-            copied1:false,
             flag:-1,
             details:[]
         };
@@ -369,9 +368,6 @@ class CredentialsForm extends React.Component {
     onCopy = () => {
         this.setState({ copied: true });
     };
-    onCopy1 = () => {
-        this.setState({ copied1: true });
-    };
 
 
     render() {
@@ -380,7 +376,6 @@ class CredentialsForm extends React.Component {
         const { autoCompleteResult } = this.state;
         let credentialsThere = this.state.credentialsThere;
         let copied = this.state.copied;
-        let copied1 = this.state.copied1;
 
 
         let alertSpan = null;
@@ -402,9 +397,6 @@ class CredentialsForm extends React.Component {
 
         }
         if (copied) {
-            copiedSpan = <Alert message={"Copied to clipboard!"} type="info" />
-        }
-        if (copied1) {
             copiedSpan = <Alert message={"Copied to clipboard!"} type="info" />
         }
         const formItemLayout = {
@@ -576,33 +568,30 @@ class CredentialsForm extends React.Component {
                 </div>)}
                 {(this.state.flag === 0) && (
                     <div>
-                        <Input value={this.state.details[8]} style={{ color: 'black' }} disabled={true} />
+                        <Input value={this.state.details[8]} style={{ color: 'black', cursor: 'pointer' }} disabled={true} />
                         <br />
                         <br />
-                        <Input value={this.state.details[7]} style={{ color: 'black' }} disabled={true} />
+                        <Input value={this.state.details[7]} style={{ color: 'black', cursor: 'pointer' }} disabled={true} />
                         <br />
                         <br />
-                        <Input value={this.state.details[6]} style={{ color: 'black' }} disabled={true} />
+                        <Input value={this.state.details[6]} style={{ color: 'black', cursor: 'pointer' }} disabled={true} />
                         <br />
                         <br />
-                        <Input value={this.state.details[2]} style={{ color: 'black' }} disabled={true} />
+                        <Input value={this.state.details[2]} style={{ color: 'black', cursor: 'pointer' }} disabled={true} />
                         <br />
                         <br />
-                        <Input value={this.state.details[4]} style={{ color: 'black' }} disabled={true} />
+                        <Input value={this.state.details[4]} style={{ color: 'black', cursor: 'pointer' }} disabled={true} />
                         <br />
                         <br />
-                        <Input value={this.state.details[0]} style={{ color: 'black' }} disabled={true} />
+                        <Input value={this.state.details[0]} style={{ color: 'black', cursor: 'pointer' }} disabled={true} />
                         <br />
                         <br />
-                        <Input value={this.state.details[1]} style={{ color: 'black' }} disabled={true} />
+                        <Input value={this.state.details[1]} style={{ color: 'black', cursor: 'pointer' }} disabled={true} />
                         <br />
                         <br />
-                        {/*<CopyToClipboard onCopy={this.onCopy} text={this.state.details[3]}>
-                            <Input value={this.state.details[3]} style={{ color: 'black', cursor:'pointer' }} disabled={true} />
-                        </CopyToClipboard>*/}
-                        {alertSpan}
-                        {copiedSpan}
-                        
+                        <Input value={this.state.details[3]} style={{ color: 'black', cursor:'pointer' }} disabled={true} />
+
+                        {/*Make the above input i.e credentials to be copiable with alert "copied to clipboard"*/}
                         <br />
                         <br />
                     </div>
