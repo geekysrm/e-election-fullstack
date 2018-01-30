@@ -723,7 +723,7 @@ app.post('/can-vote',function(req,res){
 
 app.post('/can-nominate',function(req,res){
 
-  //var hasura_id = req.body.id;
+  var hasura_id = req.body.id;
 
   var body = {
       "type": "select",
@@ -734,7 +734,7 @@ app.post('/can-nominate',function(req,res){
           ],
           "where": {
               "hasura_id": {
-                  "$eq": "2"
+                  "$eq": hasura_id
               }
           }
       }
@@ -747,7 +747,14 @@ app.post('/can-nominate',function(req,res){
     {
       if(request.status === 200)
       {
-        res.status(200).send(request.responseText);
+        if(JSON.parse(request.responseText)[0].nomination === false)
+        {
+          res.status(200).send("1");
+        }
+        else
+        {
+          res.status(200).send("0");
+        }
       }
       else if(request.status === 400)
       {
