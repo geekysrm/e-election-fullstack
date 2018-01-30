@@ -251,7 +251,7 @@ app.post('/view-credentials',function(req,res){
         ],
         "where": {
             "hasura_id": {
-                "$eq": "2"
+                "$eq": id
             }
         }
     }
