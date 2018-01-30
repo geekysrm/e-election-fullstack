@@ -20,7 +20,7 @@ details.onclick = function()
       }
     }
   };
-  request.open('POST','/check-credentials',true);
+  request.open('POST','/nominate',true);
   request.setRequestHeader('Content-Type','application/json');
   request.send(null);
 }
