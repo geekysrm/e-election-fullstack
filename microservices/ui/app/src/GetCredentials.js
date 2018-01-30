@@ -190,6 +190,7 @@ class CredentialsForm extends React.Component {
             loading: false,
             isDisabled: false,
             copied: false,
+            copied1:false,
             flag:-1,
             details:[]
         };
@@ -368,6 +369,9 @@ class CredentialsForm extends React.Component {
     onCopy = () => {
         this.setState({ copied: true });
     };
+    onCopy1 = () => {
+        this.setState({ copied1: true });
+    };
 
 
     render() {
@@ -376,9 +380,12 @@ class CredentialsForm extends React.Component {
         const { autoCompleteResult } = this.state;
         let credentialsThere = this.state.credentialsThere;
         let copied = this.state.copied;
+        let copied1 = this.state.copied1;
+
 
         let alertSpan = null;
         let copiedSpan = null;
+        let copiedSpan1 = null;
         if (credentialsThere) {
             alertSpan = <Alert
                 message="Successfully generated Voting Credentials!"
@@ -397,7 +404,9 @@ class CredentialsForm extends React.Component {
         if (copied) {
             copiedSpan = <Alert message={"Copied to clipboard!"} type="info" />
         }
-
+        if (copied1) {
+            copiedSpan = <Alert message={"Copied to clipboard!"} type="info" />
+        }
         const formItemLayout = {
             labelCol: {
                 xs: { span: 24 },
@@ -588,10 +597,10 @@ class CredentialsForm extends React.Component {
                         <Input value={this.state.details[1]} style={{ color: 'black' }} disabled={true} />
                         <br />
                         <br />
-                        <CopyToClipboard onCopy={this.onCopy} text={this.state.details[3]}>
+                        <CopyToClipboard onCopy={this.onCopy1} text={this.state.details[3]}>
                             <Input value={this.state.details[3]} style={{ color: 'black', cursor:'pointer' }} disabled={true} />
                         </CopyToClipboard>
-                        {copiedSpan}
+                        {copiedSpan1}
                         
                         <br />
                         <br />
