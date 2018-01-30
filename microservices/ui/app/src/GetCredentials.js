@@ -237,6 +237,7 @@ class CredentialsForm extends React.Component {
                                 console.log(response.data);
                                 var arr = Object.values(response.data[0]);
                                 this3.setState({ details: arr });
+                                console.log(this3.state.details);
                                 
                                
                               
