@@ -568,27 +568,35 @@ class CredentialsForm extends React.Component {
                 </div>)}
                 {(this.state.flag === 0) && (
                     <div>
+                        <span>Full Name</span>
                         <Input value={this.state.details[8]} style={{ color: 'black', cursor: 'pointer' }} disabled={true} />
                         <br />
                         <br />
+                        <span>Gender</span>
                         <Input value={this.state.details[7]} style={{ color: 'black', cursor: 'pointer' }} disabled={true} />
                         <br />
                         <br />
+                        <span>Date of Birth</span>
                         <Input value={this.state.details[6]} style={{ color: 'black', cursor: 'pointer' }} disabled={true} />
                         <br />
                         <br />
+                        <span>State</span>
                         <Input value={this.state.details[2]} style={{ color: 'black', cursor: 'pointer' }} disabled={true} />
                         <br />
                         <br />
+                        <span>Voter ID Number</span>
                         <Input value={this.state.details[4]} style={{ color: 'black', cursor: 'pointer' }} disabled={true} />
                         <br />
                         <br />
+                        <span>E-mail</span>
                         <Input value={this.state.details[0]} style={{ color: 'black', cursor: 'pointer' }} disabled={true} />
                         <br />
                         <br />
+                        <span>Phone</span>
                         <Input value={this.state.details[1]} style={{ color: 'black', cursor: 'pointer' }} disabled={true} />
                         <br />
                         <br />
+                        <span>Voting Credentials</span>
                         <Input value={this.state.details[3]} style={{ color: 'black', cursor:'pointer' }} disabled={true} />
 
                         {/*Make the above input i.e credentials to be copiable with alert "copied to clipboard"*/}
