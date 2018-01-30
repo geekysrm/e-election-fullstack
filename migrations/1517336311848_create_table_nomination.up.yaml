@@ -1,0 +1,8 @@
+- args:
+    sql: CREATE TABLE "nomination"("hasura_id" integer NOT NULL, "election_id" integer
+      NOT NULL, "manifesto" text NOT NULL, "votes" integer , PRIMARY KEY ("hasura_id")
+      )
+  type: run_sql
+- args:
+    name: nomination
+  type: add_existing_table_or_view
