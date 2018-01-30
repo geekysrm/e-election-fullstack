@@ -286,56 +286,102 @@ app.post('/view-credentials',function(req,res){
 
 app.post('/nominate',function(req,res){
 
-  var user_id = req.body.id;
+  var hasura_id = req.body.id;
   var election_id = req.body.eid;
   var manifesto1 = req.body.manifesto;
   var indi_flag = req.body.individual;
   var party_name = req.body.party;
   var party_ticket_id = req.body.party_ticket;
 
-  if(indi_flag === TRUE)
+
+  if(indi_flag)
   {
-    
-  }
+        var body = {
+        "type": "insert",
+        "args": {
+            "table": "nomination",
+            "objects": [
+                {
+                    "hasura_id": hasura_id,
+                    "election_id": election_id,
+                    "manifesto": manifesto1,
+                    "individual": indi_flag
+                }
+            ]
+        }
+    };
 
-    var body = {
-      "type": "insert",
-      "args": {
-          "table": "nomination",
-          "objects": [
-              {
-                  "hasura_id": user_id,
-                  "election_id": election_id,
-                  "manifesto": manifesto1
-              }
-          ]
-      }
-  };
+    var request = new XMLHttpRequest();
 
-  var request = new XMLHttpRequest();
-
-  request.onreadystatechange = function(){
-    if(request.readyState === XMLHttpRequest.DONE)
-    {
-      if(request.status === 200)
+    request.onreadystatechange = function(){
+      if(request.readyState === XMLHttpRequest.DONE)
       {
-        res.status(200).send(request.responseText);
-      }
-      else if(request.status === 400)
-      {
-        res.status(400).send(request.responseText);
-      }
-      else if(request.status === 500)
-      {
-        res.status(500).send(request.responseText);
+        if(request.status === 200)
+        {
+          res.status(200).send(request.responseText);
+        }
+        else if(request.status === 400)
+        {
+          res.status(400).send(request.responseText);
+        }
+        else if(request.status === 500)
+        {
+          res.status(500).send(request.responseText);
+        }
       }
     }
-  }
 
-  request.open('POST','https://data.artfully11.hasura-app.io/v1/query',true);
-  request.setRequestHeader('Content-Type','application/json');
-  request.setRequestHeader('Authorization','Bearer 9729a88294a0859b8bf736156b6b9f7d381d596c44d8a73f');
-  request.send(JSON.stringify(body));
+    request.open('POST','https://data.artfully11.hasura-app.io/v1/query',true);
+    request.setRequestHeader('Content-Type','application/json');
+    request.setRequestHeader('Authorization','Bearer 9729a88294a0859b8bf736156b6b9f7d381d596c44d8a73f');
+    request.send(JSON.stringify(body));
+
+  }
+  else
+  {
+        var body = {
+        "type": "insert",
+        "args": {
+            "table": "nomination",
+            "objects": [
+                {
+                    "election_id": election_id,
+                    "manifesto": manifesto1,
+                    "individual": indi_flag,
+                    "party": party_name,
+                    "party_ticket_id": party_ticket_id,
+                    "hasura_id": hasura_id
+                }
+            ]
+        }
+    };
+
+    var request = new XMLHttpRequest();
+
+    request.onreadystatechange = function(){
+      if(request.readyState === XMLHttpRequest.DONE)
+      {
+        if(request.status === 200)
+        {
+          res.status(200).send(request.responseText);
+        }
+        else if(request.status === 400)
+        {
+          res.status(400).send(request.responseText);
+        }
+        else if(request.status === 500)
+        {
+          res.status(500).send(request.responseText);
+        }
+      }
+    }
+
+    request.open('POST','https://data.artfully11.hasura-app.io/v1/query',true);
+    request.setRequestHeader('Content-Type','application/json');
+    request.setRequestHeader('Authorization','Bearer 9729a88294a0859b8bf736156b6b9f7d381d596c44d8a73f');
+    request.send(JSON.stringify(body));
+
+  }
 
 });
 
@@ -470,6 +516,6 @@ app.post('/vote',function(req,res){
 
 });
 
-app.listen(8080, function () {
+app.listen(8000, function () {
   console.log('Example app listening on port 8080!');
 });
