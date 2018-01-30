@@ -377,6 +377,91 @@ app.post('/get-nominations',function(req,res){
 
 });
 
+app.post('/vote',function(req,res){
+
+  var hasura_id = req.body.id;
+  var election_id = req.body.eid;
+
+    var body = {
+      "type": "update",
+      "args": {
+          "table": "nomination",
+          "where": {
+              "hasura_id": {
+                  "$eq": hasura_id
+              }
+          },
+          "$inc": {
+              "votes": "1"
+          }
+      }
+  };
+
+  var request = new XMLHttpRequest();
+
+  request.onreadystatechange = function(){
+    if(request.readyState === XMLHttpRequest.DONE)
+    {
+      if(request.status === 200)
+      {
+        res.status(200).send(request.responseText);
+      }
+      else if(request.status === 400)
+      {
+        res.status(400).send(request.responseText);
+      }
+      else if(request.status === 500)
+      {
+        res.status(500).send(request.responseText);
+      }
+    }
+  }
+
+  request.open('POST','https://data.artfully11.hasura-app.io/v1/query',true);
+  request.setRequestHeader('Content-Type','application/json');
+  request.setRequestHeader('Authorization','Bearer 9729a88294a0859b8bf736156b6b9f7d381d596c44d8a73f');
+  request.send(JSON.stringify(body));
+
+    var body1 = {
+      "type": "update",
+      "args": {
+          "table": "election",
+          "where": {
+              "election_id": {
+                  "$eq": "1"
+              }
+          },
+          "$inc": {
+              "total_votes": "1"
+          }
+      }
+  };
+
+  request1.onreadystatechange = function(){
+    if(request1.readyState === XMLHttprequest1.DONE)
+    {
+      if(request1.status === 200)
+      {
+        res.status(200).send(request1.responseText);
+      }
+      else if(request1.status === 400)
+      {
+        res.status(400).send(request1.responseText);
+      }
+      else if(request1.status === 500)
+      {
+        res.status(500).send(request1.responseText);
+      }
+    }
+  }
+
+  request1.open('POST','https://data.artfully11.hasura-app.io/v1/query',true);
+  request1.setrequest1Header('Content-Type','application/json');
+  request1.setrequest1Header('Authorization','Bearer 9729a88294a0859b8bf736156b6b9f7d381d596c44d8a73f');
+  request1.send(JSON.stringify(body1));
+
+});
+
 app.listen(8080, function () {
   console.log('Example app listening on port 8080!');
 });

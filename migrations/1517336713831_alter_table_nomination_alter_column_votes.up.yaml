@@ -1,0 +1,9 @@
+- args:
+    sql: ALTER TABLE "nomination" ALTER COLUMN "votes" TYPE integer;
+  type: run_sql
+- args:
+    sql: ALTER TABLE ONLY "nomination" ALTER COLUMN "votes" SET DEFAULT 0;
+  type: run_sql
+- args:
+    sql: ALTER TABLE "nomination" ALTER COLUMN "votes" SET NOT NULL;
+  type: run_sql
