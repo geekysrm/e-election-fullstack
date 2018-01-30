@@ -7,6 +7,10 @@ const authToken = getSavedToken();
 class elections extends Component
 {
 
+  renderCard = (data) => {
+    return( <h1>{data.state}</h1> )
+  }
+
   loadCards = () =>{
 
     axios({
@@ -17,9 +21,19 @@ class elections extends Component
         .then(function (response) {
             console.log('Successful post request');
             console.log(response);
-            console.log(response.data);
+            /*console.log(response.data);
             console.log(response.data[0]);
-            console.log(response.data[0].state);
+            console.log(response.data[0].state);*/
+            return(
+              <div>
+                {
+                  for(var i=0;i<response.data.length;i++)
+                  {
+                      this.renderCard(response.data[i]);
+                  }
+                }
+              </div>
+            );
             for(var i=0;i<response.data.length;i++)
             {
                 console.log("hello");
