@@ -1,0 +1,3 @@
+- args:
+    sql: ALTER TABLE "nomination" ADD COLUMN "party_ticket_id" integer NUll
+  type: run_sql
