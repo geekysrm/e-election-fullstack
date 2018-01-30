@@ -322,7 +322,53 @@ app.post('/nominate',function(req,res){
         res.status(500).send(request.responseText);
       }
     }
+  }
+
+  request.open('POST','https://data.artfully11.hasura-app.io/v1/query',true);
+  request.setRequestHeader('Content-Type','application/json');
+  request.setRequestHeader('Authorization','Bearer 9729a88294a0859b8bf736156b6b9f7d381d596c44d8a73f');
+  request.send(JSON.stringify(body));
+
+});
+
+app.post('/get-nominations',function(req,res){
+
+  var election_id = req.body.eid;
+
+    var body = {
+      "type": "select",
+      "args": {
+          "table": "nomination",
+          "columns": [
+              "*"
+          ],
+          "where": {
+              "election_id": {
+                  "$eq": election_id
+              }
+          }
+      }
   };
+
+  var request = new XMLHttpRequest();
+
+  request.onreadystatechange = function(){
+    if(request.readyState === XMLHttpRequest.DONE)
+    {
+      if(request.status === 200)
+      {
+        res.status(200).send(request.responseText);
+      }
+      else if(request.status === 400)
+      {
+        res.status(400).send(request.responseText);
+      }
+      else if(request.status === 500)
+      {
+        res.status(500).send(request.responseText);
+      }
+    }
+  }
 
   request.open('POST','https://data.artfully11.hasura-app.io/v1/query',true);
   request.setRequestHeader('Content-Type','application/json');
