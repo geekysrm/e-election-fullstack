@@ -226,6 +226,7 @@ class CredentialsForm extends React.Component {
                         if (response.data === 0)
                         {
                             this2.setState({ flag: 0 });
+                            var this3=this2;
                         axios({
                             method: 'post',
                             url: 'https://api.artfully11.hasura-app.io/view-credentials',                                           //URL to be modified here
@@ -234,6 +235,9 @@ class CredentialsForm extends React.Component {
                         })
                             .then(function (response) {
                                 console.log(response.data);
+                                var result = Object.values(response.data).map(value => value);
+                                console.log(result);
+
                                
                               
 
