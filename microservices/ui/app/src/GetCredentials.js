@@ -190,7 +190,8 @@ class CredentialsForm extends React.Component {
             loading: false,
             isDisabled: false,
             copied: false,
-            flag:-1
+            flag:-1,
+            details:[]
         };
         
     }
@@ -219,13 +220,31 @@ class CredentialsForm extends React.Component {
                     .then(function (response) {
                         console.log('Successful post request');
                         console.log(response.data);
-                        //this2.setState({ flag: 0 });
-                             if(response.data===0)
-                            this2.setState({ flag: 0 });;
+                             
                             if(response.data===1)
                             this2.setState({ flag: 1 });
-                            
-                       
+                        if (response.data === 0)
+                        {
+                            this2.setState({ flag: 0 });
+                        axios({
+                            method: 'post',
+                            url: 'https://api.artfully11.hasura-app.io/view-credentials',                                           //URL to be modified here
+                            data: { serial: id },
+                            config: { headers: { 'Content-Type': 'application/json' } }
+                        })
+                            .then(function (response) {
+                                console.log(response.data);
+                               
+                              
+
+
+
+
+                            })
+                            .catch(function (response) {
+                                console.log("post req 3 failed");
+                            });
+                        }
                       
 
                     })
@@ -240,8 +259,6 @@ class CredentialsForm extends React.Component {
                 console.log("post req failed");
                 alert('Sorry, Server Error!');
             });
-        // if (this.state.flag === 0) { console.log("only view"); }
-        // if (this.state.flag === 1) { console.log("editable form"); }
     }
 
     componentDidMount()
@@ -543,7 +560,7 @@ class CredentialsForm extends React.Component {
                     {alertSpan}
                     {copiedSpan}
                 </div>)}
-                {(this.state.flag === 0) && (<h1>Details in database. Will be viewed here.</h1>)}
+                {(this.state.flag === 0) && (<p>You have already </p>)}
 
             </div>
         );
