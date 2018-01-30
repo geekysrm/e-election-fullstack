@@ -17,7 +17,7 @@ class elections extends Component
         .then(function (response) {
             console.log('Successful post request');
             console.log(response);
-            console.log(response.data[i].id);
+            console.log(response.data[0].id);
             for(var i=0;i<response.data.length;i++)
             {
                 console.log("hello");
