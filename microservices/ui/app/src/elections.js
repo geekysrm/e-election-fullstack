@@ -24,17 +24,12 @@ class elections extends Component
             /*console.log(response.data);
             console.log(response.data[0]);
             console.log(response.data[0].state);*/
-            var x = `<h1>hello world</h1>`
-            /*return(
-              <div>
-                      {this.renderCard(response.data[i])}
-              </div>
-            );*/
+            //var x = `<h1>hello world</h1>`;
             for(var i=0;i<response.data.length;i++)
             {
                 console.log("hello");
             }
-            return x;
+            return (<h1>hello world</h1>);
         })
         .catch(function (response) {
           console.log('UnSuccessful post request');
