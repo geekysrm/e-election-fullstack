@@ -597,10 +597,11 @@ class CredentialsForm extends React.Component {
                         <Input value={this.state.details[1]} style={{ color: 'black' }} disabled={true} />
                         <br />
                         <br />
-                        <CopyToClipboard onCopy={this.onCopy1} text={this.state.details[3]}>
+                        {/*<CopyToClipboard onCopy={this.onCopy} text={this.state.details[3]}>
                             <Input value={this.state.details[3]} style={{ color: 'black', cursor:'pointer' }} disabled={true} />
-                        </CopyToClipboard>
-                        {copiedSpan1}
+                        </CopyToClipboard>*/}
+                        {alertSpan}
+                        {copiedSpan}
                         
                         <br />
                         <br />
