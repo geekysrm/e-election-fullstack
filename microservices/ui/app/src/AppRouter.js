@@ -2,7 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from './Home';
 import { Data } from './Data';
-import { Auth } from './Auth';
+import { Auth } from './temp';
+import { Auth1 } from './Auth';
 import { Filestore } from './Filestore';
 import GetCredentials from './GetCredentials';
 //import ShowElection from './ShowElection';
@@ -23,6 +24,7 @@ class AppRouter extends React.Component {
               }/>
             <Route exact path="/data" component={Data}/>
             <Route exact path="/auth" component={Auth}/>
+            <Route exact path="/auth1" component={Auth1}/>
             <Route exact path="/filestore" component={Filestore}/>
             <Route exact path="/home" component={Home} />
             <Route exact path="/get-credentials" component={GetCredentials} />
