@@ -149,5 +149,5 @@ class AuthForm extends React.Component {
 const Auth = Form.create()(AuthForm);
 
 export {
-  Auth
+  Auth1
 };
