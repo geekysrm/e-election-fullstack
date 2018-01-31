@@ -97,15 +97,24 @@ class Home extends Component {
                 </div>
                 <div>
                 <h1>All Elections</h1>
-                    <div>
+                    <ol>
                         {this.state.elections.map(function (election) {
                             return (
-                               <ul>
-                                 <li>Post: {election.post}</li>
-                               </ul>
+                                <div>
+                               <li key={election.election_id}>
+                                 <li key={election.post}>Election Post: {election.post}</li>
+                                 <li key={election.state}>Election State: {election.state}</li>
+                                <li key={election.election_start_time}>Election Start Time: {election.election_start_time}</li>
+                                <li key={election.election_end_time}>Election End Time: {election.election_end_time}</li>
+                                <li key={election.nomination_start_time}>Nomination Start Time: {election.nomination_start_time}</li>
+                                <li key={election.nomination_end_time}>Nomination End Time: {election.nomination_end_time}</li>
+                               </li>
+                               <br />
+                               <br />
+                               </div>
                             );
                         })}
-                    </div>
+                    </ol>
                 </div>
                 
             </div>
