@@ -36,7 +36,7 @@ class AuthForm extends React.Component {
             saveOffline(authResponse.auth_token)
             //this.showAlert("SignUp Successful! \n Your auth credentials are: " + JSON.stringify(authResponse, null, 2));
             //this.showAlert("SignUp Successful! \n Please login.");
-            alert("SignUp Successful!")
+            alert("SignUp Successful!");       //TO DO: convert to modal
             window.location.assign("/auth-login");
 
           } else {

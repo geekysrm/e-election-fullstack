@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from './Home';
 import { Data } from './Data';
-import { Auth } from './temp';
 import { AuthLogin } from './AuthLogin';
 import { AuthRegister } from './AuthRegister';
 import { Filestore } from './Filestore';
@@ -24,7 +23,6 @@ class AppRouter extends React.Component {
                 </div>
               }/>
             <Route exact path="/data" component={Data}/>
-            <Route exact path="/auth" component={Auth}/>
             <Route exact path="/auth-login" component={AuthLogin}/>
             <Route exact path="/auth-Register" component={AuthRegister}/>
             <Route exact path="/filestore" component={Filestore}/>
