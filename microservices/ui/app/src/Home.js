@@ -31,7 +31,12 @@ class Home extends Component {
 
     componentDidMount()
     {
-        axios.get('https://api.artfully11.hasura-app.io/get-elections')
+        axios({
+            method: 'post',
+            url: 'https://api.artfully11.hasura-app.io/get-elections',
+           
+            config: { headers: { 'Content-Type': 'application/json' } }
+        })
             .then(response => {
                 console.log(response.data);
             })
