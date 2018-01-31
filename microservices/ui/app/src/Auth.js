@@ -15,7 +15,7 @@ class AuthForm extends React.Component {
   constructor() {
     super()
     this.state = {
-      username: '',
+      uesrName: '',
       password: ''
     };
   }
@@ -25,29 +25,49 @@ class AuthForm extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
+
+        console.log('on login clicked');
+        //this.showProgressIndicator(true)
+        authenticateUser(values.uesrName, values.password, false).then(authResponse => {
+          //this.showProgressIndicator(false)
+          console.log(authResponse);
+          if (authResponse.auth_token) {
+            //Save the auth token offline to be used by the filestore service
+            saveOffline(authResponse.auth_token);
+            //this.showAlert("Login Successful! \n Your auth credentials are: " + JSON.stringify(authResponse, null, 2));
+
+            window.location.assign("/home");
+          } else {
+            //this.showAlert(JSON.stringify(authResponse));
+            alert(JSON.stringify(authResponse));
+          }
+        });
+
       }
     });
   }
-
-  handleUsernameChange = (e) => {
+/*
+  handleuesrNameChange = (e) => {
+    console.log(e.target.value);
     this.setState({
       ...this.state,
-      username: e.target.value
+      uesrName: e.target.value
     });
+    console.log(this.state.userName);
   }
   handlePasswordChange = (e) => {
+    console.log(e.target.value);
     this.setState({
       ...this.state,
       password: e.target.value
     });
+    console.log(this.state.password);
   }
 
   login = () => {
     console.log('on login clicked');
     //this.showProgressIndicator(true)
-    console.log(this.state.username);
-    console.log(this.state.password);
-    authenticateUser(this.state.username, this.state.password, false).then(authResponse => {
+    authenticateUser(this.state.uesrName, this.state.password, false).then(authResponse => {
       //this.showProgressIndicator(false)
       console.log(authResponse);
       if (authResponse.auth_token) {
@@ -66,7 +86,9 @@ class AuthForm extends React.Component {
   register = () => {
     console.log('on register clicked');
     //this.showProgressIndicator(true)
-    authenticateUser(this.state.username, this.state.password, true).then(authResponse => {
+    console.log(this.state.uesrName);
+    console.log(this.state.password);
+    authenticateUser(this.state.uesrName, this.state.password, true).then(authResponse => {
       //this.showProgressIndicator(false)
       console.log(authResponse);
       if (authResponse.auth_token) {
@@ -82,7 +104,7 @@ class AuthForm extends React.Component {
       }
     });
   }
-
+*/
   render() {
     const { getFieldDecorator } = this.props.form;
 
@@ -112,7 +134,7 @@ class AuthForm extends React.Component {
               <Input prefix={<Icon type="user"
               style={{ color: 'rgba(0,0,0,.25)' }} />}
               placeholder="Username"
-              onChange={this.handleUsernameChange}
+              onChange={this.handleuesrNameChange}
               />
             )}
           </FormItem>
@@ -124,21 +146,19 @@ class AuthForm extends React.Component {
               style={{ color: 'rgba(0,0,0,.25)' }} />}
               type="password"
               placeholder="Password"
-              onChange={this.handleUsernameChange}
+              onChange={this.handleuesrNameChange}
               />
             )}
           </FormItem>
           <FormItem>
-            <Button type="primary" htmlType="submit" className="login-form-button" onClick= {(e) => {
-              this.login()
-            }} >
+            <Button type="primary" htmlType="submit" className="login-form-button" >
               Log in
             </Button>
-            <Button type="primary" htmlType="submit" className="login-form-button" onClick= {(e) => {
+            {/*<Button type="primary" className="login-form-button" onClick= {(e) => {
               this.register()
             }} >
               Register
-            </Button>
+            </Button>*/}
           </FormItem>
         </Form>
       </div>
