@@ -81,7 +81,7 @@ class Home extends Component {
     render() {
         return (
             <div className="App">
-                <h1>Home Page</h1>
+                <h1>Welcome to E Election</h1>
                 <div>
                     <Button type="primary" href="/get-credentials">Get Credentials</Button>
                     <Button type="primary" onClick={this.onLogout}>Logout</Button>
