@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Button } from 'antd';
 import axios from 'axios';
-//import Elections from './elections.js';
 import { getSavedToken, deleteToken } from './config';
 import 'antd/dist/antd.css';
 const authToken = getSavedToken();
@@ -66,33 +65,25 @@ class Home extends Component {
 
     }
 
-    getData = () => {
+    onClickElection = () => {
+        const authToken = getSavedToken();
+        if (authToken) {
+            deleteToken();
+        }
+        else {
+            alert('Please login at /auth first');
+        }
 
-
-                console.log('Clicked getdata');
-
-                axios({
-                    method: 'post',
-                    url: 'https://api.artfully11.hasura-app.io/data',                                           //URL to be modified here
-                    data: { auth: authToken },
-                    config: { headers: { 'Content-Type': 'application/json' } }
-                })
-                    .then(function (response) {
-                      console.log(response.data.hasura_id);
-                      const id = response.data.hasura_id;
-                    })
-                    .catch(function (response) {
-                      console.log("post req failed");
-                    });
     }
 
+   
+//Add Ant.Design components like lists etc. below 
     render() {
         return (
             <div className="App">
                 <h1>Home Page</h1>
                 <div>
                     <Button type="primary" href="/get-credentials">Get Credentials</Button>
-                    <Button type="primary" onClick={this.getData}>Data</Button>
                     <Button type="primary" onClick={this.onLogout}>Logout</Button>
                 </div>
                 <div>
@@ -112,7 +103,7 @@ class Home extends Component {
                                 <li key={election.nomination_end_time}>Nomination End Time: {election.nomination_end_time}</li>
                                </li>
                                </ul>
-                                    <Button type="primary">View Details</Button>
+                                    <Button type="primary" href={`/election/${election.election_id}`}>View Details</Button>
                                 <br />
                                 <br />
                                </li>
