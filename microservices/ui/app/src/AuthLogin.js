@@ -28,7 +28,9 @@ class AuthForm extends React.Component {
 
         console.log('on login clicked');
         //this.showProgressIndicator(true)
-        authenticateUser(values.uesrName, values.password, false).then(authResponse => {
+        console.log(values.userName);
+        console.log(values.password);
+        authenticateUser(values.userName, values.password, false).then(authResponse => {
           //this.showProgressIndicator(false)
           console.log(authResponse);
           if (authResponse.auth_token) {
@@ -46,65 +48,7 @@ class AuthForm extends React.Component {
       }
     });
   }
-/*
-  handleuesrNameChange = (e) => {
-    console.log(e.target.value);
-    this.setState({
-      ...this.state,
-      uesrName: e.target.value
-    });
-    console.log(this.state.userName);
-  }
-  handlePasswordChange = (e) => {
-    console.log(e.target.value);
-    this.setState({
-      ...this.state,
-      password: e.target.value
-    });
-    console.log(this.state.password);
-  }
 
-  login = () => {
-    console.log('on login clicked');
-    //this.showProgressIndicator(true)
-    authenticateUser(this.state.uesrName, this.state.password, false).then(authResponse => {
-      //this.showProgressIndicator(false)
-      console.log(authResponse);
-      if (authResponse.auth_token) {
-        //Save the auth token offline to be used by the filestore service
-        saveOffline(authResponse.auth_token);
-        //this.showAlert("Login Successful! \n Your auth credentials are: " + JSON.stringify(authResponse, null, 2));
-
-        window.location.assign("/home");
-      } else {
-        //this.showAlert(JSON.stringify(authResponse));
-        alert(JSON.stringify(authResponse));
-      }
-    });
-  }
-
-  register = () => {
-    console.log('on register clicked');
-    //this.showProgressIndicator(true)
-    console.log(this.state.uesrName);
-    console.log(this.state.password);
-    authenticateUser(this.state.uesrName, this.state.password, true).then(authResponse => {
-      //this.showProgressIndicator(false)
-      console.log(authResponse);
-      if (authResponse.auth_token) {
-        saveOffline(authResponse.auth_token)
-        //this.showAlert("SignUp Successful! \n Your auth credentials are: " + JSON.stringify(authResponse, null, 2));
-        //this.showAlert("SignUp Successful! \n Please login.");
-        alert("SignUp Successful!")
-
-
-      } else {
-        //this.showAlert(JSON.stringify(authResponse));
-        alert(JSON.stringify(authResponse));
-      }
-    });
-  }
-*/
   render() {
     const { getFieldDecorator } = this.props.form;
 
@@ -154,20 +98,16 @@ class AuthForm extends React.Component {
             <Button type="primary" htmlType="submit" className="login-form-button" >
               Log in
             </Button>
-            {/*<Button type="primary" className="login-form-button" onClick= {(e) => {
-              this.register()
-            }} >
-              Register
-            </Button>*/}
-          </FormItem>
+            Or <a href="/auth-register">register now!</a>
+            </FormItem>
         </Form>
       </div>
     );
   }
 }
 
-const Auth1 = Form.create()(AuthForm);
+const AuthLogin = Form.create()(AuthForm);
 
 export {
-  Auth1
+  AuthLogin
 };

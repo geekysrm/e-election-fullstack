@@ -39,6 +39,8 @@ class Auth extends React.Component {
   login = () => {
     console.log('on login clicked');
     this.showProgressIndicator(true)
+    console.log(this.state.username);
+    console.log(this.state.password);
     authenticateUser(this.state.username, this.state.password, false).then(authResponse => {
       this.showProgressIndicator(false)
       console.log(authResponse);

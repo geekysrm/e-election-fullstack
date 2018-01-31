@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from './Home';
 import { Data } from './Data';
 import { Auth } from './temp';
-import { Auth1 } from './Auth';
+import { AuthLogin } from './AuthLogin';
+import { AuthRegister } from './AuthRegister';
 import { Filestore } from './Filestore';
 import GetCredentials from './GetCredentials';
 //import ShowElection from './ShowElection';
@@ -24,7 +25,8 @@ class AppRouter extends React.Component {
               }/>
             <Route exact path="/data" component={Data}/>
             <Route exact path="/auth" component={Auth}/>
-            <Route exact path="/auth1" component={Auth1}/>
+            <Route exact path="/auth-login" component={AuthLogin}/>
+            <Route exact path="/auth-Register" component={AuthRegister}/>
             <Route exact path="/filestore" component={Filestore}/>
             <Route exact path="/home" component={Home} />
             <Route exact path="/get-credentials" component={GetCredentials} />
