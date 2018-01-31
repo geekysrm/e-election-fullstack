@@ -3,6 +3,7 @@ import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Butto
 import moment from 'moment';
 import axios from 'axios';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import 'antd/dist/antd.css';
 
 
 import { getSavedToken } from './config';
