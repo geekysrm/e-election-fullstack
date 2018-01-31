@@ -100,7 +100,7 @@ class Home extends Component {
                     <ol>
                         {this.state.elections.map(function (election) {
                             return (
-                                <li key={this.state.election_id}>
+                                <li key={election.election_id}>
                                 
                                 <ul>
                                <li key={election.election_id}>
