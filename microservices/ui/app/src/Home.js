@@ -32,7 +32,7 @@ class Home extends Component {
     componentDidMount()
     {
         axios.get('https://api.artfully11.hasura-app.io/get-elections')
-            .then(res => {
+            .then(response => {
                 console.log(response.data);
             })
             .catch(error => {
