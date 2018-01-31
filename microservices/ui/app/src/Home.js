@@ -50,7 +50,7 @@ class Home extends Component {
                     <Button type="primary" onClick={this.getData}>Data</Button>
                     <Button type="primary" onClick={this.onLogout}>Logout</Button>
                 </div>
-                <Election />
+                <elections />
             </div>
         );
     }
