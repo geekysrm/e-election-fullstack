@@ -79,7 +79,7 @@ class ShowElection extends Component {
 
                                 <ul>
                                     <li key={nomination.hasura_id}>
-                                        <li key={nomination.manifesto}>Election Manifesto: {election.manifesto}</li>
+                                        <li key={nomination.manifesto}>Election Manifesto: {nomination.manifesto}</li>
                                     </li>
                                 </ul>
                                 
