@@ -774,6 +774,120 @@ app.post('/can-nominate',function(req,res){
 
 });
 
+app.post('/results',function(req,res){
+
+  var election_id = req.body.eid;
+
+  var body = {
+      "type": "select",
+      "args": {
+          "table": "election",
+          "columns": [
+              "total_votes"
+          ],
+          "where": {
+              "election_id": {
+                  "$eq": "1"
+              }
+          }
+      }
+  };
+
+  var request = new XMLHttpRequest();
+
+  request.onreadystatechange = function(){
+    if(request.readyState === XMLHttpRequest.DONE)
+    {
+      if(request.status === 200)
+      {
+
+        var total = JSON.parse(request.responseText)[0].total_votes.toString();
+
+        var body1 = {
+            "type": "select",
+            "args": {
+                "table": "nomination",
+                "columns": [
+                    "votes",
+                    "hasura_id"
+                ],
+                "where": {
+                    "election_id": {
+                        "$eq": "1"
+                    }
+                }
+            }
+        };
+
+        var request1 = new XMLHttpRequest();
+
+        request1.onreadystatechange = function(){
+          if(request1.readyState === XMLHttpRequest.DONE)
+          {
+            if(request1.status === 200)
+            {
+
+              var max_votes=0,winner_id="";
+              var votes=0,id="";
+              var percent = 0;
+              var data = JSON.parse(request1.responseText);
+              for(var i=0;i<data.length;i++)
+              {
+                id = data[i].hasura_id.toString();
+                votes = Number(data[i].votes);
+                if(votes > max_votes)
+                {
+                  max_votes = votes;
+                  winner_id = id;
+                }
+              }
+
+              percent = (((Number(max_votes)/Number(total))*100).toString()).substring(0,5)+"%";;
+
+              var result = {
+                "winner":winner_id,
+                "total_votes":total,
+                "votes_of_winner":max_votes,
+                "win_percent":percent
+              }
+
+              res.status(200).send(JSON.stringify(result));
+            }
+            else if(request1.status === 400)
+            {
+              res.status(400).send(request1.responseText);
+            }
+            else if(request1.status === 500)
+            {
+              res.status(500).send(request1.responseText);
+            }
+          }
+        }
+
+        request1.open('POST','https://data.artfully11.hasura-app.io/v1/query',true);
+        request1.setRequestHeader('Content-Type','application/json');
+        request1.setRequestHeader('Authorization','Bearer 9729a88294a0859b8bf736156b6b9f7d381d596c44d8a73f');
+        request1.send(JSON.stringify(body1));
+
+      }
+      else if(request.status === 400)
+      {
+        res.status(400).send(request.responseText);
+      }
+      else if(request.status === 500)
+      {
+        res.status(500).send(request.responseText);
+      }
+    }
+  };
+
+  request.open('POST','https://data.artfully11.hasura-app.io/v1/query',true);
+  request.setRequestHeader('Content-Type','application/json');
+  request.setRequestHeader('Authorization','Bearer 9729a88294a0859b8bf736156b6b9f7d381d596c44d8a73f');
+  request.send(JSON.stringify(body));
+
+});
+
 app.listen(8080, function () {
   console.log('Example app listening on port 8080!');
 });
