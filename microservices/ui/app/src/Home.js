@@ -111,8 +111,9 @@ class Home extends Component {
                                 <li key={election.nomination_start_time}>Nomination Start Time: {election.nomination_start_time}</li>
                                 <li key={election.nomination_end_time}>Nomination End Time: {election.nomination_end_time}</li>
                                </li>
-                               <br />
                                </ul>
+                                    <Button type="primary">View Details</Button>
+                                <br />
                                </li>
                             );
                         })}
