@@ -114,6 +114,7 @@ class Home extends Component {
                                </ul>
                                     <Button type="primary">View Details</Button>
                                 <br />
+                                <br />
                                </li>
                             );
                         })}
