@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from './Home';
 import { Data } from './Data';
 import { Auth } from './Auth';
@@ -15,7 +15,7 @@ class AppRouter extends React.Component {
     return (
       <MuiThemeProvider>
         <Router>
-          <div>
+          <Switch>
             <Route exact path="/" render={() =>
                 <div>
                   <h3>Welcome to E-Election</h3>
@@ -29,7 +29,7 @@ class AppRouter extends React.Component {
             <Route path="/election/:id" component={GetCredentials} />
 
             <Route component={NotFoundPage} />
-          </div>
+          </Switch>
         </Router>
       </MuiThemeProvider>
     );
