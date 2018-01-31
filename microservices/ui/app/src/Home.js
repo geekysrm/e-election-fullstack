@@ -1,33 +1,33 @@
 import React, { Component } from 'react';
 import { Button } from 'antd';
 import axios from 'axios';
-import Elections from './elections.js';
+//import Elections from './elections.js';
 import { getSavedToken, deleteToken } from './config';
 import 'antd/dist/antd.css';
-import elections from './elections.js';
 const authToken = getSavedToken();
 class Home extends Component {
 
-    // constructor(props) {
-    //     super(props);
+    constructor(props) {
+        super(props);
 
-    //     this.state = {
-    //         // selectedTable: '',
-    //         // selectedColumns: [],
-    //         // tables: [],
-    //         // columns: [],
-    //         // tableData: [],
-    //         // auth: 'Basic ' + btoa(props.user + ':' + props.pass),
-    //     };
+        this.state = {
+            elections: []
+            // selectedTable: '',
+            // selectedColumns: [],
+            // tables: [],
+            // columns: [],
+            // tableData: [],
+            // auth: 'Basic ' + btoa(props.user + ':' + props.pass),
+        };
 
-    //     // this.onTableChange = this.onTableChange.bind(this);
-    //     // this.onColumnChange = this.onColumnChange.bind(this);
-    //     // this.renderTableHeaders = this.renderTableHeaders.bind(this);
-    //     // this.renderTableBody = this.renderTableBody.bind(this);
-    //     // this.getColumnList = this.getColumnList.bind(this);
-    //     // this.getData = this.getData.bind(this);
+        // this.onTableChange = this.onTableChange.bind(this);
+        // this.onColumnChange = this.onColumnChange.bind(this);
+        // this.renderTableHeaders = this.renderTableHeaders.bind(this);
+        // this.renderTableBody = this.renderTableBody.bind(this);
+        // this.getColumnList = this.getColumnList.bind(this);
+        // this.getData = this.getData.bind(this);
 
-    // }
+    }
 
     componentDidMount()
     {
@@ -39,6 +39,11 @@ class Home extends Component {
         })
             .then(response => {
                 console.log(response.data);
+
+
+
+
+                this.setState({ elections: response.data });
             })
             .catch(error => {
                alert(`Sorry, can't fetch elections right now!`);
@@ -91,9 +96,18 @@ class Home extends Component {
                     <Button type="primary" onClick={this.onLogout}>Logout</Button>
                 </div>
                 <div>
-
+                <h1>All Elections</h1>
+                    <div>
+                        {this.state.elections.map(function (election) {
+                            return (
+                               <ul>
+                                 <li>Post: {election.post}</li>
+                               </ul>
+                            );
+                        })}
+                    </div>
                 </div>
-                <Elections />
+                
             </div>
         );
     }
