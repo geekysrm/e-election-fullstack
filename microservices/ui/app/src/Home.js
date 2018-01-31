@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from 'antd';
 import axios from 'axios';
-import Election from './elections.js';
+import elections from './elections.js';
 import { getSavedToken, deleteToken } from './config';
 import 'antd/dist/antd.css';
 const authToken = getSavedToken();
