@@ -6,7 +6,7 @@ import { Auth } from './temp';
 import { Auth1 } from './Auth';
 import { Filestore } from './Filestore';
 import GetCredentials from './GetCredentials';
-//import ShowElection from './ShowElection';
+import ShowElection from './ShowElection';
 import NotFoundPage from './NotFoundPage';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
@@ -28,7 +28,7 @@ class AppRouter extends React.Component {
             <Route exact path="/filestore" component={Filestore}/>
             <Route exact path="/home" component={Home} />
             <Route exact path="/get-credentials" component={GetCredentials} />
-            <Route path="/election/:id" component={GetCredentials} />
+            <Route path="/election/:id" component={ShowElection} />
 
             <Route component={NotFoundPage} />
           </Switch>
