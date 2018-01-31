@@ -16,8 +16,7 @@ class AuthForm extends React.Component {
     super()
     this.state = {
       username: '',
-      password: '',
-      alertMessage: ''
+      password: ''
     };
   }
 
@@ -46,6 +45,8 @@ class AuthForm extends React.Component {
   login = () => {
     console.log('on login clicked');
     //this.showProgressIndicator(true)
+    console.log(this.state.username);
+    console.log(this.state.password);
     authenticateUser(this.state.username, this.state.password, false).then(authResponse => {
       //this.showProgressIndicator(false)
       console.log(authResponse);
@@ -71,7 +72,8 @@ class AuthForm extends React.Component {
       if (authResponse.auth_token) {
         saveOffline(authResponse.auth_token)
         //this.showAlert("SignUp Successful! \n Your auth credentials are: " + JSON.stringify(authResponse, null, 2));
-        this.showAlert("SignUp Successful! \n Please login.");
+        //this.showAlert("SignUp Successful! \n Please login.");
+        alert("SignUp Successful!")
 
 
       } else {
