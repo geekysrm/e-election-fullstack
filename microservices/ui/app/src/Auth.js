@@ -11,12 +11,35 @@ import { authenticateUser } from './api';
 const FormItem = Form.Item;
 
 class AuthForm extends React.Component {
+
+  constructor() {
+    super()
+    this.state = {
+      username: '',
+      password: '',
+      alertMessage: ''
+    };
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
       }
+    });
+  }
+
+  handleUsernameChange = (e) => {
+    this.setState({
+      ...this.state,
+      username: e.target.value
+    });
+  }
+  handlePasswordChange = (e) => {
+    this.setState({
+      ...this.state,
+      password: e.target.value
     });
   }
 
@@ -33,7 +56,8 @@ class AuthForm extends React.Component {
 
         window.location.assign("/home");
       } else {
-        this.showAlert(JSON.stringify(authResponse));
+        //this.showAlert(JSON.stringify(authResponse));
+        alert(JSON.stringify(authResponse));
       }
     });
   }
@@ -51,7 +75,8 @@ class AuthForm extends React.Component {
 
 
       } else {
-        this.showAlert(JSON.stringify(authResponse));
+        //this.showAlert(JSON.stringify(authResponse));
+        alert(JSON.stringify(authResponse));
       }
     });
   }
@@ -82,14 +107,23 @@ class AuthForm extends React.Component {
             {getFieldDecorator('userName', {
               rules: [{ required: true, message: 'Please input your username!' }],
             })(
-              <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
+              <Input prefix={<Icon type="user"
+              style={{ color: 'rgba(0,0,0,.25)' }} />}
+              placeholder="Username"
+              onChange={this.handleUsernameChange}
+              />
             )}
           </FormItem>
           <FormItem>
             {getFieldDecorator('password', {
               rules: [{ required: true, message: 'Please input your Password!' }],
             })(
-              <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
+              <Input prefix={<Icon type="lock"
+              style={{ color: 'rgba(0,0,0,.25)' }} />}
+              type="password"
+              placeholder="Password"
+              onChange={this.handleUsernameChange}
+              />
             )}
           </FormItem>
           <FormItem>
