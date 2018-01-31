@@ -13,8 +13,10 @@ class ShowElection extends Component {
     constructor(props) {
         super(props);
 
-        // this.state = {
-        // };
+        this.state = {
+            electionDetails:[],         //Store details of the particular election shown in the page
+            nominations: []
+        };
     }
 
 
@@ -28,6 +30,7 @@ class ShowElection extends Component {
         })
             .then(response => {
                 console.log(response.data);
+                this.setState({ nominations: response.data });
 
 
             })
@@ -67,10 +70,30 @@ class ShowElection extends Component {
                 <Button type="primary" onClick={this.onViewNominations}>View Nominations</Button>
                 <Button type="primary" onClick={this.onVote}>Vote</Button>
                 <Button type="primary" onClick={this.onNominate}>Nominate Yourself</Button>
+                <div>
+                    The Nominations are:
+                    <ol>
+                    {this.state.nominations.map(function (nomination) {
+                        return (
+                            <li key={nomination.hasura_id}>
+
+                                <ul>
+                                    <li key={nomination.hasura_id}>
+                                        <li key={nomination.post}>Election Post: {election.post}</li>
+                                    </li>
+                                </ul>
+                                <Button type="primary" href={`/election/${election.election_id}`}>View Details</Button>
+                                <br />
+                                <br />
+                            </li>
+                        );
+                    })}
+                    </ol>
+                </div>
 
             </div>
         );
     }
 }
-
+//ASK SAI TO GIVE NAME OF NOMINATED CANDIDATE in /view-nominations
 export default ShowElection;
