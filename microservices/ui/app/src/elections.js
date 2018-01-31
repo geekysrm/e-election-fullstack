@@ -4,7 +4,7 @@ import { Card } from 'antd';
 import { getSavedToken } from './config';
 const authToken = getSavedToken();
 
-class elections extends Component
+class Elections extends Component
 {
 
   renderCard = (data) => {
@@ -75,4 +75,4 @@ class elections extends Component
   }
 }
 
-export default elections;
+export default Elections;

@@ -239,7 +239,7 @@ class CredentialsForm extends React.Component {
                                 this3.setState({ details: arr });
                                 console.log(this3.state.details);
                                 
-                               
+                               //TODO: Give loading screen when data is being loaded for viewing credentials
                               
 
 
@@ -377,8 +377,10 @@ class CredentialsForm extends React.Component {
         let credentialsThere = this.state.credentialsThere;
         let copied = this.state.copied;
 
+
         let alertSpan = null;
         let copiedSpan = null;
+        let copiedSpan1 = null;
         if (credentialsThere) {
             alertSpan = <Alert
                 message="Successfully generated Voting Credentials!"
@@ -397,7 +399,6 @@ class CredentialsForm extends React.Component {
         if (copied) {
             copiedSpan = <Alert message={"Copied to clipboard!"} type="info" />
         }
-
         const formItemLayout = {
             labelCol: {
                 xs: { span: 24 },
@@ -567,25 +568,38 @@ class CredentialsForm extends React.Component {
                 </div>)}
                 {(this.state.flag === 0) && (
                     <div>
-                        <Input value={this.state.details[8]} style={{ color: 'black' }} disabled={true} />
+                        <span>Full Name</span>
+                        <Input value={this.state.details[8]} style={{ color: 'black', cursor: 'pointer' }} disabled={true} />
                         <br />
                         <br />
-                        <Input value={this.state.details[7]} style={{ color: 'black' }} disabled={true} />
+                        <span>Gender</span>
+                        <Input value={this.state.details[7]} style={{ color: 'black', cursor: 'pointer' }} disabled={true} />
                         <br />
                         <br />
-                        <Input value={this.state.details[6]} style={{ color: 'black' }} disabled={true} />
+                        <span>Date of Birth</span>
+                        <Input value={this.state.details[6]} style={{ color: 'black', cursor: 'pointer' }} disabled={true} />
                         <br />
                         <br />
-                        <Input value={this.state.details[2]} style={{ color: 'black' }} disabled={true} />
+                        <span>State</span>
+                        <Input value={this.state.details[2]} style={{ color: 'black', cursor: 'pointer' }} disabled={true} />
                         <br />
                         <br />
-                        <Input value={this.state.details[4]} style={{ color: 'black' }} disabled={true} />
+                        <span>Voter ID Number</span>
+                        <Input value={this.state.details[4]} style={{ color: 'black', cursor: 'pointer' }} disabled={true} />
                         <br />
                         <br />
-                        <Input value={this.state.details[0]} style={{ color: 'black' }} disabled={true} />
+                        <span>E-mail</span>
+                        <Input value={this.state.details[0]} style={{ color: 'black', cursor: 'pointer' }} disabled={true} />
                         <br />
                         <br />
-                        <Input value={this.state.details[1]} style={{ color: 'black' }} disabled={true} />
+                        <span>Phone</span>
+                        <Input value={this.state.details[1]} style={{ color: 'black', cursor: 'pointer' }} disabled={true} />
+                        <br />
+                        <br />
+                        <span>Voting Credentials</span>
+                        <Input value={this.state.details[3]} style={{ color: 'black', cursor:'pointer' }} disabled={true} />
+
+                        {/*Make the above input i.e credentials to be copiable with alert "copied to clipboard"*/}
                         <br />
                         <br />
                     </div>
