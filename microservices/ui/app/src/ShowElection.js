@@ -79,10 +79,10 @@ class ShowElection extends Component {
 
                                 <ul>
                                     <li key={nomination.hasura_id}>
-                                        <li key={nomination.post}>Election Post: {election.post}</li>
+                                        <li key={nomination.manifesto}>Election Manifesto: {election.manifesto}</li>
                                     </li>
                                 </ul>
-                                <Button type="primary" href={`/election/${election.election_id}`}>View Details</Button>
+                                
                                 <br />
                                 <br />
                             </li>
