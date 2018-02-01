@@ -17,10 +17,9 @@ class ShowElection extends Component {
         this.state = {
             electionDetails:[],         //Store details of the particular election shown in the page
             nominations: [],
-            nominee_names: '',
+            nominee_names: [],
             nominee_ages:[],
-            nominee_genders:[],
-            check:'hello'
+            nominee_genders:[]
         };
     }
 
@@ -49,9 +48,9 @@ class ShowElection extends Component {
                                 // const nowDate = moment();
                                 console.log(response.data[0].name);
                                 console.log(response.data[0].gender);
-                                // this.setState({
-                                //     nominee_names: this.state.nominee_names.concat(response.data[0].name)
-                                // });
+                                this.setState({
+                                    nominee_names: this.state.nominee_names.concat(response.data[0].name)
+                                });
                                 // this.setState({
                                 //     nominee_genders: this.state.nominee_genders.concat(response.data[0].gender)
                                 // });
@@ -60,8 +59,7 @@ class ShowElection extends Component {
                                 // this.setState({
                                 //     nominee_ages: this.state.nominee_ages.concat(age)
                                 // });
-                                this.setState({ nominee_names: response.data[0].name});
-                                console.log(this.state.check);
+                                //this.setState({ nominee_names: response.data[0].name});
 
                             })
                             .catch(error => {
@@ -121,7 +119,8 @@ class ShowElection extends Component {
                                     <ul>
                                         <li key={nomination.hasura_id}>
                                             <li key={nomination.manifesto}>Election Manifesto: {nomination.manifesto}</li>
-                                            <li key={this.state.nominee_names}>Name: {this.state.nominee_names}</li>
+                                            <li key={this.state.nominee_names[0]}>Name: {this.state.nominee_names[0]}</li>
+                                            <li key={this.state.nominee_names[1]}>Name: {this.state.nominee_names[1]}</li>
                                         </li>
                                     </ul>
 
