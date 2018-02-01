@@ -91,20 +91,22 @@ class Home extends Component {
                 <h1>All Elections</h1>
                         {this.state.elections.map(function (election) {
                             return (
-                              <Card title={`${election.state} state ${election.post} elections`}
-                                extra={<a href={`/election/${election.election_id}`}>View Details</a>} style={{ width: 500 }}
-                              >
-                                  <br />
-                                  <p>Election State: {election.state}</p>
-                                  <p>Election Post: {election.post}</p>
-                                  <p>Nomination Start Time: {election.nomination_start_time}</p>
-                                  <p>Nomination End Time: {election.nomination_end_time}</p>
-                                  <p>Election Start Time: {election.election_start_time}</p>
-                                  <p>Election End Time: {election.election_end_time}</p>
+                              <div>
+                                <Card title={`${election.state} state ${election.post} elections`}
+                                  extra={<a href={`/election/${election.election_id}`}>View Details</a>} style={{ width: 500 , marginLeft: 20 }}
+                                >
+                                    <br />
+                                    <p>Election State: {election.state}</p>
+                                    <p>Election Post: {election.post}</p>
+                                    <p>Nomination Start Time: {election.nomination_start_time}</p>
+                                    <p>Nomination End Time: {election.nomination_end_time}</p>
+                                    <p>Election Start Time: {election.election_start_time}</p>
+                                    <p>Election End Time: {election.election_end_time}</p>
 
-                              </Card>
-                              <br />
-                              <br />
+                                </Card>
+                                <br />
+                                <br />
+                              </div>
                             );
                         })}
                 </div>
