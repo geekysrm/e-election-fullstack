@@ -87,7 +87,7 @@ class ShowElection extends Component {
     
 
     }
-    onCast = (id_of_candidate, eid) => {
+    onCastVote = (id_of_candidate, eid) => {
         console.log("ID of candidate: " + id_of_candidate);
         console.log("Election ID: " + eid);
 
