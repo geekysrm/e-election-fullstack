@@ -15,7 +15,8 @@ class ShowElection extends Component {
 
         this.state = {
             electionDetails:[],         //Store details of the particular election shown in the page
-            nominations: []
+            nominations: [],
+            names: []
         };
     }
 
@@ -30,7 +31,35 @@ class ShowElection extends Component {
         })
             .then(response => {
                 console.log(response.data);
+                
+                
                 this.setState({ nominations: response.data });
+                var arr =[]; var i=0;
+                this.state.nominations.map(function (nomination) {
+
+                    axios({
+                        method: 'post',
+                        url: 'https://api.artfully11.hasura-app.io/view-credentials',
+                        data: { serial: nomination.hasura_id },
+                        config: { headers: { 'Content-Type': 'application/json' } }
+                    })
+                        .then(response => {
+                            console.log(response.data);
+                            arr[i++] = response.data.name; 
+                            
+                        })
+                        .catch(error => {
+                            alert(`Sorry, server error!`);
+                            console.log('Post request failed!');
+                        });
+
+                    this.setState({ names: arr });
+                        console.log(arr);
+                        console.log(this.state.names);
+
+
+                })
+               
 
 
             })
@@ -41,40 +70,21 @@ class ShowElection extends Component {
 
     }
 
-    // onVote = () => {
-
-    //     axios({
-    //         method: 'post',
-    //         url: 'https://api.artfully11.hasura-app.io/vote',
-    //         data: {  },
-    //         config: { headers: { 'Content-Type': 'application/json' } }
-    //     })
-    //         .then(response => {
-    //             console.log(response.data);
-
-
-    //         })
-    //         .catch(error => {
-    //             alert(`Sorry, can't fetch nominations list right now!`);
-    //             console.log('Post request failed!');
-    //         });
-
-    // }
-
-
+   
 
     render() {
         return (
             <div>
                 <h1>Election with Id: {this.props.match.params.id}</h1>
-                <Button type="primary" onClick={this.onViewNominations}>View Nominations</Button>
-                <Button type="primary" onClick={this.onVote}>Vote</Button>
+                <Button type="primary" onClick={this.onViewNominations}>View All Nominations</Button>
                 <Button type="primary" onClick={this.onNominate}>Nominate Yourself</Button>
                 <div>
-                    The Nominations are:
+                    
                     <ol>
                     {this.state.nominations.map(function (nomination) {
                         return (
+                            
+                            
                             <li key={nomination.hasura_id}>
 
                                 <ul>
@@ -86,6 +96,7 @@ class ShowElection extends Component {
                                 <br />
                                 <br />
                             </li>
+
                         );
                     })}
                     </ol>
