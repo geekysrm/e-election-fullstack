@@ -91,7 +91,7 @@ class Home extends Component {
                     //<ol>
                         {this.state.elections.map(function (election) {
                             return (
-                              <Card title=`${election.state} state ${election.post} elections`
+                              <Card title={`${election.state} state ${election.post} elections`}
                                 extra={<a href={`/election/${election.election_id}`}>View Details</a>} style={{ width: 500 }}
                               >
                                   <br />
