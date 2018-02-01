@@ -509,123 +509,208 @@ app.post('/get-nominations',function(req,res){
 
 app.post('/vote',function(req,res){
 
-  var hasura_id = req.body.id;
+  var hasura_id_candidate = req.body.id_of_candidate;
+  var hasura_id_voter = req.body.id_of_voter;
   var election_id = req.body.eid;
+  var cred = req.body.credentials;
 
-    var body = {
-      "type": "update",
+  var body3 = {
+      "type": "select",
       "args": {
-          "table": "nomination",
+          "table": "usertable",
+          "columns": [
+              "hasura_id",
+              "credentials"
+          ],
           "where": {
-              "hasura_id": {
-                  "$eq": hasura_id
-              }
-          },
-          "$inc": {
-              "votes": "1"
+              "$and": [
+                  {
+                      "hasura_id": {
+                          "$eq": hasura_id_voter
+                      }
+                  },
+                  {
+                    "credentials": {
+                        "$eq": cred
+                    }
+                  }
+              ]
           }
       }
   };
 
-  var request = new XMLHttpRequest();
+  var request3 = new XMLHttpRequest();
 
-  request.onreadystatechange = function(){
-    if(request.readyState === XMLHttpRequest.DONE)
+  request3.onreadystatechange = function(){
+    if(request3.readyState === XMLHttpRequest.DONE)
     {
-      if(request.status === 200)
+      if(request3.status === 200)
       {
-          var body1 = {
+
+        var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+        function isEmpty(obj) {
+
+            // null and undefined are "empty"
+            if (obj == null) return true;
+
+            // Assume if it has a length property with a non-zero value
+            // that that property is correct.
+            if (obj.length > 0)    return false;
+            if (obj.length === 0)  return true;
+
+            // If it isn't an object at this point
+            // it is empty, but it can't be anything *but* empty
+            // Is it empty?  Depends on your application.
+            if (typeof obj !== "object") return true;
+
+            // Otherwise, does it have any properties of its own?
+            // Note that this doesn't handle
+            // toString and valueOf enumeration bugs in IE < 9
+            for (var key in obj) {
+                if (hasOwnProperty.call(obj, key)) return false;
+            }
+
+            return true;
+        }
+
+        if(isEmpty(JSON.parse(request3.responseText)))
+        {
+          res.status(200).send("Credentials Incorrect");
+        }
+        else
+        {
+          var body = {
             "type": "update",
             "args": {
-                "table": "election",
+                "table": "nomination",
                 "where": {
-                    "election_id": {
-                        "$eq": election_id
+                    "hasura_id": {
+                        "$eq": hasura_id_candidate
                     }
                 },
                 "$inc": {
-                    "total_votes": "1"
+                    "votes": "1"
                 }
             }
         };
 
-        var request1 = new XMLHttpRequest();
+        var request = new XMLHttpRequest();
 
-        request1.onreadystatechange = function(){
-          if(request1.readyState === XMLHttpRequest.DONE)
+        request.onreadystatechange = function(){
+          if(request.readyState === XMLHttpRequest.DONE)
           {
-            if(request1.status === 200)
+            if(request.status === 200)
             {
-              var body2 = {
-                  "type": "insert",
+                var body1 = {
+                  "type": "update",
                   "args": {
-                      "table": "votes",
-                      "objects": [
-                          {
-                              "hasura_id": hasura_id,
-                              "election_id": election_id
+                      "table": "election",
+                      "where": {
+                          "election_id": {
+                              "$eq": election_id
                           }
-                      ]
+                      },
+                      "$inc": {
+                          "total_votes": "1"
+                      }
                   }
               };
 
-              var request2 = new XMLHttpRequest();
+              var request1 = new XMLHttpRequest();
 
-              request2.onreadystatechange = function(){
-                if(request2.readyState === XMLHttpRequest.DONE)
+              request1.onreadystatechange = function(){
+                if(request1.readyState === XMLHttpRequest.DONE)
                 {
-                  if(request2.status === 200)
+                  if(request1.status === 200)
                   {
-                    res.status(200).send(request2.responseText);
+                    var body2 = {
+                        "type": "insert",
+                        "args": {
+                            "table": "votes",
+                            "objects": [
+                                {
+                                    "hasura_id": hasura_id_voter,
+                                    "election_id": election_id
+                                }
+                            ]
+                        }
+                    };
+
+                    var request2 = new XMLHttpRequest();
+
+                    request2.onreadystatechange = function(){
+                      if(request2.readyState === XMLHttpRequest.DONE)
+                      {
+                        if(request2.status === 200)
+                        {
+                          res.status(200).send(request2.responseText);
+                        }
+                        else if(request2.status === 400)
+                        {
+                          res.status(400).send(request2.responseText);
+                        }
+                        else if(request2.status === 500)
+                        {
+                          res.status(500).send(request2.responseText);
+                        }
+                      }
+                    }
+
+                    request2.open('POST','https://data.artfully11.hasura-app.io/v1/query',true);
+                    request2.setRequestHeader('Content-Type','application/json');
+                    request2.setRequestHeader('Authorization','Bearer 9729a88294a0859b8bf736156b6b9f7d381d596c44d8a73f');
+                    request2.send(JSON.stringify(body2));
+
                   }
-                  else if(request2.status === 400)
+                  else if(request1.status === 400)
                   {
-                    res.status(400).send(request2.responseText);
+                    res.status(400).send(request1.responseText);
                   }
-                  else if(request2.status === 500)
+                  else if(request1.status === 500)
                   {
-                    res.status(500).send(request2.responseText);
+                    res.status(500).send(request1.responseText);
                   }
                 }
               }
 
-              request2.open('POST','https://data.artfully11.hasura-app.io/v1/query',true);
-              request2.setRequestHeader('Content-Type','application/json');
-              request2.setRequestHeader('Authorization','Bearer 9729a88294a0859b8bf736156b6b9f7d381d596c44d8a73f');
-              request2.send(JSON.stringify(body2));
-
+              request1.open('POST','https://data.artfully11.hasura-app.io/v1/query',true);
+              request1.setRequestHeader('Content-Type','application/json');
+              request1.setRequestHeader('Authorization','Bearer 9729a88294a0859b8bf736156b6b9f7d381d596c44d8a73f');
+              request1.send(JSON.stringify(body1));
             }
-            else if(request1.status === 400)
+            else if(request.status === 400)
             {
-              res.status(400).send(request1.responseText);
+              res.status(400).send(request.responseText);
             }
-            else if(request1.status === 500)
+            else if(request.status === 500)
             {
-              res.status(500).send(request1.responseText);
+              res.status(500).send(request.responseText);
             }
           }
         }
 
-        request1.open('POST','https://data.artfully11.hasura-app.io/v1/query',true);
-        request1.setRequestHeader('Content-Type','application/json');
-        request1.setRequestHeader('Authorization','Bearer 9729a88294a0859b8bf736156b6b9f7d381d596c44d8a73f');
-        request1.send(JSON.stringify(body1));
+        request.open('POST','https://data.artfully11.hasura-app.io/v1/query',true);
+        request.setRequestHeader('Content-Type','application/json');
+        request.setRequestHeader('Authorization','Bearer 9729a88294a0859b8bf736156b6b9f7d381d596c44d8a73f');
+        request.send(JSON.stringify(body));
+        }
       }
-      else if(request.status === 400)
+      else if(request3.status === 400)
       {
-        res.status(400).send(request.responseText);
+        res.status(400).send(request3.responseText);
       }
-      else if(request.status === 500)
+      else if(request3.status === 500)
       {
-        res.status(500).send(request.responseText);
+        res.status(500).send(request3.responseText);
       }
     }
   }
 
-  request.open('POST','https://data.artfully11.hasura-app.io/v1/query',true);
-  request.setRequestHeader('Content-Type','application/json');
-  request.setRequestHeader('Authorization','Bearer 9729a88294a0859b8bf736156b6b9f7d381d596c44d8a73f');
-  request.send(JSON.stringify(body));
+  request3.open('POST','https://data.artfully11.hasura-app.io/v1/query',true);
+  request3.setRequestHeader('Content-Type','application/json');
+  request3.setRequestHeader('Authorization','Bearer 9729a88294a0859b8bf736156b6b9f7d381d596c44d8a73f');
+  request3.send(JSON.stringify(body3));
 
 });
 

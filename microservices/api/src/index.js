@@ -20,7 +20,7 @@ details.onclick = function()
       }
     }
   };
-  request.open('POST','/results',true);
+  request.open('POST','/vote',true);
   request.setRequestHeader('Content-Type','application/json');
   request.send(null);
 }
