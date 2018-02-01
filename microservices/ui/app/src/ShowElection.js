@@ -36,7 +36,7 @@ class ShowElection extends Component {
                 console.log(response.data);
                 this.setState({ nominations: response.data });
                 
-  
+                    var that = this;
                     this.state.nominations.map(function (nomination) {
                         axios({
                             method: 'post',
@@ -60,7 +60,7 @@ class ShowElection extends Component {
                                 // this.setState({
                                 //     nominee_ages: this.state.nominee_ages.concat(age)
                                 // });
-                                this.setState({ nominee_names: response.data[0].name});
+                                that.setState({ nominee_names: response.data[0].name});
 
                             })
                             .catch(error => {
