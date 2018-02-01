@@ -434,7 +434,7 @@ class CredentialsForm extends React.Component {
         return (
             <div>
                 {(this.state.flag === 1) && (<div>
-                  <h1>Register To Get Credentials</h1>
+                  <h1 style={{marginTop:"10px" , textAlign:"center"}}>Register To Get Credentials</h1>
                   <Divider />
                     <Form onSubmit={this.handleSubmit} style={{ marginLeft: "-200px" ,
                           marginRight:"100px" ,
