@@ -89,7 +89,6 @@ class Home extends Component {
                 </div>
                 <div>
                 <h1>All Elections</h1>
-                    //<ol>
                         {this.state.elections.map(function (election) {
                             return (
                               <Card title={`${election.state} state ${election.post} elections`}
@@ -102,12 +101,12 @@ class Home extends Component {
                                   <p>Nomination End Time: {election.nomination_end_time}</p>
                                   <p>Election Start Time: {election.election_start_time}</p>
                                   <p>Election End Time: {election.election_end_time}</p>
-                                  <br />
 
                               </Card>
+                              <br />
+                              <br />
                             );
                         })}
-                    //</ol>
                 </div>
 
             </div>
