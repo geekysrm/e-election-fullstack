@@ -19,7 +19,8 @@ class ShowElection extends Component {
             nominations: [],
             nominee_names: '',
             nominee_ages:[],
-            nominee_genders:[]
+            nominee_genders:[],
+            check:'hello'
         };
     }
 
@@ -36,8 +37,7 @@ class ShowElection extends Component {
                 console.log(response.data);
                 this.setState({ nominations: response.data });
                 
-                    var that = this;
-                    this.state.nominations.map(function (nomination) {
+                    this.state.nominations.map( (nomination) => {
                         axios({
                             method: 'post',
                             url: 'https://api.artfully11.hasura-app.io/view-credentials',
@@ -60,7 +60,8 @@ class ShowElection extends Component {
                                 // this.setState({
                                 //     nominee_ages: this.state.nominee_ages.concat(age)
                                 // });
-                                that.setState({ nominee_names: response.data[0].name});
+                                this.setState({ nominee_names: response.data[0].name});
+                                console.log(this.state.check);
 
                             })
                             .catch(error => {
