@@ -34,7 +34,7 @@ class ShowElection extends Component {
                 
                 
                 this.setState({ nominations: response.data });
-
+                var arr =[]; var i=0;
                 this.state.nominations.map(function (nomination) {
 
                     axios({
@@ -45,13 +45,17 @@ class ShowElection extends Component {
                     })
                         .then(response => {
                             console.log(response.data);
-
-
+                            arr[i++] = response.data.name; 
+                            
                         })
                         .catch(error => {
                             alert(`Sorry, server error!`);
                             console.log('Post request failed!');
                         });
+
+                    this.setState({ names: arr });
+                        console.log(arr);
+                        console.log(this.state.names);
 
 
                 })
