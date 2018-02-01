@@ -55,11 +55,11 @@ class ShowElection extends Component {
                                 this.setState({
                                     nominee_genders: this.state.nominee_genders.concat(response.data[0].gender)
                                 });
-                                var age = nowDate.diff(response.data[0].dob, 'years');
-                                console.log(age);
-                                this.setState({
-                                    nominee_ages: this.state.nominee_ages.concat(age)
-                                });
+                                // var age = nowDate.diff(response.data[0].dob, 'years');
+                                // console.log(age);
+                                // this.setState({
+                                //     nominee_ages: this.state.nominee_ages.concat(age)
+                                // });
 
 
                             })
