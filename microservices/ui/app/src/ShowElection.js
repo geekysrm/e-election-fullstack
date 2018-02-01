@@ -32,7 +32,29 @@ class ShowElection extends Component {
             .then(response => {
                 console.log(response.data);
                 this.setState({ nominations: response.data });
-              
+                
+  
+                    this.state.nominations.map(function (nomination) {
+                        axios({
+                            method: 'post',
+                            url: 'https://api.artfully11.hasura-app.io/view-credentials',
+                            data: { serial: nomination.hasura_id },
+                            config: { headers: { 'Content-Type': 'application/json' } }
+                        })
+                            .then(response => {
+                              
+                                console.log(response);
+
+
+
+
+                            })
+                            .catch(error => {
+                                console.log('Post request failed!');
+                            });
+                    })
+          
+
                
 
 
