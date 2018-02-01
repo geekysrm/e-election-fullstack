@@ -574,6 +574,11 @@ class CredentialsForm extends React.Component {
                 </div>)}
                 {(this.state.flag === 0) && (
                     <div>
+                    <h1 style={{marginTop:"10px" , textAlign:"center"}}>Personal Details and Credentials</h1>
+                    <Divider />
+                        <div style={{ marginRight:"20%",
+                              marginLeft:"10%",
+                              marginTop:"20px"}}>
                         <span>Full Name</span>
                         <Input value={this.state.details[8]} style={{ color: 'black', cursor: 'pointer' }} disabled={true} />
                         <br />
@@ -608,6 +613,7 @@ class CredentialsForm extends React.Component {
                         {/*Make the above input i.e credentials to be copiable with alert "copied to clipboard"*/}
                         <br />
                         <br />
+                        </div>
                     </div>
 
                 )}
