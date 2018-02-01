@@ -34,9 +34,8 @@ class ShowElection extends Component {
                 
                 
                 this.setState({ nominations: response.data });
-                var arr =[]; var i=0;
                 this.state.nominations.map(function (nomination) {
-
+                    var arr = [];
                     axios({
                         method: 'post',
                         url: 'https://api.artfully11.hasura-app.io/view-credentials',
@@ -45,7 +44,7 @@ class ShowElection extends Component {
                     })
                         .then(response => {
                             console.log(response.data);
-                            arr[i++] = response.data.name; 
+                             arr = this.state.names.concat(response.data.name);
                             
                         })
                         .catch(error => {
@@ -53,7 +52,7 @@ class ShowElection extends Component {
                             console.log('Post request failed!');
                         });
 
-                    this.setState({ names: arr });
+                     this.setState({ names: arr })
                         console.log(arr);
                         console.log(this.state.names);
 
