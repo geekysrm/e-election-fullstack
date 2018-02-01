@@ -5,6 +5,7 @@ import { Data } from './Data';
 import { AuthLogin } from './AuthLogin';
 import { AuthRegister } from './AuthRegister';
 import { Filestore } from './Filestore';
+import Welcome from './Welcome'
 import GetCredentials from './GetCredentials';
 import ShowElection from './ShowElection';
 import NotFoundPage from './NotFoundPage';
@@ -17,11 +18,7 @@ class AppRouter extends React.Component {
       <MuiThemeProvider>
         <Router>
           <Switch>
-            <Route exact path="/" render={() =>
-                <div>
-                  <h3>Welcome to E-Election</h3>
-                </div>
-              }/>
+            <Route exact path="/" component={Welcome}/>
             <Route exact path="/data" component={Data}/>
             <Route exact path="/auth-login" component={AuthLogin}/>
             <Route exact path="/auth-Register" component={AuthRegister}/>
