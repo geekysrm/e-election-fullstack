@@ -21,7 +21,7 @@ class ShowElection extends Component {
             nominee_names: [],
             nominee_ages:[],
             nominee_genders:[],
-            textBoxShow:false
+            textBoxShow: -1
         };
     }
 
@@ -83,8 +83,7 @@ class ShowElection extends Component {
     onVote = (id_of_candidate, eid) => {
         console.log("ID of candidate: " + id_of_candidate);
         console.log("Election ID: " + eid);
-
-        this.setState({ textBoxShow: true });
+        this.setState({ textBoxShow: id_of_candidate });
     
 
     }
@@ -92,9 +91,9 @@ class ShowElection extends Component {
    
 
     render() {
-        let textBox = null;
-        if(this.state.textBoxShow)
-             textBox = <Search placeholder="Enter your Voting Credentials" enterButton="Cast Vote" onSearch={value => console.log(value)} />;
+        // let textBox = null;
+        // if (this.state.textBoxShow[1] === 'true' && this.state.textBoxShow[1] )
+        //      textBox = <Search placeholder="Enter your Voting Credentials" enterButton="Cast Vote" onSearch={value => console.log(value)} />;
         
             return (
             <div>
@@ -123,7 +122,8 @@ class ShowElection extends Component {
                                         </li>
                                     </ul>
                                     <Button type="primary" onClick={() => this.onVote(nomination.hasura_id, this.props.match.params.id)}>Vote</Button>
-                                    {textBox}
+                                    {this.state.textBoxShow === nomination.hasura_id && <Search placeholder="Enter your Voting Credentials" enterButton="Cast Vote" onSearch={value => console.log(value)} />}
+                                    <br />
                                     <br />
                                 </li>
 
