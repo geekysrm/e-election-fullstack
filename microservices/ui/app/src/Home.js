@@ -91,9 +91,9 @@ class Home extends Component {
                 <h1>All Elections</h1>
                         {this.state.elections.map(function (election) {
                             return (
-                              <div>
+                              <div style={{ background: '#ECECEC', padding: '30px' , width: 560 , marginLeft: 20 }}>
                                 <Card title={`${election.state} state ${election.post} elections`}
-                                  extra={<a href={`/election/${election.election_id}`}>View Details</a>} style={{ width: 500 , marginLeft: 20 }}
+                                  extra={<a href={`/election/${election.election_id}`}>View Details</a>} style={{ width: 500 }}
                                 >
                                     <br />
                                     <p>Election State: {election.state}</p>
