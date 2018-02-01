@@ -92,8 +92,9 @@ class ShowElection extends Component {
    
 
     render() {
+        let textBox = null;
         if(this.state.textBoxShow)
-            const textBox = <Search placeholder="Enter your Voting Credentials" enterButton="Cast Vote" onSearch={value => console.log(value)} />;
+             textBox = <Search placeholder="Enter your Voting Credentials" enterButton="Cast Vote" onSearch={value => console.log(value)} />;
         
             return (
             <div>
