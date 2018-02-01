@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Button } from 'antd';
+import { Button , Card } from 'antd';
 import axios from 'axios';
 import { getSavedToken, deleteToken } from './config';
 import 'antd/dist/antd.css';
+import './Home.css'
 const authToken = getSavedToken();
 class Home extends Component {
 
