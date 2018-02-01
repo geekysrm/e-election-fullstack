@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Button } from 'antd';
+import { Button,Input } from 'antd';
 import moment from 'moment';
 import 'antd/dist/antd.css';
 
@@ -8,6 +8,7 @@ import 'antd/dist/antd.css';
 //     <h1>{id}</h1>
     
 // );
+const Search = Input.Search;
 
 class ShowElection extends Component {
 
@@ -19,7 +20,8 @@ class ShowElection extends Component {
             nominations: [],
             nominee_names: [],
             nominee_ages:[],
-            nominee_genders:[]
+            nominee_genders:[],
+            textBoxShow:false
         };
     }
 
@@ -78,8 +80,11 @@ class ShowElection extends Component {
 
     }
 
-    onVote = (id_of_candidate) => {
-        console.log("Hello: " + id_of_candidate);
+    onVote = (id_of_candidate, eid) => {
+        console.log("ID of candidate: " + id_of_candidate);
+        console.log("Election ID: " + eid);
+
+        this.setState({ textBoxShow: true });
     
 
     }
@@ -87,7 +92,10 @@ class ShowElection extends Component {
    
 
     render() {
-        return (
+        if(this.state.textBoxShow)
+            const textBox = <Search placeholder="Enter your Voting Credentials" enterButton="Cast Vote" onSearch={value => console.log(value)} />;
+        
+            return (
             <div>
                 <h1>Election with Id: {this.props.match.params.id}</h1>
                 <Button type="primary" onClick={this.onViewNominations}>View All Nominations</Button>
@@ -113,7 +121,8 @@ class ShowElection extends Component {
                                             <li key={nomination.manifesto}>Election Manifesto: {nomination.manifesto}</li>
                                         </li>
                                     </ul>
-                                    <Button type="primary" onClick={() => this.onVote(nomination.hasura_id)}>Vote</Button>
+                                    <Button type="primary" onClick={() => this.onVote(nomination.hasura_id, this.props.match.params.id)}>Vote</Button>
+                                    {textBox}
                                     <br />
                                 </li>
 
