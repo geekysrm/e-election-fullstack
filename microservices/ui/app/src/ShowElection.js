@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Button } from 'antd';
+import moment from 'moment';
 import 'antd/dist/antd.css';
 
 // const ShowElection = ( { match: { params: {id } } } ) => (
@@ -42,9 +43,12 @@ class ShowElection extends Component {
                             config: { headers: { 'Content-Type': 'application/json' } }
                         })
                             .then(response => {
-                              
-                                console.log(response);
-
+                                
+                                const nowDate = moment();
+                                console.log(response.data.name);
+                                console.log(response.data.gender);
+                                var age = nowDate.diff(dob, 'years');
+                                console.log(age);
 
 
 
