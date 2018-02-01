@@ -91,7 +91,7 @@ class ShowElection extends Component {
                 <div>
                     
                     <ol>
-                    {this.state.nominations.map(function (nomination) {
+                  {/*  {this.state.nominations.map(function (nomination) {
                         return (
                             
                             
@@ -109,7 +109,27 @@ class ShowElection extends Component {
                             </li>
 
                         );
-                    })}
+                    })} */}
+
+                        {this.state.nominations.map( (nomination) => {
+                            return (
+
+
+                                <li key={nomination.hasura_id}>
+
+                                    <ul>
+                                        <li key={nomination.hasura_id}>
+                                            <li key={nomination.manifesto}>Election Manifesto: {nomination.manifesto}</li>
+                                            <li key={this.state.nominee_names}>Name: {this.state.nominee_names}</li>
+                                        </li>
+                                    </ul>
+
+                                    <br />
+                                    <br />
+                                </li>
+
+                            );
+                        })}
                     </ol>
                 </div>
 
