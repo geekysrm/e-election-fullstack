@@ -45,7 +45,7 @@ class ShowElection extends Component {
                         })
                             .then(response => {
                                 
-                                // const nowDate = moment();
+                                const nowDate = moment();
                                 console.log(response.data[0].name);
                                 console.log(response.data[0].gender);
                                 this.setState({
@@ -54,8 +54,9 @@ class ShowElection extends Component {
                                 this.setState({
                                     nominee_genders: this.state.nominee_genders.concat(response.data[0].gender)
                                 });
-                                // var age = nowDate.diff(response.data[0].dob, 'years');
-                                // console.log(age);
+                                const dob = moment(response.data[0].dob, 'YYYY-MM-DD').toDate();
+                                 var age = nowDate.diff(dob, 'years');
+                                 console.log(age);
                                 // this.setState({
                                 //     nominee_ages: this.state.nominee_ages.concat(age)
                                 // });
@@ -137,5 +138,4 @@ class ShowElection extends Component {
         );
     }
 }
-//ASK SAI TO GIVE NAME OF NOMINATED CANDIDATE in /view-nominations
 export default ShowElection;
