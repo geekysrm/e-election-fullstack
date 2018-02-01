@@ -49,12 +49,12 @@ class ShowElection extends Component {
                                 const nowDate = moment();
                                 console.log(response.data[0].name);
                                 console.log(response.data[0].gender);
-                                this.setState({
-                                    nominee_names: this.state.nominee_names.concat(response.data[0].name)
-                                });
-                                this.setState({
-                                    nominee_genders: this.state.nominee_genders.concat(response.data[0].gender)
-                                });
+                                // this.setState({
+                                //     nominee_names: this.state.nominee_names.concat(response.data[0].name)
+                                // });
+                                // this.setState({
+                                //     nominee_genders: this.state.nominee_genders.concat(response.data[0].gender)
+                                // });
                                 // var age = nowDate.diff(response.data[0].dob, 'years');
                                 // console.log(age);
                                 // this.setState({
@@ -99,7 +99,7 @@ class ShowElection extends Component {
 
                                 <ul>
                                     <li key={nomination.hasura_id}>
-                                        <li key={nomination.manifesto}>Election Manifesto: {nomination.manifesto}</li>
+                                        <li key={nomination.manifesto}>Election Manifesto: {nomination.manifesto}</li>                                        <li key={nomination.manifesto}>Election Manifesto: {nomination.manifesto}</li>
                                     </li>
                                 </ul>
                                 
