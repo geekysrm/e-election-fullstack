@@ -437,7 +437,7 @@ class CredentialsForm extends React.Component {
                   <h1 style={{marginTop:"10px" , textAlign:"center"}}>Register To Get Credentials</h1>
                   <Divider />
                     <Form onSubmit={this.handleSubmit} style={{ marginRight:"20%" ,
-                          marginLeft:"5%"
+                          marginLeft:"5%",
                           marginTop:"20px"}}>
                         <FormItem
                             {...formItemLayout}
