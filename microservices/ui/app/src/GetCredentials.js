@@ -182,7 +182,7 @@ const authToken = getSavedToken();
 class CredentialsForm extends React.Component {
     constructor(props)
     {
-      
+
         super(props);
         this.state = {
             confirmDirty: false,
@@ -194,12 +194,12 @@ class CredentialsForm extends React.Component {
             flag:-1,
             details:[]
         };
-        
+
     }
-    
+
     handleOnLoad = () => {
         var this1 = this;
-        
+
         axios({
             method: 'post',
             url: 'https://api.artfully11.hasura-app.io/data',                                           //URL to be modified here
@@ -221,7 +221,7 @@ class CredentialsForm extends React.Component {
                     .then(function (response) {
                         console.log('Successful post request');
                         console.log(response.data);
-                             
+
                             if(response.data===1)
                             this2.setState({ flag: 1 });
                         if (response.data === 0)
@@ -239,9 +239,9 @@ class CredentialsForm extends React.Component {
                                 var arr = Object.values(response.data[0]);
                                 this3.setState({ details: arr });
                                 console.log(this3.state.details);
-                                
+
                                //TODO: Give loading screen when data is being loaded for viewing credentials
-                              
+
 
 
 
@@ -251,7 +251,7 @@ class CredentialsForm extends React.Component {
                                 console.log("post req 3 failed");
                             });
                         }
-                      
+
 
                     })
                     .catch(function (response) {
@@ -309,7 +309,8 @@ class CredentialsForm extends React.Component {
                                     serial: id,
                                     name: values.name,
                                     gender: values.gender[0],
-                                    date: dateGot, state: values.states[0],
+                                    date: dateGot,
+                                    state: values.states[0],
                                     voterId: values.voterId,
                                     email: values.email,
                                     phone: Number(values.phone)
@@ -433,7 +434,7 @@ class CredentialsForm extends React.Component {
         return (
             <div>
                 {(this.state.flag === 1) && (<div>
-                    <Form onSubmit={this.handleSubmit}>
+                    <Form onSubmit={this.handleSubmit} style={{ marginLeft: "-200px" }}>
                         <FormItem
                             {...formItemLayout}
                             label={(
@@ -604,7 +605,7 @@ class CredentialsForm extends React.Component {
                         <br />
                         <br />
                     </div>
-                
+
                 )}
 
             </div>
