@@ -81,10 +81,16 @@ class ShowElection extends Component {
     }
 
     onVote = (id_of_candidate, eid) => {
-        console.log("ID of candidate: " + id_of_candidate);
-        console.log("Election ID: " + eid);
+        // console.log("ID of candidate: " + id_of_candidate);
+        // console.log("Election ID: " + eid);
         this.setState({ textBoxShow: id_of_candidate });
     
+
+    }
+    onCast = (id_of_candidate, eid) => {
+        console.log("ID of candidate: " + id_of_candidate);
+        console.log("Election ID: " + eid);
+
 
     }
 
@@ -122,7 +128,7 @@ class ShowElection extends Component {
                                         </li>
                                     </ul>
                                     <Button type="primary" onClick={() => this.onVote(nomination.hasura_id, this.props.match.params.id)}>Vote</Button>
-                                    {this.state.textBoxShow === nomination.hasura_id && <Search placeholder="Enter your Voting Credentials" enterButton="Cast Vote" onSearch={value => console.log(value)} />}
+                                    {this.state.textBoxShow === nomination.hasura_id && <Search placeholder="Enter your Voting Credentials" enterButton="Cast Vote" onSearch={value => this.onCastVote(nomination.hasura_id, this.props.match.params.id,value)} />}
                                     <br />
                                     <br />
                                 </li>
@@ -138,3 +144,5 @@ class ShowElection extends Component {
 }
 //TODO: Ask Sai to change Individual to Independent
 export default ShowElection;
+
+//{value => console.log(value)}
