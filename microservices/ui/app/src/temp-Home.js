@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { Button , Card } from 'antd';
+import { Button } from 'antd';
 import axios from 'axios';
 import { getSavedToken, deleteToken } from './config';
 import 'antd/dist/antd.css';
-import './Home.css'
 const authToken = getSavedToken();
 class Home extends Component {
 
@@ -65,7 +64,7 @@ class Home extends Component {
         }
 
     }
-/*
+
     onClickElection = () => {
         const authToken = getSavedToken();
         if (authToken) {
@@ -76,7 +75,7 @@ class Home extends Component {
         }
 
     }
-*/
+
 
 //Add Ant.Design components like lists etc. below
     render() {
@@ -89,25 +88,28 @@ class Home extends Component {
                 </div>
                 <div>
                 <h1>All Elections</h1>
-                    //<ol>
+                    <ol>
                         {this.state.elections.map(function (election) {
                             return (
-                              <Card title={`${election.state} state ${election.post} elections`}
-                                extra={<a href={`/election/${election.election_id}`}>View Details</a>} style={{ width: 500 }}
-                              >
-                                  <br />
-                                  <p>Election State: {election.state}</p>
-                                  <p>Election Post: {election.post}</p>
-                                  <p>Nomination Start Time: {election.nomination_start_time}</p>
-                                  <p>Nomination End Time: {election.nomination_end_time}</p>
-                                  <p>Election Start Time: {election.election_start_time}</p>
-                                  <p>Election End Time: {election.election_end_time}</p>
-                                  <br />
+                                <li key={election.election_id}>
 
-                              </Card>
+                                <ul>
+                               <li key={election.election_id}>
+                                 <li key={election.post}>Election Post: {election.post}</li>
+                                 <li key={election.state}>Election State: {election.state}</li>
+                                <li key={election.election_start_time}>Election Start Time: {election.election_start_time}</li>
+                                <li key={election.election_end_time}>Election End Time: {election.election_end_time}</li>
+                                <li key={election.nomination_start_time}>Nomination Start Time: {election.nomination_start_time}</li>
+                                <li key={election.nomination_end_time}>Nomination End Time: {election.nomination_end_time}</li>
+                               </li>
+                               </ul>
+                                    <Button type="primary" href={`/election/${election.election_id}`}>View Details</Button>
+                                <br />
+                                <br />
+                               </li>
                             );
                         })}
-                    //</ol>
+                    </ol>
                 </div>
 
             </div>
