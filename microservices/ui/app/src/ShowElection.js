@@ -78,6 +78,12 @@ class ShowElection extends Component {
 
     }
 
+    onVote = (id_of_candidate) => {
+        console.log("Hello: " + id_of_candidate);
+    
+
+    }
+
    
 
     render() {
@@ -107,8 +113,7 @@ class ShowElection extends Component {
                                             <li key={nomination.manifesto}>Election Manifesto: {nomination.manifesto}</li>
                                         </li>
                                     </ul>
-
-                                    <br />
+                                    <Button type="primary" onClick={() => this.onVote(nomination.hasura_id)}>Vote</Button>
                                     <br />
                                 </li>
 

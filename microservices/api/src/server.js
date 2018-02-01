@@ -576,7 +576,7 @@ app.post('/vote',function(req,res){
 
         if(isEmpty(JSON.parse(request3.responseText)))
         {
-          res.status(200).send("Credentials Incorrect");
+          res.status(200).send("0");
         }
         else
         {
@@ -644,7 +644,7 @@ app.post('/vote',function(req,res){
                       {
                         if(request2.status === 200)
                         {
-                          res.status(200).send(request2.responseText);
+                          res.status(200).send("1");
                         }
                         else if(request2.status === 400)
                         {
