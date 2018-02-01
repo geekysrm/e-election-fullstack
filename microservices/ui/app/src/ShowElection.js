@@ -17,7 +17,7 @@ class ShowElection extends Component {
         this.state = {
             electionDetails:[],         //Store details of the particular election shown in the page
             nominations: [],
-            nominee_names: '',
+            nominee_names: [],
             nominee_ages:[],
             nominee_genders:[]
         };
@@ -36,8 +36,7 @@ class ShowElection extends Component {
                 console.log(response.data);
                 this.setState({ nominations: response.data });
                 
-  
-                    this.state.nominations.map(function (nomination) {
+                    this.state.nominations.map( (nomination) => {
                         axios({
                             method: 'post',
                             url: 'https://api.artfully11.hasura-app.io/view-credentials',
@@ -49,18 +48,18 @@ class ShowElection extends Component {
                                 // const nowDate = moment();
                                 console.log(response.data[0].name);
                                 console.log(response.data[0].gender);
-                                // this.setState({
-                                //     nominee_names: this.state.nominee_names.concat(response.data[0].name)
-                                // });
-                                // this.setState({
-                                //     nominee_genders: this.state.nominee_genders.concat(response.data[0].gender)
-                                // });
+                                this.setState({
+                                    nominee_names: this.state.nominee_names.concat(response.data[0].name)
+                                });
+                                this.setState({
+                                    nominee_genders: this.state.nominee_genders.concat(response.data[0].gender)
+                                });
                                 // var age = nowDate.diff(response.data[0].dob, 'years');
                                 // console.log(age);
                                 // this.setState({
                                 //     nominee_ages: this.state.nominee_ages.concat(age)
                                 // });
-                                this.setState({ nominee_names: response.data[0].name});
+                                //this.setState({ nominee_names: response.data[0].name});
 
                             })
                             .catch(error => {
@@ -111,7 +110,7 @@ class ShowElection extends Component {
                         );
                     })} */}
 
-                        {this.state.nominations.map( (nomination) => {
+                        {this.state.nominations.map( (nomination, index) => {
                             return (
 
 
@@ -120,7 +119,8 @@ class ShowElection extends Component {
                                     <ul>
                                         <li key={nomination.hasura_id}>
                                             <li key={nomination.manifesto}>Election Manifesto: {nomination.manifesto}</li>
-                                            <li key={this.state.nominee_names}>Name: {this.state.nominee_names}</li>
+                                            <li key={this.state.nominee_names[index]}>Name: {this.state.nominee_names[index]}</li>
+                                            <li key={this.state.nominee_genders[index]}>Gender: {this.state.nominee_genders[index]}</li>
                                         </li>
                                     </ul>
 
