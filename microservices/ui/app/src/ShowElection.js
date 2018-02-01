@@ -45,8 +45,8 @@ class ShowElection extends Component {
                             .then(response => {
                                 
                                 const nowDate = moment();
-                                console.log(response.data);
-                                var age = nowDate.diff(response.data.dob, 'years');
+                                console.log(response.data[0]);
+                                var age = nowDate.diff(response.data[0].dob, 'years');
                                 console.log(age);
 
 
