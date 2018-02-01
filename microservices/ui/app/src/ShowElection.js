@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Button } from 'antd';
+import moment from 'moment';
 import 'antd/dist/antd.css';
 
 // const ShowElection = ( { match: { params: {id } } } ) => (
@@ -16,7 +17,9 @@ class ShowElection extends Component {
         this.state = {
             electionDetails:[],         //Store details of the particular election shown in the page
             nominations: [],
-            names: []
+            nominee_names: '',
+            nominee_ages:[],
+            nominee_genders:[]
         };
     }
 
@@ -31,33 +34,41 @@ class ShowElection extends Component {
         })
             .then(response => {
                 console.log(response.data);
-                
-                
                 this.setState({ nominations: response.data });
-                this.state.nominations.map(function (nomination) {
-                    var arr = [];
-                    axios({
-                        method: 'post',
-                        url: 'https://api.artfully11.hasura-app.io/view-credentials',
-                        data: { serial: nomination.hasura_id },
-                        config: { headers: { 'Content-Type': 'application/json' } }
-                    })
-                        .then(response => {
-                            console.log(response.data);
-                             arr = this.state.names.concat(response.data.name);
-                            
+                
+  
+                    this.state.nominations.map(function (nomination) {
+                        axios({
+                            method: 'post',
+                            url: 'https://api.artfully11.hasura-app.io/view-credentials',
+                            data: { serial: nomination.hasura_id },
+                            config: { headers: { 'Content-Type': 'application/json' } }
                         })
-                        .catch(error => {
-                            alert(`Sorry, server error!`);
-                            console.log('Post request failed!');
-                        });
+                            .then(response => {
+                                
+                                // const nowDate = moment();
+                                console.log(response.data[0].name);
+                                console.log(response.data[0].gender);
+                                // this.setState({
+                                //     nominee_names: this.state.nominee_names.concat(response.data[0].name)
+                                // });
+                                // this.setState({
+                                //     nominee_genders: this.state.nominee_genders.concat(response.data[0].gender)
+                                // });
+                                // var age = nowDate.diff(response.data[0].dob, 'years');
+                                // console.log(age);
+                                // this.setState({
+                                //     nominee_ages: this.state.nominee_ages.concat(age)
+                                // });
+                                this.setState({ nominee_names: response.data[0].name});
 
-                     this.setState({ names: arr })
-                        console.log(arr);
-                        console.log(this.state.names);
-
-
-                })
+                            })
+                            .catch(error => {
+                                console.log('Post request failed!');
+                            });
+                    })
+          
+                 
                
 
 
@@ -80,7 +91,7 @@ class ShowElection extends Component {
                 <div>
                     
                     <ol>
-                    {this.state.nominations.map(function (nomination) {
+                  {/*  {this.state.nominations.map(function (nomination) {
                         return (
                             
                             
@@ -88,7 +99,8 @@ class ShowElection extends Component {
 
                                 <ul>
                                     <li key={nomination.hasura_id}>
-                                        <li key={nomination.manifesto}>Election Manifesto: {nomination.manifesto}</li>
+                                        <li key={nomination.manifesto}>Election Manifesto: {nomination.manifesto}</li>  
+                                        <li key={this.state.nominee_names}>Name: {this.state.nominee_names}</li>                                   
                                     </li>
                                 </ul>
                                 
@@ -97,7 +109,27 @@ class ShowElection extends Component {
                             </li>
 
                         );
-                    })}
+                    })} */}
+
+                        {this.state.nominations.map( (nomination) => {
+                            return (
+
+
+                                <li key={nomination.hasura_id}>
+
+                                    <ul>
+                                        <li key={nomination.hasura_id}>
+                                            <li key={nomination.manifesto}>Election Manifesto: {nomination.manifesto}</li>
+                                            <li key={this.state.nominee_names}>Name: {this.state.nominee_names}</li>
+                                        </li>
+                                    </ul>
+
+                                    <br />
+                                    <br />
+                                </li>
+
+                            );
+                        })}
                     </ol>
                 </div>
 
