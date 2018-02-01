@@ -56,11 +56,9 @@ class ShowElection extends Component {
                                 });
                                 const dob = moment(response.data[0].dob, 'YYYY-MM-DD').toDate();
                                  var age = nowDate.diff(dob, 'years');
-                                 console.log(age);
-                                // this.setState({
-                                //     nominee_ages: this.state.nominee_ages.concat(age)
-                                // });
-                                //this.setState({ nominee_names: response.data[0].name});
+                                this.setState({
+                                    nominee_genders: this.state.nominee_genders.concat(age)
+                                });
 
                             })
                             .catch(error => {
@@ -122,6 +120,7 @@ class ShowElection extends Component {
                                             <li key={nomination.manifesto}>Election Manifesto: {nomination.manifesto}</li>
                                             <li key={this.state.nominee_names[index]}>Name: {this.state.nominee_names[index]}</li>
                                             <li key={this.state.nominee_genders[index]}>Gender: {this.state.nominee_genders[index]}</li>
+                                            <li key={this.state.nominee_ages[index]}>Age: {this.state.nominee_ages[index]} years</li>
                                         </li>
                                     </ul>
 
