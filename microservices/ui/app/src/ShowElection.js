@@ -89,25 +89,6 @@ class ShowElection extends Component {
                 <div>
                     
                     <ol>
-                  {/*  {this.state.nominations.map(function (nomination) {
-                        return (
-                            
-                            
-                            <li key={nomination.hasura_id}>
-
-                                <ul>
-                                    <li key={nomination.hasura_id}>
-                                        <li key={nomination.manifesto}>Election Manifesto: {nomination.manifesto}</li>  
-                                        <li key={this.state.nominee_names}>Name: {this.state.nominee_names}</li>                                   
-                                    </li>
-                                </ul>
-                                
-                                <br />
-                                <br />
-                            </li>
-
-                        );
-                    })} */}
 
                         {this.state.nominations.map( (nomination, index) => {
                             return (
@@ -117,10 +98,13 @@ class ShowElection extends Component {
 
                                     <ul>
                                         <li key={nomination.hasura_id}>
-                                            <li key={nomination.manifesto}>Election Manifesto: {nomination.manifesto}</li>
+                                            
                                             <li key={this.state.nominee_names[index]}>Name: {this.state.nominee_names[index]}</li>
                                             <li key={this.state.nominee_genders[index]}>Gender: {this.state.nominee_genders[index]}</li>
                                             <li key={this.state.nominee_ages[index]}>Age: {this.state.nominee_ages[index]}</li>
+                                            {nomination.individual ? <li key={nomination.individual}>Party: Independent Candidate</li> : <li key={nomination.party}>Party: {nomination.party}</li> }
+                                            {!(nomination.individual) && <li key={nomination.party_ticket_id}>Party Ticket ID: {nomination.party_ticket_id}</li> }
+                                            <li key={nomination.manifesto}>Election Manifesto: {nomination.manifesto}</li>
                                         </li>
                                     </ul>
 
@@ -137,4 +121,5 @@ class ShowElection extends Component {
         );
     }
 }
+//TODO: Ask Sai to change Individual to Independent
 export default ShowElection;
