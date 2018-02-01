@@ -51,9 +51,9 @@ class ShowElection extends Component {
                                 this.setState({
                                     nominee_names: this.state.nominee_names.concat(response.data[0].name)
                                 });
-                                // this.setState({
-                                //     nominee_genders: this.state.nominee_genders.concat(response.data[0].gender)
-                                // });
+                                this.setState({
+                                    nominee_genders: this.state.nominee_genders.concat(response.data[0].gender)
+                                });
                                 // var age = nowDate.diff(response.data[0].dob, 'years');
                                 // console.log(age);
                                 // this.setState({
@@ -110,7 +110,7 @@ class ShowElection extends Component {
                         );
                     })} */}
 
-                        {this.state.nominations.map( (nomination) => {
+                        {this.state.nominations.map( (nomination, index) => {
                             return (
 
 
@@ -119,8 +119,8 @@ class ShowElection extends Component {
                                     <ul>
                                         <li key={nomination.hasura_id}>
                                             <li key={nomination.manifesto}>Election Manifesto: {nomination.manifesto}</li>
-                                            <li key={this.state.nominee_names[0]}>Name: {this.state.nominee_names[0]}</li>
-                                            <li key={this.state.nominee_names[1]}>Name: {this.state.nominee_names[1]}</li>
+                                            <li key={this.state.nominee_names[index]}>Name: {this.state.nominee_names[index]}</li>
+                                            <li key={this.state.nominee_genders[index]}>Gender: {this.state.nominee_genders[index]}</li>
                                         </li>
                                     </ul>
 
