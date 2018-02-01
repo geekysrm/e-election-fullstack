@@ -17,7 +17,7 @@ class ShowElection extends Component {
         this.state = {
             electionDetails:[],         //Store details of the particular election shown in the page
             nominations: [],
-            nominee_names: [],
+            nominee_names: '',
             nominee_ages:[],
             nominee_genders:[]
         };
@@ -46,7 +46,7 @@ class ShowElection extends Component {
                         })
                             .then(response => {
                                 
-                                const nowDate = moment();
+                                // const nowDate = moment();
                                 console.log(response.data[0].name);
                                 console.log(response.data[0].gender);
                                 // this.setState({
@@ -60,7 +60,7 @@ class ShowElection extends Component {
                                 // this.setState({
                                 //     nominee_ages: this.state.nominee_ages.concat(age)
                                 // });
-
+                                this.setState({ nominee_names: response.data[0].name});
 
                             })
                             .catch(error => {
@@ -99,7 +99,8 @@ class ShowElection extends Component {
 
                                 <ul>
                                     <li key={nomination.hasura_id}>
-                                        <li key={nomination.manifesto}>Election Manifesto: {nomination.manifesto}</li>                                        <li key={nomination.manifesto}>Election Manifesto: {nomination.manifesto}</li>
+                                        <li key={nomination.manifesto}>Election Manifesto: {nomination.manifesto}</li>  
+                                        <li key={this.state.nominee_names}>Name: {this.state.nominee_names}</li>                                   
                                     </li>
                                 </ul>
                                 
