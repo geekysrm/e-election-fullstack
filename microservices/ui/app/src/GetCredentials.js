@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete, DatePicker, Alert } from 'antd';
+import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Divider, Checkbox, Button, AutoComplete, DatePicker, Alert } from 'antd';
 import moment from 'moment';
 import axios from 'axios';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
@@ -434,7 +434,11 @@ class CredentialsForm extends React.Component {
         return (
             <div>
                 {(this.state.flag === 1) && (<div>
-                    <Form onSubmit={this.handleSubmit} style={{ marginLeft: "-200px" }}>
+                  <h1>Register To Get Credentials</h1>
+                  <Divider />
+                    <Form onSubmit={this.handleSubmit} style={{ marginLeft: "-200px" ,
+                          marginRight:"100px" ,
+                          marginTop:"20px"}}>
                         <FormItem
                             {...formItemLayout}
                             label={(
