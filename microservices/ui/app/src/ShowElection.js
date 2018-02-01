@@ -68,7 +68,7 @@ class ShowElection extends Component {
                             });
                     })
           
-                    console.log(this.state.nominee_names);
+                 
                
 
 
