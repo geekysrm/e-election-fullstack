@@ -92,3 +92,5 @@ const styles = {
 }
 
 export default Welcome;
+
+//Ask Sai to add shadow effect on heading E-Election 

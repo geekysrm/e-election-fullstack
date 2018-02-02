@@ -29,21 +29,28 @@ class AuthForm extends React.Component {
         //this.showProgressIndicator(true)
         console.log(values.userName);
         console.log(values.password);
-        authenticateUser(values.userName, values.password, true).then(authResponse => {
-          //this.showProgressIndicator(false)
-          console.log(authResponse);
-          if (authResponse.auth_token) {
-            saveOffline(authResponse.auth_token)
-            //this.showAlert("SignUp Successful! \n Your auth credentials are: " + JSON.stringify(authResponse, null, 2));
-            //this.showAlert("SignUp Successful! \n Please login.");
-            alert("SignUp Successful!");       //TO DO: convert to modal
-            window.location.assign("/auth-login");
+        console.log(values.cpassword);
+       if(values.password === values.cpassword)
+       {
+         authenticateUser(values.userName, values.password, true).then(authResponse => {
+           //this.showProgressIndicator(false)
+           console.log(authResponse);
+           if (authResponse.auth_token) {
+             saveOffline(authResponse.auth_token)
+             //this.showAlert("SignUp Successful! \n Your auth credentials are: " + JSON.stringify(authResponse, null, 2));
+             //this.showAlert("SignUp Successful! \n Please login.");
+             alert("SignUp Successful!");       //TO DO: convert to modal
+             window.location.assign("/auth-login");
 
-          } else {
-            //this.showAlert(JSON.stringify(authResponse));
-            alert(JSON.stringify(authResponse));
-          }
-        });
+           } else {
+             //this.showAlert(JSON.stringify(authResponse));
+             alert(JSON.stringify(authResponse));
+           }
+         });
+       }
+       else {
+         alert('Please enter same password in both fields!');
+       }
 
       }
     });
@@ -93,6 +100,18 @@ class AuthForm extends React.Component {
               onChange={this.handleuesrNameChange}
               />
             )}
+          </FormItem>
+          <FormItem>
+            {getFieldDecorator('cpassword', {
+              rules: [{ required: true, message: 'Please confirm your Password!' }],
+            })(
+              <Input prefix={<Icon type="lock"
+                style={{ color: 'rgba(0,0,0,.25)' }} />}
+                type="password"
+                placeholder="Confirm Password"
+                onChange={this.handleuesrNameChange}
+              />
+              )}
           </FormItem>
           <FormItem>
             <Button type="primary" htmlType="submit" className="login-form-button" >
