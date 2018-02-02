@@ -13,7 +13,7 @@ class Welcome extends Component
         <div style={styles.body}>
           <div>
             <h1 style={styles.text}>
-            Tired of standing in voting Queues
+            Tired of standing in voting queues?
             <br />
             Use our E-Election app
             <br />
@@ -30,7 +30,7 @@ class Welcome extends Component
           </div>
         </div>
         <br />
-        <h1 style={styles.text1}>&quot;Have a Vision? Make the Right Decision! VOTE &quot;</h1>
+        <h1 style={styles.text1}>&quot;Have a Vision? Make the Right Decision! VOTE! &quot;</h1>
         <br /><br /><br />
         <footer style={{background:'#222222' , position:'absolute' , marginBottom:'0' , width:'100%'}}>
           <h1 style={styles.text2}>E-Election App</h1>
