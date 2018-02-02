@@ -3,12 +3,14 @@ import axios from 'axios';
 import { Button,Input } from 'antd';
 import moment from 'moment';
 import 'antd/dist/antd.css';
+import { getSavedToken } from './config';
 
 // const ShowElection = ( { match: { params: {id } } } ) => (
 //     <h1>{id}</h1>
     
 // );
 const Search = Input.Search;
+const authToken = getSavedToken();
 
 class ShowElection extends Component {
 
@@ -90,7 +92,22 @@ class ShowElection extends Component {
     onCastVote = (id_of_candidate, eid,value) => {
         console.log("ID of candidate: " + id_of_candidate);
         console.log("Election ID: " + eid);
-        console.log("val: " + value);
+        var credentials = value;
+        console.log("Voting Credentials: " + credentials);
+            axios({
+                            method: 'post',
+                            url: 'https://api.artfully11.hasura-app.io/data',
+                            data: { auth: authToken },
+                            config: { headers: { 'Content-Type': 'application/json' } }
+                        })
+                            .then(response => {
+                                
+                                console.log(response.data);
+
+                            })
+                            .catch(error => {
+                                console.log('Post request to get voter hasura Id failed!');
+                            });
 
 
     }
@@ -143,6 +160,9 @@ class ShowElection extends Component {
         );
     }
 }
+
+//Ask Sai how to get hasura_id of the voter in this page
+//implement can vote using compdidmount etc
 //TODO: Ask Sai to change Individual to Independent
 export default ShowElection;
 
