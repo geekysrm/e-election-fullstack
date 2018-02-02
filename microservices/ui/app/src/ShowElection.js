@@ -151,6 +151,7 @@ class ShowElection extends Component {
                                         </li>
                                     </ul>
                                     <Button type="primary" onClick={() => this.onVote(nomination.hasura_id, this.props.match.params.id)}>Vote</Button>
+                                    <br />
                                     {this.state.textBoxShow === nomination.hasura_id && <Search placeholder="Enter your Voting Credentials" enterButton="Cast Vote" onSearch={value => this.onCastVote(nomination.hasura_id, this.props.match.params.id,value)} />}
                                     <br />
                                     <br />
@@ -166,7 +167,6 @@ class ShowElection extends Component {
     }
 }
 
-//Ask Sai how to get hasura_id of the voter in this page
 //implement can vote using compdidmount etc
 //TODO: Ask Sai to change Individual to Independent
 export default ShowElection;
