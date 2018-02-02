@@ -77,8 +77,8 @@ class ShowElection extends Component {
             config: { headers: { 'Content-Type': 'application/json' } }
         })
             .then(response => {
-                console.log(response.data);
-            
+                console.log(response.data[0].state);
+                this.setState({ electionState: response.data[0].state });
 
 
             })
