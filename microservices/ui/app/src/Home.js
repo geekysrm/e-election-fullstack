@@ -66,7 +66,7 @@ class Home extends Component {
                   <ul style={{listStyle:'none'}}>
                     <li style={{lineHeight:'30px'}}><a href="/get-credentials">Get Credentials</a></li>
                     <li style={{lineHeight:'30px'}}><button style={styles.btn} onClick={this.onLogout}>Logout</button></li>
-                    <li style={{lineHeight:'30px'}}><a href="#">About</a></li>
+                    <li style={{ lineHeight: '30px' }}><a href="#" onClick={this.onLogout}>Logout</a></li>
                     <li style={{lineHeight:'30px'}}><a href="#">About</a></li>
                   </ul>
                 </nav>
