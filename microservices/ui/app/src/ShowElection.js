@@ -211,7 +211,7 @@ class ShowElection extends Component {
                         else if(response.data === 1)
                         {
                             alert('Successfully voted!');
-                            this.setState({ disableCastVoteButton: true });
+                            this.setState({disableCastVoteButton: true });
 
 
                         }
@@ -269,8 +269,7 @@ class ShowElection extends Component {
                                     <Button type="primary" onClick={() => this.onVote(nomination.hasura_id, this.props.match.params.id)}>Vote</Button>
                                     <br />
                                     <br />
-                                    
-                                    {this.state.textBoxShow === nomination.hasura_id && <Search placeholder="Enter your Voting Credentials" enterButton={<Button type="primary" disabled={this.state.disableCastVoteButton}>Cast Vote</Button>} onSearch={value => this.onCastVote(nomination.hasura_id, this.props.match.params.id, value)} />}
+                                    {this.state.textBoxShow === nomination.hasura_id && <Search placeholder="Enter your Voting Credentials"  enterButton="Cast Vote" onSearch={value => this.onCastVote(nomination.hasura_id, this.props.match.params.id, value)} />}
                                     <br />
                                     <br />
                                 </li>
@@ -285,7 +284,7 @@ class ShowElection extends Component {
     }
 }
 
-//implement can vote using compdidmount etc
+//implement this after clicking cast vote btn once: disabled={this.state.disableCastVoteButton}
 //TODO: Ask Sai to change Individual to Independent
 export default ShowElection;
 

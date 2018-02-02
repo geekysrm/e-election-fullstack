@@ -74,7 +74,7 @@ class Home extends Component {
 
               <div style={styles.content}>
               <div>
-              <h1>All Elections</h1>
+              <h1>Current Elections</h1>
                       {this.state.elections.map(function (election) {
                           return (
                             <div style={{ background: '#ECECEC', padding: '30px' , width: 560 , marginLeft: 20 }}>
@@ -124,7 +124,7 @@ const styles={
     background:'none',
     border:'none',
     padding:'0!important',
-
+    outline:'none',
     /*optional*/
     color:'#069',
     cursor:'pointer'
