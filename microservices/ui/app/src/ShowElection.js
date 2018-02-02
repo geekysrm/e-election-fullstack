@@ -18,7 +18,7 @@ class ShowElection extends Component {
         super(props);
 
         this.state = {
-            electionDetails: {},         //Store details of the particular election shown in the page
+            electionState: '',         //Store details of the particular election shown in the page
             nominations: [],
             nominee_names: [],
             nominee_ages: [],
@@ -141,8 +141,8 @@ class ShowElection extends Component {
                 for (var i = 0; i < response.data.length; i++) {
                     if (this.props.match.params.id === response.data[i].election_id) {
                         console.log(response.data[i].election_id);
-                        this.setState({ electionDetails: response.data[i] });
-                        console.log(this.state.electionDetails);
+                        this.setState({ electionState: response.data[i].state });
+                        console.log(this.state.electionState);
                     }
                 }
 
