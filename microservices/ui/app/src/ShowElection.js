@@ -148,11 +148,11 @@ class ShowElection extends Component {
     }
 
     onVote = (id_of_candidate, eid) => {
-        this.setState({ textBoxShow: id_of_candidate });
-        if(!(this.state.electionState === this.state.voter_state))
-        {
-            alert('Sorry, you cannot vote as you do not belong to this state!');
-        }
+       // this.setState({ textBoxShow: id_of_candidate });
+        // if(!(this.state.electionState === this.state.voter_state))
+        // {
+        //     alert('Sorry, you cannot vote as you do not belong to this state!');
+        // }
         
         axios({
             method: 'post',
@@ -166,7 +166,7 @@ class ShowElection extends Component {
                 else if (this.state.electionState === this.state.voter_state && response.data === 0)
                     alert('You have already voted for this post!');
                 else if (this.state.electionState!== this.state.voter_state)
-                    alert('You cannot vote for this post as you do not belong to this state.');
+                    alert('You cannot vote for this post as you do not belong to this state!');
 
             })
             .catch(error => {
