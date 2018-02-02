@@ -57,7 +57,7 @@ class ShowElection extends Component {
                         this.setState({ voter_state: response.data[0].state });
                         this.setState({ voter_credentials: response.data[0].credentials });
                         console.log(response.data[0].state);
-                        console.log(response.data[0].crednetials);
+                        console.log(response.data[0].credentials);
                         
 
                     })
@@ -70,27 +70,7 @@ class ShowElection extends Component {
                 console.log('Post request to get voter hasura Id failed!');
             });
 
-        axios({
-            method: 'post',
-            url: 'https://api.artfully11.hasura-app.io/get-elections',
-            config: { headers: { 'Content-Type': 'application/json' } }
-        })
-            .then(response => {
-                for(var i=0;i<response.data.length;i++)
-                {
-                    if (this.props.match.params.id === response.data[i].election_id)
-                    {
-                        console.log(response.data[i].election_id);
-                        this.setState({ electionDetails: response.data[i]});
-                        console.log(this.state.electionDetails);
-                    }
-                }
-
-
-            })
-            .catch(error => {
-                console.log('Post request failed!');
-            });
+        
 
 
     }
@@ -152,6 +132,25 @@ class ShowElection extends Component {
 
     onVote = (id_of_candidate, eid) => {
         this.setState({ textBoxShow: id_of_candidate });
+        axios({
+            method: 'post',
+            url: 'https://api.artfully11.hasura-app.io/get-elections',
+            config: { headers: { 'Content-Type': 'application/json' } }
+        })
+            .then(response => {
+                for (var i = 0; i < response.data.length; i++) {
+                    if (this.props.match.params.id === response.data[i].election_id) {
+                        console.log(response.data[i].election_id);
+                        this.setState({ electionDetails: response.data[i] });
+                        console.log(this.state.electionDetails);
+                    }
+                }
+
+
+            })
+            .catch(error => {
+                console.log('Post request failed!');
+            });
 
 
     }
