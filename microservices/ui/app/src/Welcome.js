@@ -20,7 +20,7 @@ class Welcome extends Component
             <Button type="primary" href="/auth-login" size="large" style={{width:'200px'}}>LOGIN TO VOTE</Button>
             </h1>
           </div>
-          <div style={{width:"30%" , border:'3px solid'}}>
+          <div style={{width:"35%" , border:'3px solid'}}>
           <Carousel autoplay>
            <div><img style={styles.image} src="http://www.livemint.com/rf/Image-621x414/LiveMint/WebArchive/BP/Photos/2015-11-07/Processed/Mint/Web/biharpolls1-kMIG--621x414@LiveMint.jpg"/></div>
            <div><img style={styles.image} src="http://s3.india.com/wp-content/uploads/2014/05/voters.jpg"/></div>
@@ -74,7 +74,8 @@ const styles = {
     backgroundSize: 'cover'
   },
   image:{
-    height:'300px'
+    height:'300px',
+    width:'100%'
   },
   text1:{
     color:'white',
