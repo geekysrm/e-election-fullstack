@@ -107,7 +107,7 @@ class ShowElection extends Component {
     onVote = (id_of_candidate, eid) => {
         // console.log("ID of candidate: " + id_of_candidate);
         // console.log("Election ID: " + eid);
-        console.log(this.state(voter_hasura_id))
+        console.log(this.state.voter_hasura_id)
         this.setState({ textBoxShow: id_of_candidate });
     
 
