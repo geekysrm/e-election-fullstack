@@ -106,7 +106,6 @@ class Home extends Component {
                                 </Card>
                                 <br />
                                 <br />
-                                
                               </div>
                             );
                         })}
