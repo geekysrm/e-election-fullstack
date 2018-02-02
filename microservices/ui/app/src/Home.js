@@ -4,15 +4,6 @@ import axios from 'axios';
 import { getSavedToken, deleteToken } from './config';
 import 'antd/dist/antd.css';
 import './Home.css';
-
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
-import IconButton from 'material-ui/IconButton';
-import MenuIcon from 'material-ui-icons/Menu';
-
 const authToken = getSavedToken();
 class Home extends Component {
 
@@ -66,21 +57,7 @@ class Home extends Component {
     render() {
         return (
             <div className="App">
-                <div style={{ width: '100%' }}>
-                  <AppBar position="static" color="default" >
-                    <Toolbar>
-                      <IconButton style={{
-                        marginLeft: -12,
-                        marginRight: 20
-                      }} color="inherit" aria-label="Menu">
-                        <MenuIcon />
-                      </IconButton>
-                      <Typography type="title" color="inherit" className={{flex:'1'}}>
-                        Welcome to E-Election
-                      </Typography>
-                    </Toolbar>
-                  </AppBar>
-                </div>
+                <h1>Welcome to E Election</h1>
                 <div>
                     <Button type="primary" href="/get-credentials">Get Credentials</Button>
                     <Button type="primary" onClick={this.onLogout}>Logout</Button>
