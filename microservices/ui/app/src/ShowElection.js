@@ -105,12 +105,14 @@ class ShowElection extends Component {
                                 
                                 id_of_voter = response.data.hasura_id;
                                 console.log(id_of_voter);
+                                console.log("ID of candidate: " + id_of_candidate);
+                                console.log("Election ID: " + eid);
 
                             })
                             .catch(error => {
                                 console.log('Post request to get voter hasura Id failed!');
                             });
-        console.log(id_of_voter);
+       
 
 
     }
