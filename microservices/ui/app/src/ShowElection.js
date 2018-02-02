@@ -157,7 +157,7 @@ class ShowElection extends Component {
         axios({
             method: 'post',
             url: 'https://api.artfully11.hasura-app.io/can-vote',
-            data: { id: voter_hasura_id, eid: this.props.match.params.id  },
+            data: { id: this.state.voter_hasura_id, eid: this.props.match.params.id  },
             config: { headers: { 'Content-Type': 'application/json' } }
         })
             .then(response => {
