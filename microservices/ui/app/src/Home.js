@@ -16,7 +16,7 @@ class Home extends Component {
 
     }
 
-    componentDidMount()
+    componentWillMount()
     {
         axios({
             method: 'post',

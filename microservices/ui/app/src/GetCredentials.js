@@ -267,7 +267,7 @@ class CredentialsForm extends React.Component {
             });
     }
 
-    componentDidMount()
+    componentWillMount()
     {
         window.addEventListener('load', this.handleOnLoad);
     }
