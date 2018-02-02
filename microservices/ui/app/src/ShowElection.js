@@ -26,7 +26,8 @@ class ShowElection extends Component {
             textBoxShow: -1,
             voter_hasura_id: -1,
             voter_state: '',
-            voter_credentials: ''
+            voter_credentials: '',
+            voter_can_vote: 0
         };
 
 
@@ -85,6 +86,8 @@ class ShowElection extends Component {
             .catch(error => {
                 console.log('Post request failed!');
             });
+
+        
 
 
     }
@@ -146,10 +149,34 @@ class ShowElection extends Component {
 
     onVote = (id_of_candidate, eid) => {
         this.setState({ textBoxShow: id_of_candidate });
+        if(!(this.state.electionState === this.state.voter_state))
+        {
+            alert('Sorry, you cannot vote as you do not belong to this state!');
+        }
         
+        axios({
+            method: 'post',
+            url: 'https://api.artfully11.hasura-app.io/can-vote',
+            data: { id: voter_hasura_id, eid: this.props.match.params.id  },
+            config: { headers: { 'Content-Type': 'application/json' } }
+        })
+            .then(response => {
+                if (response.data === 1 && this.state.electionState === this.state.voter_state)
+                    this.setState({ textBoxShow: id_of_candidate });
+                else if (this.state.electionState === this.state.voter_state && response.data === 0)
+                    alert('You have already voted for this post!');
+                else if (this.state.electionState!== this.state.voter_state)
+                    alert('You cannot vote for this post as you do not belong to this state.');
+
+            })
+            .catch(error => {
+                console.log('Post request failed!');
+            });
 
 
     }
+
+
     onCastVote = (id_of_candidate, eid, value) => {
 
         var credentials = value;
