@@ -26,7 +26,8 @@ class ShowElection extends Component {
             textBoxShow: -1,
             voter_hasura_id: -1,
             voter_state: '',
-            voter_credentials: ''
+            voter_credentials: '',
+            voter_can_vote: 0
         };
 
 
@@ -68,6 +69,22 @@ class ShowElection extends Component {
             })
             .catch(error => {
                 console.log('Post request to get voter hasura Id failed!');
+            });
+
+        axios({
+            method: 'post',
+            url: 'https://api.artfully11.hasura-app.io/get-election-data',
+            data: { eid: this.props.match.params.id },
+            config: { headers: { 'Content-Type': 'application/json' } }
+        })
+            .then(response => {
+                console.log(response.data[0].state);
+                this.setState({ electionState: response.data[0].state });
+
+
+            })
+            .catch(error => {
+                console.log('Post request failed!');
             });
 
         
@@ -131,23 +148,25 @@ class ShowElection extends Component {
     }
 
     onVote = (id_of_candidate, eid) => {
-        this.setState({ textBoxShow: id_of_candidate });
+       // this.setState({ textBoxShow: id_of_candidate });
+        // if(!(this.state.electionState === this.state.voter_state))
+        // {
+        //     alert('Sorry, you cannot vote as you do not belong to this state!');
+        // }
+        
         axios({
             method: 'post',
-            url: 'https://api.artfully11.hasura-app.io/get-elections',
+            url: 'https://api.artfully11.hasura-app.io/can-vote',
+            data: { id: this.state.voter_hasura_id, eid: this.props.match.params.id  },
             config: { headers: { 'Content-Type': 'application/json' } }
         })
             .then(response => {
-                console.log(response.data);
-                console.log(this.props.match.params.id);
-                for (var i = 0; i < response.data.length; i++) {
-                    if (this.props.match.params.id === response.data[i].election_id) {
-                        console.log(response.data[i].election_id);
-                        this.setState({ electionState: response.data[i].state });
-                        console.log(this.state.electionState);
-                    }
-                }
-
+                if (response.data === 1 && this.state.electionState === this.state.voter_state)
+                    this.setState({ textBoxShow: id_of_candidate });
+                else if (this.state.electionState === this.state.voter_state && response.data === 0)
+                    alert('You have already voted for this post!');
+                else if (this.state.electionState!== this.state.voter_state)
+                    alert('You cannot vote for this post as you do not belong to this state!');
 
             })
             .catch(error => {
@@ -156,6 +175,8 @@ class ShowElection extends Component {
 
 
     }
+
+
     onCastVote = (id_of_candidate, eid, value) => {
 
         var credentials = value;
