@@ -118,7 +118,8 @@ const styles={
     float:'left',
   	marginLeft: '35%',
   	width:'60%'
-  }
+  },
+  
 }
 
 export default Home;
