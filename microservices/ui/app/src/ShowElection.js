@@ -90,12 +90,10 @@ class ShowElection extends Component {
 
     }
     onCastVote = (id_of_candidate, eid,value) => {
-        console.log("ID of candidate: " + id_of_candidate);
-        console.log("Election ID: " + eid);
+        
         var credentials = value;
         var id_of_voter = -1;
-        console.log("Voting Credentials: " + credentials);
-            axios({
+              axios({
                             method: 'post',
                             url: 'https://api.artfully11.hasura-app.io/data',
                             data: { auth: authToken },
@@ -107,6 +105,24 @@ class ShowElection extends Component {
                                 console.log(id_of_voter);
                                 console.log("ID of candidate: " + id_of_candidate);
                                 console.log("Election ID: " + eid);
+                                console.log("Voting Creds: " + credentials);
+
+                                axios({
+                                    method: 'post',
+                                    url: 'https://api.artfully11.hasura-app.io/vote',
+                                    data: { id_of_candidate: id_of_candidate, id_of_voter: id_of_voter, eid:eid, credentials: credentials  },
+                                    config: { headers: { 'Content-Type': 'application/json' } }
+                                })
+                                    .then(response => {
+                                        console.log(response.data);
+
+
+                                    })
+                                    .catch(error => {
+                                        alert('Sorry, you cannot vote right now!');
+                                        console.log('Post request to vote failed!');
+                                    });
+
 
                             })
                             .catch(error => {
@@ -151,6 +167,7 @@ class ShowElection extends Component {
                                         </li>
                                     </ul>
                                     <Button type="primary" onClick={() => this.onVote(nomination.hasura_id, this.props.match.params.id)}>Vote</Button>
+                                    <br />
                                     <br />
                                     {this.state.textBoxShow === nomination.hasura_id && <Search placeholder="Enter your Voting Credentials" enterButton="Cast Vote" onSearch={value => this.onCastVote(nomination.hasura_id, this.props.match.params.id,value)} />}
                                     <br />
