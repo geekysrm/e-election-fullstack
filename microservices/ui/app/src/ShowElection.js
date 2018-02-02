@@ -27,7 +27,8 @@ class ShowElection extends Component {
             voter_hasura_id: -1,
             voter_state: '',
             voter_credentials: '',
-            voter_can_vote: 0
+            voter_can_vote: 0,
+            disableCastVoteButton: false
         };
 
 
@@ -203,6 +204,17 @@ class ShowElection extends Component {
                 })
                     .then(response => {
                         console.log(response.data);
+                        if(response.data === 0)
+                        {
+                            alert('Please enter correct credentials!');
+                        }
+                        else if(response.data === 1)
+                        {
+                            alert('Successfully voted!');
+                            this.setState({ disableCastVoteButton: true });
+
+
+                        }
 
 
                     })
@@ -257,7 +269,7 @@ class ShowElection extends Component {
                                     <Button type="primary" onClick={() => this.onVote(nomination.hasura_id, this.props.match.params.id)}>Vote</Button>
                                     <br />
                                     <br />
-                                    {this.state.textBoxShow === nomination.hasura_id && <Search placeholder="Enter your Voting Credentials" enterButton="Cast Vote" onSearch={value => this.onCastVote(nomination.hasura_id, this.props.match.params.id, value)} />}
+                                    {this.state.textBoxShow === nomination.hasura_id && <Search placeholder="Enter your Voting Credentials" disabled={this.state.disableCastVoteButton} enterButton="Cast Vote" onSearch={value => this.onCastVote(nomination.hasura_id, this.props.match.params.id, value)} />}
                                     <br />
                                     <br />
                                 </li>
