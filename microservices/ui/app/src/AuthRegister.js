@@ -60,7 +60,7 @@ class AuthForm extends React.Component {
     const { getFieldDecorator } = this.props.form;
 
     const styleObj = {
-      height: '250px',
+      height: '275px',
       width: '500px',
       margin: '20px',
       textAlign: 'center',
