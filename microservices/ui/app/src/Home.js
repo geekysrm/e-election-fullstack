@@ -50,7 +50,7 @@ class Home extends Component {
             window.location.assign('/');
         }
         else {
-            alert('Please login at /auth first');
+            alert('Please login at /auth-login first');
         }
 
     }
@@ -65,7 +65,6 @@ class Home extends Component {
                 <nav style={{display:'block'}}>
                   <ul style={{listStyle:'none'}}>
                     <li style={{lineHeight:'30px'}}><a href="/get-credentials">Get Credentials</a></li>
-                    <li style={{lineHeight:'30px'}}><button style={styles.btn} onClick={this.onLogout}>Logout</button></li>
                     <li style={{ lineHeight: '30px' }}><a href="#" onClick={this.onLogout}>Logout</a></li>
                     <li style={{lineHeight:'30px'}}><a href="#">About</a></li>
                   </ul>
@@ -119,14 +118,6 @@ const styles={
     float:'left',
   	marginLeft: '35%',
   	width:'60%'
-  },
-  btn:{
-    background:'none',
-    border:'none',
-    padding:'0!important',
-    outline:'none',
-      color:'#1890ff',
-    cursor:'pointer'
   }
 }
 

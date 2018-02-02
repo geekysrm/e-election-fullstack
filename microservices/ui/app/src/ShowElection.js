@@ -5,10 +5,6 @@ import moment from 'moment';
 import 'antd/dist/antd.css';
 import { getSavedToken } from './config';
 
-// const ShowElection = ( { match: { params: {id } } } ) => (
-//     <h1>{id}</h1>
-
-// );
 const Search = Input.Search;
 const authToken = getSavedToken();
 
@@ -18,7 +14,7 @@ class ShowElection extends Component {
         super(props);
 
         this.state = {
-            electionState: '',         //Store details of the particular election shown in the page
+            electionState: '',         //Store details of the particular election state in the page
             nominations: [],
             nominee_names: [],
             nominee_ages: [],
@@ -28,16 +24,13 @@ class ShowElection extends Component {
             voter_state: '',
             voter_credentials: '',
             voter_can_vote: 0,
-            disableCastVoteButton: false
+            disableCastVoteButton: false        //disable the Cast Vote btn after clicking it once (not implemented)
         };
 
 
 
     }
 
-
-    //this.setState({ voter_state: response.data.state });
-    //this.setState({ voter_credentials: response.data.credentials });
     componentWillMount() {
         axios({
             method: 'post',
@@ -177,6 +170,11 @@ class ShowElection extends Component {
 
     }
 
+    onNominate = () => {
+            window.location.assign('https://www.goole.com');
+
+
+    }
 
     onCastVote = (id_of_candidate, eid, value) => {
 
@@ -236,10 +234,6 @@ class ShowElection extends Component {
 
 
     render() {
-        // let textBox = null;
-        // if (this.state.textBoxShow[1] === 'true' && this.state.textBoxShow[1] )
-        //      textBox = <Search placeholder="Enter your Voting Credentials" enterButton="Cast Vote" onSearch={value => console.log(value)} />;
-
         return (
             <div>
                 <h1>Election with Id: {this.props.match.params.id}</h1>
@@ -287,5 +281,3 @@ class ShowElection extends Component {
 //implement this after clicking cast vote btn once: disabled={this.state.disableCastVoteButton}
 //TODO: Ask Sai to change Individual to Independent
 export default ShowElection;
-
-//{value => console.log(value)}
