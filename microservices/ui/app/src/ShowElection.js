@@ -142,11 +142,6 @@ class ShowElection extends Component {
     }
 
     onVote = (id_of_candidate, eid) => {
-       // this.setState({ textBoxShow: id_of_candidate });
-        // if(!(this.state.electionState === this.state.voter_state))
-        // {
-        //     alert('Sorry, you cannot vote as you do not belong to this state!');
-        // }
         
         axios({
             method: 'post',
