@@ -125,8 +125,7 @@ const styles={
     border:'none',
     padding:'0!important',
     outline:'none',
-    /*optional*/
-    color:'#069',
+      color:'#1890ff',
     cursor:'pointer'
   }
 }
