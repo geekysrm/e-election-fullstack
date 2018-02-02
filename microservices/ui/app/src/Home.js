@@ -3,7 +3,17 @@ import { Button , Card } from 'antd';
 import axios from 'axios';
 import { getSavedToken, deleteToken } from './config';
 import 'antd/dist/antd.css';
-import './Home.css'
+import './Home.css';
+
+import PropTypes from 'prop-types';
+import { withStyles } from 'material-ui/styles';
+import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
+import Typography from 'material-ui/Typography';
+import Button from 'material-ui/Button';
+import IconButton from 'material-ui/IconButton';
+import MenuIcon from 'material-ui-icons/Menu';
+
 const authToken = getSavedToken();
 class Home extends Component {
 
@@ -12,20 +22,7 @@ class Home extends Component {
 
         this.state = {
             elections: []
-            // selectedTable: '',
-            // selectedColumns: [],
-            // tables: [],
-            // columns: [],
-            // tableData: [],
-            // auth: 'Basic ' + btoa(props.user + ':' + props.pass),
         };
-
-        // this.onTableChange = this.onTableChange.bind(this);
-        // this.onColumnChange = this.onColumnChange.bind(this);
-        // this.renderTableHeaders = this.renderTableHeaders.bind(this);
-        // this.renderTableBody = this.renderTableBody.bind(this);
-        // this.getColumnList = this.getColumnList.bind(this);
-        // this.getData = this.getData.bind(this);
 
     }
 
@@ -65,24 +62,26 @@ class Home extends Component {
         }
 
     }
-/*
-    onClickElection = () => {
-        const authToken = getSavedToken();
-        if (authToken) {
-            deleteToken();
-        }
-        else {
-            alert('Please login at /auth first');
-        }
-
-    }
-*/
 
 //Add Ant.Design components like lists etc. below
     render() {
         return (
             <div className="App">
-                <h1>Welcome to E Election</h1>
+                <div style={{ width: '100%' }}>
+                  <AppBar position="static" color="default" >
+                    <Toolbar>
+                      <IconButton style={{
+                        marginLeft: -12,
+                        marginRight: 20
+                      }} color="inherit" aria-label="Menu">
+                        <MenuIcon />
+                      </IconButton>
+                      <Typography type="title" color="inherit" className={{flex:'1'}}>
+                        Welcome to E-Election
+                      </Typography>
+                    </Toolbar>
+                  </AppBar>
+                </div>
                 <div>
                     <Button type="primary" href="/get-credentials">Get Credentials</Button>
                     <Button type="primary" onClick={this.onLogout}>Logout</Button>
