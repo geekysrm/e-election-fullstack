@@ -34,6 +34,67 @@ class ShowElection extends Component {
     }
 
 
+    //this.setState({ voter_state: response.data.state });
+    //this.setState({ voter_credentials: response.data.credentials });
+    componentWiillMount() {
+        axios({
+            method: 'post',
+            url: 'https://api.artfully11.hasura-app.io/data',
+            data: { auth: authToken },
+            config: { headers: { 'Content-Type': 'application/json' } }
+        })
+            .then(response => {
+                var voter_hasura_id_var = response.data.hasura_id;
+                console.log(voter_hasura_id_var);
+                this.setState({ voter_hasura_id: response.data.hasura_id });
+                axios({
+                    method: 'post',
+                    url: 'https://api.artfully11.hasura-app.io/view-credentials',
+                    data: { serial: voter_hasura_id_var },
+                    config: { headers: { 'Content-Type': 'application/json' } }
+                })
+                    .then(response => {
+                        this.setState({ voter_state: response.data[0].state });
+                        this.setState({ voter_credentials: response.data[0].credentials });
+                        console.log(response.data[0].state);
+                        console.log(response.data[0].crednetials);
+                        
+
+                    })
+                    .catch(error => {
+                        console.log('Post request failed!');
+                    });
+
+            })
+            .catch(error => {
+                console.log('Post request to get voter hasura Id failed!');
+            });
+
+        axios({
+            method: 'post',
+            url: 'https://api.artfully11.hasura-app.io/et-elections',
+            config: { headers: { 'Content-Type': 'application/json' } }
+        })
+            .then(response => {
+                for(var i=0;i<response.data.length;i++)
+                {
+                    if (this.props.match.params.id === response.data[i].election_id)
+                    {
+                        console.log(response.data[i].election_id);
+                        this.setState({ electionDetails: response.data[i]});
+                    }
+                }
+
+
+            })
+            .catch(error => {
+                console.log('Post request failed!');
+            });
+
+
+    }
+
+
     onViewNominations = () => {
 
         axios({
@@ -89,8 +150,6 @@ class ShowElection extends Component {
     }
 
     onVote = (id_of_candidate, eid) => {
-        // console.log("ID of candidate: " + id_of_candidate);
-        // console.log("Election ID: " + eid);
         this.setState({ textBoxShow: id_of_candidate });
 
 
