@@ -138,6 +138,8 @@ class ShowElection extends Component {
             config: { headers: { 'Content-Type': 'application/json' } }
         })
             .then(response => {
+                console.log(response.data);
+                console.log(this.props.match.params.id);
                 for (var i = 0; i < response.data.length; i++) {
                     if (this.props.match.params.id === response.data[i].election_id) {
                         console.log(response.data[i].election_id);
