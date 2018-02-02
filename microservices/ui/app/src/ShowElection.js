@@ -269,7 +269,8 @@ class ShowElection extends Component {
                                     <Button type="primary" onClick={() => this.onVote(nomination.hasura_id, this.props.match.params.id)}>Vote</Button>
                                     <br />
                                     <br />
-                                    {this.state.textBoxShow === nomination.hasura_id && <Search placeholder="Enter your Voting Credentials" disabled={this.state.disableCastVoteButton} enterButton="Cast Vote" onSearch={value => this.onCastVote(nomination.hasura_id, this.props.match.params.id, value)} />}
+                                    
+                                    {this.state.textBoxShow === nomination.hasura_id && <Search placeholder="Enter your Voting Credentials" enterButton={<Button type="primary" disabled={this.state.disableCastVoteButton}>Cast Vote</Button>} onSearch={value => this.onCastVote(nomination.hasura_id, this.props.match.params.id, value)} />}
                                     <br />
                                     <br />
                                 </li>
