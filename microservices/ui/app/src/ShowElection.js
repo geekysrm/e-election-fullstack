@@ -93,6 +93,7 @@ class ShowElection extends Component {
         console.log("ID of candidate: " + id_of_candidate);
         console.log("Election ID: " + eid);
         var credentials = value;
+        var id_of_voter = -1;
         console.log("Voting Credentials: " + credentials);
             axios({
                             method: 'post',
@@ -102,12 +103,14 @@ class ShowElection extends Component {
                         })
                             .then(response => {
                                 
-                                console.log(response.data);
+                                id_of_voter = response.data.hasura_id;
+                                console.log(id_of_voter);
 
                             })
                             .catch(error => {
                                 console.log('Post request to get voter hasura Id failed!');
                             });
+        console.log(id_of_voter);
 
 
     }
