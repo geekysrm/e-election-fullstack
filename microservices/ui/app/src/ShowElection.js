@@ -16,15 +16,37 @@ class ShowElection extends Component {
 
     constructor(props) {
         super(props);
+        var x = -1;
+        axios({
+            method: 'post',
+            url: 'https://api.artfully11.hasura-app.io/data',
+            data: { auth: authToken },
+            config: { headers: { 'Content-Type': 'application/json' } }
+        })
+            .then(response => {
 
+                x = response.data.hasura_id;
+                console.log(x);
+            })
+            .catch(error => {
+                console.log('Post request to get voter hasura Id failed!');
+            });
+
+            console.log(x);
         this.state = {
             electionDetails:[],         //Store details of the particular election shown in the page
             nominations: [],
             nominee_names: [],
             nominee_ages:[],
             nominee_genders:[],
-            textBoxShow: -1
+            textBoxShow: -1,
+            voter_hasura_id: x,
+            voter_state:'',
+            voter_credentials:''
         };
+
+        
+
     }
 
 
@@ -85,6 +107,7 @@ class ShowElection extends Component {
     onVote = (id_of_candidate, eid) => {
         // console.log("ID of candidate: " + id_of_candidate);
         // console.log("Election ID: " + eid);
+        console.log(this.state(voter_hasura_id))
         this.setState({ textBoxShow: id_of_candidate });
     
 
