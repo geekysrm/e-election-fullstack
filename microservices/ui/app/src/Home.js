@@ -47,6 +47,7 @@ class Home extends Component {
         const authToken = getSavedToken();
         if (authToken) {
             deleteToken();
+            window.location.assign('/');
         }
         else {
             alert('Please login at /auth first');
@@ -57,19 +58,21 @@ class Home extends Component {
 //Add Ant.Design components like lists etc. below
     render() {
         return (
-            <div className="App" style={styles.container}>
+            <div className="App">
 
               <div style={styles.side}>
-                <p>hello</p>
+                <h1 style={{color:'white'}}>E-Election</h1>
+                <nav style={{display:'block'}}>
+                  <ul style={{listStyle:'none'}}>
+                    <li style={{lineHeight:'30px'}}><a href="/get-credentials">Get Credentials</a></li>
+                    <li style={{lineHeight:'30px'}}><button style={styles.btn} onClick={this.onLogout}>Logout</button></li>
+                    <li style={{lineHeight:'30px'}}><a href="#">About</a></li>
+                    <li style={{lineHeight:'30px'}}><a href="#">About</a></li>
+                  </ul>
+                </nav>
               </div>
 
-              <div>
-
-              <h1>Welcome to E Election</h1>
-              <div>
-                  <Button type="primary" href="/get-credentials">Get Credentials</Button>
-                  <Button type="primary" onClick={this.onLogout}>Logout</Button>
-              </div>
+              <div style={styles.content}>
               <div>
               <h1>All Elections</h1>
                       {this.state.elections.map(function (election) {
@@ -101,14 +104,30 @@ class Home extends Component {
 }
 
 const styles={
-  container:{
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
   side:{
-    width:'20%',
-    hiegth:'100%'
+    float:'left',
+  	width:'30%',
+  	paddingTop:'30px',
+  	paddingLeft:'25px',
+  	top:0,
+  	bottom:0,
+    position:'fixed',
+  	backgroundColor:'#474958',
+  	zIndex:400
+  },
+  content:{
+    float:'left',
+  	marginLeft: '35%',
+  	width:'60%'
+  },
+  btn:{
+    background:'none',
+    border:'none',
+    padding:'0!important',
+
+    /*optional*/
+    color:'#069',
+    cursor:'pointer'
   }
 }
 
