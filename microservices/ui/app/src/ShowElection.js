@@ -18,7 +18,7 @@ class ShowElection extends Component {
         super(props);
 
         this.state = {
-            electionDetails: [],         //Store details of the particular election shown in the page
+            electionDetails: {},         //Store details of the particular election shown in the page
             nominations: [],
             nominee_names: [],
             nominee_ages: [],
@@ -36,7 +36,7 @@ class ShowElection extends Component {
 
     //this.setState({ voter_state: response.data.state });
     //this.setState({ voter_credentials: response.data.credentials });
-    componentWiillMount() {
+    componentWillMount() {
         axios({
             method: 'post',
             url: 'https://api.artfully11.hasura-app.io/data',
@@ -72,7 +72,7 @@ class ShowElection extends Component {
 
         axios({
             method: 'post',
-            url: 'https://api.artfully11.hasura-app.io/et-elections',
+            url: 'https://api.artfully11.hasura-app.io/get-elections',
             config: { headers: { 'Content-Type': 'application/json' } }
         })
             .then(response => {
@@ -82,6 +82,7 @@ class ShowElection extends Component {
                     {
                         console.log(response.data[i].election_id);
                         this.setState({ electionDetails: response.data[i]});
+                        console.log(this.state.electionDetails);
                     }
                 }
 
