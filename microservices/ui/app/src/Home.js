@@ -13,20 +13,7 @@ class Home extends Component {
 
         this.state = {
             elections: []
-            // selectedTable: '',
-            // selectedColumns: [],
-            // tables: [],
-            // columns: [],
-            // tableData: [],
-            // auth: 'Basic ' + btoa(props.user + ':' + props.pass),
         };
-
-        // this.onTableChange = this.onTableChange.bind(this);
-        // this.onColumnChange = this.onColumnChange.bind(this);
-        // this.renderTableHeaders = this.renderTableHeaders.bind(this);
-        // this.renderTableBody = this.renderTableBody.bind(this);
-        // this.getColumnList = this.getColumnList.bind(this);
-        // this.getData = this.getData.bind(this);
 
     }
 
@@ -66,55 +53,63 @@ class Home extends Component {
         }
 
     }
-/*
-    onClickElection = () => {
-        const authToken = getSavedToken();
-        if (authToken) {
-            deleteToken();
-        }
-        else {
-            alert('Please login at /auth first');
-        }
-
-    }
-*/
 
 //Add Ant.Design components like lists etc. below
     render() {
         return (
-            <div className="App">
-                <h1>Welcome to E Election</h1>
-                <div>
-                    <Button type="primary" href="/get-credentials">Get Credentials</Button>
-                    <Button type="primary" onClick={this.onLogout}>Logout</Button>
-                </div>
-                <div>
-                <h1>All Elections</h1>
-                        {this.state.elections.map(function (election) {
-                            return (
-                              <div style={{ background: '#ECECEC', padding: '30px' , width: 560 , marginLeft: 20 }}>
-                                <Card title={`${election.state} state ${election.post} elections`}
-                                  extra={<a href={`/election/${election.election_id}`}>View Details</a>} style={{ width: 500 }}
-                                >
-                                    <br />
-                                    <p>Election State: {election.state}</p>
-                                    <p>Election Post: {election.post}</p>
-                                    <p>Nomination Start Time: {election.nomination_start_time}</p>
-                                    <p>Nomination End Time: {election.nomination_end_time}</p>
-                                    <p>Election Start Time: {election.election_start_time}</p>
-                                    <p>Election End Time: {election.election_end_time}</p>
+            <div className="App" style={styles.container}>
 
-                                </Card>
-                                <br />
-                                <br />
-                              </div>
-                            );
-                        })}
-                </div>
+              <div style={styles.side}>
+                <p>hello</p>
+              </div>
+
+              <div>
+
+              <h1>Welcome to E Election</h1>
+              <div>
+                  <Button type="primary" href="/get-credentials">Get Credentials</Button>
+                  <Button type="primary" onClick={this.onLogout}>Logout</Button>
+              </div>
+              <div>
+              <h1>All Elections</h1>
+                      {this.state.elections.map(function (election) {
+                          return (
+                            <div style={{ background: '#ECECEC', padding: '30px' , width: 560 , marginLeft: 20 }}>
+                              <Card title={`${election.state} state ${election.post} elections`}
+                                extra={<a href={`/election/${election.election_id}`}>View Details</a>} style={{ width: 500 }}
+                              >
+                                  <br />
+                                  <p>Election State: {election.state}</p>
+                                  <p>Election Post: {election.post}</p>
+                                  <p>Nomination Start Time: {election.nomination_start_time}</p>
+                                  <p>Nomination End Time: {election.nomination_end_time}</p>
+                                  <p>Election Start Time: {election.election_start_time}</p>
+                                  <p>Election End Time: {election.election_end_time}</p>
+
+                              </Card>
+                              <br />
+                              <br />
+                            </div>
+                          );
+                      })}
+              </div>
+              </div>
 
             </div>
         );
     }
+}
+
+const styles={
+  container:{
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  side:{
+    width:'20%',
+    hiegth:'100%'
+  }
 }
 
 export default Home;
