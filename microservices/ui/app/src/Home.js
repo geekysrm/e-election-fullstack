@@ -4,6 +4,7 @@ import axios from 'axios';
 import { getSavedToken, deleteToken } from './config';
 import 'antd/dist/antd.css';
 import './Home.css';
+
 const authToken = getSavedToken();
 class Home extends Component {
 
@@ -12,7 +13,20 @@ class Home extends Component {
 
         this.state = {
             elections: []
+            // selectedTable: '',
+            // selectedColumns: [],
+            // tables: [],
+            // columns: [],
+            // tableData: [],
+            // auth: 'Basic ' + btoa(props.user + ':' + props.pass),
         };
+
+        // this.onTableChange = this.onTableChange.bind(this);
+        // this.onColumnChange = this.onColumnChange.bind(this);
+        // this.renderTableHeaders = this.renderTableHeaders.bind(this);
+        // this.renderTableBody = this.renderTableBody.bind(this);
+        // this.getColumnList = this.getColumnList.bind(this);
+        // this.getData = this.getData.bind(this);
 
     }
 
@@ -52,6 +66,18 @@ class Home extends Component {
         }
 
     }
+/*
+    onClickElection = () => {
+        const authToken = getSavedToken();
+        if (authToken) {
+            deleteToken();
+        }
+        else {
+            alert('Please login at /auth first');
+        }
+
+    }
+*/
 
 //Add Ant.Design components like lists etc. below
     render() {
