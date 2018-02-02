@@ -3,12 +3,14 @@ import axios from 'axios';
 import { Button,Input } from 'antd';
 import moment from 'moment';
 import 'antd/dist/antd.css';
+import { getSavedToken } from './config';
 
 // const ShowElection = ( { match: { params: {id } } } ) => (
 //     <h1>{id}</h1>
     
 // );
 const Search = Input.Search;
+const authToken = getSavedToken();
 
 class ShowElection extends Component {
 
@@ -90,7 +92,27 @@ class ShowElection extends Component {
     onCastVote = (id_of_candidate, eid,value) => {
         console.log("ID of candidate: " + id_of_candidate);
         console.log("Election ID: " + eid);
-        console.log("val: " + value);
+        var credentials = value;
+        var id_of_voter = -1;
+        console.log("Voting Credentials: " + credentials);
+            axios({
+                            method: 'post',
+                            url: 'https://api.artfully11.hasura-app.io/data',
+                            data: { auth: authToken },
+                            config: { headers: { 'Content-Type': 'application/json' } }
+                        })
+                            .then(response => {
+                                
+                                id_of_voter = response.data.hasura_id;
+                                console.log(id_of_voter);
+                                console.log("ID of candidate: " + id_of_candidate);
+                                console.log("Election ID: " + eid);
+
+                            })
+                            .catch(error => {
+                                console.log('Post request to get voter hasura Id failed!');
+                            });
+       
 
 
     }
@@ -129,6 +151,7 @@ class ShowElection extends Component {
                                         </li>
                                     </ul>
                                     <Button type="primary" onClick={() => this.onVote(nomination.hasura_id, this.props.match.params.id)}>Vote</Button>
+                                    <br />
                                     {this.state.textBoxShow === nomination.hasura_id && <Search placeholder="Enter your Voting Credentials" enterButton="Cast Vote" onSearch={value => this.onCastVote(nomination.hasura_id, this.props.match.params.id,value)} />}
                                     <br />
                                     <br />
@@ -143,6 +166,8 @@ class ShowElection extends Component {
         );
     }
 }
+
+//implement can vote using compdidmount etc
 //TODO: Ask Sai to change Individual to Independent
 export default ShowElection;
 
