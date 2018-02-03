@@ -274,7 +274,6 @@ class ShowElection extends Component {
                         alert('Sorry, cannot view results right now!');
                         console.log('Post request to get winner id failed!');
                     });
-
             })
             .catch(error => {
                 alert('Sorry, cannot view results right now!');
