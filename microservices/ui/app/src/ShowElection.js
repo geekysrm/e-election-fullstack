@@ -221,6 +221,7 @@ class ShowElection extends Component {
                                 content: 'Thank you for your precious vote.',
                             });
                             this.setState({disableCastVoteButton: true });
+                            this.setState({ textBoxShow: !this.state.textBoxShow });
 
 
                         }
