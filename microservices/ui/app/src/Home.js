@@ -75,6 +75,12 @@ class Home extends Component {
                 <div style={styles.cardContainer}>
                 <div>
                         {this.state.elections.map(function (election) {
+                          var nsd = election.nomination_start_time.split('T')[0];
+                          var ned = election.nomination_end_time.split('T')[0];
+                          var esd = election.election_start_time.split('T')[0];
+                          var eed = election.election_end_time.split('T')[0];
+
+
                             return (
                               <div style={{ background: '#ECECEC', padding: '30px' , width: 610 , marginLeft: 20 }}>
                                 <Card title={`${election.state} state ${election.post} elections`}
@@ -83,10 +89,10 @@ class Home extends Component {
                                     <br />
                                     <p>Election State: {election.state}</p>
                                     <p>Election Post: {election.post}</p>
-                                    <p>Nomination Start Time: {election.nomination_start_time}</p>
-                                    <p>Nomination End Time: {election.nomination_end_time}</p>
-                                    <p>Election Start Time: {election.election_start_time}</p>
-                                    <p>Election End Time: {election.election_end_time}</p>
+                                    <p>Nomination Start Time: {nsd}</p>
+                                    <p>Nomination End Time: {ned}</p>
+                                    <p>Election Start Time: {esd}</p>
+                                    <p>Election End Time: {eed}</p>
 
                                 </Card>
                                 <br />
