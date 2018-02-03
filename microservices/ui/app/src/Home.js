@@ -62,9 +62,10 @@ class Home extends Component {
             <div className="App">
 
               <div style={styles.side}>
-                <h1 style={{color:'white' , fontFamily: 'Acme', fontSize: 60}}>E-Election</h1>
+                <h1 style={{color:'white' , fontFamily: 'Acme', fontSize: 50}}>E-Election</h1>
                 <nav style={{display:'block'}}>
                   <ul style={{listStyle:'none'}}>
+                    <li style={styles.link}><a className='a' href="/home">Home</a></li>
                     <li style={styles.link}><a className='a' href="/get-credentials">Get Credentials</a></li>
                     <li style={styles.link}><a className='a' href="#">About</a></li>
                     <li style={styles.link}><a className='a' href="#" onClick={this.onLogout}>Logout</a></li>
@@ -120,7 +121,7 @@ class Home extends Component {
 const styles={
   side:{
     float:'left',
-  	width:'30%',
+  	width:'25%',
   	paddingTop:'30px',
   	paddingLeft:'25px',
   	top:0,
@@ -131,8 +132,8 @@ const styles={
   },
   content:{
     float:'left',
-  	marginLeft: '35%',
-  	width:'60%'
+  	marginLeft: '30%',
+  	width:'65%'
   },
   link:{
     lineHeight:'50px',
