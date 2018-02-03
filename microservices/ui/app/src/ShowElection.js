@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Button, Input , Divider } from 'antd';
+import { Button, Input , Divider , Card } from 'antd';
 import moment from 'moment';
 import 'antd/dist/antd.css';
 import { getSavedToken } from './config';
@@ -252,7 +252,26 @@ class ShowElection extends Component {
                           {this.state.nominations.map((nomination, index) => {
                               return (
 
+                                <div>
+                                <Card style={{ width: 550 , fontWeight:'bold' }}>
 
+                                    <p>Name: {this.state.nominee_names[index]}</p>
+                                    <p>Gender: {this.state.nominee_genders[index]}</p>
+                                    <p>Age: {this.state.nominee_ages[index]}</p>
+                                    {nomination.individual ? <p>Party: Independent Candidate</p> : <p>Party: {nomination.party}</p>}
+                                    {!(nomination.individual) && <p>Party Ticket ID: {nomination.party_ticket_id}</p>}
+                                    <p>Election Manifesto: {nomination.manifesto}</p>
+                                    <br />
+                                    <Button type="primary" onClick={() => this.onVote(nomination.hasura_id, this.props.match.params.id)}>Vote</Button>
+                                    <br />
+                                    <br />
+                                    {this.state.textBoxShow === nomination.hasura_id && <Search placeholder="Enter your Voting Credentials"  enterButton="Cast Vote" onSearch={value => this.onCastVote(nomination.hasura_id, this.props.match.params.id, value)} />}
+
+                                </Card>
+                                <br />
+                                </div>
+
+/*
                                   <li key={nomination.hasura_id}>
 
                                       <ul>
@@ -273,7 +292,7 @@ class ShowElection extends Component {
                                       <br />
                                       <br />
                                   </li>
-
+*/
                               );
                           })}
                       </ol>
