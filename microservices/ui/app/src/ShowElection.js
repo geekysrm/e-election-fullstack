@@ -100,6 +100,7 @@ class ShowElection extends Component {
                     })
                         .then(response => {
 
+                            const nowDate = moment();
                             console.log(response.data[0].name);
                             console.log(response.data[0].gender);
                             this.setState({
