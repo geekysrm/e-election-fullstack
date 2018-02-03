@@ -72,28 +72,30 @@ class Home extends Component {
               </div>
 
               <div style={styles.content}>
-              <div>
-                      {this.state.elections.map(function (election) {
-                          return (
-                            <div style={{ background: '#ECECEC', padding: '30px' , width: 560 , marginLeft: 20 }}>
-                              <Card title={`${election.state} state ${election.post} elections`}
-                                extra={<a href={`/election/${election.election_id}`}>View Details</a>} style={{ width: 500 }}
-                              >
-                                  <br />
-                                  <p>Election State: {election.state}</p>
-                                  <p>Election Post: {election.post}</p>
-                                  <p>Nomination Start Time: {election.nomination_start_time}</p>
-                                  <p>Nomination End Time: {election.nomination_end_time}</p>
-                                  <p>Election Start Time: {election.election_start_time}</p>
-                                  <p>Election End Time: {election.election_end_time}</p>
+                <div style={styles.cardContainer}>
+                <div>
+                        {this.state.elections.map(function (election) {
+                            return (
+                              <div style={{ background: '#ECECEC', padding: '30px' , width: 610 , marginLeft: 20 }}>
+                                <Card title={`${election.state} state ${election.post} elections`}
+                                  extra={<a href={`/election/${election.election_id}`}>View Details</a>} style={{ width: 550 }}
+                                >
+                                    <br />
+                                    <p>Election State: {election.state}</p>
+                                    <p>Election Post: {election.post}</p>
+                                    <p>Nomination Start Time: {election.nomination_start_time}</p>
+                                    <p>Nomination End Time: {election.nomination_end_time}</p>
+                                    <p>Election Start Time: {election.election_start_time}</p>
+                                    <p>Election End Time: {election.election_end_time}</p>
 
-                              </Card>
-                              <br />
-                              <br />
-                            </div>
-                          );
-                      })}
-              </div>
+                                </Card>
+                                <br />
+                                <br />
+                              </div>
+                            );
+                        })}
+                </div>
+                </div>
               </div>
 
               <link href="https://fonts.googleapis.com/css?family=Acme" rel="stylesheet" />
@@ -123,6 +125,12 @@ const styles={
   link:{
     lineHeight:'50px',
     fontFamily:'Raleway',
+  },
+  cardContainer:{
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center'
   }
 }
 
