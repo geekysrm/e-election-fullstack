@@ -570,10 +570,9 @@ class CredentialsForm extends React.Component {
                             Display get credentials
                             */
                         }
-
+                        {alertSpan}
+                        {copiedSpan}
                     </Form>
-                    {alertSpan}
-                    {copiedSpan}
                 </div>)}
                 {(this.state.flag === 0) && (
                     <div>
