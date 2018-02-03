@@ -1,3 +1,15 @@
 .code-box-demo p {
   margin: 0;
 }
+
+a{
+  color:white;
+  text-decoration:none;
+  font-size: 2rem;
+}
+
+a:hover{
+  color:#80b3ff;
+  text-decoration:none;
+  font-size: 2rem;
+}
