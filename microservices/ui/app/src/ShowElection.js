@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Button, Input , Divider , Card } from 'antd';
 import moment from 'moment';
 import 'antd/dist/antd.css';
-import { getSavedToken } from './config';
+import { getSavedToken, deleteToken } from './config';
 
 const Search = Input.Search;
 const authToken = getSavedToken();
