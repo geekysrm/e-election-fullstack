@@ -85,21 +85,7 @@ class NominateYourselfForm extends React.Component {
         let alertSpan = null;
         let copiedSpan = null;
         let copiedSpan1 = null;
-        if (credentialsThere) {
-            alertSpan = <Alert
-                message="Successfully generated Voting Credentials!"
-                description={
-
-                    <CopyToClipboard onCopy={this.onCopy} text={this.state.credentialsThere}>
-                        <span style={{ cursor: 'pointer' }}>Your voting credentials are <strong>{credentialsThere}</strong>.</span>
-                    </CopyToClipboard>
-
-                }
-                type="success"
-                showIcon
-            />;
-
-        }
+     
         if (copied) {
             copiedSpan = <Alert message={"Copied to clipboard!"} type="info" />
         }
@@ -163,59 +149,11 @@ class NominateYourselfForm extends React.Component {
                         
 
 
-                        <FormItem
-                            {...formItemLayout}
-                            label={(
-                                <span>
-                                    Date of Birth&nbsp;
-              <Tooltip title="Please enter your DOB as in your Voter ID Card.">
-                                        <Icon type="question-circle-o" />
-                                    </Tooltip>
-                                </span>
-                            )}
-                        >
-                            {getFieldDecorator('date', config)(
-                                <DatePicker />
-                            )}
-                        </FormItem>
+                       
 
-                        <FormItem
-                            {...formItemLayout}
-                            label="State"
-                        >
-                            {getFieldDecorator('states', {
-                                initialValue: ['Andaman and Nicobar Islands'],
-                                rules: [{ type: 'array', required: true, message: 'Please select your state!' }],
-                            })(
-                                <Cascader options={states} key={states} style={{ width: '100%' }} />
-                                )}
-                        </FormItem>
-                        
-                        <FormItem
-                            {...formItemLayout}
-                            label="E-mail"
-                        >
-                            {getFieldDecorator('email', {
-                                rules: [{
-                                    type: 'email', message: 'The e-mail entered is not valid!',
-                                }, {
-                                    required: true, message: 'Please input your E-mail!',
-                                }],
-                            })(
-                                <Input />
-                                )}
-                        </FormItem>
+                   
 
-                        <FormItem
-                            {...formItemLayout}
-                            label="Phone Number"
-                        >
-                            {getFieldDecorator('phone', {
-                                rules: [{ required: true, message: 'Please input your phone number!' }, { pattern: '^((\\+91-?)|0)?[0-9]{10}$', message: 'Please input a valid phone number!' }],
-                            })(
-                                <Input addonBefore="+91" style={{ width: '100%' }} />
-                                )}
-                        </FormItem>
+                      
                         <FormItem {...tailFormItemLayout}>
                             <Button type="primary" htmlType="submit" disabled={this.state.isDisabled} loading={this.state.loading} onClick={this.enterLoading}>
                                 Get Voting Credentials
