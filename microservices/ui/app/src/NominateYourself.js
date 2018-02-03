@@ -23,7 +23,7 @@ class NominateYourselfForm extends React.Component {
             displayPartyTextBox:false,
             hasuraId:-1,
             successMsg: false
-            
+
         };
 
     }
@@ -73,7 +73,7 @@ class NominateYourselfForm extends React.Component {
                 if (values.partyOrIndependent === 'independent')
                 {
                      independent_flag = true;
-                   
+
                 }
                 else if (values.partyOrIndependent === 'party')
                 {
@@ -94,9 +94,11 @@ class NominateYourselfForm extends React.Component {
                         this.setState({ successMsg: true });
                     })
                     .catch(error => {
+                        this.setState({ loading: false });
+                        this.setState({ isDisabled: true });
                         alert('Sorry! You cannot nominate yourself for this post!');
                     });
-                
+
 
             }
         });
@@ -112,7 +114,7 @@ class NominateYourselfForm extends React.Component {
         }
         callback();
     }
-    
+
 
 
     render() {
@@ -123,7 +125,7 @@ class NominateYourselfForm extends React.Component {
         let copied = this.state.copied;
 
 
-        let alertSpan = null;     
+        let alertSpan = null;
         if (this.state.successMsg) {
             alertSpan = <Alert
                 message="Successfully Nominated!"
@@ -161,11 +163,11 @@ class NominateYourselfForm extends React.Component {
         const config = {
             rules: [{ type: 'object', required: true, message: 'Please select date!' }],
         };
-       
+
 
         return (
             <div>
-               
+
                     <h1 style={{ marginTop: "10px", textAlign: "center" }}>Enter Nomination Details</h1>
                     <Divider />
                     <Form onSubmit={this.handleSubmit} style={{
@@ -198,7 +200,7 @@ class NominateYourselfForm extends React.Component {
                             </span>
                         )}
                     >
-                        
+
                         {getFieldDecorator('partyOrIndependent', {
                             rules: [{ required: true, message: 'Please select an option!' }],
                         })(
@@ -242,22 +244,22 @@ class NominateYourselfForm extends React.Component {
                     </div>}
 
 
-                       
 
-                   
 
-                      
+
+
+
                         <FormItem {...tailFormItemLayout}>
                         <Button type="primary" htmlType="submit" disabled={this.state.isDisabled} loading={this.state.loading}>
                                 Submit Nomination
                         </Button>
                         </FormItem>
 
-                       
+
 
                     </Form>
                     {alertSpan}
-                
+
             </div>
         );
     }

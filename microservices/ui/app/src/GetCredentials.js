@@ -327,6 +327,8 @@ class CredentialsForm extends React.Component {
                                     that1.setState({ isDisabled: true });
                                 })
                                 .catch(function (response) {
+                                    this.setState({ loading: false });
+                                    this.setState({ isDisabled: true });
                                     console.log('Unsuccessful post request');
                                     console.log(response);
                                     alert('Sorry, Server Error!');
