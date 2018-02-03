@@ -10,7 +10,7 @@ const Option = Select.Option;
 const AutoCompleteOption = AutoComplete.Option;
 
 const authToken = getSavedToken();
-class CredentialsForm extends React.Component {
+class NominateYourselfForm extends React.Component {
     constructor(props) {
 
         super(props);
@@ -160,17 +160,7 @@ class CredentialsForm extends React.Component {
                                 <Input />
                                 )}
                         </FormItem>
-                        <FormItem
-                            {...formItemLayout}
-                            label="Gender"
-                        >
-                            {getFieldDecorator('gender', {
-                                initialValue: ['Male'],
-                                rules: [{ type: 'array', required: true, message: 'Please select your gender!' }]
-                            })(
-                                <Cascader options={gender} key={gender} />
-                                )}
-                        </FormItem>
+                        
 
 
                         <FormItem
@@ -200,23 +190,7 @@ class CredentialsForm extends React.Component {
                                 <Cascader options={states} key={states} style={{ width: '100%' }} />
                                 )}
                         </FormItem>
-                        <FormItem
-                            {...formItemLayout}
-                            label={(
-                                <span>
-                                    Voter ID Number&nbsp;
-              <Tooltip title="Please enter the Voter ID Number as in your Voter ID Card.">
-                                        <Icon type="question-circle-o" />
-                                    </Tooltip>
-                                </span>
-                            )}
-                        >
-                            {getFieldDecorator('voterId', {
-                                rules: [{ required: true, message: 'Please input your voter ID Number!' }, { pattern: '^[A-Z]{3}[0-9]{7}$', message: 'Please input valid voter ID Number!' }],
-                            })(
-                                <Input style={{ width: '100%' }} />
-                                )}
-                        </FormItem>
+                        
                         <FormItem
                             {...formItemLayout}
                             label="E-mail"
