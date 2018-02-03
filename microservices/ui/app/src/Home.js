@@ -80,10 +80,10 @@ class Home extends Component {
                           var esd = election.election_start_time.split('T')[0];
                           var eed = election.election_end_time.split('T')[0];
 
-                          var nst = election.nomination_start_time.split('T')[1].split('+')[0] + "hrs";
-                          var net = election.nomination_end_time.split('T')[1].split('+')[0] + "hrs";
-                          var est = election.election_start_time.split('T')[1].split('+')[0] + "hrs";
-                          var eet = election.election_end_time.split('T')[1].split('+')[0] + "hrs";
+                          var nst = election.nomination_start_time.split('T')[1].split('+')[0] + " hrs";
+                          var net = election.nomination_end_time.split('T')[1].split('+')[0] + " hrs";
+                          var est = election.election_start_time.split('T')[1].split('+')[0] + " hrs";
+                          var eet = election.election_end_time.split('T')[1].split('+')[0] + " hrs";
 
 
                             return (
@@ -94,10 +94,10 @@ class Home extends Component {
                                     <br />
                                     <p>Election State: {election.state}</p>
                                     <p>Election Post: {election.post}</p>
-                                    <p>Nomination Start Time: {nsd+" "+nst}</p>
-                                    <p>Nomination End Time: {ned+" "+net}</p>
-                                    <p>Election Start Time: {esd+" "+est}</p>
-                                    <p>Election End Time: {eed+" "+eet}</p>
+                                    <p>Nomination Start Time: {nsd+" , "+nst}</p>
+                                    <p>Nomination End Time: {ned+" , "+net}</p>
+                                    <p>Election Start Time: {esd+" , "+est}</p>
+                                    <p>Election End Time: {eed+" , "+eet}</p>
 
                                 </Card>
                                 <br />
