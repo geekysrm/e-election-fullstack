@@ -8,7 +8,7 @@ import { getSavedToken } from './config';
 const FormItem = Form.Item;
 const Option = Select.Option;
 const AutoCompleteOption = AutoComplete.Option;
-
+const { TextArea } = Input;
 const authToken = getSavedToken();
 class NominateYourselfForm extends React.Component {
     constructor(props) {
@@ -53,14 +53,6 @@ class NominateYourselfForm extends React.Component {
     handleConfirmBlur = (e) => {
         const value = e.target.value;
         this.setState({ confirmDirty: this.state.confirmDirty || !!value });
-    }
-    checkPassword = (rule, value, callback) => {
-        const form = this.props.form;
-        if (value && value !== form.getFieldValue('password')) {
-            callback('Two passwords that you enter is inconsistent!');
-        } else {
-            callback();
-        }
     }
     checkConfirm = (rule, value, callback) => {
         const form = this.props.form;
@@ -115,9 +107,7 @@ class NominateYourselfForm extends React.Component {
         const config = {
             rules: [{ type: 'object', required: true, message: 'Please select date!' }],
         };
-        const websiteOptions = autoCompleteResult.map(website => (
-            <AutoCompleteOption key={website}>{website}</AutoCompleteOption>
-        ));
+       
 
         return (
             <div>
@@ -133,17 +123,17 @@ class NominateYourselfForm extends React.Component {
                             {...formItemLayout}
                             label={(
                                 <span>
-                                    Full Name&nbsp;
-              <Tooltip title="Please enter the same name as in your Voter ID Card.">
+                                    Manifesto&nbsp;
+              <Tooltip title="Please enter your manifesto for the election.">
                                         <Icon type="question-circle-o" />
                                     </Tooltip>
                                 </span>
                             )}
                         >
                             {getFieldDecorator('name', {
-                                rules: [{ required: true, message: 'Please input your Full Name!', whitespace: true }],
+                                rules: [{ required: true, message: 'Please input your manifesto!', whitespace: true }],
                             })(
-                                <Input />
+                            <TextArea rows={4} />
                                 )}
                         </FormItem>
                         

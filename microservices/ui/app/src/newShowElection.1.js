@@ -81,6 +81,14 @@ class ShowElection extends Component {
                 console.log('Post request failed!');
             });
 
+        
+
+
+    }
+
+
+    onViewNominations = () => {
+
         axios({
             method: 'post',
             url: 'https://api.artfully11.hasura-app.io/get-nominations',
@@ -131,9 +139,7 @@ class ShowElection extends Component {
                 console.log('Post request failed!');
             });
 
-
     }
-
 
     onVote = (id_of_candidate, eid) => {
         
@@ -226,7 +232,7 @@ class ShowElection extends Component {
         return (
             <div>
                 <h1>Election with Id: {this.props.match.params.id}</h1>
-                
+                <Button type="primary" onClick={this.onViewNominations}>View All Nominations</Button>
                 <Button type="primary" onClick={this.onNominate}>Nominate Yourself</Button>
                 <div>
 
