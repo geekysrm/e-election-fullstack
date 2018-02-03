@@ -61,19 +61,18 @@ class Home extends Component {
             <div className="App">
 
               <div style={styles.side}>
-                <h1 style={{color:'white'}}>E-Election</h1>
+                <h1 style={{color:'white' , fontFamily: 'Acme', fontSize: 60}}>E-Election</h1>
                 <nav style={{display:'block'}}>
                   <ul style={{listStyle:'none'}}>
-                    <li style={{lineHeight:'30px'}}><a href="/get-credentials">Get Credentials</a></li>
-                    <li style={{ lineHeight: '30px' }}><a href="#" onClick={this.onLogout}>Logout</a></li>
-                    <li style={{lineHeight:'30px'}}><a href="#">About</a></li>
+                    <li style={styles.link}><a className='a' href="/get-credentials">Get Credentials</a></li>
+                    <li style={styles.link}><a className='a' href="#" onClick={this.onLogout}>Logout</a></li>
+                    <li style={styles.link}><a className='a' href="#">About</a></li>
                   </ul>
                 </nav>
               </div>
 
               <div style={styles.content}>
               <div>
-              <h1>Current Elections</h1>
                       {this.state.elections.map(function (election) {
                           return (
                             <div style={{ background: '#ECECEC', padding: '30px' , width: 560 , marginLeft: 20 }}>
@@ -97,6 +96,8 @@ class Home extends Component {
               </div>
               </div>
 
+              <link href="https://fonts.googleapis.com/css?family=Acme" rel="stylesheet" />
+              <link href="https://fonts.googleapis.com/css?family=Raleway:600" rel="stylesheet" />
             </div>
         );
     }
@@ -119,7 +120,10 @@ const styles={
   	marginLeft: '35%',
   	width:'60%'
   },
-  
+  link:{
+    lineHeight:'50px',
+    fontFamily:'Raleway',
+  }
 }
 
 export default Home;
