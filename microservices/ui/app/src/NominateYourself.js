@@ -1,10 +1,11 @@
 import React from 'react';
-import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Divider, Checkbox, Button, AutoComplete, DatePicker, Alert } from 'antd';
+import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Divider, Checkbox, Button, AutoComplete, DatePicker, Alert, Radio } from 'antd';
 import axios from 'axios';
 import 'antd/dist/antd.css';
 
 import { getSavedToken } from './config';
-
+const RadioButton = Radio.Button;
+const RadioGroup = Radio.Group;
 const FormItem = Form.Item;
 const Option = Select.Option;
 const AutoCompleteOption = AutoComplete.Option;
@@ -112,7 +113,7 @@ class NominateYourselfForm extends React.Component {
         return (
             <div>
                
-                    <h1 style={{ marginTop: "10px", textAlign: "center" }}>Enter Voting Details</h1>
+                    <h1 style={{ marginTop: "10px", textAlign: "center" }}>Enter Nomination Details</h1>
                     <Divider />
                     <Form onSubmit={this.handleSubmit} style={{
                         marginRight: "20%",
@@ -124,7 +125,7 @@ class NominateYourselfForm extends React.Component {
                             label={(
                                 <span>
                                     Manifesto&nbsp;
-              <Tooltip title="Please enter your manifesto for the election.">
+                                 <Tooltip title="Please enter your manifesto for the election.">
                                         <Icon type="question-circle-o" />
                                     </Tooltip>
                                 </span>
@@ -136,7 +137,23 @@ class NominateYourselfForm extends React.Component {
                             <TextArea rows={4} />
                                 )}
                         </FormItem>
-                        
+                    <FormItem
+                        {...formItemLayout}
+                        label={(
+                            <span>
+                                Please select:&nbsp;
+                            </span>
+                        )}
+                    >
+                        {getFieldDecorator('party', {
+                            rules: [{ required: true, message: 'Please select an option!' }],
+                        })(
+                            <RadioGroup defaultValue="a" onChange={(value) => console.log(value.target.value)}>
+                                <RadioButton value="party">Party Candidate</RadioButton>
+                                <RadioButton value="independent">Independent Candidate</RadioButton>
+                            </RadioGroup>
+                            )}
+                    </FormItem>
 
 
                        
