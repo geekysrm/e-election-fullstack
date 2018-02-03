@@ -89,7 +89,7 @@ class Home extends Component {
                             return (
                               <div style={{ background: '#ECECEC', padding: '30px' , width: 610 , marginLeft: 20 }}>
                                 <Card title={`${election.state} state ${election.post} elections`}
-                                  extra={<a href={`/election/${election.election_id}`}>View Details</a>} style={{ width: 550 }}
+                                  extra={<a href={`/election/${election.election_id}`}>View Details</a>} style={{ width: 550 , fontSize:'1.5rem' , fontWeight:'bold' }}
                                 >
                                     <br />
                                     <p>Election State: {election.state}</p>
