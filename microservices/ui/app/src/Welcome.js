@@ -34,7 +34,7 @@ class Welcome extends Component
         <br /><br /><br />
         <footer style={{background:'#222222' , position:'absolute' , marginBottom:'0' , width:'100%'}}>
           <a href="/about"><h1 style={styles.text2}>About</h1></a>
-          <h1 style={styles.text2}>&copy;2018 E-Election App . All rights reserved</h1>
+          <h1 style={styles.text2}>&copy;2018 E-Election App · All rights reserved</h1>
         </footer>
 
         <link href="https://fonts.googleapis.com/css?family=Acme" rel="stylesheet" />

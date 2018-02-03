@@ -391,6 +391,7 @@ const styles={
   }
 }
 
+//IMP: Result not showing correctly. ask sai how the votes r stored
 //implement this after clicking cast vote btn once: disabled={this.state.disableCastVoteButton}
 //TODO: Ask Sai to change Individual to Independent
 export default ShowElection;
