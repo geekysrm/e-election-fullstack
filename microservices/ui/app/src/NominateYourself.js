@@ -89,6 +89,7 @@ class NominateYourselfForm extends React.Component {
                 })
                     .then(response => {
                         console.log(response.data);
+                        this.setState({ loading: false });
                         this.setState({ isDisabled: true });
                         this.setState({ successMsg: true });
                     })
