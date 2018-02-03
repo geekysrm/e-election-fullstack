@@ -241,7 +241,10 @@ class ShowElection extends Component {
             <div style={styles.content}>
                   <h1 style={{marginTop:"10px" , textAlign:"center"}}>{this.state.electionState} state {this.state.electionPost} elections</h1>
                   <Divider />
-                  <Button type="primary" onClick={this.onNominate}>Nominate Yourself</Button>
+                  <div style={styles.header}>
+                    <p>Current Nominations - </p>
+                    <Button type="primary" onClick={this.onNominate}>Nominate Yourself</Button>
+                  </div>
                   <div>
 
                       <ol>
@@ -301,6 +304,12 @@ const styles={
     float:'left',
   	marginLeft: '35%',
   	width:'60%'
+  },
+  header:{
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center'
   }
 }
 
