@@ -321,6 +321,10 @@ const styles={
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center'
+  },
+  link:{
+    lineHeight:'50px',
+    fontFamily:'Raleway',
   }
 }
 

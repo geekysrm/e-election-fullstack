@@ -67,17 +67,6 @@ class Home extends Component {
                 <nav style={{display:'block'}}>
                   <ul style={{listStyle:'none'}}>
                     <li style={styles.link}><a className='anow' href="/home">Home</a></li>
-
-                    {this.state.elections.map(function(election){
-                      return(
-                        <li style={styles.link}>
-                        <a className='a' href={`/election/${election.election_id}`}>
-                        {election.state} state {election.post} elections
-                        </a>
-                        </li>
-                      );
-                    })}
-
                     <li style={styles.link}><a className='a' href="/get-credentials">Get Credentials</a></li>
                     <li style={styles.link}><a className='a' href="#">About</a></li>
                     <li style={styles.link}><a className='a' href="#" onClick={this.onLogout}>Logout</a></li>
