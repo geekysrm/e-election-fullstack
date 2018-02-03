@@ -76,9 +76,9 @@ class Home extends Component {
                 <div>
                         {this.state.elections.map(function (election) {
                             return (
-                              <div style={{ background: '#ECECEC', padding: '30px' , width: 660 , marginLeft: 20 }}>
+                              <div style={{ background: '#ECECEC', padding: '30px' , width: 610 , marginLeft: 20 }}>
                                 <Card title={`${election.state} state ${election.post} elections`}
-                                  extra={<a href={`/election/${election.election_id}`}>View Details</a>} style={{ width: 600 }}
+                                  extra={<a href={`/election/${election.election_id}`}>View Details</a>} style={{ width: 550 }}
                                 >
                                     <br />
                                     <p>Election State: {election.state}</p>
