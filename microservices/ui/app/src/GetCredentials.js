@@ -570,10 +570,13 @@ class CredentialsForm extends React.Component {
                             Display get credentials
                             */
                         }
-
                     </Form>
-                    {alertSpan}
-                    {copiedSpan}
+                    <div style={styles.msg}>
+                      <div style={{width:'50%'}}>
+                      {alertSpan}
+                      {copiedSpan}
+                      </div>
+                    </div>
                 </div>)}
                 {(this.state.flag === 0) && (
                     <div>
@@ -624,6 +627,15 @@ class CredentialsForm extends React.Component {
             </div>
         );
     }
+}
+
+const styles={
+  msg:{
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center'
+  }
 }
 
 const GetCredentials = Form.create()(CredentialsForm);
