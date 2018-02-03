@@ -18,10 +18,10 @@ class NominateYourselfForm extends React.Component {
         this.state = {
             confirmDirty: false,
             autoCompleteResult: [],
-            loading:false,
             isDisabled: false,
             displayPartyTextBox:false,
-            hasuraId:-1
+            hasuraId:-1,
+            successMsg: false
             
         };
 
@@ -87,6 +87,8 @@ class NominateYourselfForm extends React.Component {
                 })
                     .then(response => {
                         console.log(response.data);
+                        this.setState({ isDisabled: true });
+                        this.setState({ successMsg: true });
                     })
                     .catch(error => {
                         alert('Sorry! You cannot nominate yourself for this post!');
@@ -119,13 +121,18 @@ class NominateYourselfForm extends React.Component {
         let copied = this.state.copied;
 
 
-        let alertSpan = null;
-        let copiedSpan = null;
-        let copiedSpan1 = null;
-     
-        if (copied) {
-            copiedSpan = <Alert message={"Copied to clipboard!"} type="info" />
+        let alertSpan = null;     
+        if (this.state.successMsg) {
+            alertSpan = <Alert
+                message="Successfully Voted!"
+                description="Thank You for your vote."
+                type="success"
+                showIcon
+            />;
+
         }
+
+
         const formItemLayout = {
             labelCol: {
                 xs: { span: 24 },
