@@ -95,7 +95,6 @@ class NominateYourselfForm extends React.Component {
                     })
                     .catch(error => {
                         alert('Sorry! You cannot nominate yourself for this post!');
-                        console.log('Post request to get hasura Id failed!');
                     });
                 
 
@@ -127,8 +126,8 @@ class NominateYourselfForm extends React.Component {
         let alertSpan = null;     
         if (this.state.successMsg) {
             alertSpan = <Alert
-                message="Successfully Voted!"
-                description="Thank You for your vote."
+                message="Successfully Nominated!"
+                description="You have successfully nominated yourself for this post."
                 type="success"
                 showIcon
             />;
