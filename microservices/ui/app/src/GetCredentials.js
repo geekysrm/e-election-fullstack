@@ -284,6 +284,7 @@ class CredentialsForm extends React.Component {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
+                this.setState({ loading: true });
                 console.log('Received values of form: ', values);
                 const nowDate = moment();
                 var dateMoment = moment(values.date);
@@ -539,7 +540,7 @@ class CredentialsForm extends React.Component {
                                 )}
                         </FormItem>
                         <FormItem {...tailFormItemLayout}>
-                            <Button type="primary" htmlType="submit" disabled={this.state.isDisabled} loading={this.state.loading} onClick={this.enterLoading}>
+                            <Button type="primary" htmlType="submit" disabled={this.state.isDisabled} loading={this.state.loading}>
                                 Get Voting Credentials
                         </Button>
                         </FormItem>
