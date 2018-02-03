@@ -251,7 +251,30 @@ class ShowElection extends Component {
         })
             .then(response => {
                 console.log(response.data);
+                var winner_id = Number(response.data.winner);
+                var winner ='';
+                var winner_votes = response.data.votes_of_winner;
+                var total_votes = response.data.total_votes;
+                var win_percent = response.data.win_percent;
                 
+                axios({
+                    method: 'post',
+                    url: 'https://api.artfully11.hasura-app.io/view-credentials',
+                    data: { serial: winner_id },
+                    config: { headers: { 'Content-Type': 'application/json' } }
+                })
+                    .then(response => {
+                        winner = response.data[0].name;
+                        console.log(winner_votes);
+                        console.log(winner);
+                        console.log(total_votes);
+                        console.log(win_percent);
+                    })
+                    .catch(error => {
+                        alert('Sorry, cannot view results right now!');
+                        console.log('Post request to get winner id failed!');
+                    });
+
             })
             .catch(error => {
                 alert('Sorry, cannot view results right now!');
