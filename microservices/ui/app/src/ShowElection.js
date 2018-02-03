@@ -279,7 +279,7 @@ class ShowElection extends Component {
                                     <p>Age: {this.state.nominee_ages[index]}</p>
                                     {nomination.individual ? <p>Party: Independent Candidate</p> : <p>Party: {nomination.party}</p>}
                                     {!(nomination.individual) && <p>Party Ticket ID: {nomination.party_ticket_id}</p>}
-                                    <p>Election Manifesto: {nomination.manifesto}</p>
+                                    <p>Election Manifesto: <p>{nomination.manifesto}</p></p>
                                     <br />
                                     <Button type="primary" onClick={() => this.onVote(nomination.hasura_id, this.props.match.params.id)}>Vote</Button>
                                     <br />
