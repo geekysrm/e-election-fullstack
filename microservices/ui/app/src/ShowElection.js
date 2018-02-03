@@ -269,6 +269,18 @@ class ShowElection extends Component {
                         console.log(winner);
                         console.log(total_votes);
                         console.log(win_percent);
+                        Modal.info({
+                            title: `Results of this election: `,
+                            content: (
+                                <div>
+                                    <p>Winner: {winner}</p>
+                                    <p>Total number of votes: {total_votes}</p>
+                                    <p>Winner's number of votes: {winner_votes}</p>
+                                    <p>Winning Percentage: {win_percent}</p>
+                                </div>
+                            ),
+                            onOk() { },
+                        });
                     })
                     .catch(error => {
                         alert('Sorry, cannot view results right now!');
