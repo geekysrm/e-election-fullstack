@@ -19,6 +19,7 @@ class NominateYourselfForm extends React.Component {
             confirmDirty: false,
             autoCompleteResult: [],
             isDisabled: false,
+            loading:false,
             displayPartyTextBox:false,
             hasuraId:-1,
             successMsg: false
@@ -61,6 +62,7 @@ class NominateYourselfForm extends React.Component {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
+                this.setState({ loading: true });
                 console.log('Received values of form: ', values);
                 var hasura_id_nominee = this.state.hasuraId;
                 var election_id = this.props.match.params.id;
@@ -246,7 +248,7 @@ class NominateYourselfForm extends React.Component {
 
                       
                         <FormItem {...tailFormItemLayout}>
-                        <Button type="primary" htmlType="submit" disabled={this.state.isDisabled} loading={!this.state.isDisabled}>
+                        <Button type="primary" htmlType="submit" disabled={this.state.isDisabled} loading={this.state.loading}>
                                 Submit Nomination
                         </Button>
                         </FormItem>
