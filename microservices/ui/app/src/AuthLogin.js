@@ -97,7 +97,7 @@ class AuthForm extends React.Component {
             )}
           </FormItem>
           <FormItem>
-            <Button type="primary" htmlType="submit" className="login-form-button" >
+            <Button type="primary" htmlType="submit" className="login-form-button" loading={this.state.loading}>
               Log in
             </Button>
             Or <a href="/auth-register">register now!</a>
