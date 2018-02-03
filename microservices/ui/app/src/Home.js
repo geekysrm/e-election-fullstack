@@ -66,7 +66,7 @@ class Home extends Component {
                 <h1 style={{color:'white' , fontFamily: 'Acme', fontSize: 50}}>E-Election</h1>
                 <nav style={{display:'block'}}>
                   <ul style={{listStyle:'none'}}>
-                    <li style={styles.link}><a className='anow' href="/home">Home</a></li>
+                    <li style={styles.link}><a className='anow'>Home</a></li>
                     <li style={styles.link}><a className='a' href="/get-credentials">Get Credentials</a></li>
                     <li style={styles.link}><a className='a' href="#">About</a></li>
                     <li style={styles.link}><a className='a' href="#" onClick={this.onLogout}>Logout</a></li>
