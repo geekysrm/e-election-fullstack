@@ -242,7 +242,7 @@ class ShowElection extends Component {
                   <h1 style={{marginTop:"10px" , textAlign:"center"}}>{this.state.electionState} state {this.state.electionPost} elections</h1>
                   <Divider />
                   <div style={styles.header}>
-                    <p>Current Nominations - </p>
+                    <h1 style={{marginTop:"10px" , textAlign:"center"}}>Current Nominations - </h1>
                     <Button type="primary" onClick={this.onNominate}>Nominate Yourself</Button>
                   </div>
                   <div>
