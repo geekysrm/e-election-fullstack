@@ -26,7 +26,8 @@ class ShowElection extends Component {
             voter_state: '',
             voter_credentials: '',
             voter_can_vote: 0,
-            disableCastVoteButton: false        //disable the Cast Vote btn after clicking it once (not implemented)
+            disableCastVoteButton: false,        //disable the Cast Vote btn after clicking it once (not implemented)
+            loadingResults: false
         };
 
 
@@ -242,6 +243,7 @@ class ShowElection extends Component {
     }
 
     onViewResults = () => {
+        this.setState({ loadingResults: true });
         var election_id = this.props.match.params.id;
         axios({
             method: 'post',
@@ -264,6 +266,7 @@ class ShowElection extends Component {
                     config: { headers: { 'Content-Type': 'application/json' } }
                 })
                     .then(response => {
+                        this.setState({ loadingResults: false });
                         winner = response.data[0].name;
                         console.log(winner_votes);
                         console.log(winner);

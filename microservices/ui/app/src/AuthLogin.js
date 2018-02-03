@@ -15,7 +15,8 @@ class AuthForm extends React.Component {
     super()
     this.state = {
       uesrName: '',
-      password: ''
+      password: '',
+      loading: false
     };
   }
 
@@ -23,6 +24,7 @@ class AuthForm extends React.Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
+        this.setState({ loadingResults: true });
         console.log('Received values of form: ', values);
 
         console.log('on login clicked');
@@ -39,8 +41,9 @@ class AuthForm extends React.Component {
 
             window.location.assign("/home");
           } else {
+            this.setState({ loadingResults: false });
             //this.showAlert(JSON.stringify(authResponse));
-            alert(JSON.stringify(authResponse));
+            alert('Invalid login details entered!');
           }
         });
 
