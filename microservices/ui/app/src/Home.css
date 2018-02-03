@@ -2,13 +2,13 @@
   margin: 0;
 }
 
-a{
+.a{
   color:white;
   text-decoration:none;
   font-size: 2rem;
 }
 
-a:hover{
+.a:hover{
   color:#80b3ff;
   text-decoration:none;
   font-size: 2rem;
