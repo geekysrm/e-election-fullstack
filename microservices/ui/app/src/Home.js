@@ -69,11 +69,13 @@ class Home extends Component {
                     <li style={styles.link}><a className='anow' href="/home">Home</a></li>
 
                     {this.state.elections.map(function(election){
-                      <li style={styles.link}>
-                      <a className='a' href={`/election/${election.election_id}`}>
-                      {election.state} state {election.post} elections
-                      </a>
-                      </li>
+                      return(
+                        <li style={styles.link}>
+                        <a className='a' href={`/election/${election.election_id}`}>
+                        {election.state} state {election.post} elections
+                        </a>
+                        </li>
+                      );
                     })}
 
                     <li style={styles.link}><a className='a' href="/get-credentials">Get Credentials</a></li>
