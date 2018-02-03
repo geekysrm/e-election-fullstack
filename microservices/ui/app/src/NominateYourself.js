@@ -20,15 +20,31 @@ class NominateYourselfForm extends React.Component {
             autoCompleteResult: [],
             loading:false,
             isDisabled: false,
-            displayPartyTextBox:false
+            displayPartyTextBox:false,
+            hasuraId:-1
             
         };
 
     }
 
     handleOnLoad = () => {
-       
+       console.log('onLoadFunc');
+        axios({
+            method: 'post',
+            url: 'https://api.artfully11.hasura-app.io/data',
+            data: { auth: authToken },
+            config: { headers: { 'Content-Type': 'application/json' } }
+        })
+            .then(response => {
+                console.log(response.data.hasura_id);
+                this.setState({ hasuraId: response.data.hasura_id });
+            })
+            .catch(error => {
+                alert('Sorry! Server Error!');
+                console.log('Post request to get hasura Id failed!');
+            });
     }
+
 
     componentWillMount() {
         window.addEventListener('load', this.handleOnLoad);
@@ -46,7 +62,34 @@ class NominateYourselfForm extends React.Component {
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
-                
+                let hasura_id_nominee = this.state.hasuraId;
+                let election_id = this.props.match.params.id;
+                let manifesto_got = values.manifesto;
+                if (values.partyOrIndependent === 'independent')
+                {
+                    let independent_flag = true;
+                    let party_name = null;
+                    let party_ticket_id = null;
+                }
+                else if (values.partyOrIndependent === 'party')
+                {
+                    let independent_flag = false;
+                    let party_name = values.partyName;
+                    let party_ticket_id = values.partyTicket;
+                }
+                axios({
+                    method: 'post',
+                    url: 'https://api.artfully11.hasura-app.io/nominate',
+                    data: { id: hasura_id_nominee, eid: election_id, manifesto: manifesto_got, individual: independent_flag, party: party_name, party_ticket: party_ticket_id},
+                    config: { headers: { 'Content-Type': 'application/json' } }
+                })
+                    .then(response => {
+                        console.log(response.data);
+                    })
+                    .catch(error => {
+                        alert('Sorry! You cannot nominate yourself for this post!');
+                        console.log('Post request to get hasura Id failed!');
+                    });
                 
 
             }
@@ -130,7 +173,7 @@ class NominateYourselfForm extends React.Component {
                                 </span>
                             )}
                         >
-                            {getFieldDecorator('name', {
+                            {getFieldDecorator('manifesto', {
                                 rules: [{ required: true, message: 'Please input your manifesto!', whitespace: true }],
                             })(
                             <TextArea rows={4} />
@@ -179,7 +222,7 @@ class NominateYourselfForm extends React.Component {
                             </span>
                         )}
                     >
-                        {getFieldDecorator('partyName', {
+                        {getFieldDecorator('partyTicket', {
                             rules: [{ required: true, message: 'Please enter your party ticket id/no.!', whitespace: true }],
                         })(
                             <Input />
