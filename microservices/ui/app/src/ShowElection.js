@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Button, Input , Divider , Card } from 'antd';
+import { Button, Input, Divider, Card, Modal } from 'antd';
 import moment from 'moment';
 import 'antd/dist/antd.css';
 import './ShowElection.css'
@@ -214,7 +214,11 @@ class ShowElection extends Component {
                         }
                         else if(response.data === 1)
                         {
-                            alert('Successfully voted!');
+                            //alert('Successfully voted!');
+                            Modal.success({
+                                title: 'Successfully Voted!',
+                                content: 'Thank you for your precious vote.',
+                            });
                             this.setState({disableCastVoteButton: true });
 
 
