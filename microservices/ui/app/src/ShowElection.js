@@ -166,7 +166,7 @@ class ShowElection extends Component {
     }
 
     onNominate = () => {
-            window.location.assign({`/nominate/${this.props.match.params.id}`});
+            window.location.assign(`/nominate/${this.props.match.params.id}`);
 
 
     }
