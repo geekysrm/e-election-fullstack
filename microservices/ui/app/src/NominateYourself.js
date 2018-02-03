@@ -62,20 +62,22 @@ class NominateYourselfForm extends React.Component {
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
-                let hasura_id_nominee = this.state.hasuraId;
-                let election_id = this.props.match.params.id;
-                let manifesto_got = values.manifesto;
+                var hasura_id_nominee = this.state.hasuraId;
+                var election_id = this.props.match.params.id;
+                var manifesto_got = values.manifesto;
+                var independent_flag = null;
+                var party_name =null;
+                var party_ticket_id =null;
                 if (values.partyOrIndependent === 'independent')
                 {
-                    let independent_flag = true;
-                    let party_name = null;
-                    let party_ticket_id = null;
+                     independent_flag = true;
+                   
                 }
                 else if (values.partyOrIndependent === 'party')
                 {
-                    let independent_flag = false;
-                    let party_name = values.partyName;
-                    let party_ticket_id = values.partyTicket;
+                     independent_flag = false;
+                     party_name = values.partyName;
+                     party_ticket_id = values.partyTicket;
                 }
                 axios({
                     method: 'post',
