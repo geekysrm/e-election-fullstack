@@ -258,11 +258,24 @@ class NominateYourselfForm extends React.Component {
 
 
                     </Form>
-                    {alertSpan}
+                    <div style={styles.msg}>
+                      <div style={{width:'50%'}}>
+                      {alertSpan}
+                      </div>
+                    </div>
 
             </div>
         );
     }
+}
+
+const styles={
+  msg:{
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center'
+  }
 }
 
 const NominateYourself = Form.create()(NominateYourselfForm);
