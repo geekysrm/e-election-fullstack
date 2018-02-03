@@ -19,3 +19,8 @@
 #
 # example-domain.com:
 #   ssl: null
+e-election.tk:
+  ssl:
+    conf:
+      account: danglingpointersiiit@gmail.com
+    type: LetsEncrypt
