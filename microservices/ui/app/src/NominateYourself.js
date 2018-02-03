@@ -19,7 +19,8 @@ class NominateYourselfForm extends React.Component {
             confirmDirty: false,
             autoCompleteResult: [],
             loading:false,
-            isDisabled: false
+            isDisabled: false,
+            displayPartyTextBox:false
             
         };
 
@@ -62,9 +63,7 @@ class NominateYourselfForm extends React.Component {
         }
         callback();
     }
-    onCopy = () => {
-        this.setState({ copied: true });
-    };
+    
 
 
     render() {
@@ -145,15 +144,48 @@ class NominateYourselfForm extends React.Component {
                             </span>
                         )}
                     >
-                        {getFieldDecorator('party', {
+                        
+                        {getFieldDecorator('partyOrIndependent', {
                             rules: [{ required: true, message: 'Please select an option!' }],
                         })(
-                            <RadioGroup defaultValue="a" onChange={(value) => console.log(value.target.value)}>
+                            <RadioGroup defaultValue="a" onChange={(value) => this.setState({ displayPartyTextBox: (value.target.value === 'party') })}>
                                 <RadioButton value="party">Party Candidate</RadioButton>
                                 <RadioButton value="independent">Independent Candidate</RadioButton>
                             </RadioGroup>
                             )}
                     </FormItem>
+
+                    {this.state.displayPartyTextBox && <div>
+                        <FormItem
+                        {...formItemLayout}
+                        label={(
+                            <span>
+                                Party Name&nbsp;
+                            </span>
+                        )}
+                    >
+                        {getFieldDecorator('partyName', {
+                            rules: [{ required: true, message: 'Please enter your party name!', whitespace: true }],
+                        })(
+                            <Input />
+                            )}
+                    </FormItem>
+
+                    <FormItem
+                        {...formItemLayout}
+                        label={(
+                            <span>
+                                Party Ticket ID/Number&nbsp;
+                            </span>
+                        )}
+                    >
+                        {getFieldDecorator('partyName', {
+                            rules: [{ required: true, message: 'Please enter your party ticket id/no.!', whitespace: true }],
+                        })(
+                            <Input />
+                            )}
+                    </FormItem>
+                    </div>}
 
 
                        
@@ -163,7 +195,7 @@ class NominateYourselfForm extends React.Component {
                       
                         <FormItem {...tailFormItemLayout}>
                             <Button type="primary" htmlType="submit" disabled={this.state.isDisabled} loading={this.state.loading} onClick={this.enterLoading}>
-                                Get Voting Credentials
+                                Submit Nomination
                         </Button>
                         </FormItem>
 
