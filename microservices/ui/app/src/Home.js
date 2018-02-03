@@ -51,6 +51,7 @@ class Home extends Component {
         }
         else {
             alert('Please login at /auth-login first');
+            window.location.assign('/');
         }
 
     }
@@ -65,8 +66,8 @@ class Home extends Component {
                 <nav style={{display:'block'}}>
                   <ul style={{listStyle:'none'}}>
                     <li style={styles.link}><a className='a' href="/get-credentials">Get Credentials</a></li>
-                    <li style={styles.link}><a className='a' href="#" onClick={this.onLogout}>Logout</a></li>
                     <li style={styles.link}><a className='a' href="#">About</a></li>
+                    <li style={styles.link}><a className='a' href="#" onClick={this.onLogout}>Logout</a></li>
                   </ul>
                 </nav>
               </div>

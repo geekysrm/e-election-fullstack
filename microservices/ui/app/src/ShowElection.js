@@ -135,6 +135,21 @@ class ShowElection extends Component {
 
     }
 
+    onLogout = () => {
+
+
+        console.log('CLicked logout');
+        const authToken = getSavedToken();
+        if (authToken) {
+            deleteToken();
+            window.location.assign('/');
+        }
+        else {
+            alert('Please login at /auth-login first');
+            window.location.assign('/');
+        }
+
+    }
 
     onVote = (id_of_candidate, eid) => {
 
@@ -221,8 +236,6 @@ class ShowElection extends Component {
 
     }
 
-
-
     render() {
         return (
           <div>
@@ -232,8 +245,8 @@ class ShowElection extends Component {
               <nav style={{display:'block'}}>
                 <ul style={{listStyle:'none'}}>
                   <li style={styles.link}><a className='a' href="/get-credentials">Get Credentials</a></li>
-                  <li style={styles.link}><a className='a' href="#" onClick={this.onLogout}>Logout</a></li>
                   <li style={styles.link}><a className='a' href="#">About</a></li>
+                  <li style={styles.link}><a className='a' href="#" onClick={this.onLogout}>Logout</a></li>
                 </ul>
               </nav>
             </div>
@@ -253,7 +266,7 @@ class ShowElection extends Component {
                               return (
 
                                 <div>
-                                <Card style={{ width: 550 , fontWeight:'bold' }}>
+                                <Card style={{ width: 550 , fontWeight:'bold' , fontSize:'130%' }}>
 
                                     <p>Name: {this.state.nominee_names[index]}</p>
                                     <p>Gender: {this.state.nominee_genders[index]}</p>
@@ -270,29 +283,6 @@ class ShowElection extends Component {
                                 </Card>
                                 <br />
                                 </div>
-
-/*
-                                  <li key={nomination.hasura_id}>
-
-                                      <ul>
-                                          <li key={nomination.hasura_id}>
-
-                                              <li key={this.state.nominee_names[index]}>Name: {this.state.nominee_names[index]}</li>
-                                              <li key={this.state.nominee_genders[index]}>Gender: {this.state.nominee_genders[index]}</li>
-                                              <li key={this.state.nominee_ages[index]}>Age: {this.state.nominee_ages[index]}</li>
-                                              {nomination.individual ? <li key={nomination.individual}>Party: Independent Candidate</li> : <li key={nomination.party}>Party: {nomination.party}</li>}
-                                              {!(nomination.individual) && <li key={nomination.party_ticket_id}>Party Ticket ID: {nomination.party_ticket_id}</li>}
-                                              <li key={nomination.manifesto}>Election Manifesto: {nomination.manifesto}</li>
-                                          </li>
-                                      </ul>
-                                      <Button type="primary" onClick={() => this.onVote(nomination.hasura_id, this.props.match.params.id)}>Vote</Button>
-                                      <br />
-                                      <br />
-                                      {this.state.textBoxShow === nomination.hasura_id && <Search placeholder="Enter your Voting Credentials"  enterButton="Cast Vote" onSearch={value => this.onCastVote(nomination.hasura_id, this.props.match.params.id, value)} />}
-                                      <br />
-                                      <br />
-                                  </li>
-*/
                               );
                           })}
                       </ol>
