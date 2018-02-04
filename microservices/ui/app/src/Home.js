@@ -28,7 +28,7 @@ class Home extends Component {
         config: { headers: { 'Content-Type': 'application/json' } }
       })
         .then(response => {
-          console.log("To find hasura id"+ response.data);
+          console.log("To find hasura id"+ response.data.hasura_id);
 
           // axios({
           //   method: 'post',
