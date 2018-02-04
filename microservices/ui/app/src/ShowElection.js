@@ -15,6 +15,8 @@ class ShowElection extends Component {
         super(props);
 
         this.state = {
+            credentialsThere: false,
+            hasura_id: -1,
             electionState: '',         //Store details of the particular election state in the page
             electionPost: '',
             nominations: [],
@@ -35,6 +37,44 @@ class ShowElection extends Component {
     }
 
     componentWillMount() {
+
+      axios({
+        method: 'post',
+        url: 'https://api.artfully11.hasura-app.io/data',
+        data: { auth: authToken },
+        config: { headers: { 'Content-Type': 'application/json' } }
+      })
+        .then(response => {
+          console.log(response.data.hasura_id);
+          this.setState({ hasura_id: response.data.hasura_id });
+
+          axios({
+            method: 'post',
+            url: 'https://api.artfully11.hasura-app.io/check-credentials',
+            data: { serial: this.state.hasura_id },
+            config: { headers: { 'Content-Type': 'application/json' } }
+          })
+            .then(response => {
+              console.log(response.data);
+              if (response.data === 0) {
+                this.setState({ credentialsThere: true });
+              }
+              else if (response.data === 1) {
+                this.setState({ credentialsThere: false });
+              }
+            })
+            .catch(error => {
+              console.log('Post request to check for credentials failed!');
+            });
+
+
+        })
+
+        .catch(error => {
+          console.log('Post request to get hasura id failed!');
+        });
+
+
         axios({
             method: 'post',
             url: 'https://api.artfully11.hasura-app.io/data',
