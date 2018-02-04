@@ -12,13 +12,49 @@ class Home extends Component {
         super(props);
 
         this.state = {
-            elections: []
+            elections: [],
+          credentialsThere: ''
         };
 
     }
 
     componentWillMount()
     {
+
+      axios({
+        method: 'post',
+        url: 'https://api.artfully11.hasura-app.io/data',
+        data: { auth: authToken },
+        config: { headers: { 'Content-Type': 'application/json' } }
+      })
+        .then(response => {
+          console.log("To find hasura id"+ response.data);
+
+          // axios({
+          //   method: 'post',
+          //   url: 'https://api.artfully11.hasura-app.io/check-credentials',                                           //URL to be modified here
+          //   data: { serial: id },
+          //   config: { headers: { 'Content-Type': 'application/json' } }
+          // })
+          //   .then(function (response) {
+          //     console.log(response.data);
+          //     var arr = Object.values(response.data[0]);
+          //     this3.setState({ details: arr });
+          //     console.log(this3.state.details);
+          //   })
+          //   .catch(function (response) {
+          //     console.log("post req to check for credentials failed");
+          //   });
+
+
+        })
+
+        .catch(error => {
+          console.log('Post request to get hasura id failed!');
+        });
+      
+     
+
 
         axios({
             method: 'post',
@@ -28,10 +64,6 @@ class Home extends Component {
         })
             .then(response => {
                 console.log(response.data);
-
-
-
-
                 this.setState({ elections: response.data });
             })
             .catch(error => {
