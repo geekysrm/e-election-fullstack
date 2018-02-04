@@ -13,7 +13,8 @@ class Home extends Component {
 
         this.state = {
             elections: [],
-            credentialsThere: false
+            credentialsThere: false,
+            hasura_id: -1
         };
 
     }
@@ -29,22 +30,22 @@ class Home extends Component {
       })
         .then(response => {
           console.log(response.data.hasura_id);
-          var hasura_id = response.data.hasura_id;
+          this.setState({ hasura_id: response.data.hasura_id });
 
           axios({
             method: 'post',
             url: 'https://api.artfully11.hasura-app.io/check-credentials',                               
-            data: { serial: hasura_id },
+            data: { serial: this.state.hasura_id },
             config: { headers: { 'Content-Type': 'application/json' } }
           })
             .then(response => {
               console.log(response.data);
-              if (response.data === 0) {
-                this.setState({ credentialsThere: true });
-              }
-              else if (response.data === 1) {
-                this.setState({ credentialsThere: false });
-              }
+              // if (response.data === 0) {
+              //   this.setState({ credentialsThere: true });
+              // }
+              // else if (response.data === 1) {
+              //   this.setState({ credentialsThere: false });
+              // }
             })
             .catch(error => {
               console.log('Post request to check for credentials failed!');
