@@ -40,12 +40,12 @@ class Home extends Component {
           })
             .then(response => {
               console.log(response.data);
-              // if (response.data === 0) {
-              //   this.setState({ credentialsThere: true });
-              // }
-              // else if (response.data === 1) {
-              //   this.setState({ credentialsThere: false });
-              // }
+              if (response.data === 0) {
+                this.setState({ credentialsThere: true });
+              }
+              else if (response.data === 1) {
+                this.setState({ credentialsThere: false });
+              }
             })
             .catch(error => {
               console.log('Post request to check for credentials failed!');
