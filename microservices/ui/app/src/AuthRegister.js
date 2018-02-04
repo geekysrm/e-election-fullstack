@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import 'antd/dist/antd.css';
 import './Auth.css';
-import { Form, Icon, Input, Button } from 'antd';
+import { Form, Icon, Input, Button, Modal } from 'antd';
 
 import { saveOffline, getSavedToken } from './config';
 import { authenticateUser } from './api';
@@ -39,7 +39,10 @@ class AuthForm extends React.Component {
              saveOffline(authResponse.auth_token)
              //this.showAlert("SignUp Successful! \n Your auth credentials are: " + JSON.stringify(authResponse, null, 2));
              //this.showAlert("SignUp Successful! \n Please login.");
-             alert("SignUp Successful!");       //TO DO: convert to modal
+             Modal.success({
+               title: 'Registered Successfully!',
+               content: 'Taking you to login...',
+             });
              window.location.assign("/auth-login");
 
            } else {
