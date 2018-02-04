@@ -42,7 +42,9 @@ class AuthForm extends React.Component {
            if (authResponse.auth_token) {
              saveOffline(authResponse.auth_token);
 
+             //check
             this.showModal();
+
             
              Modal.success({
                title: 'Registered Successfully!',
