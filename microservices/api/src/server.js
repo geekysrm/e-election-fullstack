@@ -23,6 +23,10 @@ app.get('/',function(req,res){
   res.sendFile(path.join(__dirname,'index.html'));
 });
 
+app.get('/logo',function(req,res){
+  res.sendFile(path.join(__dirname,'logo.png'))
+})
+
 app.get('/indexjs', function(req, res) {
   res.sendFile(path.join(__dirname,'index.js'));
 });
