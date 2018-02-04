@@ -46,11 +46,11 @@ class AuthForm extends React.Component {
             this.showModal();
 
             
-             Modal.success({
-               title: 'Registered Successfully!',
-               content: 'Taking you to login...',
-             });
-             window.location.assign("/auth-login");
+            //  Modal.success({
+            //    title: 'Registered Successfully!',
+            //    content: 'Taking you to login...',
+            //  });
+            //  window.location.assign("/auth-login");
 
            } else {
              alert(JSON.stringify(authResponse));
