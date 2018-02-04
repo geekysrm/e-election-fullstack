@@ -9,7 +9,16 @@ As we know, India is the largest democracy in the world and houses ~1.3 Billion 
 ### Workflow
 When the user signs up and there after logs in, he is supposed to go to the "Get Credentials" page where he will include all his details and on entering valid detils, a voting credential will be generated which would be used while voting for a post.
 In the "Homepage" of the e-election app, the user can see the various ongoing elections and view their details by clicking on the "View Details" button next to each election. On clicking the "View Details" button, he will be able to see the various nominations for the post. He can select a candidate and vote for him/her by entering his voting credentials. Also, he can nominate himself for the post by entering the manifesto and other details.
-After the election date, the user can view the results as the election is considered inactive.
+After the election date, the user can view the results and thus the election is considered inactive.
 
 ## Internal Implementation
+The app uses [Node.JS](https://nodejs.org) in the backend and [React.JS](https://reactjs.org) in the frontend. We have also used the React UI library called [Ant Design](https://www.ant.design).
+We have also used Hasura Data APIs for managing databases, Auth APIs for user authentication, filestorage APIs for storing photo from user.
 
+## How do I build the e-election app?
+You can get the project from the hasura hub after it is uploaded there and use it to build an e-election app.
+
+## Support
+If you happen to get stuck anywhere, feel free to raise an issue [here](https://github.com/geekysrm/e-election-fullstack/issues)
+
+Also, you can contact me via [email](mailto:soumyacool2012@gmail.com) or [twitter](https://twitter.com/SoumyaRnMohanty) or [facebook](https://www.fb.com/geekysrm).
