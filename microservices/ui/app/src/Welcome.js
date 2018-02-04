@@ -29,7 +29,6 @@ class Welcome extends Component
   {
     return(
       <div style={styles.container}>
-        <img src='https://api.artfully11.hasura-app.io/logo' />
         <h1 style={styles.header}>E-Election</h1>
         <div style={styles.body}>
           <div>
@@ -43,10 +42,10 @@ class Welcome extends Component
           </div>
           <div style={{width:"35%" , border:'3px solid'}}>
           <Carousel autoplay>
-           <div><img style={styles.image} src="http://www.livemint.com/rf/Image-621x414/LiveMint/WebArchive/BP/Photos/2015-11-07/Processed/Mint/Web/biharpolls1-kMIG--621x414@LiveMint.jpg"/></div>
-           <div><img style={styles.image} src="http://s3.india.com/wp-content/uploads/2014/05/voters.jpg"/></div>
-           <div><img style={styles.image} src="https://i0.wp.com/thewire.in/wp-content/uploads/2017/06/EVM-pti.jpg?ssl=1"/></div>
-           <div><img style={styles.image} src="http://st1.bgr.in/wp-content/uploads/2014/04/india-elections-2014.jpg"/></div>
+           <div><img style={styles.image} src="https://api.artfully11.hasura-app.io/img1"/></div>
+           <div><img style={styles.image} src="https://api.artfully11.hasura-app.io/img2"/></div>
+           <div><img style={styles.image} src="https://api.artfully11.hasura-app.io/img3"/></div>
+           <div><img style={styles.image} src="https://api.artfully11.hasura-app.io/img4"/></div>
           </Carousel>
           </div>
         </div>
@@ -86,7 +85,7 @@ const styles = {
     alignItems: 'center'
   },
   container:{
-    background: 'linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url("http://s.wionews.com/photos/screen%20shot%202017-04-13%20at%206.51.16%20pm-20170413012157-1170x645.png")',
+    background: 'linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url("https://api.artfully11.hasura-app.io/background")',
     backgroundRepeat: 'no-repeat',
     backgroundAttachment: 'fixed',
     height: '100%',
