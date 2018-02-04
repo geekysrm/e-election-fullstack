@@ -614,17 +614,7 @@ class CredentialsForm extends React.Component {
                         <br />
                         <br />
                         <span>Voting Credentials</span>
-
-                        <Alert
-                            description={
-
-                                <CopyToClipboard onCopy={this.onCopy}>
-                                    <span style={{ cursor: 'pointer' }}><strong>{credentialsThere}</strong>.</span>
-                                </CopyToClipboard>
-
-                            }
-                        />;
-                        {copiedSpan}
+                        <Input value={this.state.details[3]} style={{ color: 'black', cursor:'pointer' }} disabled={true} />
 
                         {/*Make the above input i.e credentials to be copiable with alert "copied to clipboard"*/}
                         <br />
