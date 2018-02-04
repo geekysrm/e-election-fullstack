@@ -2,9 +2,29 @@ import React, { Component } from 'react';
 import 'antd/dist/antd.css';
 import './Welcome.css';
 import { Carousel , Button } from 'antd';
+import { getSavedToken } from './config';
+
 
 class Welcome extends Component
 {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+     loggedIn: false
+    };
+  }
+
+  componentWillMount() {
+    const authToken = getSavedToken();
+    if(authToken)
+    {
+      this.setState({ loggedIn: true });
+    }
+    else this.setState({ loggedIn: false });
+
+  }
+
   render()
   {
     return(
@@ -17,7 +37,7 @@ class Welcome extends Component
             <br />
             Use our E-Election app
             <br />
-            <Button type="primary" href="/auth-login" size="large" style={{width:'200px'}}>LOGIN TO VOTE</Button>
+              {!this.state.loggedIn ? <Button type="primary" href="/auth-login" size="large" style={{ width: '200px' }}>LOGIN TO VOTE</Button> : <Button type="primary" href="/home" size="large" style={{ width: '200px' }}>GO TO DASHBOARD</Button>}
             </h1>
           </div>
           <div style={{width:"35%" , border:'3px solid'}}>
