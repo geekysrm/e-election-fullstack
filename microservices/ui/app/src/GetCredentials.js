@@ -198,6 +198,9 @@ class CredentialsForm extends React.Component {
     }
 
     handleOnLoad = () => {
+        if (!authToken) {
+            window.location.assign("/");
+        }
         var this1 = this;
 
         axios({

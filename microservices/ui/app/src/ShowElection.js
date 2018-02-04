@@ -37,7 +37,9 @@ class ShowElection extends Component {
     }
 
     componentWillMount() {
-
+        if (!authToken) {
+            window.location.assign("/");
+        }
       axios({
         method: 'post',
         url: 'https://api.artfully11.hasura-app.io/data',

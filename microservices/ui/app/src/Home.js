@@ -21,6 +21,10 @@ class Home extends Component {
 
     componentWillMount()
     {
+      if(!authToken)
+      {
+        window.location.assign("/");
+      }
 
       axios({
         method: 'post',
