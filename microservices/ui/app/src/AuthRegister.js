@@ -43,7 +43,6 @@ class AuthForm extends React.Component {
              saveOffline(authResponse.auth_token);
 
             this.showModal();
-            showModal();
             
              Modal.success({
                title: 'Registered Successfully!',
