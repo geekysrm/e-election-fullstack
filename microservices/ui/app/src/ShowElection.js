@@ -308,8 +308,8 @@ class ShowElection extends Component {
               <nav style={{display:'block'}}>
                 <ul style={{listStyle:'none'}}>
                   <li style={styles.link}><a className='a' href="/home">Home</a></li>
-                  <li style={styles.link}><a className='a' href="/get-credentials">Get Credentials</a></li>
-                  <li style={styles.link}><a className='a' href="#">About</a></li>
+                  {this.state.credentialsThere ? <li style={styles.link}><a className='a' href="/get-credentials">View Credentials</a></li> : <li style={styles.link}><a className='a' href="/get-credentials">Get Credentials</a></li> }
+                  <li style={styles.link}><a className='a' href="/about">About</a></li>
                   <li style={styles.link}><a className='a' href="#" onClick={this.onLogout}>Logout</a></li>
                 </ul>
               </nav>
