@@ -37,19 +37,17 @@ class Home extends Component {
             data: { serial: hasura_id },
             config: { headers: { 'Content-Type': 'application/json' } }
           })
-            .then(function (response) {
-              if(response.data === 0 )
-              {
+            .then(response => {
+              console.log(response.data);
+              if (response.data === 0) {
                 this.setState({ credentialsThere: true });
               }
-              else if(response.data === 1)
-              {
+              else if (response.data === 1) {
                 this.setState({ credentialsThere: false });
               }
-            
             })
-            .catch(function (response) {
-              console.log("Post req to check for credentials failed");
+            .catch(error => {
+              console.log('Post request to check for credentials failed!');
             });
 
 
