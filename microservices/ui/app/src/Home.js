@@ -13,7 +13,7 @@ class Home extends Component {
 
         this.state = {
             elections: [],
-          credentialsThere: ''
+            credentialsThere: false
         };
 
     }
@@ -28,23 +28,29 @@ class Home extends Component {
         config: { headers: { 'Content-Type': 'application/json' } }
       })
         .then(response => {
-          console.log("To find hasura id"+ response.data.hasura_id);
+          console.log(response.data.hasura_id);
+          var hasura_id = response.data.hasura_id;
 
-          // axios({
-          //   method: 'post',
-          //   url: 'https://api.artfully11.hasura-app.io/check-credentials',                                           //URL to be modified here
-          //   data: { serial: id },
-          //   config: { headers: { 'Content-Type': 'application/json' } }
-          // })
-          //   .then(function (response) {
-          //     console.log(response.data);
-          //     var arr = Object.values(response.data[0]);
-          //     this3.setState({ details: arr });
-          //     console.log(this3.state.details);
-          //   })
-          //   .catch(function (response) {
-          //     console.log("post req to check for credentials failed");
-          //   });
+          axios({
+            method: 'post',
+            url: 'https://api.artfully11.hasura-app.io/check-credentials',                               
+            data: { serial: hasura_id },
+            config: { headers: { 'Content-Type': 'application/json' } }
+          })
+            .then(function (response) {
+              if(response.data === 0 )
+              {
+                this.setState({ credentialsThere: true });
+              }
+              else if(response.data === 1)
+              {
+                this.setState({ credentialsThere: false });
+              }
+            
+            })
+            .catch(function (response) {
+              console.log("Post req to check for credentials failed");
+            });
 
 
         })
@@ -99,7 +105,7 @@ class Home extends Component {
                 <nav style={{display:'block'}}>
                   <ul style={{listStyle:'none'}}>
                     <li style={styles.link}><a className='anow'>Home</a></li>
-                    <li style={styles.link}><a className='a' href="/get-credentials">Get Credentials</a></li>
+                  {this.state.credentialsThere ? <li style={styles.link}><a className='a' href="/get-credentials">View Credentials</a></li> : <li style={styles.link}><a className='a' href="/get-credentials">Get Credentials</a></li> }
                     <li style={styles.link}><a className='a' href="#">About</a></li>
                     <li style={styles.link}><a className='a' href="#" onClick={this.onLogout}>Logout</a></li>
                   </ul>
