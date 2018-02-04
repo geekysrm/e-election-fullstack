@@ -20,7 +20,12 @@ class AuthForm extends React.Component {
   }
 
   showModal = () => {
-    console.log("Hello");
+    console.log("Success");
+    const modal = Modal.success({
+      title: 'Registered Successfully!',
+      content: 'Taking you to login...',
+    });
+    setTimeout(() => modal.destroy(), 2000);
   }
 
   handleSubmit = (e) => {
@@ -44,13 +49,7 @@ class AuthForm extends React.Component {
 
              //check
             this.showModal();
-
-            
-            //  Modal.success({
-            //    title: 'Registered Successfully!',
-            //    content: 'Taking you to login...',
-            //  });
-            //  window.location.assign("/auth-login");
+            window.location.assign("/auth-login");
 
            } else {
              alert(JSON.stringify(authResponse));
