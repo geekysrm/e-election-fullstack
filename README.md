@@ -27,12 +27,12 @@ This is the Login screen where the user can log in to the application or registe
 
 This is the Homepage of the app where the user can see various ongoing elections.
 
-![Home Page](https://raw.githubusercontent.com/geekysrm/e-election-fullstack/master/readme-assets/hpd3.png "Home Page")
+![Home Page](https://raw.githubusercontent.com/geekysrm/e-election-fullstack/master/readme-assets/hpdf3.png "Home Page")
 
 
 This is the Get credentials page of the app where the user submits various details about himself and voting credentials is generated for him.
 
-![Get credentials Page](https://raw.githubusercontent.com/geekysrm/e-election-fullstack/master/readme-assets/hpd4.png "Get credentials Page")
+![Get credentials Page](https://raw.githubusercontent.com/geekysrm/e-election-fullstack/master/readme-assets/hpdf4.png "Get credentials Page")
 
 
 This is the Submit Nomination page of the app where the user can submit his nomination for a post by entering various details.
@@ -42,12 +42,12 @@ This is the Submit Nomination page of the app where the user can submit his nomi
 
 This is the View Nomination page of the app where the user can view all nominations for an election.
 
-![View Nomination Page](https://raw.githubusercontent.com/geekysrm/e-election-fullstack/master/readme-assets/hpd7.png "View Nomination Page")
+![View Nomination Page](https://raw.githubusercontent.com/geekysrm/e-election-fullstack/master/readme-assets/hpdf7.png "View Nomination Page")
 
 
 Here, the user enters his voting credentials(which were generated in the Get Credentials page) and can vote for a candidate.
 
-![View Nomination Page](https://raw.githubusercontent.com/geekysrm/e-election-fullstack/master/readme-assets/hpd8.png "View Nomination Page")
+![View Nomination Page](https://raw.githubusercontent.com/geekysrm/e-election-fullstack/master/readme-assets/hpdf8.png "View Nomination Page")
 
 
 After voting for a candidate for a particular post, the user is presented with a success message.
@@ -57,7 +57,7 @@ After voting for a candidate for a particular post, the user is presented with a
 
 The user can view the results of an election by clicking on the View Results button and the results will be shown as below.
 
-![Results Page](https://raw.githubusercontent.com/geekysrm/e-election-fullstack/master/readme-assets/hpd10.png "Results Page")
+![Results Page](https://raw.githubusercontent.com/geekysrm/e-election-fullstack/master/readme-assets/hpdf10.png "Results Page")
 
 ## Internal Implementation
 The app uses [Node.JS](https://nodejs.org) in the backend and [React.JS](https://reactjs.org) in the frontend. We have also used the React UI library called [Ant Design](https://www.ant.design).
