@@ -872,7 +872,7 @@ app.post('/results',function(req,res){
           ],
           "where": {
               "election_id": {
-                  "$eq": "1"
+                  "$eq": election_id
               }
           }
       }
@@ -898,7 +898,7 @@ app.post('/results',function(req,res){
                 ],
                 "where": {
                     "election_id": {
-                        "$eq": "1"
+                        "$eq": election_id
                     }
                 }
             }
