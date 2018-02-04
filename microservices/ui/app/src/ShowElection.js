@@ -340,7 +340,7 @@ class ShowElection extends Component {
 
 
     render() {
-        return (
+        return ( 
           <div>
 
             <div style={styles.side}>
