@@ -25,7 +25,27 @@ app.get('/',function(req,res){
 
 app.get('/logo',function(req,res){
   res.sendFile(path.join(__dirname,'logo.png'))
-})
+});
+
+app.get('/background',function(req,res){
+  res.sendFile(path.join(__dirname,'background.png'))
+});
+
+app.get('/img1',function(req,res){
+  res.sendFile(path.join(__dirname,'img1.jpg'))
+});
+
+app.get('/img2',function(req,res){
+  res.sendFile(path.join(__dirname,'img2.jpg'))
+});
+
+app.get('/img3',function(req,res){
+  res.sendFile(path.join(__dirname,'img3.jpg'))
+});
+
+app.get('/img4',function(req,res){
+  res.sendFile(path.join(__dirname,'img4.jpg'))
+});
 
 app.get('/indexjs', function(req, res) {
   res.sendFile(path.join(__dirname,'index.js'));
