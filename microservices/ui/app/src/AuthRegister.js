@@ -19,6 +19,10 @@ class AuthForm extends React.Component {
     };
   }
 
+  showModal = () => {
+    console.log("Hello");
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
@@ -36,9 +40,11 @@ class AuthForm extends React.Component {
            //this.showProgressIndicator(false)
            console.log(authResponse);
            if (authResponse.auth_token) {
-             saveOffline(authResponse.auth_token)
-             //this.showAlert("SignUp Successful! \n Your auth credentials are: " + JSON.stringify(authResponse, null, 2));
-             //this.showAlert("SignUp Successful! \n Please login.");
+             saveOffline(authResponse.auth_token);
+
+            this.showModal();
+            showModal();
+            
              Modal.success({
                title: 'Registered Successfully!',
                content: 'Taking you to login...',
@@ -46,7 +52,6 @@ class AuthForm extends React.Component {
              window.location.assign("/auth-login");
 
            } else {
-             //this.showAlert(JSON.stringify(authResponse));
              alert(JSON.stringify(authResponse));
            }
          });
