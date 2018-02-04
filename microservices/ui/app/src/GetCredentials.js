@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Divider, Checkbox, Button, AutoComplete, DatePicker, Alert } from 'antd';
+import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Divider, Checkbox, Button, AutoComplete, DatePicker, Alert, Modal } from 'antd';
 import moment from 'moment';
 import axios from 'axios';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
@@ -344,7 +344,11 @@ class CredentialsForm extends React.Component {
                         });
                 }
                 else {
-                    alert('Please enter correct DOB.\nYou have to be above 18 years to vote!');
+                    //alert('Please enter correct DOB.\nYou have to be above 18 years to vote!');
+                    Modal.error({
+                        title: 'Please enter correct DOB!',
+                        content: 'You have to be above 18 years to vote!',
+                    });
                     that.setState({ loading: false });
                 }
 

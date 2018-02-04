@@ -113,6 +113,7 @@ const styles = {
 
 export default Welcome;
 
-//Ask Sai to add shadow effect on heading E-Election
 
+//Ask Sai to add shadow effect on heading E-Election
+//TODO: Increase size of favicon in index.html
 //TODO: Restore default conf/domains.yaml from other hasura project folders
