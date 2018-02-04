@@ -624,6 +624,7 @@ class CredentialsForm extends React.Component {
                                 </CopyToClipboard>
 
                             }
+                            
                         />
                         {copiedSpan}
 
