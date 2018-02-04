@@ -614,17 +614,16 @@ class CredentialsForm extends React.Component {
                         <br />
                         <br />
                         <span>Voting Credentials</span>
-                        //<Input value={this.state.details[3]} style={{ color: 'black', cursor:'pointer' }} disabled={true} />
 
                         <Alert
                             description={
 
-                                <CopyToClipboard onCopy={this.onCopy}>
+                                <CopyToClipboard onCopy={this.onCopy} text={this.state.details[3]}>
                                     <span style={{ cursor: 'pointer' }}><strong>{this.state.details[3]}</strong></span>
                                 </CopyToClipboard>
 
                             }
-                            
+
                         />
                         {copiedSpan}
 
