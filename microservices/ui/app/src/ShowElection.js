@@ -259,7 +259,7 @@ class ShowElection extends Component {
                 var winner_votes = response.data.votes_of_winner;
                 var total_votes = response.data.total_votes;
                 var win_percent = response.data.win_percent;
-                
+
                 axios({
                     method: 'post',
                     url: 'https://api.artfully11.hasura-app.io/view-credentials',
@@ -279,7 +279,7 @@ class ShowElection extends Component {
                                 <div>
                                     <p>Winner: {winner}</p>
                                     <p>Total number of votes: {total_votes}</p>
-                                    <p>Winner's number of votes: {winner_votes}</p>
+                                    <p>Winner number of votes: {winner_votes}</p>
                                     <p>Winning Percentage: {win_percent}</p>
                                 </div>
                             ),
