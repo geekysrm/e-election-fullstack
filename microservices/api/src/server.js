@@ -24,27 +24,27 @@ app.get('/',function(req,res){
 });
 
 app.get('/logo',function(req,res){
-  res.sendFile(path.join(__dirname,'logo.png'))
+  res.sendFile(path.join(__dirname,'images/logo.png'))
 });
 
 app.get('/background',function(req,res){
-  res.sendFile(path.join(__dirname,'background.png'))
+  res.sendFile(path.join(__dirname,'images/background.png'))
 });
 
 app.get('/img1',function(req,res){
-  res.sendFile(path.join(__dirname,'img1.jpg'))
+  res.sendFile(path.join(__dirname,'images/img1.jpg'))
 });
 
 app.get('/img2',function(req,res){
-  res.sendFile(path.join(__dirname,'img2.jpg'))
+  res.sendFile(path.join(__dirname,'images/img2.jpg'))
 });
 
 app.get('/img3',function(req,res){
-  res.sendFile(path.join(__dirname,'img3.jpg'))
+  res.sendFile(path.join(__dirname,'images/img3.jpg'))
 });
 
 app.get('/img4',function(req,res){
-  res.sendFile(path.join(__dirname,'img4.jpg'))
+  res.sendFile(path.join(__dirname,'images/img4.jpg'))
 });
 
 app.get('/indexjs', function(req, res) {
