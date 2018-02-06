@@ -162,20 +162,20 @@ const { MonthPicker, RangePicker } = DatePicker;
 
 // }];
 
-// const gender = [{
-//     value: 'Male',
-//     label: 'Male',
+const gender = [{
+    value: 'Male',
+    label: 'Male',
 
-// }, {
-//     value: 'Female',
-//     label: 'Female',
+}, {
+    value: 'Female',
+    label: 'Female',
 
-// },
-// {
-//     value: 'Others',
-//     label: 'Others',
+},
+{
+    value: 'Others',
+    label: 'Others',
 
-// }];
+}];
 
 const states = [{
     value: 'Chandni Chowk',
