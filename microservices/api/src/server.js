@@ -20,7 +20,8 @@ var server = require('http').Server(app);
 var config = require('./config');
 
 app.get('/',function(req,res){
-  res.sendFile(path.join(__dirname,'index.html'));
+ // res.sendFile(path.join(__dirname,'index.html'));
+ res.send(Date());
 });
 
 app.get('/logo',function(req,res){
