@@ -28,7 +28,7 @@ class ShowElection extends Component {
             voter_state: '',
             voter_credentials: '',
             voter_can_vote: 0,
-            disableCastVoteButton: false,        //disable the Cast Vote btn after clicking it once (not implemented)
+            disableCastVoteButton: false,        
             loadingResults: false
         };
 

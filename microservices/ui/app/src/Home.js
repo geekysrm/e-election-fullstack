@@ -136,7 +136,7 @@ class Home extends Component {
                                   extra={<a href={`/election/${election.election_id}`}>View Details</a>} style={{ width: 550 , fontWeight:'bold' }}
                                 >
                                     <br />
-                                    <p>Election State: {election.state}</p>
+                                    <p>Election Constituency: {election.state}</p>
                                     <p>Election Post: {election.post}</p>
                                     <p>Nomination Start Time: {nsd+" , "+nst}</p>
                                     <p>Nomination End Time: {ned+" , "+net}</p>

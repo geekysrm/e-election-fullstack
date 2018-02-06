@@ -13,170 +13,184 @@ const Option = Select.Option;
 const AutoCompleteOption = AutoComplete.Option;
 const { MonthPicker, RangePicker } = DatePicker;
 
+// const states = [{
+//     value: 'Andaman and Nicobar Islands',
+//     label: 'Andaman and Nicobar Islands',
+
+// },
+// {
+//     value: 'Andhra Pradesh',
+//     label: 'Andhra Pradesh',
+
+// }, {
+//     value: 'Arunachal Pradesh',
+//     label: 'Arunachal Pradesh',
+
+// }, {
+//     value: 'Assam',
+//     label: 'Assam',
+
+// }, {
+//     value: 'Bihar',
+//     label: 'Bihar',
+
+// }, {
+//     value: 'Chandigarh',
+//     label: 'Chandigarh',
+
+// }, {
+//     value: 'Chhattisgarh',
+//     label: 'Chhattisgarh',
+
+// }, {
+//     value: 'Dadra and Nagar Haveli',
+//     label: 'Dadra and Nagar Haveli',
+
+// },
+// {
+//     value: 'Daman and Diu',
+//     label: 'Daman and Diu',
+
+// },
+// {
+//     value: 'National Capital Territory of Delhi',
+//     label: 'National Capital Territory of Delhi',
+
+// }, {
+//     value: 'Goa',
+//     label: 'Goa',
+
+// }, {
+//     value: 'Gujarat',
+//     label: 'Gujarat',
+
+// }, {
+//     value: 'Haryana',
+//     label: 'Haryana',
+
+// }, {
+//     value: 'Himachal Pradesh',
+//     label: 'Himachal Pradesh',
+
+// }, {
+//     value: 'Jammu and Kashmir',
+//     label: 'Jammu and Kashmir',
+
+// }, {
+//     value: 'Jharkhand',
+//     label: 'Jharkhand',
+
+// }, {
+//     value: 'Karnataka',
+//     label: 'Karnataka',
+
+// }, {
+//     value: 'Kerala',
+//     label: 'Kerala',
+
+// }, {
+//     value: 'Lakshadweep',
+//     label: 'Lakshadweep',
+
+// }, {
+//     value: 'Madhya Pradesh',
+//     label: 'Madhya Pradesh',
+
+// }, {
+//     value: 'Maharashtra',
+//     label: 'Maharashtra',
+
+// }, {
+//     value: 'Manipur',
+//     label: 'Manipur',
+
+// }, {
+//     value: 'Meghalaya',
+//     label: 'Meghalaya',
+
+// }, {
+//     value: 'Mizoram',
+//     label: 'Mizoram',
+
+// }, {
+//     value: 'Nagaland',
+//     label: 'Nagaland',
+
+// }, {
+//     value: 'Odisha',
+//     label: 'Odisha',
+
+// }, {
+//     value: 'Puducherry',
+//     label: 'Puducherry',
+
+// }, {
+//     value: 'Punjab',
+//     label: 'Punjab',
+
+// }, {
+//     value: 'Rajasthan',
+//     label: 'Rajasthan',
+
+// }, {
+//     value: 'Sikkim',
+//     label: 'Sikkim',
+
+// }, {
+//     value: 'Tamil Nadu',
+//     label: 'Tamil Nadu',
+
+// }, {
+//     value: 'Telangana',
+//     label: 'Telangana',
+
+// }, {
+//     value: 'Tripura',
+//     label: 'Tripura',
+
+// }, {
+//     value: 'Uttar Pradesh',
+//     label: 'Uttar Pradesh',
+
+// }, {
+//     value: 'Uttarakhand',
+//     label: 'Uttarakhand',
+
+// }, {
+//     value: 'West Bengal',
+//     label: 'West Bengal',
+
+// }];
+
+// const gender = [{
+//     value: 'Male',
+//     label: 'Male',
+
+// }, {
+//     value: 'Female',
+//     label: 'Female',
+
+// },
+// {
+//     value: 'Others',
+//     label: 'Others',
+
+// }];
+
 const states = [{
-    value: 'Andaman and Nicobar Islands',
-    label: 'Andaman and Nicobar Islands',
+    value: 'Chandni Chowk',
+    label: 'Chandni Chowk',
 
 },
 {
-    value: 'Andhra Pradesh',
-    label: 'Andhra Pradesh',
+    value: 'Delhi Cantonment',
+    label: 'Delhi Cantonment',
 
 }, {
-    value: 'Arunachal Pradesh',
-    label: 'Arunachal Pradesh',
-
-}, {
-    value: 'Assam',
-    label: 'Assam',
-
-}, {
-    value: 'Bihar',
-    label: 'Bihar',
-
-}, {
-    value: 'Chandigarh',
-    label: 'Chandigarh',
-
-}, {
-    value: 'Chhattisgarh',
-    label: 'Chhattisgarh',
-
-}, {
-    value: 'Dadra and Nagar Haveli',
-    label: 'Dadra and Nagar Haveli',
-
-},
-{
-    value: 'Daman and Diu',
-    label: 'Daman and Diu',
-
-},
-{
-    value: 'National Capital Territory of Delhi',
-    label: 'National Capital Territory of Delhi',
-
-}, {
-    value: 'Goa',
-    label: 'Goa',
-
-}, {
-    value: 'Gujarat',
-    label: 'Gujarat',
-
-}, {
-    value: 'Haryana',
-    label: 'Haryana',
-
-}, {
-    value: 'Himachal Pradesh',
-    label: 'Himachal Pradesh',
-
-}, {
-    value: 'Jammu and Kashmir',
-    label: 'Jammu and Kashmir',
-
-}, {
-    value: 'Jharkhand',
-    label: 'Jharkhand',
-
-}, {
-    value: 'Karnataka',
-    label: 'Karnataka',
-
-}, {
-    value: 'Kerala',
-    label: 'Kerala',
-
-}, {
-    value: 'Lakshadweep',
-    label: 'Lakshadweep',
-
-}, {
-    value: 'Madhya Pradesh',
-    label: 'Madhya Pradesh',
-
-}, {
-    value: 'Maharashtra',
-    label: 'Maharashtra',
-
-}, {
-    value: 'Manipur',
-    label: 'Manipur',
-
-}, {
-    value: 'Meghalaya',
-    label: 'Meghalaya',
-
-}, {
-    value: 'Mizoram',
-    label: 'Mizoram',
-
-}, {
-    value: 'Nagaland',
-    label: 'Nagaland',
-
-}, {
-    value: 'Odisha',
-    label: 'Odisha',
-
-}, {
-    value: 'Puducherry',
-    label: 'Puducherry',
-
-}, {
-    value: 'Punjab',
-    label: 'Punjab',
-
-}, {
-    value: 'Rajasthan',
-    label: 'Rajasthan',
-
-}, {
-    value: 'Sikkim',
-    label: 'Sikkim',
-
-}, {
-    value: 'Tamil Nadu',
-    label: 'Tamil Nadu',
-
-}, {
-    value: 'Telangana',
-    label: 'Telangana',
-
-}, {
-    value: 'Tripura',
-    label: 'Tripura',
-
-}, {
-    value: 'Uttar Pradesh',
-    label: 'Uttar Pradesh',
-
-}, {
-    value: 'Uttarakhand',
-    label: 'Uttarakhand',
-
-}, {
-    value: 'West Bengal',
-    label: 'West Bengal',
+    value: 'Malviya Nagar',
+    label: 'Malviya Nagar',
 
 }];
-
-const gender = [{
-    value: 'Male',
-    label: 'Male',
-
-}, {
-    value: 'Female',
-    label: 'Female',
-
-},
-{
-    value: 'Others',
-    label: 'Others',
-
-}];
-
 
 const authToken = getSavedToken();
 class CredentialsForm extends React.Component {
@@ -497,11 +511,11 @@ class CredentialsForm extends React.Component {
 
                         <FormItem
                             {...formItemLayout}
-                            label="State"
+                            label="Constituency"
                         >
                             {getFieldDecorator('states', {
-                                initialValue: ['Andaman and Nicobar Islands'],
-                                rules: [{ type: 'array', required: true, message: 'Please select your state!' }],
+                                initialValue: ['Chandni Chowk'],
+                                rules: [{ type: 'array', required: true, message: 'Please select your constituency!' }],
                             })(
                                 <Cascader options={states} key={states} style={{ width: '100%' }} />
                                 )}
@@ -604,7 +618,7 @@ class CredentialsForm extends React.Component {
                         <Input value={this.state.details[6]} style={{ color: 'black', cursor: 'pointer' }} disabled={true} />
                         <br />
                         <br />
-                        <span>State</span>
+                        <span>Constituency</span>
                         <Input value={this.state.details[2]} style={{ color: 'black', cursor: 'pointer' }} disabled={true} />
                         <br />
                         <br />
@@ -634,7 +648,6 @@ class CredentialsForm extends React.Component {
                         />
                         {copiedSpan}
 
-                        {/*Make the above input i.e credentials to be copiable with alert "copied to clipboard"*/}
                         <br />
                         <br />
                         </div>
