@@ -510,9 +510,9 @@ class CredentialsForm extends React.Component {
 
                         <FormItem
                             {...formItemLayout}
-                            label="State"
+                            label="Constituency"
                         >
-                            {getFieldDecorator('Constituency', {
+                            {getFieldDecorator('states', {
                                 initialValue: ['Chandni Chowk'],
                                 rules: [{ type: 'array', required: true, message: 'Please select your state!' }],
                             })(
@@ -617,7 +617,7 @@ class CredentialsForm extends React.Component {
                         <Input value={this.state.details[6]} style={{ color: 'black', cursor: 'pointer' }} disabled={true} />
                         <br />
                         <br />
-                        <span>State</span>
+                        <span>Constituency</span>
                         <Input value={this.state.details[2]} style={{ color: 'black', cursor: 'pointer' }} disabled={true} />
                         <br />
                         <br />
