@@ -12,7 +12,7 @@ const FormItem = Form.Item;
 const Option = Select.Option;
 const AutoCompleteOption = AutoComplete.Option;
 const { MonthPicker, RangePicker } = DatePicker;
-
+/*
 const states = [{
     value: 'Andaman and Nicobar Islands',
     label: 'Andaman and Nicobar Islands',
@@ -159,6 +159,22 @@ const states = [{
 }, {
     value: 'West Bengal',
     label: 'West Bengal',
+
+}];
+*/
+
+const states = [{
+    value: 'Chandni Chowk',
+    label: 'Chandni Chowk',
+
+},
+{
+    value: 'Delhi Cantonment',
+    label: 'Delhi Cantonment',
+
+}, {
+    value: 'Malviya Nagar',
+    label: 'Malviya Nagar',
 
 }];
 
@@ -496,8 +512,8 @@ class CredentialsForm extends React.Component {
                             {...formItemLayout}
                             label="State"
                         >
-                            {getFieldDecorator('states', {
-                                initialValue: ['Andaman and Nicobar Islands'],
+                            {getFieldDecorator('Constituency', {
+                                initialValue: ['Chandni Chowk'],
                                 rules: [{ type: 'array', required: true, message: 'Please select your state!' }],
                             })(
                                 <Cascader options={states} key={states} style={{ width: '100%' }} />
