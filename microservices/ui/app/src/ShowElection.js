@@ -28,7 +28,7 @@ class ShowElection extends Component {
             voter_state: '',
             voter_credentials: '',
             voter_can_vote: 0,
-            disableCastVoteButton: false,        //disable the Cast Vote btn after clicking it once (not implemented)
+            disableCastVoteButton: false,        
             loadingResults: false
         };
 
@@ -37,7 +37,9 @@ class ShowElection extends Component {
     }
 
     componentWillMount() {
-
+        if (!authToken) {
+            window.location.assign("/");
+        }
       axios({
         method: 'post',
         url: 'https://api.artfully11.hasura-app.io/data',

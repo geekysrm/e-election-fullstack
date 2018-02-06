@@ -1,105 +1,72 @@
-[**React**](https://reactjs.org) is a JavaScript library to create interactive user interfaces. The core library is focussed on the view layer. It is declarative and component based. This quickstart uses [**create-react-app**](https://github.com/facebook/create-react-app) to scaffold a react app with no build configuration.
+# E-Election App
 
-## What does this come with?
+## What is it? 
+E-election app is an innovative and unique app that allows users to conduct an election for a given post. For each post, users are able to nominate themselves as candidates and the users should be able to vote for one of them. 
 
-* React.js Hello World Project
-  * Automatic reloading and bundling
-  * All *create-react-app* feature
-  * react-scripts with inbuilt webpack bundling
-* Deployed with the [**serve**](https://www.npmjs.com/package/serve) package
-* **Dockerfile** (automatically used by Hasura for deployment)
+As we know, India is the largest democracy in the world and houses ~1.3 Billion people. But as statistics have shown, all Indians do not come forward to vote for their leaders for some reason or the other like long election queues, election booth violence etc. So, we have developed this app (as a part of Hasura Product Development Fellowship) to remove these constraints and give a smoother experience to the users. Also, any party/individual candidate can come forward and nominate himself/herself for a post.
 
-```
-FROM node:8
+## How it works? 
+### Workflow
+When the user signs up and there after logs in, he is supposed to go to the "Get Credentials" page where he will include all his details and on entering valid detils, a voting credential will be generated which would be used while voting for a post.
+In the "Homepage" of the e-election app, the user can see the various ongoing elections and view their details by clicking on the "View Details" button next to each election. On clicking the "View Details" button, he will be able to see the various nominations for the post. He can select a candidate and vote for him/her by entering his voting credentials. Also, he can nominate himself for the post by entering the manifesto and other details.
+After the election date, the user can view the results and thus the election is considered inactive.
 
-RUN apt-get update && apt-get install -y build-essential python
+## App in action
 
-#Install deps
-RUN mkdir /app
-COPY app/package.json /app/package.json
-RUN cd /app && npm install
-RUN npm -g install serve
+Here is the E-election app and its various screens views:
 
-#Add all source code
-ADD app /app/
-RUN cd /app && npm run build
+The user will be presented with the Welcome screen when he visits the application.
 
-WORKDIR /app
+![App Welcome Page](https://raw.githubusercontent.com/geekysrm/e-election-fullstack/master/readme-assets/hpdf1.png "App Welcome Page")
 
-#Default command
-CMD ["serve", "-s", "build", "-p", "8080"]
-```
 
-## Deployment instructions
+This is the Login screen where the user can log in to the application or register instead.
 
-### Basic deployment:
+![Login Page](https://raw.githubusercontent.com/geekysrm/e-election-fullstack/master/readme-assets/hpdf2.png "Login Page")
 
-* Press the **Clone & Deploy** button and follow the instructions.
-* The `hasura quickstart` command clones the project repository to your local computer, and also creates a **free Hasura cluster**, where the project will be hosted for free.
-* A git remote (called hasura) is created and initialized with your project directory.
-* Now get your cluster name using `hasura cluster status` and modify the package.json file inside `microservices/ui/app/package.json`. Assign your cluster name to `REACT_APP_CLUSTER_NAME` environment variable.
-* Run `git add .`, `git commit`, and `git push hasura master`.
-* Run the below command to open your shiny new deployed react app.
-``` shell
-$ hasura microservice open ui
-```
 
-### Making changes and deploying
+This is the Homepage of the app where the user can see various ongoing elections.
 
-* To make changes to the project, browse to `/microservices/ui/app/src` and edit the `HasuraExampleApp.js` file in `hasuraExamples` folder according to your app.
-* Commit the changes, and perform `git push hasura master` to deploy the changes.
+![Home Page](https://raw.githubusercontent.com/geekysrm/e-election-fullstack/master/readme-assets/hpdf3.png "Home Page")
 
-## Local development
 
-To test and make changes to this app locally, follow the below instructions.
-* Open Terminal and `cd` into the project folder
-* Run `npm install` to install all the project dependencies
-* Run `npm start` and `npm build` in the terminal to build and run it.
-* Make changes to the app, and see the changes in the browser
+This is the Get credentials page of the app where the user submits various details about himself and voting credentials is generated for him.
 
-## View server logs
+![Get credentials Page](https://raw.githubusercontent.com/geekysrm/e-election-fullstack/master/readme-assets/hpdf4.png "Get credentials Page")
 
-You can view the logs emitted by the ‘serve’ package by running the below command:
 
-``` shell
-$ hasura microservice logs ui
-```
-You can see the logs in your terminal, press `CTRL + C` to stop logging.
+This is the Submit Nomination page of the app where the user can submit his nomination for a post by entering various details.
 
-## Managing app dependencies
+![Submit Nomination Page](https://raw.githubusercontent.com/geekysrm/e-election-fullstack/master/readme-assets/hpdf6.png "Submit Nomination Page")
 
-* System dependencies, like changing the web-server can be made in the Dockerfile
-* npm/yarn deps can be managed by editing **package.json**.
 
-If changes have been done to the dependencies, `git commit`, and perform `git push hasura master` to deploy the changes.
+This is the View Nomination page of the app where the user can view all nominations for an election.
 
-## Migrating your existing React.js app
+![View Nomination Page](https://raw.githubusercontent.com/geekysrm/e-election-fullstack/master/readme-assets/hpdf7.png "View Nomination Page")
 
-* If you have an existing react app which you would like to deploy, replace the code inside `/microservices/ui/src/` according to your app.
-* You may need to modify the Dockerfile if your `package.json` or the build directory location has changed, but in most cases, it won't be required.
-* Commit, and run `git push hasura master` to deploy your app.
 
-## Adding backend features
+Here, the user enters his voting credentials(which were generated in the Get Credentials page) and can vote for a candidate.
 
-Hasura comes with BaaS APIs to make it easy to add backend features to your apps.
+![View Nomination Page](https://raw.githubusercontent.com/geekysrm/e-election-fullstack/master/readme-assets/hpdf8.png "View Nomination Page")
 
-### Add instant authentication via Hasura’s web UI kit
 
-Every project comes with an Authentication kit, you can restrict the access to your app to specific user roles.
-It comes with a UI for Signup and Login pages out of the box, which takes care of user registration and signing in.
+After voting for a candidate for a particular post, the user is presented with a success message.
 
-![Auth UI](https://docs.hasura.io/0.15/_images/uikit-dark.png)
+![Success Message on Voting](https://raw.githubusercontent.com/geekysrm/e-election-fullstack/master/readme-assets/hpdf9.png "Success Message on Voting")
 
-Follow the [Authorization docs](https://docs.hasura.io/0.15/manual/users/uikit.html) to add Authentication kit to your app.
 
-### Add a custom API
+The user can view the results of an election by clicking on the View Results button and the results will be shown as below.
 
-Hasura project is composed of a set of microservices. These include certain Hasura microservices like, postgres, nginx, data API, auth API and more but can also include your own microservices.
-This quickstart comes with one such custom service written in `nodejs` using the `express` framework. Check it out in action at `https://api.cluster-name.hasura-app.io` . Currently, it just returns a "Hello-React" at that endpoint.
+![Results Page](https://raw.githubusercontent.com/geekysrm/e-election-fullstack/master/readme-assets/hpdf10.png "Results Page")
 
-* [Adding Microservice](https://docs.hasura.io/0.15/manual/custom-microservices/index.html)
+## Internal Implementation
+The app uses [Node.JS](https://nodejs.org) in the backend and [React.JS](https://reactjs.org) in the frontend. We have also used the React UI library called [Ant Design](https://www.ant.design).
+We have also used Hasura Data APIs for managing databases, Auth APIs for user authentication, filestorage APIs for storing photo from user.
 
-### Add data APIs
+## How do I build the e-election app?
+You can get the project from the hasura hub after it is uploaded there and use it to build an e-election app. Further instructions will be updated after the project is uploaded on Hasura hub.
 
-Hasura comes with set of Data APIs to access the Postgres database which comes bundled with every Hasura cluster.
-Detailed docs of data APIs can be found [here](https://docs.hasura.io/0.15/manual/data/index.html).
+## Support
+If you happen to get stuck anywhere, feel free to raise an issue [here](https://github.com/geekysrm/e-election-fullstack/issues)
+
+Also, you can contact me via [email](mailto:soumyacool2012@gmail.com) or [twitter](https://twitter.com/SoumyaRnMohanty) or [facebook](https://www.fb.com/geekysrm).

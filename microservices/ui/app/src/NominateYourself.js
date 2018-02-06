@@ -29,6 +29,9 @@ class NominateYourselfForm extends React.Component {
     }
 
     handleOnLoad = () => {
+        if (!authToken) {
+            window.location.assign("/");
+        }
        console.log('onLoadFunc');
         axios({
             method: 'post',
