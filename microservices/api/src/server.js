@@ -100,8 +100,7 @@ app.get('/time',function(req,res){
 
 app.post('/election-over',function(req,res){
 
-  function get_date()
-  {
+    var cdate='';
     var loc = '28.704059, 77.102490' // India expressed as lat,lng tuple
     var targetDate = new Date() // Current date/time of user computer
     var timestamp = targetDate.getTime()/1000 + targetDate.getTimezoneOffset() * 60 // Current UTC date/time expressed as seconds since midnight, January 1, 1970 UTC
@@ -118,7 +117,90 @@ app.post('/election-over',function(req,res){
                 var offsets = output.dstOffset * 1000 + output.rawOffset * 1000 // get DST and time zone offsets in milliseconds
                 var localdate = new Date(timestamp * 1000 + offsets) // Date object containing current time of India (timestamp + dstOffset + rawOffset)
                 console.log(localdate.toLocaleString()) // Display current India date and time
-                return localdate.toLocaleString().split(',')[0];
+                cdate = localdate.toLocaleString().split(',')[0];
+
+                var election_id = req.body.eid;
+
+                var body = {
+                    "type": "select",
+                    "args": {
+                        "table": "election",
+                        "columns": [
+                            "election_end_time"
+                        ],
+                        "where": {
+                            "election_id": {
+                                "$eq": "3"
+                            }
+                        }
+                    }
+                };
+
+                var request = new XMLHttpRequest();
+
+                request.onreadystatechange = function(){
+                  if(request.readyState === XMLHttpRequest.DONE)
+                  {
+                    if(request.status === 200)
+                    {
+                      //res.status(200).send(request.responseText);
+
+                      var x = JSON.parse(request.responseText)[0];
+                      var eedate = x.election_end_time.split('T')[0];
+
+                      var eey = Number(eedate.split('-')[0]);
+                      var eem = Number(eedate.split('-')[1]);
+                      var eed = Number(eedate.split('-')[2]);
+                      console.log(eey);
+                      console.log(eem);
+                      console.log(eed);
+
+                      console.log(cdate);
+                      var cy = Number(cdate.split('/')[2]);
+                      var cm = Number(cdate.split('/')[0]);
+                      var cd = Number(cdate.split('/')[1]);
+                      console.log(cy);
+                      console.log(cm);
+                      console.log(cd);
+
+                      if(cy > eey)
+                      {
+                        res.send('1');
+                      }
+                      else if(cy === eey && cm > eem)
+                      {
+                        res.send('1');
+                      }
+                      else if(cy === eey && cm === eem && cd > eed)
+                      {
+                        res.send('1');
+                      }
+                      else if(cy === eey && cm === eem && cd === eed)
+                      {
+                        res.send('1.5');
+                      }
+                      else
+                      {
+                        res.send('0');
+                      }
+
+                    }
+                    else if(request.status === 401)
+                    {
+                      res.status(500).send(request.responseText);
+                    }
+                    else if(request.status === 500)
+                    {
+                      res.status(500).send(request.responseText);
+                    }
+                  }
+                };
+
+                request.open('POST','https://data.artfully11.hasura-app.io/v1/query',true);
+                request.setRequestHeader('Content-Type','application/json');
+                request.setRequestHeader('Authorization','Bearer 9729a88294a0859b8bf736156b6b9f7d381d596c44d8a73f');
+                request.send(JSON.stringify(body));
+
             }
         }
         else{
@@ -126,84 +208,6 @@ app.post('/election-over',function(req,res){
         }
     }
     xhr.send() // send request
-  }
-
-  var election_id = req.body.eid;
-
-  var body = {
-      "type": "select",
-      "args": {
-          "table": "election",
-          "columns": [
-              "election_end_time"
-          ],
-          "where": {
-              "election_id": {
-                  "$eq": "1"
-              }
-          }
-      }
-  };
-
-  var request = new XMLHttpRequest();
-
-  request.onreadystatechange = function(){
-    if(request.readyState === XMLHttpRequest.DONE)
-    {
-      if(request.status === 200)
-      {
-        //res.status(200).send(request.responseText);
-
-        var x = JSON.parse(request.responseText)[0];
-        var eedate = x.election_end_time.split('T')[0];
-
-        var cdate = get_date();
-
-        var eey = Number(eedate.split('-')[0]);
-        var eem = Number(eedate.split('-')[1]);
-        var eed = Number(eedate.split('-')[2]);
-
-        var cy = Number(cdate.split('/')[2]);
-        var cm = Number(cdate.split('/')[0]);
-        var cd = Number(cdate.split('/')[1]);
-
-        if(cy > eey)
-        {
-          res.send('1');
-        }
-        else if(cy === eey && cm > eem)
-        {
-          res.send('1');
-        }
-        else if(cy === eey && cm === eem && cd > eed)
-        {
-          res.send('1');
-        }
-        else if(cy === eey && cm === eem && cd === eed)
-        {
-          res.send('1.5');
-        }
-        else
-        {
-          res.send('0');
-        }
-
-      }
-      else if(request.status === 401)
-      {
-        res.status(500).send(request.responseText);
-      }
-      else if(request.status === 500)
-      {
-        res.status(500).send(request.responseText);
-      }
-    }
-  };
-
-  request.open('POST','https://data.artfully11.hasura-app.io/v1/query',true);
-  request.setRequestHeader('Content-Type','application/json');
-  request.setRequestHeader('Authorization','Bearer 9729a88294a0859b8bf736156b6b9f7d381d596c44d8a73f');
-  request.send(JSON.stringify(body));
 
 });
 
@@ -1227,6 +1231,6 @@ app.post('/get-election-data',function(req,res){
 
 });
 
-app.listen(8080, function () {
+app.listen(8000, function () {
   console.log('Example app listening on port 8080!');
 });
