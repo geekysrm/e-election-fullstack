@@ -78,7 +78,7 @@ class About extends React.Component
 
       <div>
         <div style={styles.side}>
-          <h1 style={{color:'white' , fontFamily: 'Acme', fontSize: 50}}>E-Election</h1>
+          <h1 style={{ color: 'white', fontFamily: 'Acme', fontSize: 50 }}><a className='a' style={{ color: 'white', fontFamily: 'Acme', fontSize: 50 }} href="/">E-Election</a></h1>
           <nav style={{display:'block'}}>
             <ul style={{listStyle:'none'}}>
               <li style={styles.link}><a className='a' href="/home">Home</a></li>
