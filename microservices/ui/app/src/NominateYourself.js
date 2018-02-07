@@ -305,13 +305,16 @@ class NominateYourselfForm extends React.Component {
                 </div> 
                 
                 : 
-                
-                <Alert
-                        message="Sorry, you cannot nominate yourself right now!"
-                        description="The nomination process is not going on right now."
+                <div>
+                <h1 style={{ marginTop: "10px", textAlign: "center" }}>Nomination</h1>
+                <Divider />
+                    <Alert style={{ marginTop: "10px", textAlign: "center" }}
+                        message="Sorry, you cannot nominate yourself for this post right now!"
+                        description="The nomination process for this post is not going on right now."
                         type="error"
                         showIcon
-                    />}
+                    />
+                </div>}
             </div>
         );
     }
