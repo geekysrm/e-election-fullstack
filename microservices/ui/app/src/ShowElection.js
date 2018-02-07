@@ -31,7 +31,8 @@ class ShowElection extends Component {
             disableCastVoteButton: false,        
             loadingResults: false,
             disableViewResultsButton: true,
-            disableVoteButton: true
+            disableVoteButton: true,
+            disableNominateButton:true
         };
 
 
@@ -207,7 +208,7 @@ class ShowElection extends Component {
 
                         })
                         .catch(error => {
-                            console.log('Post request to election over failed!');
+                            console.log('Post request to election start failed!');
                         });
 
                
@@ -217,7 +218,39 @@ class ShowElection extends Component {
                 console.log('Post request to election over failed!');
             });
 
-        
+        axios({
+            method: 'post',
+            url: 'https://api.artfully11.hasura-app.io/nomination-over',
+            data: { eid: this.props.match.params.id },
+            config: { headers: { 'Content-Type': 'application/json' } }
+        })
+            .then(response => {
+                console.log(response.data);
+                let res1 = response.data;
+                axios({
+                    method: 'post',
+                    url: 'https://api.artfully11.hasura-app.io/nomination-start',
+                    data: { eid: this.props.match.params.id },
+                    config: { headers: { 'Content-Type': 'application/json' } }
+                })
+                    .then(response => {
+                        console.log(response.data);
+                        if (response.data === 1 && res1 === 0) {
+                            this.setState({ disableNominateButton: false });
+
+                        }
+
+                    })
+                    .catch(error => {
+                        console.log('Post request to nomination start failed!');
+                    });
+
+
+
+            })
+            .catch(error => {
+                console.log('Post request to nomination over failed!');
+            });
 
       }
 
@@ -413,8 +446,12 @@ class ShowElection extends Component {
                   <Divider />
                   <div style={styles.header}>
                     <h1 style={{marginTop:"10px" , textAlign:"center"}}>Current Nominations </h1>
-                    <Button type="primary" onClick={this.onNominate}>Nominate Yourself</Button>
-                        <Tooltip title={this.state.disableViewResultsButton ? "The Election is on-going. Check after the election gets over." : ""}>
+                       
+                    <Tooltip title={this.state.disableViewResultsButton ? "The Nomination process is over or not started. Check the nomination dates and times." : ""}>
+                    <Button type="primary" onClick={this.onNominate} disabled={this.state.disableNominateButton}>Nominate Yourself</Button>
+                    </Tooltip>
+
+                    <Tooltip title={this.state.disableViewResultsButton ? "The Election is on-going. Check after the election gets over." : ""}>
                             <Button type="primary" onClick={this.onViewResults} disabled={this.state.disableViewResultsButton}>View Results</Button>
                         </Tooltip>
                   </div>
