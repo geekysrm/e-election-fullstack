@@ -177,23 +177,19 @@ class ShowElection extends Component {
                 console.log('Post request failed!');
             });
 
-        axios({
-            method: 'get',
-            url: 'https://api.artfully11.hasura-app.io/date'
-        })
+        axios.get('https://api.artfully11.hasura-app.io/date')
             .then(response => {
-                console.log(response.data);
+                console.log(response);
             })
             .catch(error => {
                 console.log('Post request to get date failed!');
             });
 
-        axios({
-            method: 'get',
-            url: 'https://api.artfully11.hasura-app.io/time'
-        })
+        
+
+        axios.get('https://api.artfully11.hasura-app.io/time')
             .then(response => {
-                console.log(response.data);
+                console.log(response);
             })
             .catch(error => {
                 console.log('Post request to get time failed!');
