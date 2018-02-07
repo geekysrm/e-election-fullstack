@@ -22,7 +22,8 @@ class NominateYourselfForm extends React.Component {
             loading:false,
             displayPartyTextBox:false,
             hasuraId:-1,
-            successMsg: false
+            successMsg: false,
+            nominationGoingOn: -1
 
         };
 
@@ -46,6 +47,41 @@ class NominateYourselfForm extends React.Component {
             .catch(error => {
                 alert('Sorry! Server Error!');
                 console.log('Post request to get hasura Id failed!');
+            });
+
+        axios({
+            method: 'post',
+            url: 'https://api.artfully11.hasura-app.io/nomination-over',
+            data: { eid: this.props.match.params.id },
+            config: { headers: { 'Content-Type': 'application/json' } }
+        })
+            .then(response => {
+                console.log(response.data);
+                let res1 = response.data;
+                axios({
+                    method: 'post',
+                    url: 'https://api.artfully11.hasura-app.io/nomination-start',
+                    data: { eid: this.props.match.params.id },
+                    config: { headers: { 'Content-Type': 'application/json' } }
+                })
+                    .then(response => {
+                        console.log(response.data);
+                        if (response.data === 1 && res1 === 0) {
+                            this.setState({ nominationGoingOn: 1 });
+                        }
+                        else this.setState({ nominationGoingOn: 0 });
+
+
+                    })
+                    .catch(error => {
+                        console.log('Post request to nomination start failed!');
+                    });
+
+
+
+            })
+            .catch(error => {
+                console.log('Post request to nomination over failed!');
             });
     }
 
@@ -170,7 +206,7 @@ class NominateYourselfForm extends React.Component {
 
         return (
             <div>
-
+                {(this.state.nominationGoingOn === 1) ? <div>
                     <h1 style={{ marginTop: "10px", textAlign: "center" }}>Enter Nomination Details</h1>
                     <Divider />
                     <Form onSubmit={this.handleSubmit} style={{
@@ -192,59 +228,59 @@ class NominateYourselfForm extends React.Component {
                             {getFieldDecorator('manifesto', {
                                 rules: [{ required: true, message: 'Please input your manifesto!', whitespace: true }],
                             })(
-                            <TextArea rows={4} />
+                                <TextArea rows={4} />
                                 )}
                         </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        label={(
-                            <span>
-                                Please select:&nbsp;
-                            </span>
-                        )}
-                    >
-
-                        {getFieldDecorator('partyOrIndependent', {
-                            rules: [{ required: true, message: 'Please select an option!' }],
-                        })(
-                            <RadioGroup defaultValue="a" onChange={(value) => this.setState({ displayPartyTextBox: (value.target.value === 'party') })}>
-                                <RadioButton value="party">Party Candidate</RadioButton>
-                                <RadioButton value="independent">Independent Candidate</RadioButton>
-                            </RadioGroup>
-                            )}
-                    </FormItem>
-
-                    {this.state.displayPartyTextBox && <div>
                         <FormItem
-                        {...formItemLayout}
-                        label={(
-                            <span>
-                                Party Name&nbsp;
+                            {...formItemLayout}
+                            label={(
+                                <span>
+                                    Please select:&nbsp;
                             </span>
-                        )}
-                    >
-                        {getFieldDecorator('partyName', {
-                            rules: [{ required: true, message: 'Please enter your party name!', whitespace: true }],
-                        })(
-                            <Input />
                             )}
-                    </FormItem>
+                        >
 
-                    <FormItem
-                        {...formItemLayout}
-                        label={(
-                            <span>
-                                Party Ticket ID/Number&nbsp;
+                            {getFieldDecorator('partyOrIndependent', {
+                                rules: [{ required: true, message: 'Please select an option!' }],
+                            })(
+                                <RadioGroup defaultValue="a" onChange={(value) => this.setState({ displayPartyTextBox: (value.target.value === 'party') })}>
+                                    <RadioButton value="party">Party Candidate</RadioButton>
+                                    <RadioButton value="independent">Independent Candidate</RadioButton>
+                                </RadioGroup>
+                                )}
+                        </FormItem>
+
+                        {this.state.displayPartyTextBox && <div>
+                            <FormItem
+                                {...formItemLayout}
+                                label={(
+                                    <span>
+                                        Party Name&nbsp;
                             </span>
-                        )}
-                    >
-                        {getFieldDecorator('partyTicket', {
-                            rules: [{ required: true, message: 'Please enter your party ticket id/no.!', whitespace: true }],
-                        })(
-                            <Input />
-                            )}
-                    </FormItem>
-                    </div>}
+                                )}
+                            >
+                                {getFieldDecorator('partyName', {
+                                    rules: [{ required: true, message: 'Please enter your party name!', whitespace: true }],
+                                })(
+                                    <Input />
+                                    )}
+                            </FormItem>
+
+                            <FormItem
+                                {...formItemLayout}
+                                label={(
+                                    <span>
+                                        Party Ticket ID/Number&nbsp;
+                            </span>
+                                )}
+                            >
+                                {getFieldDecorator('partyTicket', {
+                                    rules: [{ required: true, message: 'Please enter your party ticket id/no.!', whitespace: true }],
+                                })(
+                                    <Input />
+                                    )}
+                            </FormItem>
+                        </div>}
 
 
 
@@ -253,7 +289,7 @@ class NominateYourselfForm extends React.Component {
 
 
                         <FormItem {...tailFormItemLayout}>
-                        <Button type="primary" htmlType="submit" disabled={this.state.isDisabled} loading={this.state.loading}>
+                            <Button type="primary" htmlType="submit" disabled={this.state.isDisabled} loading={this.state.loading}>
                                 Submit Nomination
                         </Button>
                         </FormItem>
@@ -262,11 +298,20 @@ class NominateYourselfForm extends React.Component {
 
                     </Form>
                     <div style={styles.msg}>
-                      <div style={{width:'50%'}}>
-                      {alertSpan}
-                      </div>
+                        <div style={{ width: '50%' }}>
+                            {alertSpan}
+                        </div>
                     </div>
-
+                </div> 
+                
+                : 
+                
+                <Alert
+                        message="Sorry, you cannot nominate yourself right now!"
+                        description="The nomination process is not going on right now."
+                        type="error"
+                        showIcon
+                    />}
             </div>
         );
     }

@@ -447,7 +447,7 @@ class ShowElection extends Component {
                   <div style={styles.header}>
                     <h1 style={{marginTop:"10px" , textAlign:"center"}}>Current Nominations </h1>
                        
-                    <Tooltip title={this.state.disableViewResultsButton ? "The Nomination process is over or not started. Check the nomination dates and times." : ""}>
+                    <Tooltip title={this.state.disableNominateButton ? "The Nomination process is over or not started. Check the nomination dates and times." : ""}>
                     <Button type="primary" onClick={this.onNominate} disabled={this.state.disableNominateButton}>Nominate Yourself</Button>
                     </Tooltip>
 
