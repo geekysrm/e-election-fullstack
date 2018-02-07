@@ -414,7 +414,7 @@ class ShowElection extends Component {
                   <div style={styles.header}>
                     <h1 style={{marginTop:"10px" , textAlign:"center"}}>Current Nominations </h1>
                     <Button type="primary" onClick={this.onNominate}>Nominate Yourself</Button>
-                        <Tooltip title={this.state.disableViewResultsButton ? "The Election is on-going. Check after the election end date." : ""}>
+                        <Tooltip title={this.state.disableViewResultsButton ? "The Election is on-going. Check after the election gets over." : ""}>
                             <Button type="primary" onClick={this.onViewResults} disabled={this.state.disableViewResultsButton}>View Results</Button>
                         </Tooltip>
                   </div>
@@ -435,7 +435,9 @@ class ShowElection extends Component {
                                     {!(nomination.individual) && <p>Party Ticket ID: {nomination.party_ticket_id}</p>}
                                     <p>Election Manifesto: <p>{nomination.manifesto}</p></p>
                                     <br />
+                                    <Tooltip title={this.state.disableVoteButton ? "The Election is over or not yet started. Check the election dates and times." : ""}>
                                     <Button type="primary" onClick={() => this.onVote(nomination.hasura_id, this.props.match.params.id)} disabled={this.state.disableVoteButton}>Vote</Button>
+                                    </Tooltip>
                                     <br />
                                     <br />
                                     {this.state.textBoxShow === nomination.hasura_id && <Search placeholder="Enter your Voting Credentials"  enterButton="Cast Vote" onSearch={value => this.onCastVote(nomination.hasura_id, this.props.match.params.id, value)} />}
