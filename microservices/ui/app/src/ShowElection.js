@@ -30,7 +30,7 @@ class ShowElection extends Component {
             voter_can_vote: 0,
             disableCastVoteButton: false,        
             loadingResults: false,
-            enableVoteButton: false
+            disableVoteButton: true
         };
 
 
@@ -174,6 +174,25 @@ class ShowElection extends Component {
             .catch(error => {
                 alert(`Sorry, can't fetch nominations list right now!`);
                 console.log('Post request failed!');
+            });
+
+
+        axios({
+            method: 'post',
+            url: 'https://api.artfully11.hasura-app.io/election-over',
+            data: { eid: this.props.match.params.id },
+            config: { headers: { 'Content-Type': 'application/json' } }
+        })
+            .then(response => {
+                console.log(response.data);
+                if(response.data === 1)
+                {
+                    this.setState({ disableVoteButton: false });
+                }
+               
+            })
+            .catch(error => {
+                console.log('Post request to check for credentials failed!');
             });
 
       }
@@ -362,7 +381,7 @@ class ShowElection extends Component {
                   <div style={styles.header}>
                     <h1 style={{marginTop:"10px" , textAlign:"center"}}>Current Nominations </h1>
                     <Button type="primary" onClick={this.onNominate}>Nominate Yourself</Button>
-                    <Button type="primary" onClick={this.onViewResults}>View Results</Button>
+                    <Button type="primary" onClick={this.onViewResults} disabled={this.state.disableVoteButton}>View Results</Button>
                   </div>
                   <div>
 
