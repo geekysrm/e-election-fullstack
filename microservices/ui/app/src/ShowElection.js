@@ -190,7 +190,7 @@ class ShowElection extends Component {
                 if(response.data === 1)
                 {
                     this.setState({ disableViewResultsButton: false });
-                   
+                }
                     axios({
                         method: 'post',
                         url: 'https://api.artfully11.hasura-app.io/election-start',
@@ -206,7 +206,7 @@ class ShowElection extends Component {
                             console.log('Post request to election over failed!');
                         });
 
-                }
+               
                
             })
             .catch(error => {
