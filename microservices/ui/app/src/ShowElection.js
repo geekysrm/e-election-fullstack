@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Button, Input, Divider, Card, Modal } from 'antd';
+import { Button, Input, Divider, Card, Modal, Tooltip } from 'antd';
 import moment from 'moment';
 import 'antd/dist/antd.css';
 import './ShowElection.css'
@@ -381,7 +381,9 @@ class ShowElection extends Component {
                   <div style={styles.header}>
                     <h1 style={{marginTop:"10px" , textAlign:"center"}}>Current Nominations </h1>
                     <Button type="primary" onClick={this.onNominate}>Nominate Yourself</Button>
+                        <Tooltip title={this.state.disableVoteButton ? "The Election is on-going. Check after the election end date." : ""}>
                     <Button type="primary" onClick={this.onViewResults} disabled={this.state.disableVoteButton}>View Results</Button>
+                        </Tooltip>
                   </div>
                   <div>
 
