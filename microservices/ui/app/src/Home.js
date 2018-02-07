@@ -104,7 +104,7 @@ class Home extends Component {
             <div className="App">
 
               <div style={styles.side}>
-                <h1 style={{color:'white' , fontFamily: 'Acme', fontSize: 50}}>E-Election</h1>
+              <h1 style={{ color: 'white', fontFamily: 'Acme', fontSize: 50 }}><a href="/">E-Election</a></h1>
                 <nav style={{display:'block'}}>
                   <ul style={{listStyle:'none'}}>
                     <li style={styles.link}><a className='anow'>Home</a></li>
