@@ -145,8 +145,8 @@ app.post('/election-over',function(req,res){
                     {
                       //res.status(200).send(request.responseText);
 
-                      var x = JSON.parse(request.responseText)[0];
-                      var eedate = x.election_end_time.split('T')[0];
+                      var end_time = JSON.parse(request.responseText)[0];
+                      var eedate = end_time.election_end_time.split('T')[0];
 
                       var eey = Number(eedate.split('-')[0]);
                       var eem = Number(eedate.split('-')[1]);
@@ -177,7 +177,80 @@ app.post('/election-over',function(req,res){
                       }
                       else if(cy === eey && cm === eem && cd === eed)
                       {
-                        res.send('1.5');
+                        function convertTime12to24(time12h) {
+                          const [time, modifier] = time12h.split(' ');
+
+                          let [hours, minutes] = time.split(':');
+
+                          if (hours === '12') {
+                            hours = '00';
+                          }
+
+                          if (modifier === 'PM') {
+                            hours = parseInt(hours, 10) + 12;
+                          }
+
+                          return hours + ':' + minutes;
+                        }
+
+                        var loc = '28.704059, 77.102490' // India expressed as lat,lng tuple
+                        var targetDate = new Date() // Current date/time of user computer
+                        var timestamp = targetDate.getTime()/1000 + targetDate.getTimezoneOffset() * 60 // Current UTC date/time expressed as seconds since midnight, January 1, 1970 UTC
+                        var apikey = 'AIzaSyD4AlMeIBPVl4bNpLM1cgeaAwmJmAQf1iY'
+                        var apicall = 'https://maps.googleapis.com/maps/api/timezone/json?location=' + loc + '&timestamp=' + timestamp + '&key=' + apikey
+
+                        var xhr = new XMLHttpRequest() // create new XMLHttpRequest2 object
+                        xhr.open('GET', apicall) // open GET request
+                        xhr.onload = function(){
+                            if (xhr.status === 200){ // if Ajax request successful
+                                var output = JSON.parse(xhr.responseText) // convert returned JSON string to JSON object
+                                console.log(output.status) // log API return status for debugging purposes
+                                if (output.status == 'OK'){ // if API reports everything was returned successfully
+                                    var offsets = output.dstOffset * 1000 + output.rawOffset * 1000 // get DST and time zone offsets in milliseconds
+                                    var localdate = new Date(timestamp * 1000 + offsets) // Date object containing current time of India (timestamp + dstOffset + rawOffset)
+                                    console.log(localdate.toLocaleString()) // Display current India date and time
+                                    //res.send(localdate.toLocaleString());
+                                    var x = localdate.toLocaleString().split(',')[1];
+                                    var y = convertTime12to24(x.trim());
+                                    var z = y+':'+x.split(':')[2];
+                                    var ctime = z.split(' ')[0]);
+
+                                    var eetime = end_time.election_end_time.split('T')[1].split('+')[0];
+                                    console.log(eetime);
+
+                                    var eehr = eetime.split(':')[0];
+                                    var eemin = eetime.split(':')[1];
+                                    var eesec = eetime.split(':')[2];
+
+                                    console.log(ctime);
+                                    var chr = ctime.split(':')[0];
+                                    var cmin = ctime.split(':')[1];
+                                    var csec = ctime.split(':')[2];
+
+                                    if(chr > eehr)
+                                    {
+                                      res.send('1');
+                                    }
+                                    else if(chr === eehr && cmin > eemin)
+                                    {
+                                      res.send('1');
+                                    }
+                                    else if(chr === eehr && cmin === eemin && csec > eesec)
+                                    {
+                                      res.send('1');
+                                    }
+                                    else
+                                    {
+                                      res.send('0');
+                                    }
+
+                                }
+                            }
+                            else{
+                                alert('Request failed.  Returned status of ' + xhr.status)
+                            }
+                        }
+                        xhr.send() // send request
                       }
                       else
                       {
