@@ -20,8 +20,82 @@ var server = require('http').Server(app);
 var config = require('./config');
 
 app.get('/',function(req,res){
- // res.sendFile(path.join(__dirname,'index.html'));
- res.send(Date());
+  res.sendFile(path.join(__dirname,'index.html'));
+});
+
+app.get('/date',function(req,res){
+  var loc = '28.704059, 77.102490' // India expressed as lat,lng tuple
+  var targetDate = new Date() // Current date/time of user computer
+  var timestamp = targetDate.getTime()/1000 + targetDate.getTimezoneOffset() * 60 // Current UTC date/time expressed as seconds since midnight, January 1, 1970 UTC
+  var apikey = 'AIzaSyD4AlMeIBPVl4bNpLM1cgeaAwmJmAQf1iY'
+  var apicall = 'https://maps.googleapis.com/maps/api/timezone/json?location=' + loc + '&timestamp=' + timestamp + '&key=' + apikey
+
+  var xhr = new XMLHttpRequest() // create new XMLHttpRequest2 object
+  xhr.open('GET', apicall) // open GET request
+  xhr.onload = function(){
+      if (xhr.status === 200){ // if Ajax request successful
+          var output = JSON.parse(xhr.responseText) // convert returned JSON string to JSON object
+          console.log(output.status) // log API return status for debugging purposes
+          if (output.status == 'OK'){ // if API reports everything was returned successfully
+              var offsets = output.dstOffset * 1000 + output.rawOffset * 1000 // get DST and time zone offsets in milliseconds
+              var localdate = new Date(timestamp * 1000 + offsets) // Date object containing current time of India (timestamp + dstOffset + rawOffset)
+              console.log(localdate.toLocaleString()) // Display current India date and time
+              res.send(localdate.toLocaleString().split(',')[0]);
+          }
+      }
+      else{
+          alert('Request failed.  Returned status of ' + xhr.status)
+      }
+  }
+  xhr.send() // send request
+});
+
+app.get('/time',function(req,res){
+  function convertTime12to24(time12h) {
+    const [time, modifier] = time12h.split(' ');
+
+    let [hours, minutes] = time.split(':');
+
+    if (hours === '12') {
+      hours = '00';
+    }
+
+    if (modifier === 'PM') {
+      hours = parseInt(hours, 10) + 12;
+    }
+
+    return hours + ':' + minutes;
+  }
+
+  var loc = '28.704059, 77.102490' // India expressed as lat,lng tuple
+  var targetDate = new Date() // Current date/time of user computer
+  var timestamp = targetDate.getTime()/1000 + targetDate.getTimezoneOffset() * 60 // Current UTC date/time expressed as seconds since midnight, January 1, 1970 UTC
+  var apikey = 'AIzaSyD4AlMeIBPVl4bNpLM1cgeaAwmJmAQf1iY'
+  var apicall = 'https://maps.googleapis.com/maps/api/timezone/json?location=' + loc + '&timestamp=' + timestamp + '&key=' + apikey
+
+  var xhr = new XMLHttpRequest() // create new XMLHttpRequest2 object
+  xhr.open('GET', apicall) // open GET request
+  xhr.onload = function(){
+      if (xhr.status === 200){ // if Ajax request successful
+          var output = JSON.parse(xhr.responseText) // convert returned JSON string to JSON object
+          console.log(output.status) // log API return status for debugging purposes
+          if (output.status == 'OK'){ // if API reports everything was returned successfully
+              var offsets = output.dstOffset * 1000 + output.rawOffset * 1000 // get DST and time zone offsets in milliseconds
+              var localdate = new Date(timestamp * 1000 + offsets) // Date object containing current time of India (timestamp + dstOffset + rawOffset)
+              console.log(localdate.toLocaleString()) // Display current India date and time
+              //res.send(localdate.toLocaleString());
+              var x = localdate.toLocaleString().split(',')[1];
+              var y = convertTime12to24(x.trim());
+              var z = y+':'+x.split(':')[2];
+              res.send(z.split(' ')[0]);
+          }
+      }
+      else{
+          alert('Request failed.  Returned status of ' + xhr.status)
+      }
+  }
+  xhr.send() // send request
+
 });
 
 app.get('/logo',function(req,res){
