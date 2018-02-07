@@ -472,6 +472,197 @@ app.post('/election-start',function(req,res){
 
 });
 
+app.post('/nomination-start',function(req,res){
+
+  var cdate='';
+  var loc = '28.704059, 77.102490' // India expressed as lat,lng tuple
+  var targetDate = new Date() // Current date/time of user computer
+  var timestamp = targetDate.getTime()/1000 + targetDate.getTimezoneOffset() * 60 // Current UTC date/time expressed as seconds since midnight, January 1, 1970 UTC
+  var apikey = 'AIzaSyD4AlMeIBPVl4bNpLM1cgeaAwmJmAQf1iY'
+  var apicall = 'https://maps.googleapis.com/maps/api/timezone/json?location=' + loc + '&timestamp=' + timestamp + '&key=' + apikey
+
+  var xhr = new XMLHttpRequest() // create new XMLHttpRequest2 object
+  xhr.open('GET', apicall) // open GET request
+  xhr.onload = function(){
+      if (xhr.status === 200){ // if Ajax request successful
+          var output = JSON.parse(xhr.responseText) // convert returned JSON string to JSON object
+          console.log(output.status) // log API return status for debugging purposes
+          if (output.status == 'OK'){ // if API reports everything was returned successfully
+              var offsets = output.dstOffset * 1000 + output.rawOffset * 1000 // get DST and time zone offsets in milliseconds
+              var localdate = new Date(timestamp * 1000 + offsets) // Date object containing current time of India (timestamp + dstOffset + rawOffset)
+              console.log(localdate.toLocaleString()) // Display current India date and time
+              cdate = localdate.toLocaleString().split(',')[0];
+
+              var election_id = req.body.eid;
+
+              var body = {
+                  "type": "select",
+                  "args": {
+                      "table": "election",
+                      "columns": [
+                          "nomination_start_time"
+                      ],
+                      "where": {
+                          "election_id": {
+                              "$eq": "3"
+                          }
+                      }
+                  }
+              };
+
+              var request = new XMLHttpRequest();
+
+              request.onreadystatechange = function(){
+                if(request.readyState === XMLHttpRequest.DONE)
+                {
+                  if(request.status === 200)
+                  {
+                    //res.status(200).send(request.responseText);
+
+                    var start_time = JSON.parse(request.responseText)[0];
+                    var eedate = start_time.nomination_start_time.split('T')[0];
+
+                    console.log(eedate);
+                    var eey = Number(eedate.split('-')[0]);
+                    var eem = Number(eedate.split('-')[1]);
+                    var eed = Number(eedate.split('-')[2]);
+                    console.log(eey);
+                    console.log(eem);
+                    console.log(eed);
+
+                    console.log(cdate);
+                    var cy = Number(cdate.split('/')[2]);
+                    var cm = Number(cdate.split('/')[0]);
+                    var cd = Number(cdate.split('/')[1]);
+                    console.log(cy);
+                    console.log(cm);
+                    console.log(cd);
+
+                    if(cy > eey)
+                    {
+                      res.send('1');
+                    }
+                    else if(cy === eey && cm > eem)
+                    {
+                      res.send('1');
+                    }
+                    else if(cy === eey && cm === eem && cd > eed)
+                    {
+                      res.send('1');
+                    }
+                    else if(cy === eey && cm === eem && cd === eed)
+                    {
+                      function convertTime12to24(time12h) {
+                        const [time, modifier] = time12h.split(' ');
+
+                        let [hours, minutes] = time.split(':');
+
+                        if (hours === '12') {
+                          hours = '00';
+                        }
+
+                        if (modifier === 'PM') {
+                          hours = parseInt(hours, 10) + 12;
+                        }
+
+                        return hours + ':' + minutes;
+                      }
+
+                      var loc = '28.704059, 77.102490' // India expressed as lat,lng tuple
+                      var targetDate = new Date() // Current date/time of user computer
+                      var timestamp = targetDate.getTime()/1000 + targetDate.getTimezoneOffset() * 60 // Current UTC date/time expressed as seconds since midnight, January 1, 1970 UTC
+                      var apikey = 'AIzaSyD4AlMeIBPVl4bNpLM1cgeaAwmJmAQf1iY'
+                      var apicall = 'https://maps.googleapis.com/maps/api/timezone/json?location=' + loc + '&timestamp=' + timestamp + '&key=' + apikey
+
+                      var xhr = new XMLHttpRequest() // create new XMLHttpRequest2 object
+                      xhr.open('GET', apicall) // open GET request
+                      xhr.onload = function(){
+                          if (xhr.status === 200){ // if Ajax request successful
+                              var output = JSON.parse(xhr.responseText) // convert returned JSON string to JSON object
+                              console.log(output.status) // log API return status for debugging purposes
+                              if (output.status == 'OK'){ // if API reports everything was returned successfully
+                                  var offsets = output.dstOffset * 1000 + output.rawOffset * 1000 // get DST and time zone offsets in milliseconds
+                                  var localdate = new Date(timestamp * 1000 + offsets) // Date object containing current time of India (timestamp + dstOffset + rawOffset)
+                                  console.log(localdate.toLocaleString()) // Display current India date and time
+                                  //res.send(localdate.toLocaleString());
+                                  var x = localdate.toLocaleString().split(',')[1];
+                                  var y = convertTime12to24(x.trim());
+                                  var z = y+':'+x.split(':')[2];
+                                  var ctime = z.split(' ')[0];
+
+                                  var eetime = start_time.nomination_start_time.split('T')[1].split('+')[0];
+                                  console.log(eetime);
+
+                                  var eehr = Number(eetime.split(':')[0]);
+                                  var eemin = Number(eetime.split(':')[1]);
+                                  var eesec = Number(eetime.split(':')[2]);
+
+                                  console.log(ctime);
+                                  var chr = Number(ctime.split(':')[0]);
+                                  var cmin = Number(ctime.split(':')[1]);
+                                  var csec = Number(ctime.split(':')[2]);
+
+                                  if(chr > eehr)
+                                  {
+                                    res.send('1');
+                                  }
+                                  else if(chr === eehr && cmin > eemin)
+                                  {
+                                    res.send('1');
+                                  }
+                                  else if(chr === eehr && cmin === eemin && csec > eesec)
+                                  {
+                                    res.send('1');
+                                  }
+                                  else
+                                  {
+                                    res.send('0');
+                                  }
+
+                              }
+                          }
+                          else{
+                              alert('Request failed.  Returned status of ' + xhr.status)
+                          }
+                      }
+                      xhr.send() // send request
+                    }
+                    else
+                    {
+                      res.send('0');
+                    }
+
+                  }
+                  else if(request.status === 401)
+                  {
+                    res.status(500).send(request.responseText);
+                  }
+                  else if(request.status === 500)
+                  {
+                    res.status(500).send(request.responseText);
+                  }
+                }
+              };
+
+              request.open('POST','https://data.artfully11.hasura-app.io/v1/query',true);
+              request.setRequestHeader('Content-Type','application/json');
+              request.setRequestHeader('Authorization','Bearer 9729a88294a0859b8bf736156b6b9f7d381d596c44d8a73f');
+              request.send(JSON.stringify(body));
+
+          }
+      }
+      else{
+          alert('Request failed.  Returned status of ' + xhr.status)
+      }
+  }
+  xhr.send() // send request
+
+});
+
+app.post('/nomination-end',function(req,res){
+
+});
+
 app.get('/logo',function(req,res){
   res.sendFile(path.join(__dirname,'images/logo.png'))
 });
