@@ -335,6 +335,7 @@ app.post('/election-start',function(req,res){
                         var start_time = JSON.parse(request.responseText)[0];
                         var eedate = start_time.election_start_time.split('T')[0];
 
+                        console.log(eedate);
                         var eey = Number(eedate.split('-')[0]);
                         var eem = Number(eedate.split('-')[1]);
                         var eed = Number(eedate.split('-')[2]);
