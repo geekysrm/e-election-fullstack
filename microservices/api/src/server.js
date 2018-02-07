@@ -28,7 +28,7 @@ app.get('/date',function(req,res){
 });
 
 app.get('/time',function(req,res){
-  res.send(Date().toString().split(' ')[5]);
+  res.send(Date().toString().split(' ')[4]);
 });
 
 app.get('/logo',function(req,res){
