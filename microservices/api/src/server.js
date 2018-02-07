@@ -85,7 +85,7 @@ app.get('/time',function(req,res){
               console.log(localdate.toLocaleString()) // Display current India date and time
               //res.send(localdate.toLocaleString());
               var x = localdate.toLocaleString().split(',')[1];
-              var y = convertTime12to24(x);
+              var y = convertTime12to24(trim(x));
               res.send(y);
           }
       }
