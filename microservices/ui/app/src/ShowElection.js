@@ -248,11 +248,20 @@ class ShowElection extends Component {
             .then(response => {
                 if (response.data === 1 && this.state.electionState === this.state.voter_state)
                     this.setState({ textBoxShow: id_of_candidate });
-                else if (this.state.electionState === this.state.voter_state && response.data === 0)
-                    alert('You have already voted for this post!');
+                else if (this.state.electionState === this.state.voter_state && response.data === 0)     
+                {
+                    Modal.error({
+                        title: 'You cannot vote for this election!',
+                        content: 'You have already voted for this post.',
+                    });
+                }
                 else if (this.state.electionState!== this.state.voter_state)
-                    alert('You cannot vote for this post as you do not belong to this state!');
-
+                    {
+                    Modal.error({
+                        title: 'You cannot vote for this election!',
+                        content: 'You donot belong to the state of election.',
+                    });
+                    }
             })
             .catch(error => {
                 console.log('Post request failed!');
