@@ -525,5 +525,6 @@ const styles={
   }
 }
 
+//IMP: Ask Sai to check error in nom. start and end
 //TODO: Ask Sai to change Individual to Independent
 export default ShowElection;

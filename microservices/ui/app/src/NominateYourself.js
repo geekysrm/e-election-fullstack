@@ -206,7 +206,7 @@ class NominateYourselfForm extends React.Component {
 
         return (
             <div>
-                {(this.state.nominationGoingOn === 1) ? <div>
+                {(this.state.nominationGoingOn === 1) && <div>
                     <h1 style={{ marginTop: "10px", textAlign: "center" }}>Enter Nomination Details</h1>
                     <Divider />
                     <Form onSubmit={this.handleSubmit} style={{
@@ -302,9 +302,9 @@ class NominateYourselfForm extends React.Component {
                             {alertSpan}
                         </div>
                     </div>
-                </div> 
+                </div> }
                 
-                : 
+                {(this.state.nominationGoingOn === 0) &&
                 <div>
                 
                         <Alert style={{textAlign: "center", width: '80%', margin: "0 auto",marginTop: "10px" }}
