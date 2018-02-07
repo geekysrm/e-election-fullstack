@@ -130,7 +130,7 @@ app.post('/election-over',function(req,res){
                         ],
                         "where": {
                             "election_id": {
-                                "$eq": "3"
+                                "$eq": election_id
                             }
                         }
                     }
@@ -317,7 +317,7 @@ app.post('/election-start',function(req,res){
                           ],
                           "where": {
                               "election_id": {
-                                  "$eq": "3"
+                                "$eq": election_id
                               }
                           }
                       }
@@ -504,7 +504,7 @@ app.post('/nomination-start',function(req,res){
                       ],
                       "where": {
                           "election_id": {
-                              "$eq": "3"
+                            "$eq": election_id
                           }
                       }
                   }
@@ -691,7 +691,7 @@ app.post('/nomination-end',function(req,res){
                       ],
                       "where": {
                           "election_id": {
-                              "$eq": "3"
+                            "$eq": election_id
                           }
                       }
                   }

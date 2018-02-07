@@ -199,7 +199,11 @@ class ShowElection extends Component {
                     })
                         .then(response => {
                             console.log(response.data);
-                            console.log(res1);
+                            if(response.data === 1 && res1 === 0)
+                            {
+                                this.setState({ disableVoteButton: false });
+
+                            }
 
                         })
                         .catch(error => {
