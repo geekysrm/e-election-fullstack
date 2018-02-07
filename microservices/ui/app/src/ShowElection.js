@@ -220,7 +220,7 @@ class ShowElection extends Component {
 
         axios({
             method: 'post',
-            url: 'https://api.artfully11.hasura-app.io/nomination-over',
+            url: 'https://api.artfully11.hasura-app.io/nomination-end',
             data: { eid: this.props.match.params.id },
             config: { headers: { 'Content-Type': 'application/json' } }
         })
@@ -525,6 +525,5 @@ const styles={
   }
 }
 
-//IMP: Ask Sai to check error in nom. start and end
 //TODO: Ask Sai to change Individual to Independent
 export default ShowElection;

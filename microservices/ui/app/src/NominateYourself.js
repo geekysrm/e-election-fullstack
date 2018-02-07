@@ -51,7 +51,7 @@ class NominateYourselfForm extends React.Component {
 
         axios({
             method: 'post',
-            url: 'https://api.artfully11.hasura-app.io/nomination-over',
+            url: 'https://api.artfully11.hasura-app.io/nomination-end',
             data: { eid: this.props.match.params.id },
             config: { headers: { 'Content-Type': 'application/json' } }
         })
