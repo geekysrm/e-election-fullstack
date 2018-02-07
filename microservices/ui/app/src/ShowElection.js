@@ -118,10 +118,9 @@ class ShowElection extends Component {
             config: { headers: { 'Content-Type': 'application/json' } }
         })
             .then(response => {
-                console.log(response.data[0].state);
                 this.setState({ electionState: response.data[0].state });
                 this.setState({ electionPost: response.data[0].post });
-
+               
             })
             .catch(error => {
                 console.log('Post request failed!');
@@ -177,26 +176,7 @@ class ShowElection extends Component {
                 console.log('Post request failed!');
             });
 
-        axios.get('https://api.artfully11.hasura-app.io/date')
-            .then(response => {
-                console.log(response);
-            })
-            .catch(error => {
-                console.log('Post request to get date failed!');
-            });
-
-        
-
-        axios.get('https://api.artfully11.hasura-app.io/time')
-            .then(response => {
-                console.log(response);
-            })
-            .catch(error => {
-                console.log('Post request to get time failed!');
-            });
-
-
-    }
+      }
 
     onLogout = () => {
 
