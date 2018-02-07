@@ -176,7 +176,7 @@ const gender = [{
     label: 'Others',
 
 }];
-//states=constituencies
+//states == constituencies
 const states = [{
     value: 'Chandni Chowk',
     label: 'Chandni Chowk',

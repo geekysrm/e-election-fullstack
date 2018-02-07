@@ -29,7 +29,8 @@ class ShowElection extends Component {
             voter_credentials: '',
             voter_can_vote: 0,
             disableCastVoteButton: false,        
-            loadingResults: false
+            loadingResults: false,
+            enableVoteButton: false
         };
 
 
@@ -117,10 +118,9 @@ class ShowElection extends Component {
             config: { headers: { 'Content-Type': 'application/json' } }
         })
             .then(response => {
-                console.log(response.data[0].state);
                 this.setState({ electionState: response.data[0].state });
                 this.setState({ electionPost: response.data[0].post });
-
+               
             })
             .catch(error => {
                 console.log('Post request failed!');
@@ -176,8 +176,7 @@ class ShowElection extends Component {
                 console.log('Post request failed!');
             });
 
-
-    }
+      }
 
     onLogout = () => {
 
