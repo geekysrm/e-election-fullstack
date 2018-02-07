@@ -30,6 +30,7 @@ class ShowElection extends Component {
             voter_can_vote: 0,
             disableCastVoteButton: false,        
             loadingResults: false,
+            disableViewResultsButton: true,
             disableVoteButton: true
         };
 
@@ -185,15 +186,34 @@ class ShowElection extends Component {
         })
             .then(response => {
                 console.log(response.data);
+                let res1 = response.data;
                 if(response.data === 1)
                 {
-                    this.setState({ disableVoteButton: false });
+                    this.setState({ disableViewResultsButton: false });
+                   
+                    axios({
+                        method: 'post',
+                        url: 'https://api.artfully11.hasura-app.io/election-start',
+                        data: { eid: this.props.match.params.id },
+                        config: { headers: { 'Content-Type': 'application/json' } }
+                    })
+                        .then(response => {
+                            console.log(response.data);
+                            console.log(res1);
+
+                        })
+                        .catch(error => {
+                            console.log('Post request to election over failed!');
+                        });
+
                 }
                
             })
             .catch(error => {
-                console.log('Post request to check for credentials failed!');
+                console.log('Post request to election over failed!');
             });
+
+        
 
       }
 
@@ -381,8 +401,8 @@ class ShowElection extends Component {
                   <div style={styles.header}>
                     <h1 style={{marginTop:"10px" , textAlign:"center"}}>Current Nominations </h1>
                     <Button type="primary" onClick={this.onNominate}>Nominate Yourself</Button>
-                        <Tooltip title={this.state.disableVoteButton ? "The Election is on-going. Check after the election end date." : ""}>
-                    <Button type="primary" onClick={this.onViewResults} disabled={this.state.disableVoteButton}>View Results</Button>
+                        <Tooltip title={this.state.disableViewResultsButton ? "The Election is on-going. Check after the election end date." : ""}>
+                            <Button type="primary" onClick={this.onViewResults} disabled={this.state.disableViewResultsButton}>View Results</Button>
                         </Tooltip>
                   </div>
                   <div>
@@ -402,7 +422,7 @@ class ShowElection extends Component {
                                     {!(nomination.individual) && <p>Party Ticket ID: {nomination.party_ticket_id}</p>}
                                     <p>Election Manifesto: <p>{nomination.manifesto}</p></p>
                                     <br />
-                                    <Button type="primary" onClick={() => this.onVote(nomination.hasura_id, this.props.match.params.id)}>Vote</Button>
+                                    <Button type="primary" onClick={() => this.onVote(nomination.hasura_id, this.props.match.params.id)} disabled={this.state.disableVoteButton}>Vote</Button>
                                     <br />
                                     <br />
                                     {this.state.textBoxShow === nomination.hasura_id && <Search placeholder="Enter your Voting Credentials"  enterButton="Cast Vote" onSearch={value => this.onCastVote(nomination.hasura_id, this.props.match.params.id, value)} />}
