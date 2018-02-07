@@ -28,7 +28,10 @@ app.get('/date',function(req,res){
 });
 
 app.get('/time',function(req,res){
-  res.send(Date().toString().split(' ')[4]);
+  var hr = Number(Date().toString().split(' ')[4].split(':')[0]) + 5;
+  var min = Number(Date().toString().split(' ')[4].split(':')[1]) + 30;
+  var sec = Number(Date().toString().split(' ')[4].split(':')[2]);
+  res.send(hr.toString()+':'+min.toString()+':'+sec.toString());
 });
 
 app.get('/logo',function(req,res){
