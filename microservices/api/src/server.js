@@ -406,14 +406,14 @@ app.post('/election-start',function(req,res){
                                       var eetime = start_time.election_start_time.split('T')[1].split('+')[0];
                                       console.log(eetime);
 
-                                      var eehr = eetime.split(':')[0];
-                                      var eemin = eetime.split(':')[1];
-                                      var eesec = eetime.split(':')[2];
+                                      var eehr = Number(eetime.split(':')[0]);
+                                      var eemin = Number(eetime.split(':')[1]);
+                                      var eesec = Number(eetime.split(':')[2]);
 
                                       console.log(ctime);
-                                      var chr = ctime.split(':')[0];
-                                      var cmin = ctime.split(':')[1];
-                                      var csec = ctime.split(':')[2];
+                                      var chr = Number(ctime.split(':')[0]);
+                                      var cmin = Number(ctime.split(':')[1]);
+                                      var csec = Number(ctime.split(':')[2]);
 
                                       if(chr > eehr)
                                       {
