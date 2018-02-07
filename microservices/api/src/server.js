@@ -213,7 +213,7 @@ app.post('/election-over',function(req,res){
                                     var x = localdate.toLocaleString().split(',')[1];
                                     var y = convertTime12to24(x.trim());
                                     var z = y+':'+x.split(':')[2];
-                                    var ctime = z.split(' ')[0]);
+                                    var ctime = z.split(' ')[0];
 
                                     var eetime = end_time.election_end_time.split('T')[1].split('+')[0];
                                     console.log(eetime);
