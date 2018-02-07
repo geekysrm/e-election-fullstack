@@ -184,7 +184,11 @@ class ShowElection extends Component {
             config: { headers: { 'Content-Type': 'application/json' } }
         })
             .then(response => {
-                console.log(response.data+2);
+                console.log(response.data);
+                if(response.data === 1)
+                {
+                    this.setState({ disableVoteButton: false });
+                }
                
             })
             .catch(error => {
