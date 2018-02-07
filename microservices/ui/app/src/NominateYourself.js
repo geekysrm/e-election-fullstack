@@ -332,4 +332,4 @@ const styles={
 const NominateYourself = Form.create()(NominateYourselfForm);
 
 export default NominateYourself;
-//TODO: Ask Sai to remove primary key in nom. table so that one person can nominate himself/herself in multiple posts
+//TODO: Ask Sai to remove primary key in nomination table so that one person can nominate himself/herself in multiple posts
