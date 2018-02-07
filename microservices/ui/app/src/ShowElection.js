@@ -29,7 +29,8 @@ class ShowElection extends Component {
             voter_credentials: '',
             voter_can_vote: 0,
             disableCastVoteButton: false,        
-            loadingResults: false
+            loadingResults: false,
+            enableVoteButton: false
         };
 
 
@@ -174,6 +175,28 @@ class ShowElection extends Component {
             .catch(error => {
                 alert(`Sorry, can't fetch nominations list right now!`);
                 console.log('Post request failed!');
+            });
+
+        axios({
+            method: 'get',
+            url: 'https://api.artfully11.hasura-app.io/date'
+        })
+            .then(response => {
+                console.log(response.data);
+            })
+            .catch(error => {
+                console.log('Post request to get date failed!');
+            });
+
+        axios({
+            method: 'get',
+            url: 'https://api.artfully11.hasura-app.io/time'
+        })
+            .then(response => {
+                console.log(response.data);
+            })
+            .catch(error => {
+                console.log('Post request to get time failed!');
             });
 
 
