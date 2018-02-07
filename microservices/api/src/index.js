@@ -20,7 +20,7 @@ details.onclick = function()
       }
     }
   };
-  request.open('POST','/get-election-data',true);
+  request.open('POST','/election-over',true);
   request.setRequestHeader('Content-Type','application/json');
   request.send(null);
 }
