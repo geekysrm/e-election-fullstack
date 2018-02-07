@@ -86,7 +86,8 @@ app.get('/time',function(req,res){
               //res.send(localdate.toLocaleString());
               var x = localdate.toLocaleString().split(',')[1];
               var y = convertTime12to24(x.trim());
-              res.send(y+':'+x.split(':')[2]);
+              var z = y+':'+x.split(':')[2];
+              res.send(z.split(' ')[0]);
           }
       }
       else{
