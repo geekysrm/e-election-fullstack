@@ -20,8 +20,15 @@ var server = require('http').Server(app);
 var config = require('./config');
 
 app.get('/',function(req,res){
-  //res.sendFile(path.join(__dirname,'index.html'));
+  res.sendFile(path.join(__dirname,'index.html'));
+});
+
+app.get('/date',function(req,res){
   res.send(Date());
+});
+
+app.get('/time',function(req,res){
+  res.send(Date().toString().split(' ')[5]);
 });
 
 app.get('/logo',function(req,res){
@@ -1044,6 +1051,6 @@ app.post('/get-election-data',function(req,res){
 
 });
 
-app.listen(8080, function () {
+app.listen(8000, function () {
   console.log('Example app listening on port 8080!');
 });
