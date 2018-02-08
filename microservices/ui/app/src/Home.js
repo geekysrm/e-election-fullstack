@@ -98,7 +98,6 @@ class Home extends Component {
 
     }
 
-//Add Ant.Design components like lists etc. below
     render() {
         return (
             <div className="App">
@@ -132,7 +131,7 @@ class Home extends Component {
 
                             return (
                               <div style={{ background: '#ECECEC', padding: '30px' , width: 610 , marginLeft: 20 }}>
-                                <Card title={<b>{election.state} state {election.post} elections</b>}
+                                <Card title={<b>{election.state} Constituency {election.post} elections</b>}
                                   extra={<a href={`/election/${election.election_id}`}>View Details</a>} style={{ width: 550 , fontWeight:'bold' }}
                                 >
                                     <br />

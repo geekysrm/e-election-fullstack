@@ -96,24 +96,24 @@ class About extends React.Component
           <p style={styles.paragraph}>
             India is a constitutional democracy with a parliamentary system of government,
             and at the heart of the system is a commitment to hold regular, free and fair elections.
-            These elections determine the composition of the government, the membership of the two
-            houses of parliament, the state and union territory legislative assemblies, and the Presidency
-            and vice-presidency.
+            India is the largest democracy in the world and houses ~1.3 Billion people. 
+            But as statistics have shown, all Indians do not come forward to vote for their 
+            leaders for some reason or the other like long election queues, election booth violence etc. 
+            This must be removed for proper selection of leaders without any bias. 
           </p>
-          <h1>Function:</h1>
+          <h1>How E-Election aims to improve Indian Elections:</h1>
           <p style={styles.paragraph}>
-          E-Elections App is one stop for all the India election news, election results, information of all
-          assembly candidates, constituencies and parties. You can search for your constituency and know about
-          your election candidates and voter list online. Most importantly candidates will be talking about what
-          is their agenda and their views.
+          E-election app will remove all these constraints and thereby people can vote anytime anywhere, without any inconvenience. 
+          Apart from this, users of the app can nominate themselves for any post they want. 
+          E-election aims to become an one-stop app for all general elections happening in the country.         
           </p>
           <h1>Feature of E-Election App:</h1>
           <p style={styles.paragraph}>
-          <li>Latest news from across India about state elections </li>
-          <li>Vote appeal from the candidates</li>
-          <li>List of candidates, constituencies, parties, voters with details</li>
-          <li>Past results of state election in India</li>
-          <li>Search for various constituencies, polling stations and candidates to get their details</li>
+            <li>Users will be able to sign up/login. </li>
+            <li>Admin user would be able to create new elections with deadlines( date+time) for nominations.</li>
+            <li>Users would be able to nominate themselves as candidates for an election and upload a manifesto before the nomination deadline .</li>
+            <li>Voters would be able to see a list of elections and check out the list of candidates along with their manifesto or any other details you want to include. Then the user would be able to cast a vote for one of them.</li>
+            <li>After the deadline, the victor would be mentioned in the list of elections and the election considered inactive.</li>
           </p>
         </div>
 

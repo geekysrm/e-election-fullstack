@@ -442,7 +442,7 @@ class ShowElection extends Component {
             </div>
 
             <div style={styles.content}>
-                  <h1 style={{marginTop:"10px" , textAlign:"center"}}>{this.state.electionState} state {this.state.electionPost} elections</h1>
+                  <h1 style={{marginTop:"10px" , textAlign:"center"}}>{this.state.electionState} constituency {this.state.electionPost} elections</h1>
                   <Divider />
                   <div style={styles.header}>
                     <h1 style={{marginTop:"10px" , textAlign:"center"}}>Current Nominations </h1>
