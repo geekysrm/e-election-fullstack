@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from './Home';
-import { Data } from './Data';
 import { AuthLogin } from './AuthLogin';
 import { AuthRegister } from './AuthRegister';
 import { Filestore } from './Filestore';
