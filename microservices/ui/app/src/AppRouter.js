@@ -20,7 +20,6 @@ class AppRouter extends React.Component {
         <Router>
           <Switch>
             <Route exact path="/" component={Welcome}/>
-            <Route exact path="/data" component={Data}/>
             <Route exact path="/auth-login" component={AuthLogin}/>
             <Route exact path="/auth-register" component={AuthRegister}/>
             <Route exact path="/filestore" component={Filestore}/>
