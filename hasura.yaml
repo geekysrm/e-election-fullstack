@@ -1,2 +1,5 @@
-name: hello-react
+description: An e-election app, deployed on Hasura, that allows users to conduct an election for a given post. For each post, users would be able to nominate themselves as candidates and the users should be able to vote for one of them.   
+keywords: election, e-election, online election, election app, hpdf, nodejs, express, react, reactjs, node, javascript, hasura product development fellowship
+media: {}
+name: e-election-app
 platformVersion: v0.15.3
