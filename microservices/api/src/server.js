@@ -20,7 +20,7 @@ var server = require('http').Server(app);
 var config = require('./config');
 
 app.get('/',function(req,res){
-  res.sendFile(path.join(__dirname,'index.html'));
+  res.send('Welcome to E-election app!');
 });
 
 app.get('/date',function(req,res){
@@ -843,34 +843,6 @@ app.post('/nomination-end',function(req,res){
   }
   xhr.send() // send request
 
-});
-
-app.get('/logo',function(req,res){
-  res.sendFile(path.join(__dirname,'images/logo.png'))
-});
-
-app.get('/background',function(req,res){
-  res.sendFile(path.join(__dirname,'images/background.png'))
-});
-
-app.get('/img1',function(req,res){
-  res.sendFile(path.join(__dirname,'images/img1.jpg'))
-});
-
-app.get('/img2',function(req,res){
-  res.sendFile(path.join(__dirname,'images/img2.jpg'))
-});
-
-app.get('/img3',function(req,res){
-  res.sendFile(path.join(__dirname,'images/img3.jpg'))
-});
-
-app.get('/img4',function(req,res){
-  res.sendFile(path.join(__dirname,'images/img4.jpg'))
-});
-
-app.get('/indexjs', function(req, res) {
-  res.sendFile(path.join(__dirname,'index.js'));
 });
 
 app.post('/data',function(req,res){

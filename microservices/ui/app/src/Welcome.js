@@ -42,10 +42,10 @@ class Welcome extends Component
           </div>
           <div style={{width:"35%" , border:'3px solid'}}>
           <Carousel autoplay>
-              <div><img style={styles.image} src="https://github.com/geekysrm/e-election-fullstack/blob/master/microservices/api/src/images/img1.jpg"/></div>
-              <div><img style={styles.image} src="https://github.com/geekysrm/e-election-fullstack/blob/master/microservices/api/src/images/img1.jpg"/></div>
-              <div><img style={styles.image} src="https://github.com/geekysrm/e-election-fullstack/blob/master/microservices/api/src/images/img1.jpg"/></div>
-              <div><img style={styles.image} src="https://github.com/geekysrm/e-election-fullstack/blob/master/microservices/api/src/images/img1.jpg"/></div>
+              <div><img style={styles.image} src="https://raw.githubusercontent.com/geekysrm/e-election-fullstack/master/microservices/api/src/images/img1.jpg"/></div>
+              <div><img style={styles.image} src="https://raw.githubusercontent.com/geekysrm/e-election-fullstack/master/microservices/api/src/images/img2.jpg"/></div>
+              <div><img style={styles.image} src="https://raw.githubusercontent.com/geekysrm/e-election-fullstack/master/microservices/api/src/images/img3.jpg"/></div>
+              <div><img style={styles.image} src="https://raw.githubusercontent.com/geekysrm/e-election-fullstack/master/microservices/api/src/images/img4.jpg"/></div>
           </Carousel>
           </div>
         </div>
@@ -85,7 +85,7 @@ const styles = {
     alignItems: 'center'
   },
   container:{
-    background: 'linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url("https://github.com/geekysrm/e-election-fullstack/blob/master/microservices/api/src/images/background.png")',
+    background: 'linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url("https://github.com/geekysrm/e-election-fullstack/blob/master/microservices/api/src/images/background.png?raw=true")',
     backgroundRepeat: 'no-repeat',
     backgroundAttachment: 'fixed',
     height: '100%',
