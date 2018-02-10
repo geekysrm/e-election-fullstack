@@ -69,7 +69,8 @@ const styles = {
     textAlign:"center",
     fontFamily: 'Acme',
     fontSize: 60,
-    color:'white'
+    color:'white',
+    textShadow: '0px 5px 10px rgba(0,0,0,0.7), 0px 8px 15px rgba(0,0,0,0.5)' 
   },
   text:{
     color:'white',
