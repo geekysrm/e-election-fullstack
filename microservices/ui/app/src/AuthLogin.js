@@ -35,14 +35,11 @@ class AuthForm extends React.Component {
           //this.showProgressIndicator(false)
           console.log(authResponse);
           if (authResponse.auth_token) {
-            //Save the auth token offline to be used by the filestore service
             saveOffline(authResponse.auth_token);
-            //this.showAlert("Login Successful! \n Your auth credentials are: " + JSON.stringify(authResponse, null, 2));
 
             window.location.assign("/home");
           } else {
             this.setState({ loading: false });
-            //this.showAlert(JSON.stringify(authResponse));
             alert('Invalid login details entered!');
           }
         });

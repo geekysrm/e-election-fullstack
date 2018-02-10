@@ -114,5 +114,4 @@ const styles = {
 export default Welcome;
 
 
-//Ask Sai to add shadow effect on heading E-Election
-//TODO: Restore default conf/domains.yaml from other hasura project folders
+//add shadow effect on heading E-Election

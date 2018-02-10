@@ -21,7 +21,7 @@ class About extends React.Component
 
     axios({
       method: 'post',
-      url: 'https://api.artfully11.hasura-app.io/data',
+      url: 'https://api.' + process.env.REACT_APP_CLUSTER_NAME +'.hasura-app.io/data',
       data: { auth: authToken },
       config: { headers: { 'Content-Type': 'application/json' } }
     })
@@ -31,7 +31,7 @@ class About extends React.Component
 
         axios({
           method: 'post',
-          url: 'https://api.artfully11.hasura-app.io/check-credentials',
+          url: 'https://api.' + process.env.REACT_APP_CLUSTER_NAME + '.hasura-app.io/check-credentials',
           data: { serial: this.state.hasura_id },
           config: { headers: { 'Content-Type': 'application/json' } }
         })

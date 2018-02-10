@@ -525,5 +525,4 @@ const styles={
   }
 }
 
-//TODO: Ask Sai to change Individual to Independent
 export default ShowElection;
