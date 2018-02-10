@@ -221,7 +221,7 @@ class CredentialsForm extends React.Component {
 
         axios({
             method: 'post',
-            url: 'https://api.artfully11.hasura-app.io/data',                                           //URL to be modified here
+            url: 'https://api.' + process.env.REACT_APP_CLUSTER_NAME +'.hasura-app.io/data',                                           //URL to be modified here
             data: { auth: authToken },
             config: { headers: { 'Content-Type': 'application/json' } }
         })
@@ -231,7 +231,7 @@ class CredentialsForm extends React.Component {
                 var this2 = this1;
                 axios({
                     method: 'post',
-                    url: 'https://api.artfully11.hasura-app.io/check-credentials',
+                    url: 'https://api.'+process.env.REACT_APP_CLUSTER_NAME+'.hasura-app.io/check-credentials',
                     data: {
                         serial: id
                     },
@@ -249,7 +249,7 @@ class CredentialsForm extends React.Component {
                             var this3=this2;
                         axios({
                             method: 'post',
-                            url: 'https://api.artfully11.hasura-app.io/view-credentials',                                           //URL to be modified here
+                            url: 'https://api.' + process.env.REACT_APP_CLUSTER_NAME +'.hasura-app.io/view-credentials',                                           //URL to be modified here
                             data: { serial: id },
                             config: { headers: { 'Content-Type': 'application/json' } }
                         })
@@ -314,7 +314,7 @@ class CredentialsForm extends React.Component {
                 if (age >= 18) {
                     axios({
                         method: 'post',
-                        url: 'https://api.artfully11.hasura-app.io/data',                                           //URL to be modified here
+                        url: 'https://api.' + process.env.REACT_APP_CLUSTER_NAME+'.hasura-app.io/data',                                           //URL to be modified here
                         data: { auth: authToken },
                         config: { headers: { 'Content-Type': 'application/json' } }
                     })
@@ -324,7 +324,7 @@ class CredentialsForm extends React.Component {
                             var that1 = that;
                             axios({
                                 method: 'post',
-                                url: 'https://api.artfully11.hasura-app.io/get-credentials',
+                                url: 'https://api.' + process.env.REACT_APP_CLUSTER_NAME +'.hasura-app.io/get-credentials',
                                 data: {
                                     serial: id,
                                     name: values.name,
@@ -363,7 +363,6 @@ class CredentialsForm extends React.Component {
                         });
                 }
                 else {
-                    //alert('Please enter correct DOB.\nYou have to be above 18 years to vote!');
                     Modal.error({
                         title: 'Please enter correct DOB!',
                         content: 'You have to be above 18 years to vote!',

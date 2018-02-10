@@ -4,7 +4,7 @@ import './Welcome.css';
 import { Carousel , Button } from 'antd';
 import { getSavedToken } from './config';
 
-
+const url = 'https://api' + process.env.REACT_APP_CLUSTER_NAME+ '.hasura-app.io';
 class Welcome extends Component
 {
   constructor(props) {
@@ -42,10 +42,10 @@ class Welcome extends Component
           </div>
           <div style={{width:"35%" , border:'3px solid'}}>
           <Carousel autoplay>
-           <div><img style={styles.image} src="https://api.artfully11.hasura-app.io/img1"/></div>
-           <div><img style={styles.image} src="https://api.artfully11.hasura-app.io/img2"/></div>
-           <div><img style={styles.image} src="https://api.artfully11.hasura-app.io/img3"/></div>
-           <div><img style={styles.image} src="https://api.artfully11.hasura-app.io/img4"/></div>
+              <div><img style={styles.image} src= {url +'/img1'}/></div>
+              <div><img style={styles.image} src={url + '/img2'}/></div>
+              <div><img style={styles.image} src={url + '/img3'}/></div>
+              <div><img style={styles.image} src={url + '/img4'}/></div>
           </Carousel>
           </div>
         </div>
@@ -85,7 +85,7 @@ const styles = {
     alignItems: 'center'
   },
   container:{
-    background: 'linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url("https://api.artfully11.hasura-app.io/background")',
+    background: 'linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url("https://api."+ process.env.REACT_APP_CLUSTER_NAME +".hasura-app.io/background")',
     backgroundRepeat: 'no-repeat',
     backgroundAttachment: 'fixed',
     height: '100%',

@@ -45,7 +45,7 @@ class ShowElection extends Component {
         }
       axios({
         method: 'post',
-        url: 'https://api.artfully11.hasura-app.io/data',
+          url: 'https://api.' + process.env.REACT_APP_CLUSTER_NAME+'.hasura-app.io/data',
         data: { auth: authToken },
         config: { headers: { 'Content-Type': 'application/json' } }
       })
@@ -55,7 +55,7 @@ class ShowElection extends Component {
 
           axios({
             method: 'post',
-            url: 'https://api.artfully11.hasura-app.io/check-credentials',
+              url: 'https://api.' + process.env.REACT_APP_CLUSTER_NAME+'.hasura-app.io/check-credentials',
             data: { serial: this.state.hasura_id },
             config: { headers: { 'Content-Type': 'application/json' } }
           })
@@ -82,7 +82,7 @@ class ShowElection extends Component {
 
         axios({
             method: 'post',
-            url: 'https://api.artfully11.hasura-app.io/data',
+            url: 'https://api.' + process.env.REACT_APP_CLUSTER_NAME +'.hasura-app.io/data',
             data: { auth: authToken },
             config: { headers: { 'Content-Type': 'application/json' } }
         })
@@ -92,7 +92,7 @@ class ShowElection extends Component {
                 this.setState({ voter_hasura_id: response.data.hasura_id });
                 axios({
                     method: 'post',
-                    url: 'https://api.artfully11.hasura-app.io/view-credentials',
+                    url: 'https://api.' + process.env.REACT_APP_CLUSTER_NAME +'.hasura-app.io/view-credentials',
                     data: { serial: voter_hasura_id_var },
                     config: { headers: { 'Content-Type': 'application/json' } }
                 })
@@ -115,7 +115,7 @@ class ShowElection extends Component {
 
         axios({
             method: 'post',
-            url: 'https://api.artfully11.hasura-app.io/get-election-data',
+            url: 'https://api.' + process.env.REACT_APP_CLUSTER_NAME+'.hasura-app.io/get-election-data',
             data: { eid: this.props.match.params.id },
             config: { headers: { 'Content-Type': 'application/json' } }
         })
@@ -130,7 +130,7 @@ class ShowElection extends Component {
 
         axios({
             method: 'post',
-            url: 'https://api.artfully11.hasura-app.io/get-nominations',
+            url: 'https://api.' + process.env.REACT_APP_CLUSTER_NAME+'.hasura-app.io/get-nominations',
             data: { eid: this.props.match.params.id },
             config: { headers: { 'Content-Type': 'application/json' } }
         })
@@ -141,7 +141,7 @@ class ShowElection extends Component {
                 this.state.nominations.map((nomination) => {
                     axios({
                         method: 'post',
-                        url: 'https://api.artfully11.hasura-app.io/view-credentials',
+                        url: 'https://api.'+process.env.REACT_APP_CLUSTER_NAME+'.hasura-app.io/view-credentials',
                         data: { serial: nomination.hasura_id },
                         config: { headers: { 'Content-Type': 'application/json' } }
                     })
@@ -181,7 +181,7 @@ class ShowElection extends Component {
 
         axios({
             method: 'post',
-            url: 'https://api.artfully11.hasura-app.io/election-over',
+            url: 'https://api.' + process.env.REACT_APP_CLUSTER_NAME+'.hasura-app.io/election-over',
             data: { eid: this.props.match.params.id },
             config: { headers: { 'Content-Type': 'application/json' } }
         })
@@ -194,7 +194,7 @@ class ShowElection extends Component {
                 }
                     axios({
                         method: 'post',
-                        url: 'https://api.artfully11.hasura-app.io/election-start',
+                        url: 'https://api.' + process.env.REACT_APP_CLUSTER_NAME+'.hasura-app.io/election-start',
                         data: { eid: this.props.match.params.id },
                         config: { headers: { 'Content-Type': 'application/json' } }
                     })
@@ -220,7 +220,7 @@ class ShowElection extends Component {
 
         axios({
             method: 'post',
-            url: 'https://api.artfully11.hasura-app.io/nomination-end',
+            url: 'https://api.' + process.env.REACT_APP_CLUSTER_NAME+'.hasura-app.io/nomination-end',
             data: { eid: this.props.match.params.id },
             config: { headers: { 'Content-Type': 'application/json' } }
         })
@@ -229,7 +229,7 @@ class ShowElection extends Component {
                 let res1 = response.data;
                 axios({
                     method: 'post',
-                    url: 'https://api.artfully11.hasura-app.io/nomination-start',
+                    url: 'https://api.' + process.env.REACT_APP_CLUSTER_NAME+'.hasura-app.io/nomination-start',
                     data: { eid: this.props.match.params.id },
                     config: { headers: { 'Content-Type': 'application/json' } }
                 })
@@ -274,7 +274,7 @@ class ShowElection extends Component {
 
         axios({
             method: 'post',
-            url: 'https://api.artfully11.hasura-app.io/can-vote',
+            url: 'https://api.' + process.env.REACT_APP_CLUSTER_NAME+'.hasura-app.io/can-vote',
             data: { id: this.state.voter_hasura_id, eid: this.props.match.params.id  },
             config: { headers: { 'Content-Type': 'application/json' } }
         })
@@ -315,7 +315,7 @@ class ShowElection extends Component {
         var id_of_voter = -1;
         axios({
             method: 'post',
-            url: 'https://api.artfully11.hasura-app.io/data',
+            url: 'https://api.' + process.env.REACT_APP_CLUSTER_NAME+'.hasura-app.io/data',
             data: { auth: authToken },
             config: { headers: { 'Content-Type': 'application/json' } }
         })
@@ -329,7 +329,7 @@ class ShowElection extends Component {
 
                 axios({
                     method: 'post',
-                    url: 'https://api.artfully11.hasura-app.io/vote',
+                    url: 'https://api.' + process.env.REACT_APP_CLUSTER_NAME+'.hasura-app.io/vote',
                     data: { id_of_candidate: id_of_candidate, id_of_voter: id_of_voter, eid: eid, credentials: credentials },
                     config: { headers: { 'Content-Type': 'application/json' } }
                 })
@@ -374,7 +374,7 @@ class ShowElection extends Component {
         var election_id = this.props.match.params.id;
         axios({
             method: 'post',
-            url: 'https://api.artfully11.hasura-app.io/results',
+            url: 'https://api.' + process.env.REACT_APP_CLUSTER_NAME+'.hasura-app.io/results',
             data: { eid: election_id },
             config: { headers: { 'Content-Type': 'application/json' } }
         })
@@ -388,7 +388,7 @@ class ShowElection extends Component {
 
                 axios({
                     method: 'post',
-                    url: 'https://api.artfully11.hasura-app.io/view-credentials',
+                    url: 'https://api.' + process.env.REACT_APP_CLUSTER_NAME+'.hasura-app.io/view-credentials',
                     data: { serial: winner_id },
                     config: { headers: { 'Content-Type': 'application/json' } }
                 })

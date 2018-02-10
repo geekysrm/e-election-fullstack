@@ -36,7 +36,7 @@ class NominateYourselfForm extends React.Component {
        console.log('onLoadFunc');
         axios({
             method: 'post',
-            url: 'https://api.artfully11.hasura-app.io/data',
+            url: 'https://api.' + process.env.REACT_APP_CLUSTER_NAME+'.hasura-app.io/data',
             data: { auth: authToken },
             config: { headers: { 'Content-Type': 'application/json' } }
         })
@@ -51,7 +51,7 @@ class NominateYourselfForm extends React.Component {
 
         axios({
             method: 'post',
-            url: 'https://api.artfully11.hasura-app.io/nomination-end',
+            url: 'https://api.' + process.env.REACT_APP_CLUSTER_NAME+'.hasura-app.io/nomination-end',
             data: { eid: this.props.match.params.id },
             config: { headers: { 'Content-Type': 'application/json' } }
         })
@@ -60,7 +60,7 @@ class NominateYourselfForm extends React.Component {
                 let res1 = response.data;
                 axios({
                     method: 'post',
-                    url: 'https://api.artfully11.hasura-app.io/nomination-start',
+                    url: 'https://api.' + process.env.REACT_APP_CLUSTER_NAME+'.hasura-app.io/nomination-start',
                     data: { eid: this.props.match.params.id },
                     config: { headers: { 'Content-Type': 'application/json' } }
                 })
@@ -122,7 +122,7 @@ class NominateYourselfForm extends React.Component {
                 }
                 axios({
                     method: 'post',
-                    url: 'https://api.artfully11.hasura-app.io/nominate',
+                    url: 'https://api.' + process.env.REACT_APP_CLUSTER_NAME+'.hasura-app.io/nominate',
                     data: { id: hasura_id_nominee, eid: election_id, manifesto: manifesto_got, individual: independent_flag, party: party_name, party_ticket: party_ticket_id},
                     config: { headers: { 'Content-Type': 'application/json' } }
                 })
